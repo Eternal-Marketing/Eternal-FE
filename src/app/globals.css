@@ -1,26 +1,17 @@
+@config "../../tailwind.config.ts";
+
+/* Freesentation – 단일 패밀리로 강제 통합 */
+@font-face {
+  font-family: "Freesentation";
+  src: url("/fonts/Freesentation-Regular.woff2") format("woff2");
+  font-weight: 100 900;   
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@import "../styles/typography.css";
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Freesentation, Arial, Helvetica, sans-serif;
 }
