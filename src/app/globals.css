@@ -1,10 +1,26 @@
 @config "../../tailwind.config.ts";
 
-/* Freesentation – 단일 패밀리로 강제 통합 */
+/* Freesentation – 각 weight별 폰트 파일 정의 */
 @font-face {
   font-family: "Freesentation";
-  src: url("/fonts/Freesentation-Regular.woff2") format("woff2");
-  font-weight: 100 900;   
+  src: url("/fonts/Freesentation-4Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Freesentation";
+  src: url("/fonts/Freesentation-5Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Freesentation";
+  src: url("/fonts/Freesentation-7Bold.woff2") format("woff2");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -13,5 +29,5 @@
 @import "../styles/typography.css";
 
 body {
-  font-family: Freesentation, Arial, Helvetica, sans-serif;
+  font-family: "Freesentation", Arial, Helvetica, sans-serif;
 }
