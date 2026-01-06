@@ -5,6 +5,8 @@
   font-weight: 800;
   font-style: normal;
   line-height: normal;
+  color: #FFF;
+  text-align: center;
 }
 
 /* Heading 1 */
@@ -27,8 +29,10 @@
 
 /* Heading 4 */
 .text-h4 {
+  font-family: "Freesentation", Arial, Helvetica, sans-serif;
   font-size: 20px;
   font-weight: 500;
+  line-height: normal;
 }
 
 /* Body 1 */
@@ -39,12 +43,34 @@
 
 /* Body 2 */
 .text-body-sm {
+  font-family: "Freesentation", Arial, Helvetica, sans-serif;
   font-size: 14px;
+  font-style: normal;
   font-weight: 500;
+  line-height: normal;
+}
+
+/* 네비게이션 링크 호버 효과 */
+.nav-link {
+  transition: color 0.3s ease;
+  cursor: pointer;
+  color: #FFF;
+}
+
+.nav-link:hover {
+  color: #184BBA !important;
 }
 
 /* Caption */
 .text-caption {
   font-size: 12px;
   font-weight: 500;
+}
+
+/* Logo */
+.text-logo {
+  font-family: "Freesentation", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 15px;
 }

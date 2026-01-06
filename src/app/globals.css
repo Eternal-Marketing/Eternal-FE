@@ -31,3 +31,193 @@
 body {
   font-family: "Freesentation", Arial, Helvetica, sans-serif;
 }
+
+/* 스크롤 화살표 애니메이션 */
+@keyframes bounce-down {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+.animate-bounce-down {
+  animation: bounce-down 1.5s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+
+.animate-bounce-down:hover {
+  opacity: 1;
+}
+
+/* 버튼 호버 애니메이션 */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(24, 75, 186, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(24, 75, 186, 0.8);
+  }
+}
+
+.btn-primary {
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(24, 75, 186, 0.8);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* 네비게이션 링크 호버 효과 */
+.nav-link-hover {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link-hover:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(24, 75, 186, 0.6);
+}
+
+/* 페이드인 애니메이션 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* 펄스 애니메이션 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* 네비게이션 페이드인 애니메이션 */
+@keyframes navFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-item {
+  animation: navFadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.nav-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.nav-item:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.nav-item:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.nav-item:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+/* 로고 슬라이드인 애니메이션 */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out;
+}
+
+/* 네비게이션 링크 밑줄 효과 */
+.nav-link-hover {
+  position: relative;
+}
+
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #184BBA;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link-hover:hover::after {
+  width: 80%;
+}
+
+
+/* 원형 아이콘 회전 효과 */
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-slow {
+  animation: rotateSlow 20s linear infinite;
+}
+
+/* 텍스트 글자별 나타나기 효과 */
+@keyframes letterFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text-reveal {
+  display: inline-block;
+  animation: letterFadeIn 0.6s ease-out;
+  animation-fill-mode: both;
+}
