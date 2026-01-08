@@ -221,3 +221,44 @@ body {
   animation: letterFadeIn 0.6s ease-out;
   animation-fill-mode: both;
 }
+
+/* 플랫폼 로고 스크롤 애니메이션 - 3칸씩 이동하고 멈추는 효과 */
+@keyframes scroll-platforms {
+  0% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(calc(-1 * (200px + 31px) * 3));
+  }
+  35% {
+    transform: translateX(calc(-1 * (200px + 31px) * 3));
+  }
+  40% {
+    transform: translateX(calc(-1 * (200px + 31px) * 6));
+  }
+  55% {
+    transform: translateX(calc(-1 * (200px + 31px) * 6));
+  }
+  60% {
+    transform: translateX(calc(-1 * (200px + 31px) * 9));
+  }
+  75% {
+    transform: translateX(calc(-1 * (200px + 31px) * 9));
+  }
+  80% {
+    transform: translateX(calc(-1 * (200px + 31px) * 12));
+  }
+  95% {
+    transform: translateX(calc(-1 * (200px + 31px) * 12));
+  }
+  100% {
+    transform: translateX(calc(-1 * (200px + 31px) * 15));
+  }
+}
+
+.platform-scroll {
+  animation: scroll-platforms 20s infinite ease-in-out;
+}
