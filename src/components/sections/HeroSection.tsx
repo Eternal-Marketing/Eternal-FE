@@ -1,4 +1,3 @@
-// 이미지 및 리소스 경로
 const logoImage = "/images/logo.svg";
 const circleIcon = "/images/elipse.svg";
 const splineUrl = "https://my.spline.design/motiontrails-7nu0l9wGTzn5nWxGtrBcWZHT/";
@@ -10,7 +9,7 @@ const splineUrl = "https://my.spline.design/motiontrails-7nu0l9wGTzn5nWxGtrBcWZH
 export default function HeroSection() {
   return (
     <section className="relative w-full h-screen overflow-hidden z-20" data-node-id="24:6">
-      {/* 배경 3D 애니메이션 (Spline) */}
+      {/* 배경 3D 애니메이션 */}
       <div className="absolute top-0 left-0 right-0 h-full w-full pointer-events-none z-10">
         <iframe
           src={splineUrl}
@@ -21,10 +20,10 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* 헤더 - 로고 및 네비게이션 */}
+      {/* 상단 헤더: 로고와 네비게이션 메뉴 */}
       <header className="absolute top-0 left-0 right-0 z-50 border-b border-black">
         <div className="w-full max-w-[1440px] mx-auto px-4 h-[56px] flex justify-between">
-          {/* 로고 영역 */}
+          {/* 로고 */}
           <div className="flex items-start animate-slide-in-left">
             <img 
               src={logoImage} 
@@ -41,7 +40,7 @@ export default function HeroSection() {
             </div>
           </div>
           
-          {/* 네비게이션 메뉴 */}
+          {/* 페이지 네비게이션 링크와 AI 진단 받기 버튼 */}
           <nav className="flex items-start">
             <a href="#about" className="nav-item nav-link-hover text-body-sm text-white hover:!text-primary mt-[29px] px-3 py-1 rounded cursor-pointer">ABOUT</a>
             <a href="#portfolio" className="nav-item nav-link-hover text-body-sm text-white hover:!text-primary ml-[41px] mt-[29px] px-3 py-1 rounded cursor-pointer">PORTFOLIO</a>
@@ -53,11 +52,11 @@ export default function HeroSection() {
         </div>
       </header>
 
-      {/* 메인 콘텐츠 영역 */}
+      {/* 메인 콘텐츠: 타이틀과 서브 타이틀 */}
       <div className="relative h-full flex flex-col items-center justify-center z-20">
-        {/* 메인 타이틀 */}
-        <div className="text-center text-white mt-[200px] md:mt-[300px] lg:mt-[370px] relative z-10">
-          {/* 장식용 원형 아이콘 */}
+        {/* 메인 타이틀 영역 */}
+        <div className="text-center text-white mt-[20px] md:mt-[60px] lg:mt-[100px] relative z-10">
+          {/* 타이틀 위 장식용 원형 아이콘 */}
           <div className="absolute top-[-10px] left-[calc(50%-210px)] w-[86px] h-[86px] z-[-1] animate-pulse-slow">
             <img 
               src={circleIcon} 
@@ -74,14 +73,14 @@ export default function HeroSection() {
             다시 설계합니다
           </h1>
           
-          {/* 서브 타이틀 */}
+          {/* 서브 타이틀: 마케팅 인텔리전스 AI 설명 */}
           <div className="text-h4 text-[#d0d7eb] mt-[20px] animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
             <p className="mb-2" data-node-id="24:19">마침내 탄생한 최적 효율의 마케팅</p>
             <p data-node-id="24:20">"마케팅 인텔리전스 AI"</p>
           </div>
         </div>
         
-        {/* 스크롤 유도 화살표 */}
+        {/* 하단 스크롤 안내 화살표 */}
         <div className="absolute bottom-[80px] left-1/2 -translate-x-1/2 w-[32px] h-[18px] animate-bounce-down">
           <img 
             src="/images/arrow-down.svg" 

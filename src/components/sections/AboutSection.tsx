@@ -2,6 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react';
 
+/**
+ * AboutSection - 회사 소개 섹션 컴포넌트
+ * AI 마케팅 인텔리전스, 데이터 결과, 통계, 전문 인력 정보를 표시
+ */
+
 // 숫자 카운팅 애니메이션 컴포넌트
 function CountUpNumber({ end, duration = 2000, suffix = '' }: { end: number; duration?: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -55,7 +60,7 @@ function CountUpNumber({ end, duration = 2000, suffix = '' }: { end: number; dur
   return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
 }
 
-// Fade-in 애니메이션 컴포넌트
+// 페이드인 애니메이션 컴포넌트
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -96,7 +101,7 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 }
 
-// Slide-in 애니메이션 컴포넌트
+// 슬라이드인 애니메이션 컴포넌트
 function SlideIn({ children, direction = 'left', delay = 0, className = '', style }: { children: React.ReactNode; direction?: 'left' | 'right' | 'up' | 'down'; delay?: number; className?: string; style?: React.CSSProperties }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -148,7 +153,7 @@ export default function AboutSection() {
   return (
     <section id="about" className="bg-[#fdfeff] overflow-hidden relative z-30" data-node-id="176:48">
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] pt-12 pb-12 md:pt-[60px] md:pb-[60px] lg:pt-[80px] lg:pb-[80px] desktop:pt-[120px] desktop:pb-[120px]">
-        {/* 메인 제목 */}
+        {/* 메인 제목: 정답은 이미 데이터 속에 존재합니다 */}
         <FadeIn>
           <div className="text-center mb-10 md:mb-[40px] lg:mb-[60px] desktop:mb-[27px] desktop:mt-[114px]" data-node-id="176:49">
           <h2 
@@ -194,7 +199,7 @@ export default function AboutSection() {
           </div>
         </FadeIn>
 
-        {/* 서브텍스트 */}
+        {/* 서브 텍스트: AI와 전문 마케터 설명 */}
         <FadeIn delay={200}>
           <div className="text-center mb-12 md:mb-[60px] lg:mb-[80px] desktop:mb-[100px]" data-node-id="176:50">
           <p 
@@ -228,9 +233,9 @@ export default function AboutSection() {
           </div>
         </FadeIn>
 
-        {/* AI 마케팅 인텔리전스 및 데이터 결과 */}
+        {/* AI 마케팅 인텔리전스와 데이터 결과 영역 */}
         <div className="relative mb-12 md:mb-[60px] lg:mb-[80px] desktop:mb-[100px]" data-node-id="176:51">
-          {/* 왼쪽: AI 마케팅 인텔리전스 */}
+          {/* 왼쪽: AI 마케팅 인텔리전스 이미지 */}
           <SlideIn direction="left" delay={300}>
             <div className="text-center desktop:pl-[170px] desktop:text-left relative" data-node-id="176:51">
             <div className="relative desktop:inline-block">
@@ -251,8 +256,7 @@ export default function AboutSection() {
             </div>
           </SlideIn>
 
-          {/* 오른쪽: 데이터 결과 - 랩톱 이미지 오른쪽 끝에서 약간 왼쪽, 이미지 중간 높이에 위치 */}
-          {/* 이미지 기준 위치: 부모(relative) 기준으로 pl(170px) + 이미지 너비(374px) - 40px = 504px */}
+          {/* 오른쪽: 데이터 결과 통계 (1200000건+) */}
           <SlideIn direction="right" delay={500} className="desktop:absolute desktop:top-[160px] desktop:-translate-y-[50%]" style={{left: 'calc(170px + 374px - 40px)'}}>
             <div 
               className="text-center md:text-right" 
@@ -308,9 +312,9 @@ export default function AboutSection() {
           </SlideIn>
         </div>
 
-        {/* 통계 데이터 및 실무 경험 보유자 - 하나의 div로 묶기 */}
+        {/* 통계 데이터와 실무 경험 보유자 영역 */}
         <div className="relative mb-12 md:mb-[60px] lg:mb-[80px] desktop:mb-[100px] desktop:min-h-[500px]">
-          {/* 통계 데이터 텍스트 */}
+          {/* 통계 데이터: 매출 성장률 188%, 파트너십 유지율 98% */}
           <FadeIn delay={400}>
             <div className="text-center md:text-right desktop:text-right desktop:absolute desktop:top-[96px] desktop:left-[450px]" data-node-id="176:72">
             <p 
@@ -389,7 +393,7 @@ export default function AboutSection() {
             </div>
           </FadeIn>
 
-          {/* 이미지 및 이미지 밑 텍스트 */}
+          {/* 오른쪽: 그래프 이미지와 실무 경험 보유자 텍스트 */}
           <SlideIn direction="right" delay={600} className="desktop:absolute desktop:right-[64px] desktop:top-0">
             <div className="flex flex-col items-center" data-node-id="176:82">
             <div 
@@ -422,7 +426,7 @@ export default function AboutSection() {
         {/* 팀 구조 및 전문 인력 섹션 */}
         <div className="mb-12 md:mb-[60px] lg:mb-[80px] desktop:mb-[100px]">
           <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12 lg:gap-16 desktop:flex-row desktop:items-start desktop:justify-start desktop:gap-0 desktop:pl-[170px] desktop:pr-[60px]">
-            {/* 왼쪽: 다이어그램 및 설명 텍스트 */}
+            {/* 왼쪽: 팀 구조 다이어그램 */}
             <SlideIn direction="left" delay={700}>
               <div className="flex flex-col items-center desktop:flex-shrink-0">
               <div 
@@ -450,7 +454,7 @@ export default function AboutSection() {
               </div>
             </SlideIn>
 
-            {/* 오른쪽: 전문 인력 텍스트 */}
+            {/* 오른쪽: 전문 인력 설명 텍스트 */}
             <SlideIn direction="right" delay={800}>
               <div className="flex flex-col items-center md:items-start md:text-left desktop:items-start desktop:justify-start desktop:-ml-[300px] desktop:flex-shrink-0">
               <p 

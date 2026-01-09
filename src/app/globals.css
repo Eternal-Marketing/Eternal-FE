@@ -262,3 +262,67 @@ body {
 .platform-scroll {
   animation: scroll-platforms 20s infinite ease-in-out;
 }
+
+/* 리뷰 카드 스크롤 애니메이션 - 3칸씩 이동하고 멈추는 효과 */
+@keyframes scroll-reviews {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(calc(-1 * (371px + 16px) * 3));
+  }
+  25% {
+    transform: translateX(calc(-1 * (371px + 16px) * 3));
+  }
+  30% {
+    transform: translateX(calc(-1 * (371px + 16px) * 6));
+  }
+  40% {
+    transform: translateX(calc(-1 * (371px + 16px) * 6));
+  }
+  45% {
+    transform: translateX(calc(-1 * (371px + 16px) * 9));
+  }
+  55% {
+    transform: translateX(calc(-1 * (371px + 16px) * 9));
+  }
+  60% {
+    transform: translateX(calc(-1 * (371px + 16px) * 12));
+  }
+  70% {
+    transform: translateX(calc(-1 * (371px + 16px) * 12));
+  }
+  75% {
+    transform: translateX(calc(-1 * (371px + 16px) * 15));
+  }
+  85% {
+    transform: translateX(calc(-1 * (371px + 16px) * 15));
+  }
+  90% {
+    transform: translateX(calc(-1 * (371px + 16px) * 18));
+  }
+  100% {
+    transform: translateX(calc(-1 * (371px + 16px) * 18));
+  }
+}
+
+.review-scroll {
+  animation: scroll-reviews 30s infinite ease-in-out;
+}
+
+/* 버튼 글로우 펄스 애니메이션 */
+@keyframes button-glow {
+  0%, 100% {
+    box-shadow: 0 0 25px 5px rgba(24, 75, 186, 0.5), 0 4px 20px 0 rgba(24, 75, 186, 0.4), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 35px 8px rgba(24, 75, 186, 0.7), 0 4px 30px 0 rgba(24, 75, 186, 0.6), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+}
+
+.button-glow {
+  animation: button-glow 2s ease-in-out infinite;
+}
