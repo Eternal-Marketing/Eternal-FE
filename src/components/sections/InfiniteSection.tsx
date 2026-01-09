@@ -178,9 +178,8 @@ export default function InfiniteSection() {
       className="relative overflow-hidden z-30 w-full" 
       style={{ 
         backgroundColor: '#F6F6F6',
-        width: '1440px',
+        width: '100%',
         height: '1253px',
-        maxWidth: '100%',
         padding: '120px 0',
         position: 'relative'
       }}
