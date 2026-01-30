@@ -3,16 +3,16 @@
 /* Freesentation – 각 weight별 폰트 파일 정의 */
 @font-face {
   font-family: "Freesentation";
-  src: url("/fonts/Freesentation-4Regular.woff2") format("woff2");
-  font-weight: 400;
+  src: url("/fonts/Freesentation-5Medium.woff2") format("woff2");
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Freesentation";
-  src: url("/fonts/Freesentation-5Medium.woff2") format("woff2");
-  font-weight: 500;
+  src: url("/fonts/Freesentation-6SemiBold.ttf") format("truetype");
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
@@ -25,12 +25,46 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Freesentation";
+  src: url("/fonts/Freesentation-8ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Freesentation";
+  src: url("/fonts/Freesentation-9Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 @import "../styles/typography.css";
 
-body {
-  font-family: "Freesentation", Arial, Helvetica, sans-serif;
+/* Tailwind v4 디자인 토큰(단일 소스) */
+@theme inline {
+  /* Colors (요청 이미지 기준만) */
+  --color-primary: #184BBA;
+  --color-bg: #FFFFFF;
+
+  --color-main: #111111;
+  --color-inverse: #FFFFFF;
+
+  --color-sub1: #505050;
+  --color-sub2: #767676;
+  --color-sub3: #999999;
+
+  /* Font */
+  --font-sans: "Freesentation", Arial, Helvetica, sans-serif;
 }
+
+body {
+  font-family: var(--font-sans);
+}
+
 
 /* 스크롤 화살표 애니메이션 */
 @keyframes bounce-down {
@@ -56,10 +90,10 @@ body {
 /* 버튼 호버 애니메이션 */
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 10px rgba(24, 75, 186, 0.5);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--color-primary) 50%, transparent);
   }
   50% {
-    box-shadow: 0 0 20px rgba(24, 75, 186, 0.8);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 80%, transparent);
   }
 }
 
@@ -69,7 +103,7 @@ body {
 
 .btn-primary:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(24, 75, 186, 0.8);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 80%, transparent);
 }
 
 .btn-primary:active {
@@ -84,7 +118,7 @@ body {
 
 .nav-link-hover:hover {
   transform: translateY(-2px);
-  text-shadow: 0 0 10px rgba(24, 75, 186, 0.6);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--color-primary) 60%, transparent);
 }
 
 /* 페이드인 애니메이션 */
@@ -180,7 +214,7 @@ body {
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: #184BBA;
+  background-color: var(--color-primary);
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }
@@ -316,13 +350,42 @@ body {
 /* 버튼 글로우 펄스 애니메이션 */
 @keyframes button-glow {
   0%, 100% {
-    box-shadow: 0 0 25px 5px rgba(24, 75, 186, 0.5), 0 4px 20px 0 rgba(24, 75, 186, 0.4), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 25px 5px color-mix(in srgb, var(--color-primary) 50%, transparent), 0 4px 20px 0 color-mix(in srgb, var(--color-primary) 40%, transparent), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   }
   50% {
-    box-shadow: 0 0 35px 8px rgba(24, 75, 186, 0.7), 0 4px 30px 0 rgba(24, 75, 186, 0.6), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 35px 8px color-mix(in srgb, var(--color-primary) 70%, transparent), 0 4px 30px 0 color-mix(in srgb, var(--color-primary) 60%, transparent), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   }
 }
 
 .button-glow {
   animation: button-glow 2s ease-in-out infinite;
+}
+
+/* 공통 CTA 버튼(토큰 기반) */
+.ds-cta-button {
+  background-color: var(--color-primary);
+  color: var(--color-inverse);
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  padding: 16px 32px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0) scale(1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ds-cta-button:hover {
+  background-color: var(--color-primary);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 16px 40px 0 color-mix(in srgb, var(--color-primary) 60%, transparent), 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+  animation: none;
+}
+
+.ds-cta-button:active {
+  transform: translateY(-2px) scale(1.02);
 }

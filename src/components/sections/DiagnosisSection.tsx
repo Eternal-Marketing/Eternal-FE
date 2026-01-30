@@ -178,29 +178,12 @@ export default function DiagnosisSection() {
             <FadeIn>
               <div className="text-center mb-10 md:mb-14">
               <h2 
-                style={{
-                  color: '#FFF',
-                  textAlign: 'center',
-                  fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                  fontSize: '48px',
-                  fontStyle: 'normal',
-                  fontWeight: 700,
-                  lineHeight: 'normal',
-                  marginBottom: '8px'
-                }}
+                className="mb-2 font-sans text-[48px] font-bold leading-normal text-inverse text-center"
               >
                 정답은 이미 여기 있습니다
               </h2>
               <h2 
-                style={{
-                  color: '#FFF',
-                  textAlign: 'center',
-                  fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                  fontSize: '48px',
-                  fontStyle: 'normal',
-                  fontWeight: 700,
-                  lineHeight: 'normal'
-                }}
+                className="font-sans text-[48px] font-bold leading-normal text-inverse text-center"
               >
                 이제 확인만 남았습니다
               </h2>
@@ -211,37 +194,7 @@ export default function DiagnosisSection() {
             <ScaleIn delay={200}>
               <div className="text-center" style={{ marginBottom: '96px' }}>
                 <button
-                className="button-glow"
-                style={{
-                  backgroundColor: '#184BBA',
-                  color: '#FFF',
-                  fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                  fontSize: '24px',
-                  fontStyle: 'normal',
-                  fontWeight: 600,
-                  lineHeight: 'normal',
-                  padding: '16px 32px',
-                  borderRadius: '15px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  boxShadow: '0 0 25px 5px rgba(24, 75, 186, 0.5), 0 4px 20px 0 rgba(24, 75, 186, 0.4), 0 4px 4px 0 rgba(0, 0, 0, 0.25)',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  transform: 'translateY(0) scale(1)',
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#003CFF';
-                  e.currentTarget.style.transform = 'translateY(-4px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 16px 40px 0 rgba(24, 75, 186, 0.6), 0 8px 16px 0 rgba(0, 0, 0, 0.3)';
-                  e.currentTarget.style.animation = 'none';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#184BBA';
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 0 25px 5px rgba(24, 75, 186, 0.5), 0 4px 20px 0 rgba(24, 75, 186, 0.4), 0 4px 4px 0 rgba(0, 0, 0, 0.25)';
-                  e.currentTarget.style.animation = 'button-glow 2s ease-in-out infinite';
-                }}
+                className="button-glow ds-cta-button"
               >
                 AI 진단 받기
                 </button>
@@ -252,18 +205,13 @@ export default function DiagnosisSection() {
             <div className="text-center absolute" style={{ bottom: '180px', left: '50%', transform: 'translateX(-50%)', width: '100%' }}>
               <FadeIn delay={400} style={{ display: 'inline-block' }}>
                 <p 
-                  style={{
-                    color: '#FFF',
-                    textAlign: 'center',
-                    fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                    fontSize: '24px',
-                    fontStyle: 'normal',
-                    fontWeight: 600,
-                    lineHeight: 'normal',
-                    whiteSpace: 'nowrap'
-                  }}
+                  className="font-sans text-[24px] font-semibold leading-normal text-inverse text-center whitespace-nowrap"
                 >
-                  실시간 진단 진행 중 <span style={{ color: '#FFF', fontFamily: 'Freesentation, Arial, Helvetica, sans-serif', fontSize: '48px', fontStyle: 'normal', fontWeight: 600, lineHeight: 'normal', display: 'inline-block', minWidth: '60px', textAlign: 'left' }}><CountUpNumber end={124} duration={2000} /></span> 건
+                  실시간 진단 진행 중{" "}
+                  <span className="inline-block min-w-[60px] text-left font-sans text-[48px] font-semibold leading-normal text-inverse">
+                    <CountUpNumber end={124} duration={2000} />
+                  </span>{" "}
+                  건
                 </p>
               </FadeIn>
             </div>

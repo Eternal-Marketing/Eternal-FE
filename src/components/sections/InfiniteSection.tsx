@@ -175,14 +175,7 @@ export default function InfiniteSection() {
   return (
     <section 
       id="infinite" 
-      className="relative overflow-hidden z-30 w-full" 
-      style={{ 
-        backgroundColor: '#F6F6F6',
-        width: '100%',
-        height: '1253px',
-        padding: '120px 0',
-        position: 'relative'
-      }}
+      className="relative overflow-hidden z-30 w-full bg-bg h-[1253px] py-[120px]"
       >
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] relative z-10">
         {/* 섹션 제목 */}
@@ -195,31 +188,18 @@ export default function InfiniteSection() {
             }}
           >
             <h2 
-              style={{
-                color: '#000',
-                textAlign: 'center',
-                fontFamily: 'Freesentation',
-                fontSize: '48px',
-                fontStyle: 'normal',
-                fontWeight: 700,
-                lineHeight: 'normal',
-                marginBottom: '8px'
-              }}
+              className="mb-2 font-sans text-[48px] font-bold leading-normal text-main text-center"
             >
               결과가 왜 다를까요?
             </h2>
             <h2 
-              style={{
-                color: '#000',
-                textAlign: 'center',
-                fontFamily: 'Freesentation',
-                fontSize: '48px',
-                fontStyle: 'normal',
-                fontWeight: 700,
-                lineHeight: 'normal'
-              }}
+              className="font-sans text-[48px] font-bold leading-normal text-main text-center"
             >
-              이터널은 <span style={{ color: '#FFF', backgroundColor: '#184BBA', padding: '4px 8px', display: 'inline-block' }}>시작</span>이 다릅니다
+              이터널은{" "}
+              <span className="inline-block bg-primary text-inverse px-2 py-1">
+                시작
+              </span>
+              이 다릅니다
             </h2>
           </div>
         </div>
@@ -251,29 +231,14 @@ export default function InfiniteSection() {
                       style={{ width: '25.956px', height: '25.019px', flexShrink: 0, marginRight: '7px' }}
                     />
                     <h3 
-                      style={{
-                        color: '#000',
-                        textAlign: 'left',
-                        fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                        fontSize: '20px',
-                        fontStyle: 'normal',
-                        fontWeight: 600,
-                        lineHeight: 'normal'
-                      }}
+                      className="font-sans text-[20px] font-semibold leading-normal text-main text-left"
                     >
                       STEP 01
                     </h3>
                   </div>
                   <p 
-                    style={{
-                      color: '#505050',
-                      fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                      fontSize: '16px',
-                      fontStyle: 'normal',
-                      fontWeight: 500,
-                      lineHeight: 'normal',
-                      marginLeft: '32.956px'
-                    }}
+                    className="font-sans text-[16px] font-medium leading-normal text-sub1"
+                    style={{ marginLeft: '32.956px' }}
                   >
                     AI 진단 문진표를 기반으로<br />
                     대표님의 업체를 분석하고<br />
@@ -294,29 +259,14 @@ export default function InfiniteSection() {
                       style={{ width: '33.929px', height: '33.328px', flexShrink: 0, marginRight: '7px' }}
                     />
                     <h3 
-                      style={{
-                        color: '#000',
-                        textAlign: 'left',
-                        fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                        fontSize: '20px',
-                        fontStyle: 'normal',
-                        fontWeight: 600,
-                        lineHeight: 'normal'
-                      }}
+                      className="font-sans text-[20px] font-semibold leading-normal text-main text-left"
                     >
                       STEP 02
                     </h3>
                   </div>
                   <p 
-                    style={{
-                      color: '#505050',
-                      fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                      fontSize: '16px',
-                      fontStyle: 'normal',
-                      fontWeight: 500,
-                      lineHeight: 'normal',
-                      marginLeft: '40.929px'
-                    }}
+                    className="font-sans text-[16px] font-medium leading-normal text-sub1"
+                    style={{ marginLeft: '40.929px' }}
                   >
                     분석 결과를 바탕으로 업종과 목표에 맞는<br />
                     전문 담당 팀을 구성합니다.
@@ -336,29 +286,14 @@ export default function InfiniteSection() {
                       style={{ width: '51px', height: '38.088px', flexShrink: 0, marginRight: '7px' }}
                     />
                     <h3 
-                      style={{
-                        color: '#000',
-                        textAlign: 'left',
-                        fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                        fontSize: '20px',
-                        fontStyle: 'normal',
-                        fontWeight: 600,
-                        lineHeight: 'normal'
-                      }}
+                      className="font-sans text-[20px] font-semibold leading-normal text-main text-left"
                     >
                       STEP 03
                     </h3>
                   </div>
                   <p 
-                    style={{
-                      color: '#505050',
-                      fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                      fontSize: '16px',
-                      fontStyle: 'normal',
-                      fontWeight: 500,
-                      lineHeight: 'normal',
-                      marginLeft: '58px'
-                    }}
+                    className="font-sans text-[16px] font-medium leading-normal text-sub1"
+                    style={{ marginLeft: '58px' }}
                   >
                     대표님의 상황과 목표에 맞춰 가장 효율적인<br />
                     전략으로 실행합니다.
@@ -378,29 +313,14 @@ export default function InfiniteSection() {
                       style={{ width: '36px', height: '34.28px', flexShrink: 0, marginRight: '7px' }}
                     />
                     <h3 
-                      style={{
-                        color: '#000',
-                        textAlign: 'left',
-                        fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                        fontSize: '20px',
-                        fontStyle: 'normal',
-                        fontWeight: 600,
-                        lineHeight: 'normal'
-                      }}
+                      className="font-sans text-[20px] font-semibold leading-normal text-main text-left"
                     >
                       STEP 04
                     </h3>
                   </div>
                   <p 
-                    style={{
-                      color: '#505050',
-                      fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                      fontSize: '16px',
-                      fontStyle: 'normal',
-                      fontWeight: 500,
-                      lineHeight: 'normal',
-                      marginLeft: '43px'
-                    }}
+                    className="font-sans text-[16px] font-medium leading-normal text-sub1"
+                    style={{ marginLeft: '43px' }}
                   >
                     AI 세밀 분석 리포트로 성과를<br />
                     상시 관리하고 상세히 보고합니다.

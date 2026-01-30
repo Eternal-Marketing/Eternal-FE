@@ -207,16 +207,8 @@ export default function ReviewSection() {
           <FadeIn>
             <div className="text-center" style={{ marginTop: '241px', marginBottom: '114px' }}>
               <h2 
-                style={{
-                  color: '#FFF',
-                  textAlign: 'center',
-                  textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)',
-                  fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                  fontSize: '48px',
-                  fontStyle: 'normal',
-                  fontWeight: 700,
-                  lineHeight: 'normal'
-                }}
+                className="font-sans text-[48px] font-bold leading-normal text-inverse text-center"
+                style={{ textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)' }}
               >
                 판단은 이미 증명되어 있었고,<br />
                 AI는 그 판단을 정교하게 만들었습니다
@@ -270,15 +262,7 @@ export default function ReviewSection() {
           <ScaleIn delay={300}>
             <div className="text-center" style={{ marginTop: '0', marginBottom: '60px' }}>
               <h3 
-                style={{
-                  color: '#FFF',
-                  textAlign: 'center',
-                  fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                  fontSize: '48px',
-                  fontStyle: 'normal',
-                  fontWeight: 700,
-                  lineHeight: 'normal'
-                }}
+                className="font-sans text-[48px] font-bold leading-normal text-inverse text-center"
               >
                 그 판단은 결과로 이미 증명 되었습니다
               </h3>

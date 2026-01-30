@@ -99,49 +99,21 @@ export default function PlatformsSection() {
   ];
 
   return (
-    <section id="platforms" className="overflow-hidden relative z-30 w-full" style={{ backgroundColor: '#F6F6F6', height: '100vh' }}>
+    <section id="platforms" className="overflow-hidden relative z-30 w-full bg-bg h-screen">
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] pt-12 pb-12 md:pt-[60px] md:pb-[60px] lg:pt-[80px] lg:pb-[80px] desktop:pt-[120px] desktop:pb-[120px] h-full flex flex-col justify-center">
         {/* 섹션 제목 */}
         <FadeIn delay={200}>
           <div className="text-center mb-10 md:mb-[40px] lg:mb-[60px] desktop:mb-[80px]">
             <h2 
-              className="mb-4"
-              style={{
-                color: '#000',
-                textAlign: 'center',
-                fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                fontSize: '52px',
-                fontStyle: 'normal',
-                fontWeight: 600,
-                lineHeight: 'normal'
-              }}
+              className="mb-4 font-sans text-[52px] font-semibold leading-normal text-main text-center"
             >
               수 년 간 현장에서 다뤄 온
             </h2>
             <p 
-              className="leading-normal"
-              style={{
-                color: '#000',
-                textAlign: 'center',
-                fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                fontSize: '52px',
-                fontStyle: 'normal',
-                fontWeight: 600,
-                lineHeight: 'normal'
-              }}
+              className="font-sans text-[52px] font-semibold leading-normal text-main text-center"
             >
               <span 
-                style={{ 
-                  color: '#F5F5F5',
-                  fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                  fontSize: '52px',
-                  fontStyle: 'normal',
-                  fontWeight: 600,
-                  lineHeight: 'normal',
-                  backgroundColor: '#184BBA',
-                  padding: '4px 16px',
-                  display: 'inline-block'
-                }}
+                className="inline-block bg-primary text-inverse px-4 py-1"
               >마케팅</span>  전문 영역
             </p>
           </div>

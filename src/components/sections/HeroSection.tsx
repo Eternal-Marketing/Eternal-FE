@@ -31,10 +31,10 @@ export default function HeroSection() {
               className="w-[69px] h-[40px] mt-[17px]"
             />
             <div className="ml-[9px] mt-[22px]">
-              <p className="text-logo mb-0 text-[#3F6CE6]">
+              <p className="text-logo mb-0 text-primary">
                 ETERNAL{" "}
               </p>
-              <p className="text-logo text-[#3F6CE6]">
+              <p className="text-logo text-primary">
                 MARKETING
               </p>
             </div>
@@ -42,9 +42,9 @@ export default function HeroSection() {
           
           {/* 페이지 네비게이션 링크와 AI 진단 받기 버튼 */}
           <nav className="flex items-start">
-            <a href="#about" className="nav-item nav-link-hover text-body-sm text-white hover:!text-primary mt-[29px] px-3 py-1 rounded cursor-pointer">ABOUT</a>
-            <a href="#portfolio" className="nav-item nav-link-hover text-body-sm text-white hover:!text-primary ml-[41px] mt-[29px] px-3 py-1 rounded cursor-pointer">PORTFOLIO</a>
-            <a href="#service" className="nav-item nav-link-hover text-body-sm text-white hover:!text-primary ml-[41px] mt-[29px] px-3 py-1 rounded cursor-pointer">SERVICE</a>
+            <a href="#about" className="nav-item nav-link-hover text-body-sm text-inverse hover:!text-primary mt-[29px] px-3 py-1 rounded cursor-pointer">ABOUT</a>
+            <a href="#portfolio" className="nav-item nav-link-hover text-body-sm text-inverse hover:!text-primary ml-[41px] mt-[29px] px-3 py-1 rounded cursor-pointer">PORTFOLIO</a>
+            <a href="#service" className="nav-item nav-link-hover text-body-sm text-inverse hover:!text-primary ml-[41px] mt-[29px] px-3 py-1 rounded cursor-pointer">SERVICE</a>
             <button className="nav-item btn-primary bg-primary text-inverse text-body-sm h-[36px] w-[105px] rounded-[15px] flex items-center justify-center ml-[54px] mt-[19px]">
               AI 진단 받기
             </button>
@@ -55,7 +55,7 @@ export default function HeroSection() {
       {/* 메인 콘텐츠: 타이틀과 서브 타이틀 */}
       <div className="relative h-full flex flex-col items-center justify-center z-20">
         {/* 메인 타이틀 영역 */}
-        <div className="text-center text-white mt-[20px] md:mt-[60px] lg:mt-[100px] relative z-10">
+        <div className="text-center text-inverse mt-[20px] md:mt-[60px] lg:mt-[100px] relative z-10">
           {/* 타이틀 위 장식용 원형 아이콘 */}
           <div className="absolute top-[-10px] left-[calc(50%-210px)] w-[86px] h-[86px] z-[-1] animate-pulse-slow">
             <img 
@@ -74,9 +74,9 @@ export default function HeroSection() {
           </h1>
           
           {/* 서브 타이틀: 마케팅 인텔리전스 AI 설명 */}
-          <div className="text-h4 text-[#d0d7eb] mt-[20px] animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
+          <div className="text-h4 text-inverse/80 mt-[20px] animate-fade-in-up" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
             <p className="mb-2" data-node-id="24:19">마침내 탄생한 최적 효율의 마케팅</p>
-            <p data-node-id="24:20">"마케팅 인텔리전스 AI"</p>
+            <p data-node-id="24:20">&ldquo;마케팅 인텔리전스 AI&rdquo;</p>
           </div>
         </div>
         

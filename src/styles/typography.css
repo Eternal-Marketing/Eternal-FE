@@ -1,49 +1,60 @@
 /* Headline */
 .text-headline {
-  font-family: "Freesentation", Arial, Helvetica, sans-serif;
+  font-family: Freesentation, Arial, Helvetica, sans-serif;
   font-size: 64px;
-  font-weight: 800;
   font-style: normal;
+  font-weight: 800;
   line-height: normal;
-  color: #FFF;
-  text-align: center;
 }
 
 /* Heading 1 */
 .text-h1 {
+  font-family: Freesentation, Arial, Helvetica, sans-serif;
   font-size: 48px;
+  font-style: normal;
   font-weight: 700;
+  line-height: normal;
 }
 
 /* Heading 2 */
 .text-h2 {
+  font-family: Freesentation, Arial, Helvetica, sans-serif;
   font-size: 36px;
+  font-style: normal;
   font-weight: 700;
+  line-height: normal;
 }
 
 /* Heading 3 */
 .text-h3 {
+  font-family: Freesentation, Arial, Helvetica, sans-serif;
   font-size: 24px;
+  font-style: normal;
   font-weight: 600;
+  line-height: normal;
 }
 
 /* Heading 4 */
 .text-h4 {
-  font-family: "Freesentation", Arial, Helvetica, sans-serif;
+  font-family: Freesentation, Arial, Helvetica, sans-serif;
   font-size: 20px;
+  font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 
 /* Body 1 */
 .text-body {
+  font-family: Freesentation, Arial, Helvetica, sans-serif;
   font-size: 16px;
+  font-style: normal;
   font-weight: 500;
+  line-height: normal;
 }
 
 /* Body 2 */
 .text-body-sm {
-  font-family: "Freesentation", Arial, Helvetica, sans-serif;
+  font-family: Freesentation, Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -52,25 +63,23 @@
 
 /* 네비게이션 링크 호버 효과 */
 .nav-link {
-  transition: color 0.3s ease;
-  cursor: pointer;
-  color: #FFF;
+  @apply cursor-pointer transition-colors text-inverse;
 }
 
 .nav-link:hover {
-  color: #184BBA !important;
+  @apply text-primary;
 }
 
 /* Caption */
 .text-caption {
+  font-family: Freesentation, Arial, Helvetica, sans-serif;
   font-size: 12px;
+  font-style: normal;
   font-weight: 500;
+  line-height: normal;
 }
 
 /* Logo */
 .text-logo {
-  font-family: "Freesentation", Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 900;
-  line-height: 15px;
+  @apply font-sans text-[16px] font-black leading-[15px];
 }
