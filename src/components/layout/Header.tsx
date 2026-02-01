@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const logoImage = "/images/logo.svg";
 
@@ -11,6 +12,10 @@ const logoImage = "/images/logo.svg";
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  
+  // 밝은 배경을 가진 페이지들 (네브바 텍스트를 검정색으로)
+  const isLightBgPage = pathname === '/privacy' || pathname === '/terms';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,7 +80,7 @@ export default function Header() {
             <Link
               href="/about"
               className={`nav-item nav-link-hover px-3 py-1 rounded cursor-pointer no-underline transition-all duration-300 ${
-                isScrolled ? 'text-main hover:!text-primary text-[13px]' : 'text-inverse hover:!text-primary text-body-sm'
+                isScrolled ? 'text-main hover:!text-primary text-[13px]' : isLightBgPage ? 'text-main hover:!text-primary text-body-sm' : 'text-inverse hover:!text-primary text-body-sm'
               }`}
             >
               ABOUT
@@ -83,7 +88,7 @@ export default function Header() {
             <a
               href="/#column"
               className={`nav-item nav-link-hover ml-[32px] px-3 py-1 rounded cursor-pointer no-underline transition-all duration-300 ${
-                isScrolled ? 'text-main hover:!text-primary text-[13px]' : 'text-inverse hover:!text-primary text-body-sm'
+                isScrolled ? 'text-main hover:!text-primary text-[13px]' : isLightBgPage ? 'text-main hover:!text-primary text-body-sm' : 'text-inverse hover:!text-primary text-body-sm'
               }`}
             >
               COLUMN
@@ -91,7 +96,7 @@ export default function Header() {
             <a
               href="/#service"
               className={`nav-item nav-link-hover ml-[32px] px-3 py-1 rounded cursor-pointer no-underline transition-all duration-300 ${
-                isScrolled ? 'text-main hover:!text-primary text-[13px]' : 'text-inverse hover:!text-primary text-body-sm'
+                isScrolled ? 'text-main hover:!text-primary text-[13px]' : isLightBgPage ? 'text-main hover:!text-primary text-body-sm' : 'text-inverse hover:!text-primary text-body-sm'
               }`}
             >
               SERVICE
