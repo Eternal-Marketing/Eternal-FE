@@ -1,10 +1,9 @@
-const logoImage = "/images/logo.svg";
 const circleIcon = "/images/elipse.svg";
 const splineUrl = "https://my.spline.design/motiontrails-7nu0l9wGTzn5nWxGtrBcWZHT/";
 
 /**
  * HeroSection - 메인 히어로 섹션 컴포넌트
- * 배경 3D 애니메이션, 헤더 네비게이션, 메인 타이틀을 포함
+ * 배경 3D 애니메이션과 메인 타이틀을 포함 (헤더는 layout에서 처리)
  */
 export default function HeroSection() {
   return (
@@ -19,38 +18,6 @@ export default function HeroSection() {
           title="Spline 3D Animation"
         />
       </div>
-
-      {/* 상단 헤더: 로고와 네비게이션 메뉴 */}
-      <header className="absolute top-0 left-0 right-0 z-50 border-b border-black">
-        <div className="w-full max-w-[1440px] mx-auto px-4 h-[56px] flex justify-between">
-          {/* 로고 */}
-          <div className="flex items-start animate-slide-in-left">
-            <img 
-              src={logoImage} 
-              alt="ETERNAL MARKETING" 
-              className="w-[69px] h-[40px] mt-[17px]"
-            />
-            <div className="ml-[9px] mt-[22px]">
-              <p className="text-logo mb-0 text-primary">
-                ETERNAL{" "}
-              </p>
-              <p className="text-logo text-primary">
-                MARKETING
-              </p>
-            </div>
-          </div>
-          
-          {/* 페이지 네비게이션 링크와 AI 진단 받기 버튼 */}
-          <nav className="flex items-start">
-            <a href="#about" className="nav-item nav-link-hover text-body-sm text-inverse hover:!text-primary mt-[29px] px-3 py-1 rounded cursor-pointer">ABOUT</a>
-            <a href="#portfolio" className="nav-item nav-link-hover text-body-sm text-inverse hover:!text-primary ml-[41px] mt-[29px] px-3 py-1 rounded cursor-pointer">PORTFOLIO</a>
-            <a href="#service" className="nav-item nav-link-hover text-body-sm text-inverse hover:!text-primary ml-[41px] mt-[29px] px-3 py-1 rounded cursor-pointer">SERVICE</a>
-            <button className="nav-item btn-primary bg-primary text-inverse text-body-sm h-[36px] w-[105px] rounded-[15px] flex items-center justify-center ml-[54px] mt-[19px]">
-              AI 진단 받기
-            </button>
-          </nav>
-        </div>
-      </header>
 
       {/* 메인 콘텐츠: 타이틀과 서브 타이틀 */}
       <div className="relative h-full flex flex-col items-center justify-center z-20">

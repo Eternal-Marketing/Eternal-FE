@@ -3,11 +3,10 @@
 import Link from "next/link";
 
 /**
- * FooterSection - 푸터 섹션 컴포넌트
+ * Footer - 공통 푸터 컴포넌트
  * 회사 정보, AI·데이터 활용 고지, 네비게이션 링크, 저작권 정보를 포함
- * 구분선을 기준으로 상단(로고 및 회사 정보)과 하단(네비게이션 및 저작권)으로 구분
  */
-export default function FooterSection() {
+export default function Footer() {
   return (
     <footer 
       id="footer" 
@@ -91,7 +90,7 @@ export default function FooterSection() {
                 데이터는 내부 기준에 따라 관리되며, 외부에 무단 제공되지 않습니다.
               </p>
 
-              {/* 소셜 아이콘 (Figma 401:705, 401:704) */}
+              {/* 소셜 아이콘 */}
               <div className="mt-4 flex items-center gap-2">
                 <a
                   href="https://www.instagram.com/"
@@ -131,7 +130,7 @@ export default function FooterSection() {
           {/* 페이지 네비게이션 메뉴 */}
           <div className="flex flex-wrap gap-6 md:gap-8">
             <Link
-              href="/#about"
+              href="/about"
               className="font-sans text-[12px] font-medium leading-normal text-main no-underline transition-colors hover:text-primary"
             >
               ABOUT

@@ -17,6 +17,28 @@ const config: Config = {
         // xl: 1280px
         // 2xl: 1536px
       },
+      animation: {
+        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+        'shine': 'shine 2.5s ease-in-out infinite',
+      },
+      keyframes: {
+        'pulse-glow': {
+          '0%, 100%': {
+            boxShadow: '0 0 5px rgba(99, 102, 241, 0.4), 0 0 10px rgba(99, 102, 241, 0.2)',
+          },
+          '50%': {
+            boxShadow: '0 0 15px rgba(99, 102, 241, 0.6), 0 0 25px rgba(99, 102, 241, 0.3)',
+          },
+        },
+        'shine': {
+          '0%': {
+            transform: 'translateX(-100%)',
+          },
+          '100%': {
+            transform: 'translateX(100%)',
+          },
+        },
+      },
     },
   },
 };
