@@ -38,7 +38,7 @@ export default function Header() {
         className={`${
           isScrolled 
             ? 'bg-white/70 backdrop-blur-lg rounded-full shadow-xl border border-white/30 px-4' 
-            : 'bg-transparent border-b border-black px-4'
+            : 'bg-transparent px-4'
         }`}
         style={{
           transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
