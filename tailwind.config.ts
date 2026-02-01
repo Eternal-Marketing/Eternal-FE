@@ -20,6 +20,7 @@ const config: Config = {
       animation: {
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
         'shine': 'shine 2.5s ease-in-out infinite',
+        'ping-slow': 'ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite',
       },
       keyframes: {
         'pulse-glow': {
@@ -36,6 +37,16 @@ const config: Config = {
           },
           '100%': {
             transform: 'translateX(100%)',
+          },
+        },
+        'ping-slow': {
+          '0%': {
+            transform: 'scale(1)',
+            opacity: '0.8',
+          },
+          '75%, 100%': {
+            transform: 'scale(1.5)',
+            opacity: '0',
           },
         },
       },

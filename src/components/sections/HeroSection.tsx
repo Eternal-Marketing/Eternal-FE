@@ -33,10 +33,10 @@ export default function HeroSection() {
             />
           </div>
           
-          <h1 className="text-headline mb-0 relative z-10 animate-fade-in-up" data-node-id="24:14" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
+          <h1 className="text-[52px] font-extrabold mb-0 relative z-10 animate-fade-in-up" data-node-id="24:14" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
             마케팅의 기준을
           </h1>
-          <h1 className="text-headline mb-4 relative z-10 animate-fade-in-up" data-node-id="24:17" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
+          <h1 className="text-[52px] font-extrabold mb-4 relative z-10 animate-fade-in-up" data-node-id="24:17" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
             다시 설계합니다
           </h1>
           

@@ -207,7 +207,7 @@ export default function ReviewSection() {
           <FadeIn>
             <div className="text-center" style={{ marginTop: '241px', marginBottom: '114px' }}>
               <h2 
-                className="font-sans text-[48px] font-bold leading-normal text-inverse text-center"
+                className="font-sans text-[28px] md:text-[32px] lg:text-[36px] font-bold leading-normal text-inverse text-center"
                 style={{ textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)' }}
               >
                 판단은 이미 증명되어 있었고,<br />
@@ -220,21 +220,21 @@ export default function ReviewSection() {
           <ScaleIn delay={200}>
             <div className="flex justify-center items-center" style={{ marginBottom: '200px' }}>
               <div className="overflow-hidden w-full">
-                <div className="flex items-center review-scroll">
-                  {/* 리뷰 카드들 (8개) */}
-                  {[...Array(3)].map((_, repeatIndex) => (
-                    <div key={repeatIndex} className="flex items-center gap-[16px] flex-shrink-0">
+                <div className="review-scroll">
+                  {/* 리뷰 카드들 - 무한 스크롤을 위해 2번 반복 */}
+                  {[...Array(2)].map((_, repeatIndex) => (
+                    <div key={repeatIndex} className="flex items-center flex-shrink-0">
                       {reviews.map((review, index) => (
                         <div 
                           key={`${repeatIndex}-${index}`}
-                          className="flex items-center justify-center flex-shrink-0"
+                          className="flex items-center justify-center flex-shrink-0 mx-2"
                           style={{
-                            width: '371px',
-                            height: '250px',
-                            minWidth: '371px',
-                            maxWidth: '371px',
-                            minHeight: '250px',
-                            maxHeight: '250px',
+                            width: '340px',
+                            height: '228px',
+                            minWidth: '340px',
+                            maxWidth: '340px',
+                            minHeight: '228px',
+                            maxHeight: '228px',
                             overflow: 'hidden'
                           }}
                         >
@@ -242,8 +242,8 @@ export default function ReviewSection() {
                             src={review.image} 
                             alt={`Review ${index + 1}`}
                             style={{
-                              width: '371px',
-                              height: '250px',
+                              width: '340px',
+                              height: '228px',
                               objectFit: 'cover',
                               objectPosition: 'center',
                               display: 'block'
@@ -262,9 +262,9 @@ export default function ReviewSection() {
           <ScaleIn delay={300}>
             <div className="text-center" style={{ marginTop: '0', marginBottom: '60px' }}>
               <h3 
-                className="font-sans text-[48px] font-bold leading-normal text-inverse text-center"
+                className="font-sans text-[24px] md:text-[28px] lg:text-[32px] font-bold leading-normal text-inverse text-center"
               >
-                그 판단은 결과로 이미 증명 되었습니다
+                이미 기준이 된 이터널의 판단
               </h3>
             </div>
           </ScaleIn>
@@ -274,14 +274,14 @@ export default function ReviewSection() {
             {/* 첫 번째 상장 */}
             <SlideInLeft delay={400}>
               <div 
-                className="flex-shrink-0"
+                className="flex-shrink-0 animate-float-1"
                 style={{ 
-                  width: '369px', 
-                  height: '554px',
-                  minWidth: '369px',
-                  maxWidth: '369px',
-                  minHeight: '554px',
-                  maxHeight: '554px',
+                  width: '240px', 
+                  height: '360px',
+                  minWidth: '240px',
+                  maxWidth: '240px',
+                  minHeight: '360px',
+                  maxHeight: '360px',
                   overflow: 'hidden',
                   position: 'relative',
                   boxSizing: 'border-box',
@@ -294,12 +294,12 @@ export default function ReviewSection() {
                   src="/images/reviewSection/reward1.png" 
                   alt="Reward 1"
                   style={{
-                    width: '369px',
-                    height: '554px',
-                    minWidth: '369px',
-                    maxWidth: '369px',
-                    minHeight: '554px',
-                    maxHeight: '554px',
+                    width: '240px',
+                    height: '360px',
+                    minWidth: '240px',
+                    maxWidth: '240px',
+                    minHeight: '360px',
+                    maxHeight: '360px',
                     objectFit: 'cover',
                     objectPosition: 'center',
                     display: 'block',
@@ -314,14 +314,14 @@ export default function ReviewSection() {
             {/* 두 번째 상장 */}
             <ScaleIn delay={500}>
               <div 
-                className="flex-shrink-0"
+                className="flex-shrink-0 animate-float-2"
                 style={{ 
-                  width: '369px', 
-                  height: '554px',
-                  minWidth: '369px',
-                  maxWidth: '369px',
-                  minHeight: '554px',
-                  maxHeight: '554px',
+                  width: '240px', 
+                  height: '360px',
+                  minWidth: '240px',
+                  maxWidth: '240px',
+                  minHeight: '360px',
+                  maxHeight: '360px',
                   overflow: 'hidden',
                   position: 'relative',
                   boxSizing: 'border-box',
@@ -334,12 +334,12 @@ export default function ReviewSection() {
                   src="/images/reviewSection/reward2.png" 
                   alt="Reward 2"
                   style={{
-                    width: '369px',
-                    height: '554px',
-                    minWidth: '369px',
-                    maxWidth: '369px',
-                    minHeight: '554px',
-                    maxHeight: '554px',
+                    width: '240px',
+                    height: '360px',
+                    minWidth: '240px',
+                    maxWidth: '240px',
+                    minHeight: '360px',
+                    maxHeight: '360px',
                     objectFit: 'cover',
                     objectPosition: 'center',
                     display: 'block',
@@ -354,14 +354,14 @@ export default function ReviewSection() {
             {/* 세 번째 상장 */}
             <SlideInRight delay={600}>
               <div 
-                className="flex-shrink-0"
+                className="flex-shrink-0 animate-float-3"
                 style={{ 
-                  width: '369px', 
-                  height: '554px',
-                  minWidth: '369px',
-                  maxWidth: '369px',
-                  minHeight: '554px',
-                  maxHeight: '554px',
+                  width: '230px', 
+                  height: '345px',
+                  minWidth: '230px',
+                  maxWidth: '230px',
+                  minHeight: '345px',
+                  maxHeight: '345px',
                   overflow: 'hidden',
                   position: 'relative',
                   boxSizing: 'border-box',
@@ -376,20 +376,18 @@ export default function ReviewSection() {
                   src="/images/reviewSection/reward3.png" 
                   alt="Reward 3"
                   style={{
-                    width: '369px',
-                    height: '554px',
-                    minWidth: '369px',
-                    maxWidth: '369px',
-                    minHeight: '554px',
-                    maxHeight: '554px',
+                    width: '230px',
+                    height: '345px',
+                    minWidth: '230px',
+                    maxWidth: '230px',
+                    minHeight: '345px',
+                    maxHeight: '345px',
                     objectFit: 'cover',
                     objectPosition: 'center',
                     display: 'block',
                     margin: 0,
                     padding: 0,
-                    boxSizing: 'border-box',
-                    transform: 'scale(0.95)',
-                    transformOrigin: 'center'
+                    boxSizing: 'border-box'
                   }}
                 />
               </div>

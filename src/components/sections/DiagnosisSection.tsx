@@ -193,26 +193,28 @@ export default function DiagnosisSection() {
             {/* AI 진단 받기 버튼 */}
             <ScaleIn delay={200}>
               <div className="text-center" style={{ marginBottom: '96px' }}>
-                <button
-                className="button-glow ds-cta-button"
-              >
-                AI 진단 받기
+                <button className="diagnosis-cta-btn">
+                  AI 진단 받기
                 </button>
               </div>
             </ScaleIn>
 
             {/* 하단: 실시간 진단 진행 현황 */}
-            <div className="text-center absolute" style={{ bottom: '180px', left: '50%', transform: 'translateX(-50%)', width: '100%' }}>
+            <div className="text-center absolute" style={{ bottom: '120px', left: '50%', transform: 'translateX(-50%)', width: '100%' }}>
               <FadeIn delay={400} style={{ display: 'inline-block' }}>
-                <p 
-                  className="font-sans text-[24px] font-semibold leading-normal text-inverse text-center whitespace-nowrap"
+                <div 
+                  className="font-sans text-[24px] font-semibold leading-normal text-inverse text-center whitespace-nowrap flex items-center justify-center gap-3"
                 >
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                  </span>
                   실시간 진단 진행 중{" "}
                   <span className="inline-block min-w-[60px] text-left font-sans text-[48px] font-semibold leading-normal text-inverse">
                     <CountUpNumber end={124} duration={2000} />
                   </span>{" "}
                   건
-                </p>
+                </div>
               </FadeIn>
             </div>
           </div>

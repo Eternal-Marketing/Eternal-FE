@@ -12,10 +12,10 @@ export default function Footer() {
       id="footer" 
       className="relative w-full z-30 bg-[#f6f6f6]"
     >
-      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] py-[60px] md:py-[80px]">
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] py-[40px] md:py-[50px]">
         {/* 상단 섹션: 로고와 회사 정보 */}
         <div 
-          className="flex flex-col md:flex-row gap-8 md:gap-12"
+          className="flex flex-col md:flex-row gap-6 md:gap-10"
           style={{
             width: '1164px',
             maxWidth: '100%',
@@ -25,24 +25,21 @@ export default function Footer() {
         >
           {/* 로고 영역 */}
           <div 
-            className="flex items-start gap-[9px] flex-shrink-0"
-            style={{
-              marginBottom: '181px'
-            }}
+            className="flex items-center gap-[10px] flex-shrink-0 self-start ml-8 mt-2"
           >
             <img 
               src="/images/logo.svg" 
               alt="ETERNAL MARKETING" 
-              style={{ width: '97px', height: '56px' }}
+              style={{ width: '90px', height: '52px' }}
             />
             <div>
               <p 
-                className="m-0 font-sans text-[16px] font-semibold leading-normal text-primary"
+                className="m-0 font-sans text-[18px] font-semibold leading-tight text-primary"
               >
                 ETERNAL
               </p>
               <p 
-                className="m-0 font-sans text-[16px] font-semibold leading-normal text-primary"
+                className="m-0 font-sans text-[18px] font-semibold leading-tight text-primary"
               >
                 MARKETING
               </p>
@@ -53,13 +50,13 @@ export default function Footer() {
           <div 
             style={{ 
               textAlign: 'left',
-              marginBottom: '41px',
+              marginBottom: '20px',
               marginLeft: 'auto'
             }}
           >
             {/* 회사명, 대표자명, 사업자등록번호, 이메일, 주소, 도메인 */}
             <div 
-              className="mb-6 font-sans text-[16px] font-medium leading-normal text-sub1"
+              className="mb-4 font-sans text-[14px] font-medium leading-normal text-sub1"
             >
               <p style={{ margin: '0 0 8px 0' }}>
                 회사명 : 이터널 마케팅 | 대표자명 : 정세훈, 이훈
@@ -116,7 +113,7 @@ export default function Footer() {
         </div>
 
         {/* 상단과 하단을 구분하는 선 */}
-        <div className="w-full max-w-[1164px] mx-auto border-t border-sub1 mt-0 mb-[34px]" />
+        <div className="w-full max-w-[1164px] mx-auto border-t border-sub1 mt-0 mb-[20px]" />
 
         {/* 하단 섹션: 네비게이션 링크와 저작권 */}
         <div 

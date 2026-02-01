@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import FloatingCTA from "@/components/layout/FloatingCTA";
 
 /**
  * Marketing Layout - 공통 레이아웃
@@ -15,6 +16,7 @@ export default function MarketingLayout({
       <Header />
       {children}
       <Footer />
+      <FloatingCTA />
     </div>
   );
 }
