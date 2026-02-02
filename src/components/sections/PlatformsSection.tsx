@@ -3,11 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 
 /**
- * PlatformsSection - 플랫폼 섹션 컴포넌트
- * 다양한 마케팅 플랫폼 로고를 스크롤 애니메이션으로 표시
+ * 플랫폼 섹션 (홈)
+ * - 다양한 마케팅 채널 로고를 페이드인/스케일인으로 표시
  */
-
-// 페이드인 애니메이션 컴포넌트
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +46,6 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 }
 
-// 스케일인 애니메이션 컴포넌트
 function ScaleIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);

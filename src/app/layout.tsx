@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+/**
+ * 루트 레이아웃
+ * - 전역 메타데이터(제목, 설명, OG, 트위터, 파비콘)
+ * - body 기본 폰트·배경
+ */
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://eternalmarketing.co.kr";
 
 export const metadata: Metadata = {

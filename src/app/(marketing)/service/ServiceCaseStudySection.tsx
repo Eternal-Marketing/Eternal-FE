@@ -1,4 +1,9 @@
 'use client';
+/**
+ * 케이스 스터디 섹션
+ * - 슬라이드별 고객 사례(제목 2줄 + 카드 여러 개)
+ * - 이전/다음 버튼 + 터치 스와이프, 진입 시 콘텐츠 페이드인
+ */
 
 import { useMemo, useState, useRef, useEffect } from 'react';
 
@@ -17,6 +22,7 @@ type Slide = {
 };
 
 export default function ServiceCaseStudySection() {
+  // 슬라이드 데이터: S패션/K외식/Y의료 등 고객 유형별 카드 목록
   const slides = useMemo((): Slide[] => {
     return [
       {
@@ -158,7 +164,7 @@ export default function ServiceCaseStudySection() {
   }, []);
 
   const [idx, setIdx] = useState(0);
-  const [direction, setDirection] = useState(0); // 0: 초기, 1: 다음(오른쪽에서), -1: 이전(왼쪽에서)
+  const [direction, setDirection] = useState(0); // 1: 다음, -1: 이전 (애니 클래스용)
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const touchStartX = useRef(0);
@@ -168,6 +174,7 @@ export default function ServiceCaseStudySection() {
   const currentSlide = slides[idx];
   const cards = currentSlide.cards;
 
+  // 섹션 진입 시 isInView → 콘텐츠 opacity 전환 (CSS)
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -184,6 +191,7 @@ export default function ServiceCaseStudySection() {
     return () => observer.disconnect();
   }, []);
 
+  // 터치 스와이프: 일정 거리 이상이면 이전/다음 슬라이드
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -217,6 +225,7 @@ export default function ServiceCaseStudySection() {
       ref={sectionRef}
       className={`relative w-full overflow-hidden ${isInView ? 'case-study-in-view' : ''}`}
     >
+      {/* 배경 이미지 */}
       <div className="absolute inset-0">
         <img
           src="/images/service-page/d2c-background.svg"
@@ -226,12 +235,14 @@ export default function ServiceCaseStudySection() {
       </div>
 
       <div className="case-study-content relative z-10 w-full max-w-[1163px] mx-auto px-4 py-[180px] opacity-0">
+        {/* 현재 슬라이드 제목 2줄 */}
         <h2 className="m-0 font-sans text-[20px] md:text-[24px] font-semibold text-white text-center leading-tight">
           {currentSlide.titleLines[0]}
           <br />
           {currentSlide.titleLines[1]}
         </h2>
 
+        {/* 이전 버튼 + 카드 그리드 + 다음 버튼 (스와이프 지원) */}
         <div
           className="mt-20 flex items-center justify-center gap-4 lg:gap-6 touch-pan-y"
           onTouchStart={handleTouchStart}
@@ -259,6 +270,7 @@ export default function ServiceCaseStudySection() {
             </svg>
           </button>
 
+          {/* 현재 슬라이드 카드들 (2열 또는 3열, 방향에 따라 슬라이드 애니메이션) */}
           <div
             key={idx}
             className={`grid grid-cols-1 gap-4 lg:gap-5 max-w-[900px] ${cards.length === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-3'} ${slideAnimationClass}`}

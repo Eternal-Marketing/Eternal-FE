@@ -1,8 +1,11 @@
 'use client';
-
+/**
+ * 어바웃 페이지
+ * - 히어로 → Our Story & Philosophy → 파란 문구 스트립 → 이터널이 기준이 되는 이유 → 인텔리전스 → Our Team → CTA(진단 받기)
+ * - FadeIn/SlideIn/CountUp/ExpandBackground 등 뷰포트 진입 애니메이션
+ */
 import { useRef, useEffect, useState } from 'react';
 
-// 애니메이션 컴포넌트들
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -173,7 +176,6 @@ function ExpandCTABackground({ children, imageSrc }: { children: React.ReactNode
           className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
-      {/* 컨텐츠 */}
       <div
         className="relative z-10 h-full"
         style={{
@@ -207,7 +209,6 @@ function ExpandBackground({ children }: { children: React.ReactNode }) {
 
   return (
     <div ref={ref} className="relative w-full overflow-hidden bg-white">
-      {/* 파란 배경이 좌우로 퍼지는 효과 */}
       <div
         className="absolute inset-0 bg-primary"
         style={{
@@ -216,7 +217,6 @@ function ExpandBackground({ children }: { children: React.ReactNode }) {
           transformOrigin: 'center',
         }}
       />
-      {/* 텍스트 컨텐츠 */}
       <div
         className="relative z-10"
         style={{
@@ -288,7 +288,7 @@ export default function AboutPage() {
 
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      {/* Hero (Figma 401:247, 401:259) */}
+      {/* 히어로: 배경 이미지 + ABOUT 타이틀, 하단 문구 */}
       <section className="relative w-full h-[420px] overflow-hidden">
         <img
           src="/images/about-page/firstimage.svg"
@@ -296,7 +296,6 @@ export default function AboutPage() {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        {/* Hero text */}
         <div className="relative z-10 h-full flex flex-col items-center text-center px-4">
           <h1 className="m-0 mt-[100px] font-sans text-[40px] font-bold leading-normal">
             <span className="text-white/80">ABOUT</span> <span className="text-[#6d94ff]">ETERNAL MARKETING</span>
@@ -309,7 +308,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Story & Philosophy (Figma 401:252) */}
+      {/* Our Story & Philosophy: 스토리 이미지 + "왜 결과는 항상 같을까요?" 문단 */}
       <section ref={storySectionRef} className="w-full bg-[#ffffff]">
         <div className="w-full max-w-[1163px] mx-auto px-4 py-[100px]">
           <FadeIn>
@@ -335,7 +334,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Blue statement (Figma 401:257) */}
+      {/* 파란 배경 스트립: "이터널마케팅은 ... 질문을 던지는 것에서 시작했습니다" */}
       <ExpandBackground>
         <div className="w-full max-w-[1163px] mx-auto px-4 py-[60px] text-center">
           <p className="m-0 font-sans font-semibold leading-[50px]">
@@ -350,7 +349,7 @@ export default function AboutPage() {
         </div>
       </ExpandBackground>
 
-      {/* Why Eternal (Figma 401:269) */}
+      {/* 이터널이 기준이 되는 이유: 왼쪽 문단 + 오른쪽 인피니티 다이어그램 */}
       <section ref={whyEternalSectionRef} className="w-full bg-bg">
         <div className="w-full max-w-[1163px] mx-auto px-4 py-[200px] relative">
           <div className="flex flex-col lg:flex-row gap-10 items-center">
@@ -387,7 +386,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Intelligence (Figma 401:411) */}
+      {/* 인텔리전스: 퍼즐 배경 + "마케팅의 정답을 가려내는 인텔리전스" 문구 */}
       <section ref={intelligenceSectionRef} className="relative w-full h-[720px] overflow-hidden">
         <img src="/images/about-page/puzzle-background.svg" alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/20" />
@@ -413,7 +412,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Team (Figma 401:416) */}
+      {/* Our Team: 조직 구조 이미지 */}
       <section className="w-full bg-[#f6f6f6]">
         <div className="w-full max-w-[1163px] mx-auto px-4 py-[100px]">
           <FadeIn>
@@ -437,7 +436,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA strip (Figma 401:495) */}
+      {/* CTA: 배경 이미지 좌우 펼침 + "정답은 이미 여기 있습니다" + AI 진단 버튼 + 실시간 진단 건수 */}
       <ExpandCTABackground imageSrc="/images/about-page/last-background.svg">
         <div className="w-full max-w-[1163px] mx-auto px-8 h-full flex items-center justify-between">
           {/* 왼쪽: 메인 문구 + 버튼 */}

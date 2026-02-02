@@ -1,4 +1,9 @@
 'use client';
+/**
+ * 제공 서비스 섹션
+ * - 채널별 아이콘 + 이름 카드 그리드 (2~5열 반응형)
+ * - 뷰포트 진입 시 제목·카드 페이드업 (reveal-fade-up, delay 순차)
+ */
 
 import { useRef, useEffect, useState } from 'react';
 
@@ -41,6 +46,7 @@ export default function ServiceOfferingsSection() {
       className="bg-[#f6f6f6] py-[80px] px-4"
     >
       <div className="max-w-[1163px] mx-auto">
+        {/* 섹션 제목 + 부제 (진입 시 페이드업) */}
         <div className={`reveal-fade-up mb-12 ${visible ? 'is-visible' : ''}`}>
           <h2 className="font-sans text-[28px] md:text-[36px] font-bold leading-tight text-main mb-4">
             우리가 제공하는 <span className="text-primary">마케팅 서비스</span>
@@ -50,6 +56,7 @@ export default function ServiceOfferingsSection() {
           </p>
         </div>
 
+        {/* 채널별 카드 그리드 (카드별 delay로 순차 등장) */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {SERVICES.map((service, idx) => (
             <div

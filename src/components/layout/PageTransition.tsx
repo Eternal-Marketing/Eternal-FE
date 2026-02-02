@@ -3,8 +3,8 @@
 import { usePathname } from "next/navigation";
 
 /**
- * 페이지 전환 시 공통 진입 애니메이션 (페이드인 + 살짝 위로)
- * (marketing) 레이아웃에서 children을 감싸서 사용
+ * 페이지 전환 진입 애니메이션
+ * - pathname이 바뀔 때마다 key로 리마운트 → animate-page-enter(페이드인 + 위로) 적용
  */
 export default function PageTransition({
   children,

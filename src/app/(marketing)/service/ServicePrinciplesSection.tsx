@@ -1,4 +1,9 @@
 'use client';
+/**
+ * 운영 원칙 섹션
+ * - 연한 보라 배경 스트립 안에 4열: 약정 없음 / 경쟁분석 / 키워드 AI / 브랜드 DNA
+ * - 각 항목: 원형 아이콘 + 제목 + 설명
+ */
 
 function CircleIcon({
   children,
@@ -60,7 +65,7 @@ export default function ServicePrinciplesSection() {
           마케팅의 새로운 기준, 기본부터 다릅니다.
         </h2>
 
-        {/* light strip */}
+        {/* 연한 보라 스트립 + 4열 원칙 카드 */}
         <div className="mt-10 bg-[#e7ebff] py-10">
           <div className="w-full max-w-[1163px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 items-start justify-items-center">
             <div className="text-center">

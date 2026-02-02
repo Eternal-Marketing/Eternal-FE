@@ -1,5 +1,9 @@
 'use client';
-
+/**
+ * AI 진단 1단계 폼
+ * - 업체명(필수), 업종, 고민 영역(최대 2개), 마케팅 진행 상황, 관심 채널, 추가 공유
+ * - 다음 클릭 시 업체명 검사 후 /ai-diagnosis/step-2 이동
+ */
 import { useRef, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 

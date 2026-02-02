@@ -3,11 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 
 /**
- * InfiniteSection - 프로세스 섹션 컴포넌트
- * 중앙 무한대 루프와 4개의 STEP으로 구성된 프로세스 플로우를 표시
+ * 프로세스(무한대) 섹션 (홈)
+ * - 중앙 무한대 루프 + 4단계 STEP(판단·설계·실행·관리) 플로우
  */
-
-// 페이드인 애니메이션 컴포넌트
 function FadeIn({ children, delay = 0, className = '', style = {} }: { children: React.ReactNode; delay?: number; className?: string; style?: React.CSSProperties }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +46,6 @@ function FadeIn({ children, delay = 0, className = '', style = {} }: { children:
   );
 }
 
-// 스케일인 애니메이션 컴포넌트
 function ScaleIn({ children, delay = 0, className = '', style = {} }: { children: React.ReactNode; delay?: number; className?: string; style?: React.CSSProperties }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);

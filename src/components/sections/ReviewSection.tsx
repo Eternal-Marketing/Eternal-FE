@@ -3,11 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 
 /**
- * ReviewSection - 리뷰 및 상장 섹션 컴포넌트
- * 고객 리뷰 카드와 수상 상장 이미지를 표시
+ * 리뷰·상장 섹션 (홈)
+ * - 고객 리뷰 카드, 수상 상장 이미지, 페이드인/스케일인
  */
-
-// 페이드인 애니메이션 컴포넌트
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +46,6 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 }
 
-// 스케일인 애니메이션 컴포넌트
 function ScaleIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);

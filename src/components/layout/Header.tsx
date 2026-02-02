@@ -7,14 +7,14 @@ import { usePathname } from "next/navigation";
 const logoImage = "/images/logo.svg";
 
 /**
- * Header - 공통 헤더 컴포넌트
- * 스크롤 시 가운데로 모이면서 플로팅되는 효과
+ * 공통 헤더
+ * - 스크롤 시 상단 전체 → 중앙 플로팅(둥근 막대) 형태로 전환
+ * - privacy/terms/column 상단은 밝은 배경이라 네비 텍스트 흰색
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  
-  // 밝은 배경 페이지 = 네브 검정색 / 컬럼 목록만 상단 어두워 흰색 네브
+
   const isLightBgPage = pathname === '/privacy' || pathname === '/terms' || pathname.startsWith('/column/');
 
   useEffect(() => {

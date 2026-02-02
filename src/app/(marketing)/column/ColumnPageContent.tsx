@@ -1,5 +1,9 @@
 'use client';
-
+/**
+ * 칼럼 목록/카테고리 공통 콘텐츠
+ * - 히어로 → 브레드크럼 → 카테고리 탭(바이럴/퍼포먼스/SNS/영상) → 픽처드 아티클 → 아티클 그리드
+ * - activeCategoryIndex로 현재 카테고리 결정, 탭 클릭 시 /column 또는 /column/category/:slug 이동
+ */
 import Link from 'next/link';
 
 export const CATEGORIES = [
@@ -31,7 +35,7 @@ const ARTICLES = Array(6).fill(null).map((_, i) => ({
 export default function ColumnPageContent({ activeCategoryIndex }: { activeCategoryIndex: number }) {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      {/* Hero (Figma 804:486) */}
+      {/* 히어로: 배경 이미지 + "이터널 마케팅 칼럼" 타이틀, 진입 시 페이드업 */}
       <section className="relative w-full h-[386px] overflow-hidden" data-node-id="804:486">
         <img
           src="/images/column/column-background.svg"
@@ -58,10 +62,9 @@ export default function ColumnPageContent({ activeCategoryIndex }: { activeCateg
         </div>
       </section>
 
-      {/* Content Section (Figma 804:499) */}
+      {/* 콘텐츠: 브레드크럼 + 카테고리 탭 + 픽처드 + 그리드 */}
       <section className="w-full bg-[#f6f6f6]" data-node-id="804:499">
         <div className="w-full max-w-[1163px] mx-auto px-4 py-[60px]">
-          {/* Breadcrumb: 홈 | 칼럼 | 카테고리명 */}
           <p
             className="font-sans text-[14px] font-thin text-main mb-4 animate-fade-in-up"
             style={{ animationDelay: '0.5s', animationFillMode: 'both', animationDuration: '0.5s' }}
@@ -77,7 +80,6 @@ export default function ColumnPageContent({ activeCategoryIndex }: { activeCateg
             <span className="font-normal">{CATEGORIES[activeCategoryIndex]}</span>
           </p>
 
-          {/* Category Tabs - 각각 페이지 링크 */}
           <div
             className="flex flex-wrap items-center gap-4 mb-10 animate-fade-in-up"
             style={{ animationDelay: '0.6s', animationFillMode: 'both', animationDuration: '0.5s' }}
@@ -98,7 +100,6 @@ export default function ColumnPageContent({ activeCategoryIndex }: { activeCateg
             ))}
           </div>
 
-          {/* Featured Article (Figma 804:542, 804:539~541) */}
           <Link
             href={`/column/featured?category=${CATEGORY_SLUGS[activeCategoryIndex]}`}
             className="flex flex-col lg:flex-row gap-8 mb-16 no-underline group animate-fade-in-up"
@@ -134,7 +135,6 @@ export default function ColumnPageContent({ activeCategoryIndex }: { activeCateg
             </div>
           </Link>
 
-          {/* Article Grid (Figma 804:507~) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {ARTICLES.map((article, idx) => (
               <ArticleCard

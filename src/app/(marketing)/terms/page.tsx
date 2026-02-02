@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+/**
+ * 이용약관 페이지
+ * - 브레드크럼, 개인정보/이용약관 탭, 목차, 제1~8조 본문
+ */
 export const metadata: Metadata = {
   title: "이용약관 | Eternal Marketing",
 };
@@ -19,7 +23,6 @@ export default function TermsPage() {
 
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal pt-[74px]">
-      {/* 브레드크럼 영역 - 구분선으로 감싸기 */}
       <div className="w-full border-t border-sub3/50"></div>
       <div className="w-full max-w-[1163px] mx-auto py-4">
         <p className="text-caption text-sub1 m-0">
@@ -31,10 +34,8 @@ export default function TermsPage() {
       </div>
       <div className="w-full border-b border-sub3/50 mb-10"></div>
 
-      {/* 본문 (Figma 401:716) */}
       <section className="w-full max-w-[1163px] mx-auto pb-[120px]">
         <div className="pl-[20px]">
-          {/* 탭 */}
           <div className="flex items-center gap-[38px] mb-[26px]">
             <Link href="/privacy" className="m-0 text-h4 text-sub2 no-underline">
               개인정보 처리 방침
@@ -42,7 +43,6 @@ export default function TermsPage() {
             <p className="m-0 text-h4 text-main underline">이용 약관</p>
           </div>
 
-          {/* 목차 박스 */}
           <div className="border border-sub1 w-full h-auto py-[18px] mb-[49px]">
             <div className="px-[38px] grid grid-cols-3 gap-x-[60px] gap-y-[14px]">
               {toc.map((item) => (
@@ -55,7 +55,6 @@ export default function TermsPage() {
             </div>
           </div>
 
-          {/* 소개 문구 */}
           <p className="text-body-sm text-sub1 m-0 w-full max-w-none">
             본 약관은 이터널마케팅(이하 &ldquo;회사&rdquo;)이 제공하는 마케팅 컨설팅 및 AI 진단 관련 서비스 이용에 관한
             기본적인 사항을 규정합니다.
@@ -63,7 +62,6 @@ export default function TermsPage() {
 
           <hr className="border-0 border-t border-sub3 mt-[50px] mb-[66px]" />
 
-          {/* 제 1조 */}
           <section id="article-1" className="scroll-mt-[110px]">
             <h2 className="text-h4 text-main m-0">제 1조 (목적)</h2>
             <div className="mt-[15px] ml-[37px] text-body-sm text-sub1 w-[calc(100%-37px)] max-w-none">

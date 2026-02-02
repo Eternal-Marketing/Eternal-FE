@@ -1,4 +1,9 @@
 'use client';
+/**
+ * 퍼포먼스 마케팅 섹션
+ * - RWD(반응형 홈페이지), SEO(검색광고) 2열 카드
+ * - 카드 호버 시 검은 오버레이 + 설명 문구, 뷰포트 진입 시 그리드 등장
+ */
 
 import { useRef, useEffect, useState } from 'react';
 
@@ -29,12 +34,14 @@ export default function ServicePerformanceSection() {
           PERFORMANCE MARKETING
         </h2>
 
+        {/* RWD | SEO 라벨 */}
         <div className="mt-8 text-center font-sans text-[16px] text-sub1">
           <span>Responsive Web Design</span>
           <span className="mx-4 text-sub3">|</span>
           <span>Search Engine Optimization</span>
         </div>
 
+        {/* 2열 카드: 이미지 + 호버 시 오버레이 설명 */}
         <div
           className={`mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 ${visible ? 'service-category-cards-visible' : ''}`}
         >

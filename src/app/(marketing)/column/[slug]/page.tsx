@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CATEGORY_NAMES, getArticleCategoryIndex, getCategoryIndex } from "../categorySlug";
 
+/**
+ * 칼럼 상세 페이지 (/column/:slug)
+ * - slug로 아티클 식별, searchParams.category로 카테고리 보정. 브레드크럼·본문·관련 아티클
+ */
 export const metadata: Metadata = {
   title: "칼럼 | Eternal Marketing",
 };
 
-// 더미 데이터 - 나중에 API/CMS로 대체 (category는 slug에서 결정)
 const getArticleData = (category: string) => ({
   category,
   title: "제목",
@@ -50,7 +53,6 @@ type PageProps = {
 export default async function ColumnDetailPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
   const { category: categoryFromQuery } = await searchParams;
-  // 퍼포먼스 마케팅 등 카테고리 페이지에서 들어오면 ?category=performance 로 전달됨
   const categoryIndex = categoryFromQuery
     ? getCategoryIndex(categoryFromQuery)
     : getArticleCategoryIndex(slug);
@@ -59,7 +61,6 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
 
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      {/* Breadcrumb (Figma 804:836) */}
       <div className="w-full pt-[74px]">
         <div className="w-full max-w-[1163px] mx-auto px-4 py-4">
           <p className="font-sans text-[14px] font-thin text-main" data-node-id="804:836">
@@ -72,9 +73,7 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
         </div>
       </div>
 
-      {/* Article Content (Figma 804:791) */}
       <article className="w-full max-w-[603px] mx-auto px-4 pb-[80px]" data-node-id="804:791">
-        {/* Category Badge (Figma 804:792) */}
         <div 
           className="inline-flex items-center justify-center px-[6px] py-[2px] bg-[#f6f6f6] rounded-[3px] mb-6"
           data-node-id="804:792"
@@ -84,7 +83,6 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
           </span>
         </div>
 
-        {/* Title (Figma 804:794) */}
         <h1 
           className="m-0 font-sans text-[32px] font-semibold leading-normal text-main mb-4"
           data-node-id="804:794"
@@ -92,7 +90,6 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
           {article.title}
         </h1>
 
-        {/* Subtitle (Figma 804:796) */}
         <p 
           className="m-0 font-sans text-[14px] font-normal leading-relaxed text-sub1 mb-2"
           data-node-id="804:796"
@@ -100,7 +97,6 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
           {article.subtitle}
         </p>
 
-        {/* Date & Social (Figma 804:800~802) */}
         <div className="flex items-center gap-3 mb-6">
           <span className="font-sans text-[10px] font-thin text-main" data-node-id="804:800">
             {article.date}
@@ -115,7 +111,6 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
           </div>
         </div>
 
-        {/* Featured Image (Figma 804:803) */}
         <div 
           className="w-full h-[280px] md:h-[314px] mb-10 overflow-hidden"
           data-node-id="804:803"

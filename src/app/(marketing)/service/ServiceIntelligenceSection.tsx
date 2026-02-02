@@ -1,4 +1,9 @@
 'use client';
+/**
+ * 인텔리전스 배너
+ * - 좌·우 절반 회색 배경이 중앙으로 퍼지는 애니메이션 (뷰포트 진입 시)
+ * - 패키지 마케팅 거부 + AI 맞춤 솔루션 문구
+ */
 
 import { useRef, useEffect, useState } from 'react';
 
@@ -27,10 +32,10 @@ export default function ServiceIntelligenceSection() {
       ref={sectionRef}
       className={`relative overflow-hidden py-[70px] px-4 bg-white ${visible ? 'cta-banner-spread is-visible' : 'cta-banner-spread'}`}
     >
-      {/* 어두운 색이 좌우에서 중앙으로 퍼지는 레이어 */}
+      {/* 좌·우 스프레드 배경 (cta-banner-spread 재사용) */}
       <div className="cta-banner-spread-left absolute inset-y-0 left-0 w-1/2 bg-[#404040]" aria-hidden />
       <div className="cta-banner-spread-right absolute inset-y-0 right-0 w-1/2 bg-[#404040]" aria-hidden />
-      {/* 콘텐츠 */}
+      {/* AI 맞춤 솔루션 문구 */}
       <div className="cta-banner-content relative z-10 w-full max-w-[1163px] mx-auto text-center text-white">
         <p className="m-0 font-sans text-[16px] font-light leading-relaxed">
           결과가 정해져 있는 패키지 마케팅은 그만

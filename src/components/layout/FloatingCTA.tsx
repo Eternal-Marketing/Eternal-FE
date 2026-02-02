@@ -16,8 +16,8 @@ const PANEL_ANIM_DURATION = 360;
 type Step = 1 | 2;
 
 /**
- * FloatingCTA - 오른쪽 하단 고정 CTA 버튼
- * 클릭 시 간편 문의하기 모달(바텀시트) 표시, X 클릭 시 모달 닫기
+ * 플로팅 CTA (오른쪽 하단 고정)
+ * - 클릭 시 간편 문의 모달(2단계 폼), X로 닫기, 진단 신청 시 /ai-diagnosis 이동
  */
 export default function FloatingCTA() {
   const [showModal, setShowModal] = useState(false);
@@ -72,7 +72,6 @@ export default function FloatingCTA() {
 
   const modalContent = showOverlay && (
     <div className="fixed right-6 top-6 bottom-24 z-[99998] w-[480px] max-w-[calc(100vw-48px)] overflow-hidden">
-      {/* 트렌디 카드 패널 */}
       <div
         className={`h-full rounded-[28px] bg-gradient-to-b from-white/98 to-white/95 backdrop-blur-2xl overflow-hidden flex flex-col will-change-transform transition-transform duration-[360ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isClosing
@@ -82,7 +81,6 @@ export default function FloatingCTA() {
               : 'translate-y-full'
         }`}
       >
-        {/* Header */}
         <div className="flex items-center gap-4 px-6 pt-6 pb-5">
           <div className="w-[56px] h-[56px] rounded-2xl bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] flex items-center justify-center overflow-hidden">
             <img src="/images/logo.svg" alt="" className="w-9 h-9" aria-hidden />

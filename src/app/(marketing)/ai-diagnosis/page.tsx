@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import DiagnosisFormStep1 from "./DiagnosisFormStep1";
 
+/**
+ * AI 진단 1단계 페이지 (/ai-diagnosis)
+ * - 히어로 + "고객님에 대해 알려주세요" 폼(업체명, 업종, 고민 영역 등)
+ */
 export const metadata: Metadata = {
   title: "AI 진단받기 | Eternal Marketing",
 };
@@ -8,7 +12,6 @@ export const metadata: Metadata = {
 export default function DiagnosisPage() {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      {/* Hero (Figma 804:641) */}
       <section className="relative w-full h-[386px] overflow-hidden">
         <img src="/images/ai-diagnosis-page/background.svg" alt="" className="absolute inset-0 w-full h-full object-cover" />
         {/* Hero text (Figma 804:652, 804:653) */}
@@ -22,7 +25,6 @@ export default function DiagnosisPage() {
         </div>
       </section>
 
-      {/* Form (Figma 804:674) */}
       <section className="w-full max-w-[1163px] mx-auto px-4 pt-[80px] pb-[110px]">
         <h2 className="m-0 font-sans text-[20px] font-semibold leading-normal text-main">1. 고객님에 대해 알려주세요!</h2>
         <div className="border-t mt-[18px]" style={{ borderColor: '#000' }} />

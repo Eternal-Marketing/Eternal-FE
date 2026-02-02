@@ -1,4 +1,9 @@
 'use client';
+/**
+ * 서비스 페이지
+ * - 히어로: 배경 이미지 + SERVICE/이터널 마케팅 타이틀
+ * - 인트로/CTA 배너/네이버·SNS 카테고리 카드/퍼포먼스/운영 원칙/인텔리전스/케이스 스터디/하단 CTA
+ */
 
 import ServiceIntroSection from './ServiceIntroSection';
 import ServiceCTABanner from './ServiceCTABanner';
@@ -12,7 +17,7 @@ import CTASection from '@/components/sections/CTASection';
 export default function ServicePage() {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      {/* Hero */}
+      {/* 히어로: 배경 SVG + 어두운 오버레이, 중앙에 타이틀·부제 */}
       <section className="relative w-full h-[420px] overflow-hidden">
         <img
           src="/images/service-page/service-background.svg"
@@ -34,6 +39,7 @@ export default function ServicePage() {
       <ServiceIntroSection />
       <ServiceCTABanner />
 
+      {/* 네이버 마케팅: 플레이스/카페/블로그/홈페이지형 블로그 4종 카드 */}
       <ServiceCategoryCardsSection
         title="NAVER MARKETING"
         titleColorClassName="text-[#02c75c]"
@@ -68,6 +74,7 @@ export default function ServicePage() {
 
       <ServicePerformanceSection />
 
+      {/* SNS 마케팅: 인앱/숏폼/인스타/핫딜 4종 카드 */}
       <ServiceCategoryCardsSection
         title="SNS MARKETING"
         titleColorClassName="text-primary"

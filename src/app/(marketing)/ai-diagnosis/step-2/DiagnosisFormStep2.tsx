@@ -1,16 +1,18 @@
 'use client';
-
+/**
+ * AI 진단 2단계 폼
+ * - 지역, 연락처(10~11자리 검사), 이메일(형식 검사), 상담 희망 시간대
+ * - 제출 시 유효성 통과 후 TODO: 실제 제출 로직
+ */
 import { useState, useMemo } from 'react';
 
 const TIME_OPTIONS = ["09:00~12:00", "12:00~15:00", "15:00~18:00", "18:00~00:00", "무관", "특정시간대(직접 입력)"];
 
-/** 연락처: 숫자만 10~11자리 (010xxxxxxxx 등) */
 function isValidContact(value: string): boolean {
   const digits = value.replace(/\D/g, '');
   return digits.length >= 10 && digits.length <= 11;
 }
 
-/** 이메일 형식 검사 */
 function isValidEmail(value: string): boolean {
   if (!value.trim()) return false;
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());

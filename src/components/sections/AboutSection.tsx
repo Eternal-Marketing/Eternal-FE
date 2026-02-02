@@ -3,11 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 
 /**
- * AboutSection - 회사 소개 섹션 컴포넌트
- * AI 마케팅 인텔리전스, 데이터 결과, 통계, 전문 인력 정보를 표시
+ * 회사 소개 섹션 (홈)
+ * - AI 마케팅 인텔리전스 소개, 데이터·통계(카운트업), 전문 인력 정보
  */
-
-// 숫자 카운팅 애니메이션 컴포넌트
 function CountUpNumber({ end, duration = 2000, suffix = '' }: { end: number; duration?: number; suffix?: string }) {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);

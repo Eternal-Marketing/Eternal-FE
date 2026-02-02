@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+/**
+ * 개인정보처리방침 페이지
+ * - 브레드크럼, 개인정보/이용약관 탭, 목차(TOC), 1~9절 본문
+ */
 export const metadata: Metadata = {
   title: "개인정보처리방침 | Eternal Marketing",
 };
@@ -20,7 +24,6 @@ export default function PrivacyPage() {
 
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal pt-[74px]">
-      {/* 브레드크럼 영역 - 구분선으로 감싸기 */}
       <div className="w-full border-t border-sub3/50"></div>
       <div className="w-full max-w-[1163px] mx-auto py-4">
         <p className="text-caption text-sub1 m-0">
@@ -32,10 +35,8 @@ export default function PrivacyPage() {
       </div>
       <div className="w-full border-b border-sub3/50 mb-10"></div>
 
-      {/* 본문 (Figma 401:652) */}
       <section className="w-full max-w-[1163px] mx-auto pb-[120px]">
         <div className="pl-[20px]">
-          {/* 탭 */}
           <div className="flex items-center gap-[38px] mb-[26px]">
             <p className="m-0 text-h4 text-main underline">개인정보 처리 방침</p>
             <Link href="/terms" className="m-0 text-h4 text-sub2 no-underline">
@@ -43,7 +44,6 @@ export default function PrivacyPage() {
             </Link>
           </div>
 
-          {/* 목차 박스 */}
           <div className="border border-sub1 w-full h-auto py-[18px] mb-[49px]">
             <ol className="m-0 px-[38px] grid grid-cols-3 gap-x-[60px] gap-y-[14px] list-decimal">
               {toc.map((item) => (
@@ -56,7 +56,6 @@ export default function PrivacyPage() {
             </ol>
           </div>
 
-          {/* 소개 문구 */}
           <p className="text-body-sm text-sub1 m-0 w-full max-w-none">
             이터널마케팅(이하 &ldquo;회사&rdquo;)은 개인정보보호법 등 관련 법령을 준수하며, 이용자의 개인정보를 중요하게
             보호합니다.
@@ -65,10 +64,8 @@ export default function PrivacyPage() {
             개인정보의 처리 기준을 안내합니다
           </p>
 
-          {/* Figma Line 3 (401:804) - 좌우 오프셋 포함 */}
           <hr className="border-0 border-t border-sub3 mt-[32px] mb-[66px] w-[1163px] ml-[13px]" />
 
-          {/* 1 */}
           <section id="section-1" className="scroll-mt-[110px]">
             <h2 className="text-h4 text-main m-0">1. 개인정보의 수집 항목 및 방법</h2>
             <div className="mt-[15px] ml-[37px] text-body-sm text-sub1 w-[calc(100%-37px)] max-w-none">
@@ -94,7 +91,6 @@ export default function PrivacyPage() {
             <hr className="border-0 border-t border-sub3 w-[773px] ml-[13px] mt-[32px]" />
           </section>
 
-          {/* 2 */}
           <section id="section-2" className="scroll-mt-[110px] mt-[33px]">
             <h2 className="text-h4 text-main m-0">2. 개인정보의 이용 목적</h2>
             <div className="mt-[15px] ml-[37px] text-body-sm text-sub1 w-[calc(100%-37px)] max-w-none">

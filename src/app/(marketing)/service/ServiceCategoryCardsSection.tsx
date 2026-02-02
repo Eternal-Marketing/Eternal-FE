@@ -1,4 +1,9 @@
 'use client';
+/**
+ * 카테고리 카드 섹션 (네이버 마케팅 / SNS 마케팅 등 재사용)
+ * - title, titleColorClassName, categories(라벨 목록), cards(이미지·설명)
+ * - 4열 그리드, 호버 시 카드 위에 description 오버레이, 뷰포트 진입 시 카드 등장
+ */
 
 import { useRef, useEffect, useState } from 'react';
 
@@ -6,7 +11,6 @@ type Card = {
   title: string;
   subtitle: string;
   imageSrc: string;
-  /** 호버 시 카드 위에 표시할 설명 (줄바꿈은 \n) */
   description?: string;
 };
 
@@ -51,7 +55,7 @@ export default function ServiceCategoryCardsSection({
           {title}
         </h2>
 
-        {/* category line */}
+        {/* 카테고리 라벨 (| 구분) */}
         <div className="mt-8 text-center font-sans text-[16px] text-sub1">
           {categories.map((c, idx) => (
             <span key={c}>
@@ -61,6 +65,7 @@ export default function ServiceCategoryCardsSection({
           ))}
         </div>
 
+        {/* 카드 그리드: 이미지 + 호버 시 description 오버레이, 짝수 열은 아래로 살짝 오프셋 */}
         <div
           className={`mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ${visible ? 'service-category-cards-visible' : ''}`}
         >

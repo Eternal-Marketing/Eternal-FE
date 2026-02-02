@@ -4,8 +4,8 @@ import FloatingCTA from "@/components/layout/FloatingCTA";
 import PageTransition from "@/components/layout/PageTransition";
 
 /**
- * Marketing Layout - 공통 레이아웃
- * 모든 페이지에 Header, Footer, 페이지 전환 애니메이션 적용
+ * 마케팅 레이아웃
+ * - 모든 마케팅 페이지에 Header, Footer, 페이지 전환(PageTransition), FloatingCTA 공통 적용
  */
 export default function MarketingLayout({
   children,

@@ -1,8 +1,10 @@
 'use client';
-
+/**
+ * CTA 섹션 (서비스 페이지 하단 등)
+ * - 배경 이미지 좌우 펼침 + 문구 + AI 진단 버튼 + 실시간 건수 카운트업
+ */
 import { useRef, useEffect, useState } from 'react';
 
-// 숫자 카운트 업 애니메이션
 function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [count, setCount] = useState(0);
@@ -40,7 +42,6 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   return <span ref={ref}>{count}</span>;
 }
 
-// CTA 배경 좌우 펼침 애니메이션
 function ExpandCTABackground({ children, imageSrc }: { children: React.ReactNode; imageSrc: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);

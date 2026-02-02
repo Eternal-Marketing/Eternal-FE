@@ -3,11 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 
 /**
- * DiagnosisSection - AI 진단 섹션 컴포넌트
- * AI 진단 받기 버튼과 실시간 진단 진행 현황을 표시
+ * AI 진단 CTA 섹션 (홈)
+ * - AI 진단 받기 버튼, 실시간 진단 진행 건수(카운트업)
  */
-
-// 숫자 카운팅 애니메이션 컴포넌트
 function CountUpNumber({ end, duration = 2000, suffix = '' }: { end: number; duration?: number; suffix?: string }) {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);

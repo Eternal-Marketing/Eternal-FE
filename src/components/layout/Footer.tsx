@@ -3,8 +3,8 @@
 import Link from "next/link";
 
 /**
- * Footer - 공통 푸터 컴포넌트
- * 회사 정보, AI·데이터 활용 고지, 네비게이션 링크, 저작권 정보를 포함
+ * 공통 푸터
+ * - 로고, 회사 정보(대표/사업자/이메일/주소), AI·데이터 활용 고지, 서비스/법적 링크, 저작권
  */
 export default function Footer() {
   return (
