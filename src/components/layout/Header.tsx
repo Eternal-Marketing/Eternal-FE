@@ -14,8 +14,8 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   
-  // 밝은 배경을 가진 페이지들 (네브바 텍스트를 검정색으로)
-  const isLightBgPage = pathname === '/privacy' || pathname === '/terms' || pathname === '/column';
+  // 밝은 배경 페이지 = 네브 검정색 / 컬럼 목록만 상단 어두워 흰색 네브
+  const isLightBgPage = pathname === '/privacy' || pathname === '/terms' || pathname.startsWith('/column/');
 
   useEffect(() => {
     const handleScroll = () => {

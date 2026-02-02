@@ -38,13 +38,21 @@ export default function ServicePerformanceSection() {
         <div
           className={`mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 ${visible ? 'service-category-cards-visible' : ''}`}
         >
-          <div className="service-category-card flex flex-col items-center">
-            <div className="service-category-card-inner w-full h-[293px] flex items-center justify-center overflow-hidden">
+          <div className="service-category-card flex flex-col items-center group">
+            <div className="service-category-card-inner relative w-full h-[293px] flex items-center justify-center overflow-hidden rounded-2xl">
               <img
                 src="/images/service-page/responsive.svg"
                 alt=""
-                className="w-[420px] max-w-full h-auto object-contain"
+                className="absolute inset-0 w-full h-full object-contain"
               />
+              <div
+                className="absolute top-0.5 bottom-0.5 left-11 right-11 flex items-center justify-center rounded-[5px] bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
+                aria-hidden
+              >
+                <p className="font-sans text-[14px] leading-relaxed text-white text-center whitespace-pre-line">
+                  브랜드DNA 기반 디자인과{'\n'}탑티어급 SEO 최적화 세팅
+                </p>
+              </div>
             </div>
             <div className="mt-4 w-[420px] max-w-full text-left pl-[17px]">
               <p className="m-0 font-sans text-[16px] font-medium text-black">Responsive Web Design</p>
@@ -52,13 +60,21 @@ export default function ServicePerformanceSection() {
             </div>
           </div>
 
-          <div className="service-category-card flex flex-col items-center">
-            <div className="service-category-card-inner w-full h-[293px] flex items-center justify-center overflow-hidden">
+          <div className="service-category-card flex flex-col items-center group">
+            <div className="service-category-card-inner relative w-full h-[293px] flex items-center justify-center overflow-hidden rounded-2xl">
               <img
                 src="/images/service-page/seo.svg"
                 alt=""
-                className="w-[420px] max-w-full h-auto object-contain"
+                className="absolute inset-0 w-full h-full object-contain"
               />
+              <div
+                className="absolute top-0.5 bottom-0.5 left-11 right-11 flex items-center justify-center rounded-[5px] bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
+                aria-hidden
+              >
+                <p className="font-sans text-[14px] leading-relaxed text-white text-center whitespace-pre-line">
+                  대표 플랫폼 상위노출{'\n'}최고효율 운영
+                </p>
+              </div>
             </div>
             <div className="mt-4 w-[420px] max-w-full text-left pl-[17px]">
               <p className="m-0 font-sans text-[16px] font-medium text-black">Search Engine Optimization (SEO)</p>

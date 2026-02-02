@@ -231,6 +231,61 @@ function ExpandBackground({ children }: { children: React.ReactNode }) {
 }
 
 export default function AboutPage() {
+  const storySectionRef = useRef<HTMLElement>(null);
+  const whyEternalSectionRef = useRef<HTMLElement>(null);
+  const intelligenceSectionRef = useRef<HTMLElement>(null);
+  const [storyVisible, setStoryVisible] = useState(false);
+  const [whyEternalVisible, setWhyEternalVisible] = useState(false);
+  const [intelligenceVisible, setIntelligenceVisible] = useState(false);
+
+  useEffect(() => {
+    const el = storySectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStoryVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = whyEternalSectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setWhyEternalVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = intelligenceSectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIntelligenceVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
       {/* Hero (Figma 401:247, 401:259) */}
@@ -255,7 +310,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story & Philosophy (Figma 401:252) */}
-      <section className="w-full bg-[#ffffff]">
+      <section ref={storySectionRef} className="w-full bg-[#ffffff]">
         <div className="w-full max-w-[1163px] mx-auto px-4 py-[100px]">
           <FadeIn>
             <h2 className="m-0 font-sans text-[40px] font-bold leading-normal text-primary">Our Story &amp; Philosophy</h2>
@@ -266,18 +321,16 @@ export default function AboutPage() {
                 <img src="/images/about-page/ourstory.svg" alt="" className="w-full h-auto" />
               </div>
             </SlideInLeft>
-            <SlideInRight delay={400}>
-              <div className="flex-1">
-                <h3 className="m-0 font-sans text-[30px] font-bold leading-normal text-main">왜 결과는 항상 같을까요?</h3>
-                <div className="mt-[10px] font-sans text-[20px] leading-[42px] text-main">
-                  <p className="m-0">마케팅은 늘 진행되고 있었지만</p>
-                  <p className="m-0">정작 '왜 이걸 하는지'는 설명되지 않았습니다</p>
-                  <p className="m-0">실행은 많았지만</p>
-                  <p className="m-0">판단은 없었고,</p>
-                  <p className="m-0">성과는 남지 않았습니다.</p>
-                </div>
+            <div className={`flex-1 ${storyVisible ? 'about-story-animate' : ''}`}>
+              <h3 className="about-story-line about-story-delay-0 m-0 font-sans text-[30px] font-bold leading-normal text-main">왜 결과는 항상 같을까요?</h3>
+              <div className="mt-[10px] font-sans text-[20px] leading-[42px] text-main">
+                <p className="about-story-line about-story-delay-1 m-0">마케팅은 늘 진행되고 있었지만</p>
+                <p className="about-story-line about-story-delay-2 m-0">정작 '왜 이걸 하는지'는 설명되지 않았습니다</p>
+                <p className="about-story-line about-story-delay-3 m-0">실행은 많았지만</p>
+                <p className="about-story-line about-story-delay-4 m-0">판단은 없었고,</p>
+                <p className="about-story-line about-story-delay-5 m-0">성과는 남지 않았습니다.</p>
               </div>
-            </SlideInRight>
+            </div>
           </div>
         </div>
       </section>
@@ -298,27 +351,25 @@ export default function AboutPage() {
       </ExpandBackground>
 
       {/* Why Eternal (Figma 401:269) */}
-      <section className="w-full bg-bg">
+      <section ref={whyEternalSectionRef} className="w-full bg-bg">
         <div className="w-full max-w-[1163px] mx-auto px-4 py-[200px] relative">
           <div className="flex flex-col lg:flex-row gap-10 items-center">
             {/* 왼쪽: 텍스트 */}
-            <SlideInLeft delay={200}>
-              <div className="flex-1 pl-[80px]">
-                <h2 className="m-0 font-sans text-[40px] font-bold leading-normal text-main">
-                  <span className="text-primary">이터널</span>이 기준이 되는 이유
-                </h2>
-                <div className="mt-[18px] font-sans text-[20px] font-extralight leading-[28px] text-main">
-                  <p className="m-0">이터널은 '일단 해보는 마케팅'이 아니라 될 가능성이 있는</p>
-                  <p className="m-0">선택만 남기는 마케팅을 설계합니다. 성과로 검증된 데이터와</p>
-                  <p className="m-0">실제 운영 결과를 토대로 불필요한 시도는 배제하고, 매출로</p>
-                  <p className="m-0">이어질 수 있는 흐름만 구조화합니다.</p>
-                  <p className="m-0">&nbsp;</p>
-                  <p className="m-0">그리고 그 구조는 마케팅 전용으로 설계된 인텔리전스와</p>
-                  <p className="m-0">현장을 완벽하게 이해하고 있는 전문 마케터의 판단을 통해</p>
-                  <p className="m-0">결정됩니다.</p>
-                </div>
+            <div className={`flex-1 pl-[80px] ${whyEternalVisible ? 'about-story-animate' : ''}`}>
+              <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[40px] font-bold leading-normal text-main">
+                <span className="text-primary">이터널</span>이 기준이 되는 이유
+              </h2>
+              <div className="mt-[18px] font-sans text-[20px] font-extralight leading-[28px] text-main">
+                <p className="about-story-line about-story-delay-1 m-0">이터널은 '일단 해보는 마케팅'이 아니라 될 가능성이 있는</p>
+                <p className="about-story-line about-story-delay-2 m-0">선택만 남기는 마케팅을 설계합니다. 성과로 검증된 데이터와</p>
+                <p className="about-story-line about-story-delay-3 m-0">실제 운영 결과를 토대로 불필요한 시도는 배제하고, 매출로</p>
+                <p className="about-story-line about-story-delay-4 m-0">이어질 수 있는 흐름만 구조화합니다.</p>
+                <p className="about-story-line about-story-delay-5 m-0">&nbsp;</p>
+                <p className="about-story-line about-story-delay-6 m-0">그리고 그 구조는 마케팅 전용으로 설계된 인텔리전스와</p>
+                <p className="about-story-line about-story-delay-7 m-0">현장을 완벽하게 이해하고 있는 전문 마케터의 판단을 통해</p>
+                <p className="about-story-line about-story-delay-8 m-0">결정됩니다.</p>
               </div>
-            </SlideInLeft>
+            </div>
             
             {/* 오른쪽: 인피니티 */}
             <SlideInRight delay={400}>
@@ -337,106 +388,52 @@ export default function AboutPage() {
       </section>
 
       {/* Intelligence (Figma 401:411) */}
-      <section className="relative w-full h-[720px] overflow-hidden">
+      <section ref={intelligenceSectionRef} className="relative w-full h-[720px] overflow-hidden">
         <img src="/images/about-page/puzzle-background.svg" alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/20" />
 
-        <div className="relative z-10 w-full max-w-[1163px] mx-auto px-4 h-full">
-          <SlideInRight delay={200}>
-            <h2 className="m-0 pt-[200px] font-sans text-[40px] font-bold leading-normal text-white text-right">
-              마케팅의 정답을 가려내는{" "}
-              <span className="bg-primary px-3 py-1">인텔리전스</span>
-            </h2>
-          </SlideInRight>
+        <div className={`relative z-10 w-full max-w-[1163px] mx-auto px-4 h-full ${intelligenceVisible ? 'about-story-animate' : ''}`}>
+          <h2 className="about-story-line about-story-delay-0 m-0 pt-[200px] font-sans text-[40px] font-bold leading-normal text-white text-right">
+            마케팅의 정답을 가려내는{" "}
+            <span className="bg-primary px-3 py-1">인텔리전스</span>
+          </h2>
 
-          <SlideInRight delay={400}>
-            <div className="absolute right-4 top-[20px] text-right font-sans text-[20px] leading-[36px] text-white drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-              <p className="m-0">마케팅 인텔리전스는</p>
-              <p className="m-0">AI 기술 전문가와 업계 최상위 마케터가 함께 설계한</p>
-              <p className="m-0">
-                <span className="font-bold">결과 중심 판단 시스템</span>입니다.
-              </p>
-              <p className="m-0">수년간 축적된 마케팅 성과와 실패 사례,</p>
-              <p className="m-0">채널별 운영 결과 데이터를 기반으로</p>
-              <p className="m-0">
-                대표님에게 <span className="font-bold">가장 가능성 높은 선택</span>만 도출하도록 만들어졌습니다
-              </p>
-            </div>
-          </SlideInRight>
+          <div className="absolute right-4 top-[300px] text-right font-sans text-[20px] leading-[36px] text-white drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+            <p className="about-story-line about-story-delay-1 m-0">마케팅 인텔리전스는</p>
+            <p className="about-story-line about-story-delay-2 m-0">AI 기술 전문가와 업계 최상위 마케터가 함께 설계한</p>
+            <p className="about-story-line about-story-delay-3 m-0">
+              <span className="font-bold">결과 중심 판단 시스템</span>입니다.
+            </p>
+            <p className="about-story-line about-story-delay-4 m-0">수년간 축적된 마케팅 성과와 실패 사례,</p>
+            <p className="about-story-line about-story-delay-5 m-0">채널별 운영 결과 데이터를 기반으로</p>
+            <p className="about-story-line about-story-delay-6 m-0">
+              대표님에게 <span className="font-bold">가장 가능성 높은 선택</span>만 도출하도록 만들어졌습니다
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Our Team (Figma 401:416) - 간단 구현 */}
+      {/* Our Team (Figma 401:416) */}
       <section className="w-full bg-[#f6f6f6]">
         <div className="w-full max-w-[1163px] mx-auto px-4 py-[100px]">
           <FadeIn>
-            <h2 className="m-0 font-sans text-[40px] font-bold leading-normal text-primary">Our Team</h2>
-            <div className="mt-[12px] font-sans text-[20px] font-medium leading-[28px] text-main">
+            <h2 className="m-0 font-sans text-[28px] md:text-[32px] font-bold leading-normal text-primary">Our Team</h2>
+            <div className="mt-[10px] font-sans text-[16px] md:text-[18px] font-medium leading-[24px] md:leading-[26px] text-main">
               <p className="m-0">이터널마케팅은</p>
               <p className="m-0">판단–설계–실행–관리까지</p>
               <p className="m-0">역할이 분리된 전문 조직 체계로 운영됩니다.</p>
             </div>
           </FadeIn>
 
-          <div className="mt-[50px] flex flex-col items-center">
-            <FadeIn delay={200}>
-              <div className="relative w-[220px] h-[220px] rounded-full border-[5px] border-primary flex items-center justify-center bg-white">
-                <div className="w-[170px] h-[170px] rounded-full border-[5px] border-primary/30 flex items-center justify-center">
-                  <p className="m-0 font-sans text-[20px] font-medium text-main drop-shadow">TEAM</p>
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* 조직도(단순) */}
-            <div className="mt-[36px] w-full">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                <div>
-                  <div className="rounded-[50px] bg-white border border-black/10 px-5 py-5 text-center">
-                    <p className="m-0 text-body-sm text-main">마케팅 인텔리전스 전략 본부</p>
-                  </div>
-                  <div className="mt-5 space-y-2">
-                    <div className="rounded-[50px] bg-primary text-white px-5 py-2.5 text-center text-body-sm">
-                      데이터 · AI 분석팀
-                    </div>
-                    <div className="rounded-[50px] bg-primary text-white px-5 py-2.5 text-center text-body-sm">
-                      채널 전략 설계팀
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="rounded-[50px] bg-white border border-black/10 px-5 py-5 text-center">
-                    <p className="m-0 text-body-sm text-main">실행 전문 조직</p>
-                  </div>
-                  <div className="mt-5 space-y-2">
-                    <div className="rounded-[50px] bg-primary text-white px-5 py-2.5 text-center text-body-sm">
-                      검색 · 콘텐츠 최적화팀
-                    </div>
-                    <div className="rounded-[50px] bg-primary text-white px-5 py-2.5 text-center text-body-sm">
-                      스마트 플레이스 · 로컬 마케팅팀
-                    </div>
-                    <div className="rounded-[50px] bg-primary text-white px-5 py-2.5 text-center text-body-sm">
-                      커뮤니티 · 바이럴 전략팀
-                    </div>
-                    <div className="rounded-[50px] bg-primary text-white px-5 py-2.5 text-center text-body-sm">
-                      퍼포먼스 · 전환 최적화팀
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="rounded-[50px] bg-white border border-black/10 px-5 py-5 text-center">
-                    <p className="m-0 text-body-sm text-main">운영 · 관리 조직</p>
-                  </div>
-                  <div className="mt-5 space-y-2">
-                    <div className="rounded-[50px] bg-primary text-white px-5 py-2.5 text-center text-body-sm">
-                      클라이언트 운영 · 성과 관리팀
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <FadeIn delay={200}>
+            <div className="mt-[40px] w-full overflow-hidden rounded-2xl bg-white/80 shadow-[0px_4px_20px_rgba(0,0,0,0.08)]">
+              <img
+                src="/images/about-page/our%20team.svg"
+                alt="이터널마케팅 조직 구조 - 판단 설계 실행 관리"
+                className="w-full h-auto max-w-[720px] mx-auto block"
+              />
             </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
 

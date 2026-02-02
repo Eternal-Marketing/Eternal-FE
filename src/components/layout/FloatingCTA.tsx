@@ -1,23 +1,351 @@
 'use client';
 
-import Link from "next/link";
+import { useEffect, useState } from 'react';
+import * as ReactDOM from 'react-dom';
+
+const CONCERN_OPTIONS = [
+  '매출 증가',
+  '고객 유입',
+  '브랜드 인지도',
+  '효율 분석 / 마케팅 방향성 분석',
+];
+
+const MODAL_CLOSE_DURATION = 360;
+const PANEL_ANIM_DURATION = 360;
+
+type Step = 1 | 2;
 
 /**
  * FloatingCTA - 오른쪽 하단 고정 CTA 버튼
- * 스크롤해도 항상 오른쪽 하단에 위치
+ * 클릭 시 간편 문의하기 모달(바텀시트) 표시, X 클릭 시 모달 닫기
  */
 export default function FloatingCTA() {
+  const [showModal, setShowModal] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [step, setStep] = useState<Step>(1);
+
+  useEffect(() => {
+    if (showModal && !isClosing) {
+      const t = requestAnimationFrame(() => setIsOpen(true));
+      return () => cancelAnimationFrame(t);
+    }
+    if (!showModal) setIsOpen(false);
+  }, [showModal, isClosing]);
+
+  const goStep2 = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setStep(2);
+  };
+
+  const goStep1 = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setStep(1);
+  };
+
+  const handleSubmit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsClosing(true);
+    setTimeout(() => {
+      setShowModal(false);
+      setIsClosing(false);
+      setStep(1);
+      window.location.href = '/ai-diagnosis';
+    }, MODAL_CLOSE_DURATION);
+  };
+
+  const closeModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setShowModal(false);
+      setIsClosing(false);
+      setStep(1);
+    }, MODAL_CLOSE_DURATION);
+  };
+
+  const openModal = () => {
+    setStep(1);
+    setShowModal(true);
+  };
+
+  const showOverlay = showModal || isClosing;
+
+  const modalContent = showOverlay && (
+    <div className="fixed right-6 top-6 bottom-24 z-[99998] w-[480px] max-w-[calc(100vw-48px)] overflow-hidden">
+      {/* 트렌디 카드 패널 */}
+      <div
+        className={`h-full rounded-[28px] bg-gradient-to-b from-white/98 to-white/95 backdrop-blur-2xl overflow-hidden flex flex-col will-change-transform transition-transform duration-[360ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isClosing
+            ? 'translate-y-full'
+            : isOpen
+              ? 'translate-y-0'
+              : 'translate-y-full'
+        }`}
+      >
+        {/* Header */}
+        <div className="flex items-center gap-4 px-6 pt-6 pb-5">
+          <div className="w-[56px] h-[56px] rounded-2xl bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] flex items-center justify-center overflow-hidden">
+            <img src="/images/logo.svg" alt="" className="w-9 h-9" aria-hidden />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="m-0 font-sans text-[22px] font-bold text-main truncate">간편 문의하기</p>
+            {/* 운영시간 보기 문구 제거 */}
+          </div>
+          {step === 2 && (
+            <button
+              type="button"
+              onClick={goStep1}
+              className="h-[40px] px-3 rounded-full bg-black/5 hover:bg-black/10 transition-colors text-[13px] text-main"
+              aria-label="이전"
+            >
+              이전
+            </button>
+          )}
+        </div>
+
+        {/* Body */}
+        <div className="flex-1 overflow-y-auto px-6 pb-6">
+
+          {/* Step 1 */}
+          {step === 1 && (
+            <form onSubmit={(e) => e.preventDefault()}>
+              <div className="space-y-5">
+                {/* 업체명 */}
+                <div>
+                  <label className="block font-sans text-[14px] font-semibold text-main">업체명</label>
+                  <input
+                    type="text"
+                    placeholder="내용 작성해 주세요."
+                    className="mt-2 w-full h-[46px] px-4 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 focus:border-primary"
+                  />
+                </div>
+
+              {/* 업종 */}
+              <div>
+                <label className="block font-sans text-[14px] font-semibold text-main">업종</label>
+                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
+                  {['음식점', '병원·의원', '뷰티·헬스', '쇼핑몰', '서비스업', '기타 (직접 입력)'].map(
+                    (label, idx) => (
+                      <label
+                        key={idx}
+                        className="flex items-center gap-2 text-[14px] text-main cursor-pointer"
+                      >
+                        <input
+                          type="radio"
+                          name="industry"
+                          className="w-4 h-4 accent-primary"
+                          defaultChecked={idx === 0}
+                        />
+                        <span>{label}</span>
+                      </label>
+                    )
+                  )}
+                </div>
+              </div>
+
+              {/* 현재 가장 고민되는 영역 (최대 2대 선택) */}
+              <div>
+                <label className="block font-sans text-[14px] font-semibold text-main">
+                  현재 가장 고민되는 영역 (최대 2대 선택)
+                </label>
+                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
+                  {CONCERN_OPTIONS.map((label, idx) => (
+                    <label
+                      key={idx}
+                      className="flex items-center gap-2 text-[14px] text-main cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        name="concern"
+                        className="w-4 h-4 accent-primary"
+                        defaultChecked={idx === 0}
+                      />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* 현재 마케팅 진행 상황 */}
+              <div>
+                <label className="block font-sans text-[14px] font-semibold text-main">현재 마케팅 진행 상황</label>
+                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
+                  {[
+                    '현재 별도의 마케팅을 진행하고 있지 않음',
+                    '내부에서 간단히 진행 중',
+                    '외주 또는 대행사를 이용 중',
+                    '과거에 진행했으나 중단한 상태',
+                  ].map((label, idx) => (
+                    <label
+                      key={idx}
+                      className="flex items-center gap-2 text-[14px] text-main cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        name="status"
+                        className="w-4 h-4 accent-primary"
+                        defaultChecked={idx === 0}
+                      />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* 관심있는 마케팅 채널 */}
+              <div>
+                <label className="block font-sans text-[14px] font-semibold text-main">
+                  관심있는 마케팅 채널 (복수 선택 가능)
+                </label>
+                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
+                  {[
+                    '네이버 블로그 (기자단 체험단)',
+                    '네이버 카페 / 커뮤니티',
+                    '네이버 스마트 플레이스',
+                    '인스타그램',
+                    '유튜브',
+                    '플랫폼별 숏폼 광고',
+                    '기타(자유 기재)',
+                  ].map((label, idx) => (
+                    <label
+                      key={idx}
+                      className="flex items-center gap-2 text-[14px] text-main cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 accent-primary"
+                        defaultChecked={idx === 0}
+                      />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* 추가 공유 */}
+              <div>
+                <label className="block font-sans text-[14px] font-semibold text-main">
+                  추가로 공유하고 싶은 사항이 있다면 자유롭게 작성해주세요.
+                </label>
+                <textarea
+                  placeholder="(현재 상황, 궁금한 점, 기대하는 방향 등)"
+                  className="mt-2 w-full h-[96px] px-4 py-3 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 resize-none focus:border-primary"
+                />
+              </div>
+              </div>
+            </form>
+          )}
+
+          {/* Step 2 */}
+          {step === 2 && (
+            <form onSubmit={(e) => e.preventDefault()}>
+              <div className="space-y-5">
+                <div>
+                  <label className="block font-sans text-[14px] font-semibold text-main">
+                    지역<span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="예시 : 강남구 역삼동"
+                    className="mt-2 w-full h-[46px] px-4 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block font-sans text-[14px] font-semibold text-main">
+                    연락처<span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="01012341234(‘-’는 제외하고 작성해 주세요)"
+                    className="mt-2 w-full h-[46px] px-4 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block font-sans text-[14px] font-semibold text-main">이메일</label>
+                  <input
+                    type="email"
+                    placeholder="info@eternalmarketing.co.kr"
+                    className="mt-2 w-full h-[46px] px-4 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 focus:border-primary"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-sans text-[14px] font-semibold text-main">현재 마케팅 진행 상황</label>
+                  <div className="mt-3 flex flex-wrap gap-x-5 gap-y-3">
+                    {['09:00~12:00', '12:00~15:00', '15:00~18:00', '18:00~00:00', '무관', '특정시간대(직접 입력)'].map(
+                      (label, idx) => (
+                        <label key={idx} className="flex items-center gap-2 text-[14px] text-main cursor-pointer">
+                          <input type="radio" name="time" className="w-4 h-4 accent-primary" defaultChecked={idx === 0} />
+                          <span>{label}</span>
+                        </label>
+                      )
+                    )}
+                  </div>
+                </div>
+              </div>
+            </form>
+          )}
+        </div>
+
+        {/* Footer CTA */}
+        <div className="px-6 pb-6 pt-4 bg-white/95 backdrop-blur-xl">
+          {step === 1 ? (
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={goStep2}
+                className="h-[48px] px-10 rounded-2xl bg-primary text-white text-[16px] font-semibold shadow-[0_12px_28px_rgba(24,75,186,0.32)] hover:opacity-95 active:scale-[0.98] transition-[opacity,transform]"
+              >
+                다음
+              </button>
+            </div>
+          ) : (
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={handleSubmit}
+                className="h-[48px] px-10 rounded-2xl bg-[#222] text-white text-[16px] font-semibold shadow-[0_10px_24px_rgba(0,0,0,0.18)] hover:bg-[#111] active:scale-[0.98] transition-[background-color,transform]"
+              >
+                진단 신청하기
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <Link
-      href="/ai-diagnosis"
-      className="group fixed bottom-6 right-6 z-50 w-[56px] h-[56px] rounded-full flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-      aria-label="AI 진단 받기"
-    >
-      <img 
-        src="/images/CTA.svg" 
-        alt="AI 진단 받기" 
-        className="w-full h-full"
-      />
-    </Link>
+    <>
+      {/* 모달: body로 포탈해 레이아웃/transform 영향 없이 항상 최상단 표시 */}
+      {showModal &&
+        typeof window !== 'undefined' &&
+        document.body &&
+        ReactDOM.createPortal(modalContent, document.body)}
+      {!showModal && (
+        <button
+          type="button"
+          onClick={openModal}
+          className="group fixed bottom-6 right-6 z-[100000] w-[56px] h-[56px] rounded-full flex items-center justify-center border-0 p-0 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.24)] hover:-translate-y-1 transition-transform duration-200 active:scale-[0.96]"
+          style={{ position: 'fixed' }}
+          aria-label="간편 문의하기"
+        >
+          <img src="/images/logo.svg" alt="AI 진단 받기" className="w-9 h-9" />
+        </button>
+      )}
+      {showModal && (
+        <button
+          type="button"
+          onClick={closeModal}
+          className={`fixed bottom-6 right-6 z-[100000] w-[56px] h-[56px] rounded-full flex items-center justify-center bg-[#3d3d3d] shadow-[0_8px_18px_rgba(0,0,0,0.28)] hover:bg-[#4a4a4a] border-0 transition-[background-color,transform,opacity] duration-200 active:scale-[0.96] ${
+            isClosing ? 'opacity-80' : 'opacity-100'
+          }`}
+          style={{ position: 'fixed' }}
+          aria-label="닫기"
+        >
+          <img src="/images/x%20.svg" alt="" className="w-5 h-5 brightness-0 invert" />
+        </button>
+      )}
+    </>
   );
 }

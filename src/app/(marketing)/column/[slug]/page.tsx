@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CATEGORY_NAMES, getArticleCategoryIndex, getCategoryIndex } from "../categorySlug";
 
 export const metadata: Metadata = {
   title: "칼럼 | Eternal Marketing",
 };
 
-// 더미 데이터 - 나중에 API/CMS로 대체
-const ARTICLE_DATA = {
-  category: "바이럴 마케팅",
+// 더미 데이터 - 나중에 API/CMS로 대체 (category는 slug에서 결정)
+const getArticleData = (category: string) => ({
+  category,
   title: "제목",
   subtitle: "소제목 입니다. Lorem Ipsum is simply",
   date: "Dec 03, 2025",
@@ -18,7 +19,7 @@ const ARTICLE_DATA = {
       content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     },
   ],
-};
+});
 
 const RELATED_ARTICLES = [
   {
@@ -41,8 +42,20 @@ const RELATED_ARTICLES = [
   },
 ];
 
-export default function ColumnDetailPage({ params }: { params: { slug: string } }) {
-  const article = ARTICLE_DATA;
+type PageProps = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ category?: string }>;
+};
+
+export default async function ColumnDetailPage({ params, searchParams }: PageProps) {
+  const { slug } = await params;
+  const { category: categoryFromQuery } = await searchParams;
+  // 퍼포먼스 마케팅 등 카테고리 페이지에서 들어오면 ?category=performance 로 전달됨
+  const categoryIndex = categoryFromQuery
+    ? getCategoryIndex(categoryFromQuery)
+    : getArticleCategoryIndex(slug);
+  const categoryName = CATEGORY_NAMES[categoryIndex];
+  const article = getArticleData(categoryName);
 
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">

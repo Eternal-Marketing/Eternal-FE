@@ -6,6 +6,8 @@ type Card = {
   title: string;
   subtitle: string;
   imageSrc: string;
+  /** 호버 시 카드 위에 표시할 설명 (줄바꿈은 \n) */
+  description?: string;
 };
 
 export default function ServiceCategoryCardsSection({
@@ -65,16 +67,26 @@ export default function ServiceCategoryCardsSection({
           {cards.map((card, idx) => (
             <div
               key={card.title}
-              className={`service-category-card flex flex-col items-center ${idx % 2 === 1 ? 'lg:mt-[56px]' : ''}`}
+              className={`service-category-card flex flex-col items-center group ${idx % 2 === 1 ? 'lg:mt-[56px]' : ''}`}
             >
-              <div className="service-category-card-inner w-[260px] h-[260px] flex items-center justify-center overflow-hidden">
+              <div className="service-category-card-inner relative w-full max-w-[260px] aspect-square flex items-center justify-center overflow-hidden rounded-2xl">
                 <img
                   src={card.imageSrc}
                   alt=""
-                  className="w-[260px] h-[260px] object-contain"
+                  className="absolute inset-0 w-full h-full object-contain"
                 />
+                {card.description ? (
+                  <div
+                    className="absolute top-0.5 bottom-0.5 left-5 right-5 flex items-center justify-center rounded-[5px] bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
+                    aria-hidden
+                  >
+                    <p className="font-sans text-[14px] leading-relaxed text-white text-center whitespace-pre-line">
+                      {card.description}
+                    </p>
+                  </div>
+                ) : null}
               </div>
-              <div className="mt-4 w-[260px] text-left pl-[17px]">
+              <div className="mt-4 w-full max-w-[260px] text-left pl-[17px]">
                 <p className="m-0 font-sans text-[16px] font-medium text-black">
                   {card.title}
                 </p>

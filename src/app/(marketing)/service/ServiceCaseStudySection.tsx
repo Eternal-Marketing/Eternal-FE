@@ -1,6 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useRef, useEffect } from 'react';
+
+const SWIPE_THRESHOLD = 50;
 
 type Card = {
   id: string;
@@ -9,68 +11,212 @@ type Card = {
   lines: string[];
 };
 
-const CASE_TITLE = ['S 패션 브랜드 D2C 쇼핑몰', 'D2C 쇼핑몰'];
+type Slide = {
+  titleLines: [string, string];
+  cards: Card[];
+};
 
 export default function ServiceCaseStudySection() {
-  const slides = useMemo(() => {
-    const cards: Card[] = [
+  const slides = useMemo((): Slide[] => {
+    return [
       {
-        id: 'base-setup',
-        title: '기초 사업자 세팅',
-        caption: '초기사업자분들이 놓치기 쉬운 손실 요인을 사전에 차단합니다',
-        lines: [
-          '카카오페이, 쿠팡, 필수AI 사업자 세팅',
-          '플랫폼 별 통합 정리',
-          '업종별 최적화 AI 기본 세팅',
+        titleLines: ['S 패션 브랜드 D2C 쇼핑몰', 'D2C 쇼핑몰'],
+        cards: [
+          {
+            id: 'base-setup',
+            title: '기초 사업자 세팅',
+            caption: '초기사업자분들이 놓치기 쉬운 손실 요인을 사전에 차단합니다',
+            lines: [
+              '카카오페이, 쿠팡, 필수AI 사업자 세팅',
+              '플랫폼 별 통합 정리',
+              '업종별 최적화 AI 기본 세팅',
+            ],
+          },
+          {
+            id: 'brand-web-seo',
+            title: '기초 사업자 세팅',
+            caption: (
+              <>
+                브랜드의 고유한 특성과 대표님의 목적을 정밀하게 분석하여
+                <br />
+                기획 및 디자인을 진행하며 매출 전환에 필요한 모든 기능이
+                <br />
+                구현 가능하도록 개발합니다
+              </>
+            ),
+            lines: [
+              '브랜드 아이덴티티 기반 스토리 기획',
+              '브랜드 장르를 반영한 웹 디자인 설계',
+              '검색 알고리즘 분석 기반 SEO 최적화 개발',
+            ],
+          },
+          {
+            id: 'shortform-ops',
+            title: '기초 사업자 세팅',
+            caption: (
+              <>
+                알고리즘을 변화를 지속적으로 반영해 트렌드를 선제적으로 반영하고,
+                <br />
+                고객의 기억에 각인되는 숏폼 콘텐츠로 기획·운영합니다
+              </>
+            ),
+            lines: [
+              '유투브 숏츠, 인스타 릴스, 틱톡 인피드',
+              '플랫폼별 맞춤 기획',
+              '알고리즘 분석 및 최신화',
+              '노출값 극대화',
+              'AI정답 키워드 세팅',
+            ],
+          },
         ],
       },
       {
-        id: 'brand-web-seo',
-        title: '기초 사업자 세팅',
-        caption: (
-          <>
-            브랜드의 고유한 특성과 대표님의 목적을 정밀하게 분석하여
-            <br />
-            기획 및 디자인을 진행하며 매출 전환에 필요한 모든 기능이
-            <br />
-            구현 가능하도록 개발합니다
-          </>
-        ),
-        lines: [
-          '브랜드 아이덴티티 기반 스토리 기획',
-          '브랜드 장르를 반영한 웹 디자인 설계',
-          '검색 알고리즘 분석 기반 SEO 최적화 개발',
+        titleLines: ['K', '육류 전문 외식업체'],
+        cards: [
+          {
+            id: 'catering-setting',
+            title: '요식업 전문 세팅',
+            caption: '각 플랫폼별 브랜드 스토리 기반 계정 디자인 통일화',
+            lines: [
+              '검색광고 엔진 시간대, 요일, 상권별 특화 노출 전략 세팅',
+              '(비용대비 최대의 성과로 최적의 효율을 도출합니다)',
+            ],
+          },
+          {
+            id: 'naver-marketing',
+            title: '네이버 마케팅',
+            caption: (
+              <>
+                브랜드의 고유한 특성과 대표님의 목적을 정밀하게 분석하여
+                <br />
+                기획 및 디자인을 진행하며 매출 전환에 필요한 모든 기능이
+                <br />
+                구현 가능하도록 개발합니다
+              </>
+            ),
+            lines: [
+              '브랜드 아이덴티티 기반 스토리 기획',
+              '브랜드 장르를 반영한 웹 디자인 설계',
+              '검색 알고리즘 분석 기반 SEO 최적화 개발',
+            ],
+          },
+          {
+            id: 'meta-search-ads',
+            title: '메타 검색 광고',
+            caption: (
+              <>
+                지역 상권 내에서 인지도와 신뢰를 자연스럽게 구축해
+                <br />
+                친숙한 브랜드 인식을 형성하고 실제 방문으로 이어지도록 설계합니다.
+              </>
+            ),
+            lines: [
+              '지역·검색 기반 AI정답키워드 확립',
+              '광고 계정 전용 세팅',
+              '문구 기획 운영 가이드 제공',
+            ],
+          },
         ],
       },
       {
-        id: 'shortform-ops',
-        title: '기초 사업자 세팅',
-        caption: (
-          <>
-            알고리즘을 변화를 지속적으로 반영해 트렌드를 선제적으로 반영하고,
-            <br />
-            고객의 기억에 각인되는 숏폼 콘텐츠로 기획·운영합니다
-          </>
-        ),
-        lines: [
-          '유투브 숏츠, 인스타 릴스, 틱톡 인피드',
-          '플랫폼별 맞춤 기획',
-          '알고리즘 분석 및 최신화',
-          '노출값 극대화',
-          'AI정답 키워드 세팅',
+        titleLines: ['Y', '의료 서비스 전문 기관'],
+        cards: [
+          {
+            id: 'branding-unify',
+            title: '브랜딩 획일화',
+            caption: (
+              <>
+                브랜드별 이미지·비주얼을 기획·적용하여
+                <br />
+                전문적인 인상 구축과 신뢰 강화를 이룹니다.
+              </>
+            ),
+            lines: [
+              '네이버, 인스타그램, 카카오톡 등 플랫폼별 브랜드 디자인 스킨 제작',
+              '브랜드 전문가 칼럼 콘텐츠 제작',
+              '플랫폼별 설정에 따른 고객 문의 최적화',
+            ],
+          },
+          {
+            id: 'naver-momcafe',
+            title: '네이버 맘카페 커뮤니티 마케팅',
+            caption: (
+              <>
+                지역 상권 내에서 인지도와 신뢰를 자연스럽게 구축해
+                <br />
+                친숙한 브랜드 인식을 형성하고 실제 방문·전환으로 이어지도록 설계합니다.
+              </>
+            ),
+            lines: [
+              '브랜드 특화 자연 노출·신뢰 축적형 후기 구조',
+              '후기 콘텐츠 기획 및 운영',
+            ],
+          },
         ],
       },
     ];
-    return [cards];
   }, []);
 
   const [idx, setIdx] = useState(0);
+  const [direction, setDirection] = useState(0); // 0: 초기, 1: 다음(오른쪽에서), -1: 이전(왼쪽에서)
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const touchStartX = useRef(0);
+
   const canPrev = idx > 0;
   const canNext = idx < slides.length - 1;
-  const cards = slides[idx];
+  const currentSlide = slides[idx];
+  const cards = currentSlide.cards;
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - touchStartX.current;
+    if (diff < -SWIPE_THRESHOLD) goNext();
+    else if (diff > SWIPE_THRESHOLD) goPrev();
+  };
+
+  const goPrev = () => {
+    if (!canPrev) return;
+    setDirection(-1);
+    setIdx((v) => v - 1);
+  };
+  const goNext = () => {
+    if (!canNext) return;
+    setDirection(1);
+    setIdx((v) => v + 1);
+  };
+
+  const slideAnimationClass =
+    direction === 1
+      ? 'animate-slide-in-from-right'
+      : direction === -1
+        ? 'animate-slide-in-from-left'
+        : 'animate-fade-in-up';
 
   return (
-    <section className="relative w-full overflow-hidden">
+    <section
+      ref={sectionRef}
+      className={`relative w-full overflow-hidden ${isInView ? 'case-study-in-view' : ''}`}
+    >
       <div className="absolute inset-0">
         <img
           src="/images/service-page/d2c-background.svg"
@@ -79,19 +225,23 @@ export default function ServiceCaseStudySection() {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1163px] mx-auto px-4 py-[180px]">
+      <div className="case-study-content relative z-10 w-full max-w-[1163px] mx-auto px-4 py-[180px] opacity-0">
         <h2 className="m-0 font-sans text-[20px] md:text-[24px] font-semibold text-white text-center leading-tight">
-          {CASE_TITLE[0]}
+          {currentSlide.titleLines[0]}
           <br />
-          {CASE_TITLE[1]}
+          {currentSlide.titleLines[1]}
         </h2>
 
-        <div className="mt-20 flex items-center justify-center gap-4 lg:gap-6">
+        <div
+          className="mt-20 flex items-center justify-center gap-4 lg:gap-6 touch-pan-y"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <button
             type="button"
-            onClick={() => (canPrev ? setIdx((v) => v - 1) : null)}
+            onClick={goPrev}
             disabled={!canPrev}
-            className="group flex-shrink-0 p-2 disabled:opacity-40"
+            className={`group flex-shrink-0 p-2 disabled:opacity-40 ${canPrev ? 'case-study-swipe-hint-left' : ''}`}
             aria-label="Previous"
           >
             <svg
@@ -99,7 +249,7 @@ export default function ServiceCaseStudySection() {
               height="50"
               viewBox="0 0 30 53"
               fill="none"
-              className="-scale-x-100 [&_path]:transition-[fill] [&_path]:duration-300 group-hover:[&_path]:fill-white [&_path]:fill-white/70"
+              className="-scale-x-100 [&_path]:transition-[fill] [&_path]:duration-300 [&_path]:fill-white/70 group-hover:[&_path]:fill-white"
             >
               <path
                 fillRule="evenodd"
@@ -109,7 +259,10 @@ export default function ServiceCaseStudySection() {
             </svg>
           </button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5 max-w-[900px]">
+          <div
+            key={idx}
+            className={`grid grid-cols-1 gap-4 lg:gap-5 max-w-[900px] ${cards.length === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-3'} ${slideAnimationClass}`}
+          >
             {cards.map((c) => (
               <div
                 key={c.id}
@@ -132,9 +285,9 @@ export default function ServiceCaseStudySection() {
 
           <button
             type="button"
-            onClick={() => (canNext ? setIdx((v) => v + 1) : null)}
+            onClick={goNext}
             disabled={!canNext}
-            className="group flex-shrink-0 p-2 disabled:opacity-40"
+            className={`group flex-shrink-0 p-2 disabled:opacity-40 ${canNext ? 'case-study-swipe-hint-right' : ''}`}
             aria-label="Next"
           >
             <svg
@@ -142,7 +295,7 @@ export default function ServiceCaseStudySection() {
               height="50"
               viewBox="0 0 30 53"
               fill="none"
-              className="[&_path]:transition-[fill] [&_path]:duration-300 group-hover:[&_path]:fill-white [&_path]:fill-white/70"
+              className="[&_path]:transition-[fill] [&_path]:duration-300 [&_path]:fill-white/70 group-hover:[&_path]:fill-white"
             >
               <path
                 fillRule="evenodd"

@@ -515,6 +515,73 @@ body {
   animation: page-enter 0.4s ease-out forwards;
 }
 
+/* 케이스 스터디 슬라이드 전환 */
+@keyframes slide-in-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slide-in-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slide-in-from-right {
+  animation: slide-in-from-right 0.35s ease-out forwards;
+}
+.animate-slide-in-from-left {
+  animation: slide-in-from-left 0.35s ease-out forwards;
+}
+
+/* 케이스 스터디 섹션: 스크롤 시 등장 */
+@keyframes case-study-scroll-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.case-study-in-view .case-study-content {
+  animation: case-study-scroll-in 0.6s ease-out forwards;
+}
+
+/* 케이스 스터디: 상시 스와이프 힌트 (화살표·카드 영역) */
+@keyframes swipe-hint {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+@keyframes swipe-hint-left {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+}
+.case-study-swipe-hint-right {
+  animation: swipe-hint 2.5s ease-in-out infinite;
+}
+.case-study-swipe-hint-left {
+  animation: swipe-hint-left 2.5s ease-in-out infinite;
+}
+
 /* 순차 페이드인 (숫자용) */
 @keyframes fade-in-up {
   from {
@@ -694,6 +761,28 @@ body {
   opacity: 1;
   transform: scale(1) rotate(0deg);
 }
+
+/* 어바웃 Our Story - 텍스트 순차 등장 (서비스 인트로와 동일) */
+.about-story-line {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.about-story-animate .about-story-line,
+.about-story-animate .about-story-line.about-story-delay-7,
+.about-story-animate .about-story-line.about-story-delay-8 {
+  opacity: 1;
+  transform: translateY(0);
+}
+.about-story-delay-0 { transition-delay: 0ms; }
+.about-story-delay-1 { transition-delay: 320ms; }
+.about-story-delay-2 { transition-delay: 640ms; }
+.about-story-delay-3 { transition-delay: 960ms; }
+.about-story-delay-4 { transition-delay: 1280ms; }
+.about-story-delay-5 { transition-delay: 1600ms; }
+.about-story-delay-6 { transition-delay: 1920ms; }
+.about-story-delay-7 { transition-delay: 2240ms; }
+.about-story-delay-8 { transition-delay: 2560ms; }
 
 /* 서비스 카테고리 카드 - 순차 등장 + 호버 확대 */
 .service-category-card {
