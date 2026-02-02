@@ -15,7 +15,7 @@ export default function Header() {
   const pathname = usePathname();
   
   // 밝은 배경을 가진 페이지들 (네브바 텍스트를 검정색으로)
-  const isLightBgPage = pathname === '/privacy' || pathname === '/terms';
+  const isLightBgPage = pathname === '/privacy' || pathname === '/terms' || pathname === '/column';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,22 +85,22 @@ export default function Header() {
             >
               ABOUT
             </Link>
-            <a
-              href="/#column"
+            <Link
+              href="/column"
               className={`nav-item nav-link-hover ml-[32px] px-3 py-1 rounded cursor-pointer no-underline transition-all duration-300 ${
                 isScrolled ? 'text-main hover:!text-primary text-[13px]' : isLightBgPage ? 'text-main hover:!text-primary text-body-sm' : 'text-inverse hover:!text-primary text-body-sm'
               }`}
             >
               COLUMN
-            </a>
-            <a
-              href="/#service"
+            </Link>
+            <Link
+              href="/service"
               className={`nav-item nav-link-hover ml-[32px] px-3 py-1 rounded cursor-pointer no-underline transition-all duration-300 ${
                 isScrolled ? 'text-main hover:!text-primary text-[13px]' : isLightBgPage ? 'text-main hover:!text-primary text-body-sm' : 'text-inverse hover:!text-primary text-body-sm'
               }`}
             >
               SERVICE
-            </a>
+            </Link>
             <Link
               href="/ai-diagnosis"
               className={`group relative nav-item bg-primary text-inverse rounded-[15px] flex items-center justify-center ml-[40px] no-underline overflow-hidden transition-all duration-300 shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] hover:-translate-y-[3px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] hover:scale-[1.02] ${

@@ -151,8 +151,25 @@ function ScaleIn({ children, delay = 0, className = '', style }: { children: Rea
 }
 
 export default function DiagnosisSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [bgExpanded, setBgExpanded] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setBgExpanded(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section 
+      ref={sectionRef}
       id="diagnosis" 
       className="relative overflow-hidden z-30 w-full" 
       style={{ 
@@ -161,17 +178,31 @@ export default function DiagnosisSection() {
         minHeight: '100vh'
       }}
     >
-      {/* 배경 이미지 */}
-      <div className="absolute inset-0 w-full h-full">
-        <img 
-          src="/images/diagnosisSection/diagnosisSection.svg" 
-          alt="Diagnosis Section Background"
-          className="w-full h-full object-cover"
-        />
+      {/* 배경 이미지 - 중앙에서 좌우로 열리는 클립 리빌 (세련된 이징) */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <div
+          className="absolute inset-0 w-full h-full"
+          style={{
+            clipPath: bgExpanded ? 'inset(0 0% 0 0%)' : 'inset(0 50% 0 50%)',
+            transition: 'clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
+          }}
+        >
+          <img 
+            src="/images/diagnosisSection/diagnosisSection.svg" 
+            alt="Diagnosis Section Background"
+            className="w-full h-full object-cover"
+          />
+        </div>
       </div>
 
-      {/* 콘텐츠 영역 */}
-      <div className="absolute inset-0 w-full h-full flex flex-col">
+      {/* 콘텐츠 - 배경 열린 뒤 부드럽게 페이드인 */}
+      <div 
+        className="absolute inset-0 w-full h-full flex flex-col"
+        style={{
+          opacity: bgExpanded ? 1 : 0,
+          transition: 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.6s',
+        }}
+      >
         <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] flex-1 flex flex-col">
           <div className="flex-1 flex flex-col items-center justify-center relative" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
             {/* 섹션 제목 */}

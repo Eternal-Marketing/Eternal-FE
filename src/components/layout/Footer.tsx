@@ -133,13 +133,13 @@ export default function Footer() {
               ABOUT
             </Link>
             <Link
-              href="/#portfolio"
+              href="/column"
               className="font-sans text-[12px] font-medium leading-normal text-main no-underline transition-colors hover:text-primary"
             >
-              PORTFOLIO
+              COLUMN
             </Link>
             <Link
-              href="/#service"
+              href="/service"
               className="font-sans text-[12px] font-medium leading-normal text-main no-underline transition-colors hover:text-primary"
             >
               SERVICE
