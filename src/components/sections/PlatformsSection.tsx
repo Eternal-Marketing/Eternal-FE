@@ -3,11 +3,9 @@
 import { useState, useEffect, useRef } from 'react';
 
 /**
- * PlatformsSection - 플랫폼 섹션 컴포넌트
- * 다양한 마케팅 플랫폼 로고를 스크롤 애니메이션으로 표시
+ * 플랫폼 섹션 (홈)
+ * - 다양한 마케팅 채널 로고를 페이드인/스케일인으로 표시
  */
-
-// 페이드인 애니메이션 컴포넌트
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +46,6 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   );
 }
 
-// 스케일인 애니메이션 컴포넌트
 function ScaleIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -99,75 +96,48 @@ export default function PlatformsSection() {
   ];
 
   return (
-    <section id="platforms" className="overflow-hidden relative z-30 w-full" style={{ backgroundColor: '#F6F6F6', height: '100vh' }}>
+    <section id="platforms" className="overflow-hidden relative z-30 w-full bg-[#F6F6F6] h-screen">
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] pt-12 pb-12 md:pt-[60px] md:pb-[60px] lg:pt-[80px] lg:pb-[80px] desktop:pt-[120px] desktop:pb-[120px] h-full flex flex-col justify-center">
         {/* 섹션 제목 */}
         <FadeIn delay={200}>
           <div className="text-center mb-10 md:mb-[40px] lg:mb-[60px] desktop:mb-[80px]">
             <h2 
-              className="mb-4"
-              style={{
-                color: '#000',
-                textAlign: 'center',
-                fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                fontSize: '52px',
-                fontStyle: 'normal',
-                fontWeight: 600,
-                lineHeight: 'normal'
-              }}
+              className="mb-2 font-sans text-[36px] md:text-[40px] lg:text-[44px] font-semibold leading-tight text-main text-center"
             >
-              수 년 간 현장에서 다뤄 온
+              수많은 실전 결과를 통해 검증된
             </h2>
             <p 
-              className="leading-normal"
-              style={{
-                color: '#000',
-                textAlign: 'center',
-                fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                fontSize: '52px',
-                fontStyle: 'normal',
-                fontWeight: 600,
-                lineHeight: 'normal'
-              }}
+              className="font-sans text-[36px] md:text-[40px] lg:text-[44px] font-semibold leading-tight text-main text-center"
             >
-              <span 
-                style={{ 
-                  color: '#F5F5F5',
-                  fontFamily: 'Freesentation, Arial, Helvetica, sans-serif',
-                  fontSize: '52px',
-                  fontStyle: 'normal',
-                  fontWeight: 600,
-                  lineHeight: 'normal',
-                  backgroundColor: '#184BBA',
-                  padding: '4px 16px',
-                  display: 'inline-block'
-                }}
-              >마케팅</span>  전문 영역
+              <span className="inline-block bg-gradient-to-r from-[#1a4fd6] to-[#3273ff] text-white px-5 py-1 rounded-xl shadow-md shadow-[#1a4fd6]/15">
+                마케팅
+              </span>{" "}
+              의 핵심 영역
             </p>
           </div>
         </FadeIn>
 
-        {/* 플랫폼 로고 스크롤 영역 */}
+        {/* 플랫폼 로고 스크롤 영역 - 컨베이어 스타일 */}
         <ScaleIn delay={400}>
           <div className="overflow-hidden w-full">
-            <div className="flex items-center platform-scroll">
-            {/* 플랫폼 로고들 (Naver, Google, TikTok, YouTube, Instagram) */}
-            {[...Array(4)].map((_, repeatIndex) => (
-              <div key={repeatIndex} className="flex items-center gap-[31px] flex-shrink-0">
-                {platforms.map((platform, index) => (
-                  <div 
-                    key={`${repeatIndex}-${platform.name}-${index}`}
-                    className="flex items-center justify-center w-[120px] h-[120px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px] desktop:w-[200px] desktop:h-[200px] flex-shrink-0"
-                  >
-                    <img 
-                      src={platform.image} 
-                      alt={platform.name}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
+            <div className="platform-scroll">
+              {/* 로고 2세트 (seamless 무한 스크롤) */}
+              {[...Array(2)].map((_, setIndex) => (
+                <div key={setIndex} className="flex items-center flex-shrink-0 gap-12 md:gap-16 lg:gap-20 px-6 md:px-8 lg:px-10">
+                  {platforms.map((platform, index) => (
+                    <div 
+                      key={`${setIndex}-${platform.name}-${index}`}
+                      className="flex items-center justify-center w-[100px] h-[100px] md:w-[140px] md:h-[140px] lg:w-[180px] lg:h-[180px] flex-shrink-0"
+                    >
+                      <img 
+                        src={platform.image} 
+                        alt={platform.name}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </ScaleIn>
