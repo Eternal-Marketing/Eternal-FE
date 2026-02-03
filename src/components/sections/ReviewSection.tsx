@@ -186,26 +186,21 @@ export default function ReviewSection() {
     { image: '/images/reviewSection/reward4.svg' },
   ];
 
+  const cardW = 'min-w-[240px] w-[240px] sm:min-w-[280px] sm:w-[280px] md:min-w-[320px] md:w-[320px] lg:min-w-[360px] lg:w-[360px]';
+  const cardH = 'h-[164px] sm:h-[192px] md:h-[220px] lg:h-[248px]';
+
   return (
-    <section id="review" className="relative overflow-hidden z-30 w-full" style={{ height: '1687px', position: 'relative' }}>
-      {/* 배경 이미지 */}
+    <section id="review" className="relative overflow-hidden z-30 w-full min-h-[880px] sm:min-h-[1200px] md:min-h-[1400px] lg:min-h-[1600px] xl:min-h-[1687px]">
       <div className="absolute inset-0 w-full h-full">
-        <img 
-          src="/images/reviewSection/section.svg" 
-          alt="Review Section Background"
-          className="w-full h-full object-cover"
-        />
+        <img src="/images/reviewSection/section.svg" alt="Review Section Background" className="w-full h-full object-cover" />
       </div>
 
-      {/* 콘텐츠 영역 */}
       <div className="absolute inset-0 w-full h-full flex flex-col">
-        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] flex-1 flex flex-col">
-          {/* 섹션 제목 */}
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 desktop:px-[60px] flex-1 flex flex-col">
           <FadeIn>
-            <div className="text-center" style={{ marginTop: '241px', marginBottom: '114px' }}>
-              <h2 
-                className="font-sans text-[28px] md:text-[32px] lg:text-[36px] font-bold leading-normal text-inverse text-center"
-                style={{ textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)' }}
+            <div className="text-center pt-16 sm:pt-24 md:pt-32 lg:pt-[241px] pb-10 sm:pb-14 md:pb-20 lg:pb-[114px]">
+              <h2
+                className="font-sans text-[20px] sm:text-[24px] md:text-[30px] lg:text-[36px] font-bold leading-normal text-inverse text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
               >
                 판단은 이미 증명되어 있었고,<br />
                 AI는 그 판단을 정교하게 만들었습니다
@@ -213,39 +208,18 @@ export default function ReviewSection() {
             </div>
           </FadeIn>
 
-          {/* 고객 리뷰 카드 스크롤 영역 */}
           <ScaleIn delay={200}>
-            <div className="flex justify-center items-center" style={{ marginBottom: '200px' }}>
+            <div className="flex justify-center items-center pb-12 sm:pb-16 md:pb-24 lg:pb-[200px]">
               <div className="overflow-hidden w-full">
                 <div className="review-scroll">
-                  {/* 리뷰 카드들 - 무한 스크롤을 위해 2번 반복 */}
                   {[...Array(2)].map((_, repeatIndex) => (
                     <div key={repeatIndex} className="flex items-center flex-shrink-0">
                       {reviews.map((review, index) => (
-                        <div 
+                        <div
                           key={`${repeatIndex}-${index}`}
-                          className="flex items-center justify-center flex-shrink-0 mx-2"
-                          style={{
-                            width: '340px',
-                            height: '228px',
-                            minWidth: '340px',
-                            maxWidth: '340px',
-                            minHeight: '228px',
-                            maxHeight: '228px',
-                            overflow: 'hidden'
-                          }}
+                          className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 overflow-hidden ${cardW} ${cardH}`}
                         >
-                          <img 
-                            src={review.image} 
-                            alt={`Review ${index + 1}`}
-                            style={{
-                              width: '340px',
-                              height: '228px',
-                              objectFit: 'cover',
-                              objectPosition: 'center',
-                              display: 'block'
-                            }}
-                          />
+                          <img src={review.image} alt={`Review ${index + 1}`} className="w-full h-full object-cover object-center block" />
                         </div>
                       ))}
                     </div>
@@ -255,138 +229,29 @@ export default function ReviewSection() {
             </div>
           </ScaleIn>
 
-          {/* 중간 안내 텍스트 */}
           <ScaleIn delay={300}>
-            <div className="text-center" style={{ marginTop: '0', marginBottom: '60px' }}>
-              <h3 
-                className="font-sans text-[24px] md:text-[28px] lg:text-[32px] font-bold leading-normal text-inverse text-center"
-              >
+            <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-[60px]">
+              <h3 className="font-sans text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-bold leading-normal text-inverse text-center">
                 이미 기준이 된 이터널의 판단
               </h3>
             </div>
           </ScaleIn>
 
-          {/* 수상 상장 이미지들 (3개) */}
-          <div className="flex justify-center items-center desktop:flex-nowrap flex-wrap" style={{ gap: '16px' }}>
-            {/* 첫 번째 상장 */}
+          {/* 모바일: 카드 3개 나란히 한 줄, 웹: 기존 flex-wrap */}
+          <div className="flex justify-center items-center flex-nowrap gap-2 sm:gap-3 sm:flex-wrap md:gap-4 desktop:flex-nowrap">
             <SlideInLeft delay={400}>
-              <div 
-                className="flex-shrink-0 animate-float-1"
-                style={{ 
-                  width: '240px', 
-                  height: '360px',
-                  minWidth: '240px',
-                  maxWidth: '240px',
-                  minHeight: '360px',
-                  maxHeight: '360px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  boxSizing: 'border-box',
-                  padding: 0,
-                  margin: 0,
-                  isolation: 'isolate'
-                }}
-              >
-                <img 
-                  src="/images/reviewSection/reward1.png" 
-                  alt="Reward 1"
-                  style={{
-                    width: '240px',
-                    height: '360px',
-                    minWidth: '240px',
-                    maxWidth: '240px',
-                    minHeight: '360px',
-                    maxHeight: '360px',
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                    display: 'block',
-                    margin: 0,
-                    padding: 0,
-                    boxSizing: 'border-box'
-                  }}
-                />
+              <div className="flex-shrink-0 animate-float-1 w-[112px] h-[168px] sm:w-[200px] sm:h-[300px] md:w-[232px] md:h-[348px] lg:w-[264px] lg:h-[396px] overflow-hidden relative isolation-isolate">
+                <img src="/images/reviewSection/reward1.png" alt="Reward 1" className="w-full h-full object-cover object-center block" />
               </div>
             </SlideInLeft>
-
-            {/* 두 번째 상장 */}
             <ScaleIn delay={500}>
-              <div 
-                className="flex-shrink-0 animate-float-2"
-                style={{ 
-                  width: '240px', 
-                  height: '360px',
-                  minWidth: '240px',
-                  maxWidth: '240px',
-                  minHeight: '360px',
-                  maxHeight: '360px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  boxSizing: 'border-box',
-                  padding: 0,
-                  margin: 0,
-                  isolation: 'isolate'
-                }}
-              >
-                <img 
-                  src="/images/reviewSection/reward2.png" 
-                  alt="Reward 2"
-                  style={{
-                    width: '240px',
-                    height: '360px',
-                    minWidth: '240px',
-                    maxWidth: '240px',
-                    minHeight: '360px',
-                    maxHeight: '360px',
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                    display: 'block',
-                    margin: 0,
-                    padding: 0,
-                    boxSizing: 'border-box'
-                  }}
-                />
+              <div className="flex-shrink-0 animate-float-2 w-[112px] h-[168px] sm:w-[200px] sm:h-[300px] md:w-[232px] md:h-[348px] lg:w-[264px] lg:h-[396px] overflow-hidden relative isolation-isolate">
+                <img src="/images/reviewSection/reward2.png" alt="Reward 2" className="w-full h-full object-cover object-center block" />
               </div>
             </ScaleIn>
-
-            {/* 세 번째 상장 */}
             <SlideInRight delay={600}>
-              <div 
-                className="flex-shrink-0 animate-float-3"
-                style={{ 
-                  width: '230px', 
-                  height: '345px',
-                  minWidth: '230px',
-                  maxWidth: '230px',
-                  minHeight: '345px',
-                  maxHeight: '345px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  boxSizing: 'border-box',
-                  padding: 0,
-                  margin: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <img 
-                  src="/images/reviewSection/reward3.png" 
-                  alt="Reward 3"
-                  style={{
-                    width: '230px',
-                    height: '345px',
-                    minWidth: '230px',
-                    maxWidth: '230px',
-                    minHeight: '345px',
-                    maxHeight: '345px',
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                    display: 'block',
-                    margin: 0,
-                    padding: 0,
-                    boxSizing: 'border-box'
-                  }}
-                />
+              <div className="flex-shrink-0 animate-float-3 w-[112px] h-[168px] sm:w-[190px] sm:h-[285px] md:w-[220px] md:h-[330px] lg:w-[252px] lg:h-[378px] overflow-hidden relative flex items-center justify-center">
+                <img src="/images/reviewSection/reward3.png" alt="Reward 3" className="w-full h-full object-cover object-center block" />
               </div>
             </SlideInRight>
           </div>

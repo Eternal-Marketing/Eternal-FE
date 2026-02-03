@@ -17,20 +17,15 @@ import CTASection from '@/components/sections/CTASection';
 export default function ServicePage() {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      {/* 히어로: 배경 SVG + 어두운 오버레이, 중앙에 타이틀·부제 */}
-      <section className="relative w-full h-[420px] overflow-hidden">
-        <img
-          src="/images/service-page/service-background.svg"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+      <section className="relative w-full min-h-[280px] sm:min-h-[320px] md:h-[380px] lg:h-[420px] overflow-hidden">
+        <img src="/images/service-page/service-background.svg" alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-          <h1 className="m-0 font-sans text-[40px] font-bold leading-normal">
+        <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] md:min-h-0 flex flex-col items-center justify-center text-center px-4 py-12 sm:py-16">
+          <h1 className="m-0 font-sans text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-normal">
             <span className="text-white/90">SERVICE</span>{' '}
             <span className="text-primary">이터널 마케팅</span>
           </h1>
-          <p className="m-0 mt-4 font-sans text-[18px] font-medium leading-normal text-white">
+          <p className="m-0 mt-3 sm:mt-4 font-sans text-[14px] sm:text-[16px] md:text-[18px] font-medium leading-normal text-white">
             정답만 선택하는 마케팅, 이터널이 함께합니다
           </p>
         </div>

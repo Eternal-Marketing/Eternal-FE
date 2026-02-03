@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 
 /**
@@ -201,48 +202,39 @@ export default function DiagnosisSection() {
           transition: 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.6s',
         }}
       >
-        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] flex-1 flex flex-col">
-          <div className="flex-1 flex flex-col items-center justify-center relative" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
-            {/* 섹션 제목 */}
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 desktop:px-[60px] flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col items-center justify-center relative pt-16 sm:pt-20 md:pt-24 lg:pt-[120px] pb-20 sm:pb-24 md:pb-28 lg:pb-[80px]">
             <FadeIn>
-              <div className="text-center mb-10 md:mb-14">
-              <h2 
-                className="mb-2 font-sans text-[48px] font-bold leading-normal text-inverse text-center"
-              >
-                정답은 이미 여기 있습니다
-              </h2>
-              <h2 
-                className="font-sans text-[48px] font-bold leading-normal text-inverse text-center"
-              >
-                이제 확인만 남았습니다
-              </h2>
-            </div>
+              <div className="text-center mb-8 sm:mb-10 md:mb-14">
+                <h2 className="mb-2 font-sans text-[24px] sm:text-[30px] md:text-[38px] lg:text-[48px] font-bold leading-normal text-inverse text-center">
+                  정답은 이미 여기 있습니다
+                </h2>
+                <h2 className="font-sans text-[24px] sm:text-[30px] md:text-[38px] lg:text-[48px] font-bold leading-normal text-inverse text-center">
+                  이제 확인만 남았습니다
+                </h2>
+              </div>
             </FadeIn>
 
-            {/* AI 진단 받기 버튼 */}
             <ScaleIn delay={200}>
-              <div className="text-center" style={{ marginBottom: '96px' }}>
-                <button className="diagnosis-cta-btn">
+              <div className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-[96px]">
+                <Link href="/ai-diagnosis" className="diagnosis-cta-btn inline-block no-underline">
                   AI 진단 받기
-                </button>
+                </Link>
               </div>
             </ScaleIn>
 
-            {/* 하단: 실시간 진단 진행 현황 */}
-            <div className="text-center absolute" style={{ bottom: '120px', left: '50%', transform: 'translateX(-50%)', width: '100%' }}>
+            <div className="text-center absolute bottom-56 sm:bottom-60 md:bottom-72 lg:bottom-[120px] left-1/2 -translate-x-1/2 w-full px-4">
               <FadeIn delay={400} style={{ display: 'inline-block' }}>
-                <div 
-                  className="font-sans text-[24px] font-semibold leading-normal text-inverse text-center whitespace-nowrap flex items-center justify-center gap-3"
-                >
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                <div className="font-sans text-[16px] sm:text-[20px] md:text-[24px] lg:text-[24px] font-semibold leading-normal text-inverse text-center flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+                  <span className="relative flex h-3 w-3 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-3 lg:w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-3 w-3 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-3 lg:w-3 bg-green-500" />
                   </span>
-                  실시간 진단 진행 중{" "}
-                  <span className="inline-block min-w-[60px] text-left font-sans text-[48px] font-semibold leading-normal text-inverse">
+                  <span>실시간 진단 진행 중</span>
+                  <span className="inline-block min-w-[3rem] sm:min-w-[4rem] md:min-w-[3.5rem] lg:min-w-[60px] text-left font-sans text-[32px] sm:text-[40px] md:text-[44px] lg:text-[48px] font-semibold leading-normal text-inverse">
                     <CountUpNumber end={124} duration={2000} />
-                  </span>{" "}
-                  건
+                  </span>
+                  <span>건</span>
                 </div>
               </FadeIn>
             </div>
