@@ -234,9 +234,9 @@ export default function ServiceCaseStudySection() {
         />
       </div>
 
-      <div className="case-study-content relative z-10 w-full max-w-[1163px] mx-auto px-4 py-[180px] opacity-0">
+      <div className="case-study-content relative z-10 w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-[180px] opacity-0">
         {/* 현재 슬라이드 제목 2줄 */}
-        <h2 className="m-0 font-sans text-[20px] md:text-[24px] font-semibold text-white text-center leading-tight">
+        <h2 className="m-0 font-sans text-[18px] sm:text-[20px] md:text-[24px] font-semibold text-white text-center leading-tight">
           {currentSlide.titleLines[0]}
           <br />
           {currentSlide.titleLines[1]}
@@ -244,7 +244,7 @@ export default function ServiceCaseStudySection() {
 
         {/* 이전 버튼 + 카드 그리드 + 다음 버튼 (스와이프 지원) */}
         <div
-          className="mt-20 flex items-center justify-center gap-4 lg:gap-6 touch-pan-y"
+          className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex items-center justify-center gap-2 sm:gap-4 lg:gap-6 touch-pan-y"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -252,15 +252,13 @@ export default function ServiceCaseStudySection() {
             type="button"
             onClick={goPrev}
             disabled={!canPrev}
-            className={`group flex-shrink-0 p-2 disabled:opacity-40 ${canPrev ? 'case-study-swipe-hint-left' : ''}`}
+            className={`group flex-shrink-0 p-1 sm:p-2 disabled:opacity-40 ${canPrev ? 'case-study-swipe-hint-left' : ''}`}
             aria-label="Previous"
           >
             <svg
-              width="28"
-              height="50"
               viewBox="0 0 30 53"
               fill="none"
-              className="-scale-x-100 [&_path]:transition-[fill] [&_path]:duration-300 [&_path]:fill-white/70 group-hover:[&_path]:fill-white"
+              className="w-5 h-9 sm:w-7 sm:h-[50px] -scale-x-100 [&_path]:transition-[fill] [&_path]:duration-300 [&_path]:fill-white/70 group-hover:[&_path]:fill-white"
             >
               <path
                 fillRule="evenodd"
@@ -270,21 +268,21 @@ export default function ServiceCaseStudySection() {
             </svg>
           </button>
 
-          {/* 현재 슬라이드 카드들 (2열 또는 3열, 방향에 따라 슬라이드 애니메이션) */}
+          {/* 현재 슬라이드 카드들: 모바일 1열, 태블릿·lg는 카드 수에 따라 2열 또는 3열(3개일 때 빈 칸 없음) */}
           <div
             key={idx}
-            className={`grid grid-cols-1 gap-4 lg:gap-5 max-w-[900px] ${cards.length === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-3'} ${slideAnimationClass}`}
+            className={`grid grid-cols-1 gap-3 sm:gap-4 lg:gap-5 max-w-[900px] w-full ${cards.length === 2 ? 'sm:grid-cols-2 lg:grid-cols-2' : 'sm:grid-cols-3 lg:grid-cols-3'} ${slideAnimationClass}`}
           >
             {cards.map((c) => (
               <div
                 key={c.id}
-                className="rounded-[5px] bg-white/85 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] px-4 py-5"
+                className="rounded-[5px] bg-white/85 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] px-3 py-3 sm:px-4 sm:py-5 min-w-0"
               >
-                <p className="m-0 font-sans text-[18px] font-medium text-main">{c.title}</p>
-                <p className="m-0 mt-3 font-sans text-[10px] font-light text-sub1 leading-relaxed">
+                <p className="m-0 font-sans text-[13px] sm:text-[18px] font-medium text-main leading-tight">{c.title}</p>
+                <p className="m-0 mt-1 sm:mt-3 font-sans text-[10px] sm:text-[11px] font-light text-sub1 leading-relaxed">
                   {c.caption}
                 </p>
-                <div className="mt-4 font-sans text-[13px] text-main leading-relaxed">
+                <div className="mt-1.5 sm:mt-4 font-sans text-[11px] sm:text-[13px] text-main leading-relaxed">
                   {c.lines.map((line) => (
                     <p key={line} className="m-0">
                       {line}
@@ -299,15 +297,13 @@ export default function ServiceCaseStudySection() {
             type="button"
             onClick={goNext}
             disabled={!canNext}
-            className={`group flex-shrink-0 p-2 disabled:opacity-40 ${canNext ? 'case-study-swipe-hint-right' : ''}`}
+            className={`group flex-shrink-0 p-1 sm:p-2 disabled:opacity-40 ${canNext ? 'case-study-swipe-hint-right' : ''}`}
             aria-label="Next"
           >
             <svg
-              width="28"
-              height="50"
               viewBox="0 0 30 53"
               fill="none"
-              className="[&_path]:transition-[fill] [&_path]:duration-300 [&_path]:fill-white/70 group-hover:[&_path]:fill-white"
+              className="w-5 h-9 sm:w-7 sm:h-[50px] [&_path]:transition-[fill] [&_path]:duration-300 [&_path]:fill-white/70 group-hover:[&_path]:fill-white"
             >
               <path
                 fillRule="evenodd"

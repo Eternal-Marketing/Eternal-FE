@@ -1,55 +1,78 @@
 # ETERNAL MARKETING
 
-마케팅 인텔리전스 AI를 소개하는 랜딩 페이지 프로젝트입니다.
+마케팅 인텔리전스 AI를 소개하는 랜딩·서비스 웹사이트 프로젝트입니다.
+
+---
 
 ## 📋 프로젝트 소개
 
-ETERNAL MARKETING은 AI 기반 마케팅 솔루션을 제공하는 회사의 공식 웹사이트입니다. 
-다양한 섹션을 통해 회사 소개, 서비스 프로세스, 고객 리뷰 등을 효과적으로 전달합니다.
+ETERNAL MARKETING은 AI 기반 마케팅 솔루션을 제공하는 회사의 공식 웹사이트입니다.  
+홈, ABOUT, SERVICE, COLUMN, AI 진단, 개인정보처리방침·이용약관 등 다양한 페이지로 회사 소개, 서비스, 고객 사례, AI 진단 신청을 제공합니다.
 
-## 🛠️ 기술 스택
+---
 
-- **Framework**: Next.js 16.1.1
-- **UI Library**: React 19.2.3
-- **Language**: TypeScript 5
-- **Styling**: Tailwind CSS 4
-- **3D Animation**: Spline
+## 🛠️ 사용 기술
 
-## 📁 프로젝트 구조
+| 구분 | 기술 |
+|------|------|
+| **Framework** | Next.js 16.1.1 (App Router) |
+| **UI** | React 19.2.3 |
+| **Language** | TypeScript 5 |
+| **Styling** | Tailwind CSS 4 |
+| **폰트** | Freesentation (woff2/ttf, 500~900 weight) |
 
-```
-src/
-├── app/                    # Next.js App Router
-│   ├── page.tsx            # 메인 페이지
-│   ├── layout.tsx          # 루트 레이아웃
-│   └── globals.css         # 전역 스타일 및 애니메이션
-├── components/
-│   └── sections/           # 섹션 컴포넌트들
-│       ├── HeroSection.tsx         # 메인 히어로 섹션
-│       ├── AboutSection.tsx         # 회사 소개 섹션
-│       ├── PlatformsSection.tsx    # 플랫폼 섹션
-│       ├── ReviewSection.tsx       # 리뷰 및 상장 섹션
-│       ├── InfiniteSection.tsx     # 프로세스 플로우 섹션
-│       ├── DiagnosisSection.tsx     # AI 진단 섹션
-│       └── FooterSection.tsx        # 푸터 섹션
-└── styles/
-    └── typography.css      # 타이포그래피 스타일
-```
+- **의존성**: `next`, `react`, `react-dom`  
+- **개발 도구**: `@tailwindcss/postcss`, `eslint`, `eslint-config-next`, `tailwindcss`, `typescript`
 
-## 🚀 시작하기
+---
 
-### 필수 요구사항
+## 📁 페이지 구성
 
-- Node.js 18 이상
-- npm, yarn, pnpm 또는 bun
+모든 마케팅 페이지는 공통 **Header**, **Footer**, **FloatingCTA**, **PageTransition** 레이아웃을 사용합니다.
+
+| 경로 | 설명 |
+|------|------|
+| **`/`** | **홈** — 히어로 → 회사소개 → 플랫폼 → 리뷰/상장 → 프로세스(무한대) → AI 진단 CTA |
+| **`/about`** | **ABOUT** — 히어로, Our Story & Philosophy, 파란 스트립, 이터널이 기준이 되는 이유, 인텔리전스, Our Team, CTA |
+| **`/service`** | **SERVICE** — 히어로, 인트로, CTA 배너, 네이버 마케팅(4종), 퍼포먼스(RWD/SEO), 운영 원칙, 인텔리전스, 케이스 스터디(D2C 등), 하단 CTA |
+| **`/column`** | **COLUMN** — 칼럼 목록·카테고리·상세(`/column/[slug]`, `/column/category/[categorySlug]`) |
+| **`/ai-diagnosis`** | **AI 진단 1단계** — 문진표 기반 1단계 폼 |
+| **`/ai-diagnosis/step-2`** | **AI 진단 2단계** — 2단계 폼 |
+| **`/privacy`** | **개인정보처리방침** |
+| **`/terms`** | **이용약관** |
+
+### 홈(`/`) 섹션 구성
+
+1. **HeroSection** — 메인 비주얼, 타이틀, 스크롤 유도
+2. **AboutSection** — 회사 소개, AI 마케팅 인텔리전스, 데이터·성과
+3. **PlatformsSection** — 플랫폼 로고, 무한 스크롤
+4. **ReviewSection** — “판단은 이미 증명되어 있었고…” 문구, 리뷰 카드(8개), “이미 기준이 된 이터널의 판단”, 상장 이미지(3개)
+5. **InfiniteSection** — 프로세스 플로우(STEP 01~04), 무한대 루프
+6. **DiagnosisSection** — “정답은 이미 여기 있습니다”, AI 진단 받기 버튼, 실시간 진단 진행 건수
+
+### 공통 레이아웃 컴포넌트
+
+- **Header** — 로고, 네비(ABOUT/COLUMN/SERVICE), AI 진단 받기 CTA, 모바일·태블릿 시 햄버거 + 드로어
+- **Footer** — 로고, 회사 정보(대표/사업자/이메일/주소/도메인), AI·데이터 활용 고지, 네비 링크, 저작권
+- **FloatingCTA** — 우측 하단 AI 진단 받기 플로팅 버튼
+- **PageTransition** — 페이지 전환 애니메이션
+
+---
+
+## 🚀 사용 방법
+
+### 요구사항
+
+- Node.js 18 이상  
+- npm / yarn / pnpm / bun
 
 ### 설치
 
 ```bash
 npm install
-# or
+# 또는
 yarn install
-# or
+# 또는
 pnpm install
 ```
 
@@ -57,15 +80,13 @@ pnpm install
 
 ```bash
 npm run dev
-# or
+# 또는
 yarn dev
-# or
+# 또는
 pnpm dev
-# or
-bun dev
 ```
 
-브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
+브라우저에서 [http://localhost:3000](http://localhost:3000) 에 접속합니다.
 
 ### 빌드
 
@@ -79,96 +100,128 @@ npm run build
 npm start
 ```
 
-## 📦 주요 섹션
+### 린트
 
-### HeroSection
-- 3D 배경 애니메이션 (Spline)
-- 헤더 네비게이션
-- 메인 타이틀 및 서브 타이틀
-- 스크롤 유도 화살표
+```bash
+npm run lint
+```
 
-### AboutSection
-- 회사 소개 및 AI 마케팅 인텔리전스 설명
-- 데이터 결과 통계 (1200000건+)
-- 매출 성장률 및 파트너십 유지율
-- 전문 인력 및 팀 구조
+---
 
-### PlatformsSection
-- 다양한 마케팅 플랫폼 로고 (Naver, Google, TikTok, YouTube, Instagram)
-- 무한 스크롤 애니메이션
+## 📱 반응형 구성
 
-### ReviewSection
-- 고객 리뷰 카드 (8개)
-- 수상 상장 이미지 (3개)
-- 리뷰 카드 스크롤 애니메이션
+Tailwind 기본 브레이크포인트와 커스텀 `desktop`을 사용하며, **1440px**을 기준으로 디자인합니다.
 
-### InfiniteSection
-- 프로세스 플로우 시각화
-- 4단계 프로세스 (STEP 01-04)
-- 중앙 무한대 루프 아이콘
+| 브레이크포인트 | 최소 너비 | 용도 |
+|----------------|-----------|------|
+| **(기본)** | 0px | 모바일 |
+| **sm** | 640px | 작은 태블릿 |
+| **md** | 768px | 태블릿 |
+| **lg** | 1024px | 노트북·작은 데스크톱 |
+| **xl** | 1280px | 데스크톱 |
+| **desktop** | 1440px | 디자인 기준 너비 |
+| **2xl** | 1536px | 큰 화면 |
 
-### DiagnosisSection
-- AI 진단 받기 CTA 버튼
-- 실시간 진단 진행 현황
-- 버튼 글로우 애니메이션
+- **모바일**: 1열, 햄버거 메뉴, 드로어 네비, 플로팅 CTA, 카드·폼 세로 배치
+- **태블릿**: 2~3열 그리드, CTA·카드 크기·간격 조정
+- **데스크톱(lg~)**: 가로 네비, 플로팅 헤더, 최대 너비 컨테이너(예: `max-w-[1163px]`, `max-w-[1440px]`)
 
-### FooterSection
-- 회사 정보 및 연락처
-- AI·데이터 활용 고지
-- 네비게이션 링크
-- 저작권 정보
+---
+
+## 🎨 Theme & CSS 컬러톤
+
+### 디자인 토큰 (`src/app/globals.css` — `@theme inline`)
+
+| 토큰 | 값 | 용도 |
+|------|-----|------|
+| **--color-primary** | `#184BBA` | 메인 블루(CTA, 강조, 링크) |
+| **--color-bg** | `#FFFFFF` | 기본 배경 |
+| **--color-main** | `#111111` | 본문 텍스트 |
+| **--color-inverse** | `#FFFFFF` | 어두운 배경 위 텍스트 |
+| **--color-sub1** | `#505050` | 부가 텍스트 |
+| **--color-sub2** | `#767676` | 보조 텍스트 |
+| **--color-sub3** | `#999999` | 캡션·구분자 |
+
+### 폰트
+
+- **--font-sans**: `"Freesentation", Arial, Helvetica, sans-serif`  
+- Freesentation: 500(Medium), 600(SemiBold), 700(Bold), 800(ExtraBold), 900(Black)
+
+### 타이포그래피 (`src/styles/typography.css`)
+
+| 클래스 | 크기 | 굵기 |
+|--------|------|------|
+| `.text-headline` | 64px | 800 |
+| `.text-h1` | 48px | 700 |
+| `.text-h2` | 36px | 700 |
+| `.text-h3` | 24px | 600 |
+| `.text-h4` | 20px | 500 |
+| `.text-body` | 16px | 500 |
+| `.text-body-sm` | 14px | 500 |
+| `.text-caption` | 12px | 500 |
+| `.text-logo` | 16px | 900 |
+
+---
+
+## 📂 프로젝트 구조
+
+```
+src/
+├── app/
+│   ├── globals.css           # 전역 스타일, @theme, 폰트, 애니메이션
+│   ├── layout.tsx             # 루트 레이아웃
+│   └── (marketing)/
+│       ├── layout.tsx         # Header, Footer, FloatingCTA, PageTransition
+│       ├── page.tsx           # 홈
+│       ├── about/page.tsx
+│       ├── service/page.tsx   # + Service*Section 컴포넌트들
+│       ├── column/page.tsx, [slug], category/[categorySlug]
+│       ├── ai-diagnosis/page.tsx, step-2/page.tsx
+│       ├── privacy/page.tsx
+│       └── terms/page.tsx
+├── components/
+│   ├── layout/
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   ├── FloatingCTA.tsx
+│   │   └── PageTransition.tsx
+│   └── sections/
+│       ├── HeroSection.tsx
+│       ├── AboutSection.tsx
+│       ├── PlatformsSection.tsx
+│       ├── ReviewSection.tsx
+│       ├── InfiniteSection.tsx
+│       ├── DiagnosisSection.tsx
+│       └── CTASection.tsx
+└── styles/
+    └── typography.css
+```
+
+---
 
 ## ✨ 주요 기능
 
-- **스크롤 애니메이션**: Intersection Observer를 활용한 요소별 애니메이션
-- **숫자 카운팅**: 0부터 목표 숫자까지 카운팅 애니메이션
-- **반응형 디자인**: 모바일, 태블릿, 데스크톱 대응
-- **커스텀 폰트**: Freesentation 폰트 사용
-- **3D 애니메이션**: Spline을 활용한 배경 3D 효과
+- **스크롤 애니메이션**: Intersection Observer 기반 FadeIn, SlideIn, ScaleIn
+- **숫자 카운팅**: DiagnosisSection·CTASection 실시간 진단 건수 카운트업
+- **반응형**: 모바일·태블릿·데스크톱별 레이아웃·타이포·간격 조정
+- **헤더**: 스크롤 시 플로팅 막대 형태, 모바일·태블릿 드로어 메뉴
+- **폼**: AI 진단 1·2단계 문진표
+- **커스텀 폰트**: Freesentation (woff2/ttf)
+- **Tailwind 애니메이션**: `animate-shine`, `animate-pulse-glow`, `animate-ping-slow` 등
 
-## 🎨 스타일 가이드
-
-### 폰트
-- **Freesentation**: 커스텀 폰트 (Regular 400, Medium 500, Bold 700)
-
-### 주요 색상
-- **Primary Blue**: #184BBA
-- **Text Color**: #000, #505050, #999
-- **Background**: #F5F5F5, #F6F6F6
-
-### 애니메이션
-- FadeIn: 페이드인 효과
-- SlideIn: 슬라이드인 효과 (left/right/up/down)
-- ScaleIn: 스케일인 효과
-- CountUpNumber: 숫자 카운팅 애니메이션
-
-## 📝 개발 가이드
-
-### 컴포넌트 구조
-각 섹션은 독립적인 컴포넌트로 구성되어 있으며, `src/components/sections/` 디렉토리에 위치합니다.
-
-### 애니메이션 사용
-애니메이션은 각 섹션 내부에 정의된 컴포넌트를 사용합니다:
-- `FadeIn`: 페이드인 애니메이션
-- `SlideIn`: 슬라이드인 애니메이션
-- `ScaleIn`: 스케일인 애니메이션
-- `CountUpNumber`: 숫자 카운팅 애니메이션
-
-### 스타일링
-- Tailwind CSS 클래스를 주로 사용
-- 인라인 스타일은 Figma 디자인과 정확히 일치해야 할 때 사용
-- 반응형은 Tailwind의 breakpoint 사용 (md, lg, desktop)
+---
 
 ## 🚢 배포
 
-### Vercel 배포
-가장 쉬운 방법은 [Vercel Platform](https://vercel.com/new)을 사용하는 것입니다.
+Vercel 등에 배포할 때:
 
 ```bash
 npm run build
 ```
 
-빌드 후 Vercel에 배포하면 자동으로 최적화된 프로덕션 버전이 배포됩니다.
+빌드 후 프로젝트를 연결하면 Next.js가 자동으로 최적화된 프로덕션 빌드를 제공합니다.
+
+---
 
 ## 📄 라이선스
 

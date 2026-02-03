@@ -44,26 +44,26 @@ export default function DiagnosisFormStep1() {
 
   return (
     <>
-      <form className="mt-[18px] space-y-5" onSubmit={(e) => e.preventDefault()}>
+      <form className="mt-4 sm:mt-[18px] space-y-4 sm:space-y-5" onSubmit={(e) => e.preventDefault()}>
         {/* 업체명 */}
-        <div className="py-5 border-b border-divider">
-          <label className="block font-sans text-[18px] font-medium text-main">업체명</label>
+        <div className="py-4 sm:py-5 border-b border-divider">
+          <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">업체명</label>
           <input
             ref={companyNameRef}
             type="text"
             placeholder="내용 작성해 주세요."
-            className="mt-4 w-[261px] h-[42px] px-[18px] border outline-none text-[14px] text-main placeholder:text-sub3 bg-white"
+            className="mt-3 sm:mt-4 w-full max-w-[261px] h-10 sm:h-[42px] px-3 sm:px-[18px] border outline-none text-[13px] sm:text-[14px] text-main placeholder:text-sub3 bg-white"
             style={{ borderColor: 'rgba(153, 153, 153, 0.3)' }}
           />
         </div>
 
         {/* 업종 */}
-        <div className="py-5 border-b border-divider">
-          <p className="m-0 font-sans text-[18px] font-medium text-main">업종</p>
-          <div className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+        <div className="py-4 sm:py-5 border-b border-divider">
+          <p className="m-0 font-sans text-[16px] sm:text-[18px] font-medium text-main">업종</p>
+          <div className="mt-3 sm:mt-4 flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-3">
             {["음식점", "병원·의원", "학원·교육", "뷰티·헬스", "쇼핑몰", "서비스업", "기타 (직접 입력)"].map((label, idx) => (
-              <label key={idx} className="flex items-center gap-2 text-[13px] text-main">
-                <input type="radio" name="industry" className="w-5 h-5 accent-primary" defaultChecked={idx === 0} />
+              <label key={idx} className="flex items-center gap-2 text-[12px] sm:text-[13px] text-main">
+                <input type="radio" name="industry" className="w-4 h-4 sm:w-5 sm:h-5 accent-primary flex-shrink-0" defaultChecked={idx === 0} />
                 <span className={idx === 0 ? "font-medium" : "font-light"}>{label}</span>
               </label>
             ))}
@@ -71,14 +71,14 @@ export default function DiagnosisFormStep1() {
         </div>
 
         {/* 현재 가장 고민되는 영역 (최대 2개) */}
-        <div className="py-5 border-b border-divider">
-          <p className="m-0 font-sans text-[18px] font-medium text-main">현재 가장 고민되는 영역 (최대 2개 선택)</p>
-          <div className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+        <div className="py-4 sm:py-5 border-b border-divider">
+          <p className="m-0 font-sans text-[16px] sm:text-[18px] font-medium text-main">현재 가장 고민되는 영역 (최대 2개 선택)</p>
+          <div className="mt-3 sm:mt-4 flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-3">
             {CONCERN_OPTIONS.map((label, idx) => (
-              <label key={idx} className="flex items-center gap-2 text-[13px] text-main">
+              <label key={idx} className="flex items-center gap-2 text-[12px] sm:text-[13px] text-main">
                 <input
                   type="checkbox"
-                  className="w-5 h-5 accent-primary"
+                  className="w-4 h-4 sm:w-5 sm:h-5 accent-primary flex-shrink-0"
                   checked={concernSelected[idx]}
                   onChange={() => handleConcernChange(idx)}
                 />
@@ -89,17 +89,17 @@ export default function DiagnosisFormStep1() {
         </div>
 
         {/* 현재 마케팅 진행 상태 */}
-        <div className="py-5 border-b border-divider">
-          <p className="m-0 font-sans text-[18px] font-medium text-main">현재 마케팅 진행 상태</p>
-          <div className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+        <div className="py-4 sm:py-5 border-b border-divider">
+          <p className="m-0 font-sans text-[16px] sm:text-[18px] font-medium text-main">현재 마케팅 진행 상태</p>
+          <div className="mt-3 sm:mt-4 flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-3">
             {[
               "현재 별도의 마케팅을 진행하고 있지 않음",
               "내부에서 간단히 진행 중",
               "외주 또는 대행사를 이용 중",
               "과거에 진행했으나 중단한 상태",
             ].map((label, idx) => (
-              <label key={idx} className="flex items-center gap-2 text-[13px] text-main">
-                <input type="radio" name="status" className="w-5 h-5 accent-primary" defaultChecked={idx === 0} />
+              <label key={idx} className="flex items-center gap-2 text-[12px] sm:text-[13px] text-main">
+                <input type="radio" name="status" className="w-4 h-4 sm:w-5 sm:h-5 accent-primary flex-shrink-0" defaultChecked={idx === 0} />
                 <span className={idx === 0 ? "font-medium" : "font-light"}>{label}</span>
               </label>
             ))}
@@ -107,9 +107,9 @@ export default function DiagnosisFormStep1() {
         </div>
 
         {/* 관심 채널 */}
-        <div className="py-5 border-b border-divider">
-          <p className="m-0 font-sans text-[18px] font-medium text-main">관심 있는 마케팅 채널 (복수 선택 가능)</p>
-          <div className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+        <div className="py-4 sm:py-5 border-b border-divider">
+          <p className="m-0 font-sans text-[16px] sm:text-[18px] font-medium text-main">관심 있는 마케팅 채널 (복수 선택 가능)</p>
+          <div className="mt-3 sm:mt-4 flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-3">
             {[
               "네이버 블로그(기자단 체험단)",
               "네이버 카페 / 커뮤니티",
@@ -119,8 +119,8 @@ export default function DiagnosisFormStep1() {
               "플랫폼별 숏폼 광고",
               "기타 (자유 기재)",
             ].map((label, idx) => (
-              <label key={idx} className="flex items-center gap-2 text-[13px] text-main">
-                <input type="checkbox" className="w-5 h-5 accent-primary" defaultChecked={idx === 0} />
+              <label key={idx} className="flex items-center gap-2 text-[12px] sm:text-[13px] text-main">
+                <input type="checkbox" className="w-4 h-4 sm:w-5 sm:h-5 accent-primary flex-shrink-0" defaultChecked={idx === 0} />
                 <span className={idx === 0 ? "font-medium" : "font-light"}>{label}</span>
               </label>
             ))}
@@ -128,22 +128,22 @@ export default function DiagnosisFormStep1() {
         </div>
 
         {/* 추가 사항 */}
-        <div className="py-5 border-b border-divider">
-          <p className="m-0 font-sans text-[18px] font-medium text-main">
+        <div className="py-4 sm:py-5 border-b border-divider">
+          <p className="m-0 font-sans text-[16px] sm:text-[18px] font-medium text-main">
             추가로 공유하고 싶은 사항이 있다면 자유롭게 작성해주세요.
           </p>
           <textarea
             placeholder="(현재 상황, 궁금한 점, 기대하는 방향 등)"
-            className="mt-4 w-full h-[153px] px-[18px] py-[9px] border outline-none text-[14px] text-main placeholder:text-sub3 resize-none bg-white"
+            className="mt-3 sm:mt-4 w-full min-h-[120px] sm:min-h-[153px] h-[120px] sm:h-[153px] px-3 sm:px-[18px] py-2 sm:py-[9px] border outline-none text-[13px] sm:text-[14px] text-main placeholder:text-sub3 resize-none bg-white"
             style={{ borderColor: 'rgba(153, 153, 153, 0.3)' }}
           />
         </div>
 
-        <div className="pt-[30px] flex justify-center">
+        <div className="pt-6 sm:pt-[30px] flex justify-center">
           <button
             type="button"
             onClick={handleNext}
-            className="h-[44px] px-[37px] bg-primary text-white text-[14px] font-medium flex items-center justify-center no-underline cursor-pointer border-0"
+            className="h-10 sm:h-[44px] px-6 sm:px-[37px] bg-primary text-white text-[13px] sm:text-[14px] font-medium flex items-center justify-center no-underline cursor-pointer border-0 rounded-sm"
           >
             다음 단계로
           </button>

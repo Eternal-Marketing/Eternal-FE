@@ -65,10 +65,10 @@ export default function DiagnosisFormStep2() {
   };
 
   return (
-    <form className="mt-[22px]" onSubmit={(e) => e.preventDefault()}>
+    <form className="mt-4 sm:mt-[22px]" onSubmit={(e) => e.preventDefault()}>
       {/* 지역* */}
-      <div className="py-5 border-b border-divider">
-        <label className="block font-sans text-[18px] font-medium text-main">
+      <div className="py-4 sm:py-5 border-b border-divider">
+        <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">
           지역<span className="text-[#ff3434]">*</span>
         </label>
         <input
@@ -76,14 +76,14 @@ export default function DiagnosisFormStep2() {
           placeholder="예시 : 강남구 역삼동"
           value={region}
           onChange={(e) => setRegion(e.target.value)}
-          className="mt-4 w-[261px] h-[42px] px-[18px] border outline-none text-[14px] text-main placeholder:text-sub3 bg-white"
+          className="mt-3 sm:mt-4 w-full max-w-[261px] h-10 sm:h-[42px] px-3 sm:px-[18px] border outline-none text-[13px] sm:text-[14px] text-main placeholder:text-sub3 bg-white"
           style={{ borderColor: 'rgba(153, 153, 153, 0.3)' }}
         />
       </div>
 
       {/* 연락처* */}
-      <div className="py-5 border-b border-divider">
-        <label className="block font-sans text-[18px] font-medium text-main">
+      <div className="py-4 sm:py-5 border-b border-divider">
+        <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">
           연락처<span className="text-[#ff3434]">*</span>
         </label>
         <input
@@ -93,48 +93,48 @@ export default function DiagnosisFormStep2() {
           value={contact}
           onChange={handleContactChange}
           onBlur={() => setTouchedContact(true)}
-          className="mt-4 w-[362px] max-w-full h-[42px] px-[18px] border outline-none text-[14px] text-main placeholder:text-sub3 bg-white"
+          className="mt-3 sm:mt-4 w-full max-w-[362px] h-10 sm:h-[42px] px-3 sm:px-[18px] border outline-none text-[13px] sm:text-[14px] text-main placeholder:text-sub3 bg-white"
           style={{ borderColor: contactError ? '#ef4444' : 'rgba(153, 153, 153, 0.3)' }}
           aria-invalid={!!contactError}
           aria-describedby={contactError ? 'contact-error' : undefined}
         />
         {contactError && (
-          <p id="contact-error" className="mt-2 text-[13px] text-[#ef4444]" role="alert">
+          <p id="contact-error" className="mt-2 text-[12px] sm:text-[13px] text-[#ef4444]" role="alert">
             {contactError}
           </p>
         )}
       </div>
 
       {/* 이메일 */}
-      <div className="py-5 border-b border-divider">
-        <label className="block font-sans text-[18px] font-medium text-main">이메일</label>
+      <div className="py-4 sm:py-5 border-b border-divider">
+        <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">이메일</label>
         <input
           type="email"
           placeholder="info@eternalmarketing.co.kr"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           onBlur={() => setTouchedEmail(true)}
-          className="mt-4 w-[362px] max-w-full h-[42px] px-[18px] border outline-none text-[14px] text-main placeholder:text-sub3 bg-white"
+          className="mt-3 sm:mt-4 w-full max-w-[362px] h-10 sm:h-[42px] px-3 sm:px-[18px] border outline-none text-[13px] sm:text-[14px] text-main placeholder:text-sub3 bg-white"
           style={{ borderColor: emailError ? '#ef4444' : 'rgba(153, 153, 153, 0.3)' }}
           aria-invalid={!!emailError}
           aria-describedby={emailError ? 'email-error' : undefined}
         />
         {emailError && (
-          <p id="email-error" className="mt-2 text-[13px] text-[#ef4444]" role="alert">
+          <p id="email-error" className="mt-2 text-[12px] sm:text-[13px] text-[#ef4444]" role="alert">
             {emailError}
           </p>
         )}
       </div>
 
       {/* 연락 가능 시간대 */}
-      <div className="py-5 border-b border-divider">
-        <p className="m-0 font-sans text-[18px] font-medium text-main">연락 가능 시간대 (복수 선택 가능)</p>
-        <div className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+      <div className="py-4 sm:py-5 border-b border-divider">
+        <p className="m-0 font-sans text-[16px] sm:text-[18px] font-medium text-main">연락 가능 시간대 (복수 선택 가능)</p>
+        <div className="mt-3 sm:mt-4 flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-3">
           {TIME_OPTIONS.map((label, idx) => (
-            <label key={idx} className="flex items-center gap-2 text-[13px] text-main">
+            <label key={idx} className="flex items-center gap-2 text-[12px] sm:text-[13px] text-main">
               <input
                 type="checkbox"
-                className="w-5 h-5 accent-primary"
+                className="w-4 h-4 sm:w-5 sm:h-5 accent-primary flex-shrink-0"
                 checked={timeSelected[idx]}
                 onChange={() => handleTimeChange(idx)}
               />
@@ -144,8 +144,8 @@ export default function DiagnosisFormStep2() {
         </div>
       </div>
 
-      <div className="pt-[54px] flex flex-col items-center">
-        <p className="m-0 font-sans text-[13px] font-normal leading-normal text-sub1 text-center">
+      <div className="pt-8 sm:pt-12 md:pt-[54px] flex flex-col items-center">
+        <p className="m-0 font-sans text-[12px] sm:text-[13px] font-normal leading-normal text-sub1 text-center px-2">
           AI 마케팅 인텔리전스가 1차 분석을 진행하며,
           <br />
           세부 전략과 실행 범위는 전문마케터와의 상담을 통해 함께 설계됩니다.
@@ -155,7 +155,7 @@ export default function DiagnosisFormStep2() {
           type="button"
           onClick={handleSubmit}
           disabled={!isFormValid}
-          className="mt-[34px] h-[44px] w-[139px] text-white text-[14px] font-medium border-0 bg-[#2b2b2b] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
+          className="mt-6 sm:mt-8 md:mt-[34px] h-10 sm:h-[44px] min-w-[120px] w-[139px] max-w-full text-white text-[13px] sm:text-[14px] font-medium border-0 bg-[#2b2b2b] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-opacity rounded-sm"
         >
           진단 신청하기
         </button>

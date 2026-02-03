@@ -30,14 +30,14 @@ export default function ServiceIntelligenceSection() {
   return (
     <section
       ref={sectionRef}
-      className={`relative overflow-hidden py-[70px] px-4 bg-white ${visible ? 'cta-banner-spread is-visible' : 'cta-banner-spread'}`}
+      className={`relative overflow-hidden py-10 sm:py-14 md:py-16 lg:py-[70px] px-4 sm:px-6 bg-white ${visible ? 'cta-banner-spread is-visible' : 'cta-banner-spread'}`}
     >
       {/* 좌·우 스프레드 배경 (cta-banner-spread 재사용) */}
       <div className="cta-banner-spread-left absolute inset-y-0 left-0 w-1/2 bg-[#404040]" aria-hidden />
       <div className="cta-banner-spread-right absolute inset-y-0 right-0 w-1/2 bg-[#404040]" aria-hidden />
       {/* AI 맞춤 솔루션 문구 */}
       <div className="cta-banner-content relative z-10 w-full max-w-[1163px] mx-auto text-center text-white">
-        <p className="m-0 font-sans text-[16px] font-light leading-relaxed">
+        <p className="m-0 font-sans text-[14px] sm:text-[15px] md:text-[16px] font-light leading-relaxed">
           결과가 정해져 있는 패키지 마케팅은 그만
           <br />
           이터널은 변화하는 알고리즘과 사업 조건에 맞춰
@@ -46,7 +46,7 @@ export default function ServiceIntelligenceSection() {
           <br />
           패키지가 아닌, AI 인텔리전스 기반 솔루션으로
         </p>
-        <p className="m-0 mt-8 font-sans text-[18px] md:text-[20px] font-semibold">
+        <p className="m-0 mt-4 sm:mt-6 md:mt-8 font-sans text-[16px] sm:text-[18px] md:text-[20px] font-semibold">
           마케팅 인텔리전스 AI 전용 맞춤 솔루션
         </p>
       </div>

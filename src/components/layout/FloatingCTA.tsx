@@ -71,7 +71,7 @@ export default function FloatingCTA() {
   const showOverlay = showModal || isClosing;
 
   const modalContent = showOverlay && (
-    <div className="fixed right-6 top-6 bottom-24 z-[99998] w-[480px] max-w-[calc(100vw-48px)] overflow-hidden">
+    <div className="fixed right-3 top-4 bottom-20 sm:right-4 sm:top-5 sm:bottom-24 lg:right-6 lg:top-6 lg:bottom-24 z-[99998] w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] sm:max-w-[420px] md:max-w-[460px] lg:w-[480px] lg:max-w-[480px] overflow-hidden">
       <div
         className={`h-full rounded-[28px] bg-gradient-to-b from-white/98 to-white/95 backdrop-blur-2xl overflow-hidden flex flex-col will-change-transform transition-transform duration-[360ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isClosing
@@ -81,12 +81,12 @@ export default function FloatingCTA() {
               : 'translate-y-full'
         }`}
       >
-        <div className="flex items-center gap-4 px-6 pt-6 pb-5">
-          <div className="w-[56px] h-[56px] rounded-2xl bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] flex items-center justify-center overflow-hidden">
-            <img src="/images/logo.svg" alt="" className="w-9 h-9" aria-hidden />
+        <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-6 pt-4 sm:pt-6 pb-4 sm:pb-5">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[56px] lg:h-[56px] rounded-xl sm:rounded-2xl bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] flex items-center justify-center overflow-hidden shrink-0">
+            <img src="/images/logo.svg" alt="" className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9" aria-hidden />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="m-0 font-sans text-[22px] font-bold text-main truncate">간편 문의하기</p>
+            <p className="m-0 font-sans text-[18px] sm:text-[20px] lg:text-[22px] font-bold text-main truncate">간편 문의하기</p>
             {/* 운영시간 보기 문구 제거 */}
           </div>
           {step === 2 && (
@@ -101,8 +101,7 @@ export default function FloatingCTA() {
           )}
         </div>
 
-        {/* Body */}
-        <div className="flex-1 overflow-y-auto px-6 pb-6">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-4 sm:pb-6">
 
           {/* Step 1 */}
           {step === 1 && (
@@ -285,14 +284,13 @@ export default function FloatingCTA() {
           )}
         </div>
 
-        {/* Footer CTA */}
-        <div className="px-6 pb-6 pt-4 bg-white/95 backdrop-blur-xl">
+        <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-3 sm:pt-4 bg-white/95 backdrop-blur-xl">
           {step === 1 ? (
             <div className="flex justify-end">
               <button
                 type="button"
                 onClick={goStep2}
-                className="h-[48px] px-10 rounded-2xl bg-primary text-white text-[16px] font-semibold shadow-[0_12px_28px_rgba(24,75,186,0.32)] hover:opacity-95 active:scale-[0.98] transition-[opacity,transform]"
+                className="h-11 sm:h-[48px] px-6 sm:px-10 rounded-xl sm:rounded-2xl bg-primary text-white text-[14px] sm:text-[16px] font-semibold shadow-[0_12px_28px_rgba(24,75,186,0.32)] hover:opacity-95 active:scale-[0.98] transition-[opacity,transform]"
               >
                 다음
               </button>
@@ -302,7 +300,7 @@ export default function FloatingCTA() {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="h-[48px] px-10 rounded-2xl bg-[#222] text-white text-[16px] font-semibold shadow-[0_10px_24px_rgba(0,0,0,0.18)] hover:bg-[#111] active:scale-[0.98] transition-[background-color,transform]"
+                className="h-11 sm:h-[48px] px-6 sm:px-10 rounded-xl sm:rounded-2xl bg-[#222] text-white text-[14px] sm:text-[16px] font-semibold shadow-[0_10px_24px_rgba(0,0,0,0.18)] hover:bg-[#111] active:scale-[0.98] transition-[background-color,transform]"
               >
                 진단 신청하기
               </button>
@@ -324,24 +322,24 @@ export default function FloatingCTA() {
         <button
           type="button"
           onClick={openModal}
-          className="group fixed bottom-6 right-6 z-[100000] w-[56px] h-[56px] rounded-full flex items-center justify-center border-0 p-0 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.24)] hover:-translate-y-1 transition-transform duration-200 active:scale-[0.96]"
+          className="group fixed bottom-4 right-4 sm:bottom-5 sm:right-5 lg:bottom-6 lg:right-6 z-[100000] w-12 h-12 sm:w-14 sm:h-14 lg:w-[56px] lg:h-[56px] rounded-full flex items-center justify-center border-0 p-0 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.24)] hover:-translate-y-1 transition-transform duration-200 active:scale-[0.96]"
           style={{ position: 'fixed' }}
           aria-label="간편 문의하기"
         >
-          <img src="/images/logo.svg" alt="AI 진단 받기" className="w-9 h-9" />
+          <img src="/images/logo.svg" alt="AI 진단 받기" className="w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
         </button>
       )}
       {showModal && (
         <button
           type="button"
           onClick={closeModal}
-          className={`fixed bottom-6 right-6 z-[100000] w-[56px] h-[56px] rounded-full flex items-center justify-center bg-[#3d3d3d] shadow-[0_8px_18px_rgba(0,0,0,0.28)] hover:bg-[#4a4a4a] border-0 transition-[background-color,transform,opacity] duration-200 active:scale-[0.96] ${
+          className={`fixed bottom-4 right-4 sm:bottom-5 sm:right-5 lg:bottom-6 lg:right-6 z-[100000] w-12 h-12 sm:w-14 sm:h-14 lg:w-[56px] lg:h-[56px] rounded-full flex items-center justify-center bg-[#3d3d3d] shadow-[0_8px_18px_rgba(0,0,0,0.28)] hover:bg-[#4a4a4a] border-0 transition-[background-color,transform,opacity] duration-200 active:scale-[0.96] ${
             isClosing ? 'opacity-80' : 'opacity-100'
           }`}
           style={{ position: 'fixed' }}
           aria-label="닫기"
         >
-          <img src="/images/x%20.svg" alt="" className="w-5 h-5 brightness-0 invert" />
+          <img src="/images/x%20.svg" alt="" className="w-4 h-4 sm:w-5 sm:h-5 brightness-0 invert" />
         </button>
       )}
     </>

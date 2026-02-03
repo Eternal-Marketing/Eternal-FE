@@ -61,7 +61,7 @@ function ExpandCTABackground({ children, imageSrc }: { children: React.ReactNode
   }, []);
 
   return (
-    <div ref={ref} className="relative w-full h-[180px] overflow-hidden bg-[#0a0a1a]">
+    <div ref={ref} className="relative w-full min-h-[140px] sm:min-h-[160px] md:h-[180px] overflow-hidden bg-[#0a0a1a]">
       {/* 배경 이미지가 좌우로 퍼지는 효과 */}
       <div
         className="absolute inset-0"
@@ -98,28 +98,26 @@ interface CTASectionProps {
 export default function CTASection({ imageSrc = "/images/about-page/last-background.svg" }: CTASectionProps) {
   return (
     <ExpandCTABackground imageSrc={imageSrc}>
-      <div className="w-full max-w-[1163px] mx-auto px-8 h-full flex items-center justify-between">
-        {/* 왼쪽: 메인 문구 + 버튼 */}
-        <div className="font-sans flex items-center gap-10">
+      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 md:px-8 h-full min-h-[140px] sm:min-h-[160px] md:min-h-0 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 sm:gap-6 md:gap-10 py-6 sm:py-0">
+        <div className="font-sans flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 sm:gap-6 md:gap-10">
           <div className="text-white">
-            <p className="m-0 text-[20px] font-semibold">정답은 이미 여기 있습니다</p>
-            <p className="m-0 text-[20px] font-semibold">이제 확인만 남았습니다</p>
+            <p className="m-0 text-[16px] sm:text-[18px] md:text-[20px] lg:text-[20px] font-semibold">정답은 이미 여기 있습니다</p>
+            <p className="m-0 text-[16px] sm:text-[18px] md:text-[20px] lg:text-[20px] font-semibold">이제 확인만 남았습니다</p>
           </div>
           <a
             href="/ai-diagnosis"
-            className="group relative flex-shrink-0 inline-block bg-primary text-white text-[14px] font-medium px-6 py-2.5 rounded-full no-underline overflow-hidden shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] transition-all duration-300"
+            className="group relative flex-shrink-0 inline-block bg-primary text-white text-[13px] sm:text-[14px] md:text-[15px] lg:text-[14px] font-medium px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 rounded-full no-underline overflow-hidden shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] transition-all duration-300"
           >
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
             <span className="relative z-10">AI 진단 받기</span>
           </a>
         </div>
-        {/* 오른쪽: 실시간 수치 */}
-        <div className="flex items-center gap-3">
-          <img src="/images/about-page/infinity.svg" alt="" className="w-[40px] h-auto opacity-40" />
-          <div className="text-white/80 text-[14px]">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <img src="/images/about-page/infinity.svg" alt="" className="w-9 h-auto sm:w-10 md:w-11 lg:w-[40px] opacity-40 shrink-0" />
+          <div className="text-white/80 text-[14px] sm:text-[15px] md:text-[16px] lg:text-[14px]">
             <span>실시간 진단 진행 중</span>
-            <span className="ml-2 text-[20px] font-bold text-white"><CountUp end={124} duration={1500} /></span>
-            <span className="ml-1">건</span>
+            <span className="ml-1 sm:ml-2 text-[18px] sm:text-[20px] md:text-[22px] lg:text-[20px] font-bold text-white"><CountUp end={124} duration={1500} /></span>
+            <span className="ml-0.5 sm:ml-1">건</span>
           </div>
         </div>
       </div>
