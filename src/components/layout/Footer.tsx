@@ -123,10 +123,10 @@ export default function Footer() {
               SERVICE
             </Link>
             <Link
-              href="/#contact"
+              href="/admin"
               className="font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-main no-underline transition-colors hover:text-primary"
             >
-              CONTACT
+              ADMIN
             </Link>
             <Link
               href="/privacy"
