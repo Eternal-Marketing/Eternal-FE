@@ -48,6 +48,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        {/* Spline 3D 첫 진입 시 끊김 방지: 연결 미리 수립 */}
+        <link rel="preconnect" href="https://my.spline.design" />
+        <link rel="dns-prefetch" href="https://my.spline.design" />
+      </head>
       <body className="antialiased font-sans bg-bg text-main" suppressHydrationWarning>
         {children}
       </body>
