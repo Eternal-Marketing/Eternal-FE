@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import DiagnosisFormStep1 from "./DiagnosisFormStep1";
 
 /**
@@ -13,7 +14,16 @@ export default function DiagnosisPage() {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
       <section className="relative w-full min-h-[240px] sm:min-h-[280px] md:h-[340px] lg:h-[386px] overflow-hidden">
-        <img src="/images/ai-diagnosis-page/background.svg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/ai-diagnosis-page/background.svg"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
         <div className="relative z-10 h-full min-h-[240px] sm:min-h-[280px] md:min-h-0 flex flex-col items-center justify-center text-center px-4 py-10 sm:py-14">
           <h1 className="m-0 font-sans text-[22px] sm:text-[26px] md:text-[28px] font-bold leading-normal text-white">AI 진단받기</h1>
           <p className="m-0 mt-2 sm:mt-3 font-sans text-[12px] sm:text-[13px] font-normal leading-normal text-white">

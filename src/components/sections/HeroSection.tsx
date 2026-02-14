@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const circleIcon = "/images/elipse.svg";
 const splineUrl = "https://my.spline.design/motiontrails-7nu0l9wGTzn5nWxGtrBcWZHT/";
 
@@ -21,7 +23,16 @@ export default function HeroSection() {
       <div className="relative h-full flex flex-col items-center justify-center z-20 px-4">
         <div className="text-center text-inverse mt-4 sm:mt-6 md:mt-12 lg:mt-[100px] relative z-10 max-w-[90vw]">
           <div className="absolute top-[-8px] sm:top-[-10px] left-1/2 -translate-x-1/2 sm:left-[calc(50%-105px)] sm:translate-x-0 w-14 h-14 sm:w-20 sm:h-20 md:w-[86px] md:h-[86px] z-[-1] animate-pulse-slow">
-            <img src={circleIcon} alt="" className="w-full h-full" data-node-id="42:247" />
+            <Image
+              src={circleIcon}
+              alt=""
+              width={86}
+              height={86}
+              className="w-full h-full object-contain"
+              priority
+              sizes="56px"
+              data-node-id="42:247"
+            />
           </div>
 
           <h1 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-extrabold mb-0 relative z-10 animate-fade-in-up leading-tight" data-node-id="24:14" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
@@ -38,10 +49,14 @@ export default function HeroSection() {
         </div>
 
         <div className="absolute bottom-12 sm:bottom-16 md:bottom-20 lg:bottom-[80px] left-1/2 -translate-x-1/2 w-6 h-4 sm:w-8 sm:h-[18px] lg:w-[32px] lg:h-[18px] animate-bounce-down">
-          <img 
-            src="/images/arrow-down.svg" 
-            alt="Scroll down" 
-            className="w-full h-full opacity-80"
+          <Image
+            src="/images/arrow-down.svg"
+            alt="Scroll down"
+            width={32}
+            height={18}
+            className="w-full h-full opacity-80 object-contain"
+            priority
+            sizes="32px"
           />
         </div>
       </div>

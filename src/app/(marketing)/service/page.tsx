@@ -5,6 +5,7 @@
  * - 인트로/CTA 배너/네이버·SNS 카테고리 카드/퍼포먼스/운영 원칙/인텔리전스/케이스 스터디/하단 CTA
  */
 
+import Image from 'next/image';
 import ServiceIntroSection from './ServiceIntroSection';
 import ServiceCTABanner from './ServiceCTABanner';
 import ServiceCategoryCardsSection from './ServiceCategoryCardsSection';
@@ -18,7 +19,16 @@ export default function ServicePage() {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
       <section className="relative w-full min-h-[280px] sm:min-h-[320px] md:h-[380px] lg:h-[420px] overflow-hidden">
-        <img src="/images/service-page/service-background.svg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/service-page/service-background.svg"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] md:min-h-0 flex flex-col items-center justify-center text-center px-4 py-12 sm:py-16">
           <h1 className="m-0 font-sans text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-normal">

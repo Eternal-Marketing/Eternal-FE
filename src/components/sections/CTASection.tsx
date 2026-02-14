@@ -4,6 +4,7 @@
  * - 배경 이미지 좌우 펼침 + 문구 + AI 진단 버튼 + 실시간 건수 카운트업
  */
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 
 function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -71,10 +72,12 @@ function ExpandCTABackground({ children, imageSrc }: { children: React.ReactNode
           transformOrigin: 'center',
         }}
       >
-        <img
+        <Image
           src={imageSrc}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          className="object-cover"
+          sizes="100vw"
         />
       </div>
       {/* 컨텐츠 */}
@@ -113,7 +116,7 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
           </a>
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
-          <img src="/images/about-page/infinity.svg" alt="" className="w-9 h-auto sm:w-10 md:w-11 lg:w-[40px] opacity-40 shrink-0" />
+          <Image src="/images/about-page/infinity.svg" alt="" width={40} height={40} className="w-9 h-auto sm:w-10 md:w-11 lg:w-[40px] opacity-40 shrink-0 object-contain" />
           <div className="text-white/80 text-[14px] sm:text-[15px] md:text-[16px] lg:text-[14px]">
             <span>실시간 진단 진행 중</span>
             <span className="ml-1 sm:ml-2 text-[18px] sm:text-[20px] md:text-[22px] lg:text-[20px] font-bold text-white"><CountUp end={124} duration={1500} /></span>

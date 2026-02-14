@@ -5,6 +5,7 @@
  * - FadeIn/SlideIn/ExpandBackground 등 뷰포트 진입 애니메이션
  */
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import CTASection from '@/components/sections/CTASection';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -221,7 +222,16 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
       <section className="relative w-full min-h-[280px] sm:min-h-[320px] md:h-[380px] lg:h-[420px] overflow-hidden">
-        <img src="/images/about-page/firstimage.svg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/about-page/firstimage.svg"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
         <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] md:min-h-0 flex flex-col items-center text-center px-4 pt-12 sm:pt-16 pb-12 sm:pb-16 md:pt-12 md:pb-20 lg:pt-14 lg:pb-20">
           <h1 className="m-0 mt-8 sm:mt-12 md:mt-8 lg:mt-12 font-sans text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-normal">
             <span className="text-white/80">ABOUT</span> <span className="text-[#6d94ff]">ETERNAL MARKETING</span>
@@ -242,7 +252,7 @@ export default function AboutPage() {
           <div className="mt-6 sm:mt-8 md:mt-10 lg:mt-[46px] flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
             <SlideInLeft delay={200}>
               <div className="w-full lg:w-[680px]">
-                <img src="/images/about-page/ourstory.svg" alt="" className="w-full h-auto" />
+                <Image src="/images/about-page/ourstory.svg" alt="" width={680} height={400} className="w-full h-auto" sizes="(max-width: 1024px) 100vw, 680px" />
               </div>
             </SlideInLeft>
             <div className={`flex-1 ${storyVisible ? 'about-story-animate' : ''}`}>
@@ -297,8 +307,8 @@ export default function AboutPage() {
             
             {/* 오른쪽: 인피니티 */}
             <SlideInRight delay={400}>
-              <div className="w-full max-w-[320px] sm:max-w-[360px] lg:max-w-none lg:w-[400px] relative flex-shrink-0 lg:ml-[120px] mx-auto lg:mx-0">
-                <img src="/images/about-page/infinity.svg" alt="" className="w-full h-auto" />
+              <div className="w-full max-w-[320px] sm:max-w-[360px] lg:max-w-none lg:w-[400px] flex-shrink-0 lg:ml-[120px] mx-auto lg:mx-0">
+                <Image src="/images/about-page/infinity.svg" alt="" width={400} height={300} className="w-full h-auto" sizes="(max-width: 1024px) 100vw, 400px" />
                 <span className="absolute top-[-12px] sm:top-[-20px] left-[12%] sm:left-[75px] text-[10px] sm:text-body-sm text-main">구조 재설계</span>
                 <span className="absolute top-[-12px] sm:top-[-20px] right-[12%] sm:right-auto sm:left-[255px] text-[10px] sm:text-body-sm text-main">세밀 분석</span>
                 <span className="absolute top-[50%] left-[-8px] sm:left-[-44px] -translate-y-1/2 text-[10px] sm:text-body-sm text-main">최적화</span>
@@ -313,7 +323,9 @@ export default function AboutPage() {
 
       {/* 인텔리전스: 퍼즐 배경 + "마케팅의 정답을 가려내는 인텔리전스" 문구 */}
       <section ref={intelligenceSectionRef} className="relative w-full min-h-[420px] sm:min-h-[520px] md:min-h-[620px] lg:h-[720px] overflow-hidden">
-        <img src="/images/about-page/puzzle-background.svg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0">
+          <Image src="/images/about-page/puzzle-background.svg" alt="" fill className="object-cover" sizes="100vw" />
+        </div>
         <div className="absolute inset-0 bg-black/20" />
 
         <div className={`relative z-10 w-full max-w-[1163px] mx-auto px-4 sm:px-6 h-full min-h-[420px] sm:min-h-[520px] md:min-h-[620px] lg:min-h-0 ${intelligenceVisible ? 'about-story-animate' : ''}`}>

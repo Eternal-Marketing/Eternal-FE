@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 /**
  * 프로세스(무한대) 섹션 (홈)
@@ -210,10 +211,12 @@ export default function InfiniteSection() {
             className="order-3 w-full max-w-[260px] sm:max-w-[320px] mx-auto aspect-[480/230] md:absolute md:top-[35%] md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[340px] md:max-w-none md:aspect-auto md:h-[165px] lg:w-[480px] lg:h-[230px] z-10 shrink-0"
           >
             <div className="relative w-full h-full">
-              <img 
-                src="/images/reviewSection/infinite.svg" 
+              <Image
+                src="/images/reviewSection/infinite.svg"
                 alt="Infinite Loop"
-                className="w-full h-full object-contain"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 320px, 480px"
               />
               {/* 01 - 왼쪽 상단 */}
               <div className="absolute text-white font-bold text-[10px] sm:text-[12px] md:text-[14px]" style={{ top: '10%', left: '21%' }}>
@@ -242,11 +245,7 @@ export default function InfiniteSection() {
               <div className={stepCardClass}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
-                    <img 
-                      src="/images/reviewSection/Magnifier.svg" 
-                      alt="Magnifier Icon"
-                      className="w-4 h-[17px] sm:w-[18px] flex-shrink-0 mr-1.5 sm:mr-[6px]"
-                    />
+                    <Image src="/images/reviewSection/Magnifier.svg" alt="Magnifier Icon" width={18} height={17} className="w-4 h-[17px] sm:w-[18px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 01</h3>
                   </div>
                   <p className={`${stepDescClass} ml-5 sm:ml-6`}>
@@ -266,11 +265,7 @@ export default function InfiniteSection() {
               <div className={stepCardClass}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
-                    <img 
-                      src="/images/reviewSection/arrows.svg" 
-                      alt="Arrow Icon"
-                      className="w-6 h-5 sm:w-7 sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px]"
-                    />
+                    <Image src="/images/reviewSection/arrows.svg" alt="Arrow Icon" width={28} height={22} className="w-6 h-5 sm:w-7 sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 03</h3>
                   </div>
                   <p className={`${stepDescClass} ml-6 sm:ml-8 md:ml-[34px]`}>
@@ -289,11 +284,7 @@ export default function InfiniteSection() {
               <div className={stepCardClass}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
-                    <img 
-                      src="/images/reviewSection/people.svg" 
-                      alt="People Icon"
-                      className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px]"
-                    />
+                    <Image src="/images/reviewSection/people.svg" alt="People Icon" width={22} height={22} className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 02</h3>
                   </div>
                   <p className={`${stepDescClass} ml-5 sm:ml-7 md:ml-[28px]`}>
@@ -312,11 +303,7 @@ export default function InfiniteSection() {
               <div className={stepCardClass}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
-                    <img 
-                      src="/images/reviewSection/pen.svg" 
-                      alt="Pen Icon"
-                      className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px]"
-                    />
+                    <Image src="/images/reviewSection/pen.svg" alt="Pen Icon" width={22} height={22} className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 04</h3>
                   </div>
                   <p className={`${stepDescClass} ml-5 sm:ml-7 md:ml-[28px]`}>

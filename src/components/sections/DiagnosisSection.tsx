@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 
 /**
@@ -186,10 +187,12 @@ export default function DiagnosisSection() {
             transition: 'clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
-          <img 
+          <Image 
             src="/images/diagnosisSection/diagnosisSection.svg" 
             alt="Diagnosis Section Background"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            sizes="100vw"
           />
         </div>
       </div>

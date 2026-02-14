@@ -2,13 +2,18 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { loginAdmin, ApiClientError } from '@/lib/api';
+import { setTokens, setAdminInfo } from '@/lib/auth/token';
 
 /**
  * 관리자 로그인 페이지
- * - ID/비밀번호 입력, 트렌디한 로그인 UI
+ * - 이메일/비밀번호로 로그인, JWT 토큰 발급
  */
 export default function AdminLoginPage() {
-  const [id, setId] = useState('');
+  const router = useRouter();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -19,14 +24,17 @@ export default function AdminLoginPage() {
     setIsLoading(true);
 
     try {
-      if (!id.trim() || !password.trim()) {
-        setError('아이디와 비밀번호를 입력해 주세요.');
+      if (!email.trim() || !password.trim()) {
+        setError('이메일과 비밀번호를 입력해 주세요.');
         return;
       }
-      console.log('Admin login attempt:', { id, password });
-      setError('인증 API가 연결되지 않았습니다. 관리자에게 문의하세요.');
-    } catch {
-      setError('로그인 중 오류가 발생했습니다.');
+
+      const data = await loginAdmin({ email: email.trim(), password });
+      setTokens(data.accessToken, data.refreshToken);
+      if (data.admin) setAdminInfo({ name: data.admin.name, email: data.admin.email });
+      router.push('/admin/dashboard');
+    } catch (err) {
+      setError(err instanceof ApiClientError ? err.message : '로그인 중 오류가 발생했습니다.');
     } finally {
       setIsLoading(false);
     }
@@ -66,10 +74,12 @@ export default function AdminLoginPage() {
           href="/"
           className="inline-flex items-center gap-2.5 no-underline group mb-12"
         >
-          <img
+          <Image
             src="/images/logo.svg"
             alt="ETERNAL"
-            className="w-10 h-6 opacity-95 group-hover:opacity-100 transition-opacity"
+            width={40}
+            height={24}
+            className="w-10 h-6 opacity-95 group-hover:opacity-100 transition-opacity object-contain"
           />
           <span className="text-[13px] font-semibold tracking-wide text-white/90 group-hover:text-white transition-colors">
             ETERNAL MARKETING
@@ -104,18 +114,18 @@ export default function AdminLoginPage() {
           />
           <div className="relative rounded-2xl bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] p-8 sm:p-10 shadow-2xl">
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* 아이디 */}
+              {/* 이메일 */}
               <div className="group/input">
-                <label htmlFor="admin-id" className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-2.5">
-                  아이디
+                <label htmlFor="admin-email" className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-2.5">
+                  이메일
                 </label>
                 <input
-                  id="admin-id"
-                  type="text"
-                  value={id}
-                  onChange={(e) => setId(e.target.value)}
-                  placeholder="admin"
-                  autoComplete="username"
+                  id="admin-email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="admin@example.com"
+                  autoComplete="email"
                   className="w-full h-12 px-4 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-white/25 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 focus:bg-white/[0.06] transition-all duration-300"
                   disabled={isLoading}
                 />

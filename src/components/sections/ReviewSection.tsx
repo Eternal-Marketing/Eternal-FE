@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
 /**
  * 리뷰·상장 섹션 (홈)
@@ -192,7 +193,7 @@ export default function ReviewSection() {
   return (
     <section id="review" className="relative overflow-hidden z-30 w-full min-h-[880px] sm:min-h-[1200px] md:min-h-[1400px] lg:min-h-[1600px] xl:min-h-[1687px]">
       <div className="absolute inset-0 w-full h-full">
-        <img src="/images/reviewSection/section.svg" alt="Review Section Background" className="w-full h-full object-cover" />
+        <Image src="/images/reviewSection/section.svg" alt="Review Section Background" fill className="object-cover" sizes="100vw" />
       </div>
 
       <div className="absolute inset-0 w-full h-full flex flex-col">
@@ -217,9 +218,9 @@ export default function ReviewSection() {
                       {reviews.map((review, index) => (
                         <div
                           key={`${repeatIndex}-${index}`}
-                          className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 overflow-hidden ${cardW} ${cardH}`}
+                          className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 overflow-hidden relative ${cardW} ${cardH}`}
                         >
-                          <img src={review.image} alt={`Review ${index + 1}`} className="w-full h-full object-cover object-center block" />
+                          <Image src={review.image} alt={`Review ${index + 1}`} fill className="object-cover object-center" sizes="360px" />
                         </div>
                       ))}
                     </div>
@@ -241,17 +242,17 @@ export default function ReviewSection() {
           <div className="flex justify-center items-center flex-nowrap gap-2 sm:gap-3 sm:flex-wrap md:gap-4 desktop:flex-nowrap">
             <SlideInLeft delay={400}>
               <div className="flex-shrink-0 animate-float-1 w-[112px] h-[168px] sm:w-[200px] sm:h-[300px] md:w-[232px] md:h-[348px] lg:w-[264px] lg:h-[396px] overflow-hidden relative isolation-isolate">
-                <img src="/images/reviewSection/reward1.png" alt="Reward 1" className="w-full h-full object-cover object-center block" />
+                <Image src="/images/reviewSection/reward1.png" alt="Reward 1" fill className="object-cover object-center" sizes="264px" />
               </div>
             </SlideInLeft>
             <ScaleIn delay={500}>
               <div className="flex-shrink-0 animate-float-2 w-[112px] h-[168px] sm:w-[200px] sm:h-[300px] md:w-[232px] md:h-[348px] lg:w-[264px] lg:h-[396px] overflow-hidden relative isolation-isolate">
-                <img src="/images/reviewSection/reward2.png" alt="Reward 2" className="w-full h-full object-cover object-center block" />
+                <Image src="/images/reviewSection/reward2.png" alt="Reward 2" fill className="object-cover object-center" sizes="264px" />
               </div>
             </ScaleIn>
             <SlideInRight delay={600}>
               <div className="flex-shrink-0 animate-float-3 w-[112px] h-[168px] sm:w-[190px] sm:h-[285px] md:w-[220px] md:h-[330px] lg:w-[252px] lg:h-[378px] overflow-hidden relative flex items-center justify-center">
-                <img src="/images/reviewSection/reward3.png" alt="Reward 3" className="w-full h-full object-cover object-center block" />
+                <Image src="/images/reviewSection/reward3.png" alt="Reward 3" fill className="object-cover object-center" sizes="252px" />
               </div>
             </SlideInRight>
           </div>

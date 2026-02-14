@@ -1,8 +1,10 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { hasTokens } from "@/lib/auth/token";
 
 const logoImage = "/images/logo.svg";
 
@@ -20,7 +22,12 @@ const navLinks = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setIsLoggedIn(hasTokens());
+  }, [pathname]);
 
   const isLightBgPage = pathname === '/privacy' || pathname === '/terms' || pathname.startsWith('/column/');
 
@@ -45,6 +52,11 @@ export default function Header() {
   const ctaClass = (scrolled: boolean) =>
     `group relative nav-item bg-primary text-inverse rounded-[15px] flex items-center justify-center no-underline overflow-hidden transition-all duration-300 shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] hover:-translate-y-[3px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] hover:scale-[1.02] ${
       scrolled ? 'h-[32px] w-[95px] text-[12px]' : 'h-[36px] w-[105px] text-body-sm'
+    }`;
+
+  const dashboardBtnClass = (scrolled: boolean) =>
+    `group relative nav-item bg-primary text-inverse rounded-[15px] flex items-center justify-center no-underline overflow-hidden transition-all duration-300 shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] hover:-translate-y-[3px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] hover:scale-[1.02] ${
+      scrolled ? 'h-[32px] min-w-[120px] px-5 text-[12px]' : 'h-[36px] min-w-[140px] px-6 text-body-sm'
     }`;
 
   return (
@@ -76,12 +88,16 @@ export default function Header() {
                 isScrolled ? 'ml-4 sm:ml-6 lg:ml-10 scale-90' : 'ml-4 sm:ml-6 md:ml-10 lg:ml-16 mt-0.5 lg:mt-1'
               }`}
             >
-              <img
+              <Image
                 src={logoImage}
                 alt="ETERNAL MARKETING"
-                className={`transition-all duration-500 ${
+                width={69}
+                height={40}
+                className={`transition-all duration-500 object-contain ${
                   isScrolled ? 'w-[48px] h-[28px] sm:w-[55px] sm:h-[32px]' : 'w-[56px] h-[32px] sm:w-[62px] sm:h-[36px] lg:w-[69px] lg:h-[40px]'
                 }`}
+                priority
+                sizes="69px"
               />
               <div className="ml-1.5 sm:ml-2 lg:ml-[9px]">
                 <p className={`mb-0 text-primary leading-tight transition-all duration-500 ${
@@ -102,23 +118,42 @@ export default function Header() {
                   {label}
                 </Link>
               ))}
-              <Link href="/ai-diagnosis" className={`ml-10 ${ctaClass(isScrolled)}`}>
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
-                <span className="relative z-10">AI 진단 받기</span>
-              </Link>
+              {isLoggedIn ? (
+                <Link href="/admin/dashboard" className={`ml-10 ${dashboardBtnClass(isScrolled)}`}>
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
+                  <span className="relative z-10">Dashboard</span>
+                </Link>
+              ) : (
+                <Link href="/ai-diagnosis" className={`ml-10 ${ctaClass(isScrolled)}`}>
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
+                  <span className="relative z-10">AI 진단 받기</span>
+                </Link>
+              )}
             </nav>
 
-            {/* 모바일/태블릿: 햄버거 + CTA 또는 햄버거만 */}
+            {/* 모바일/태블릿: 햄버거 + CTA */}
             <div className="flex lg:hidden items-center gap-2">
-              <Link
-                href="/ai-diagnosis"
-                className={`group relative shrink-0 rounded-[12px] sm:rounded-[15px] flex items-center justify-center no-underline overflow-hidden transition-all duration-300 shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] bg-primary text-inverse font-medium ${
-                  isScrolled ? 'h-7 px-2.5 text-[10px] sm:h-8 sm:px-3 sm:text-[11px]' : 'h-8 px-3 text-[11px] sm:h-9 sm:px-3.5 sm:text-[12px]'
-                }`}
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
-                <span className="relative z-10">AI 진단 받기</span>
-              </Link>
+              {isLoggedIn ? (
+                <Link
+                  href="/admin/dashboard"
+                  className={`group relative shrink-0 rounded-[12px] sm:rounded-[15px] flex items-center justify-center no-underline overflow-hidden transition-all duration-300 shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] bg-primary text-inverse font-medium ${
+                    isScrolled ? 'h-7 px-3 text-[10px] sm:h-8 sm:px-4 sm:text-[11px]' : 'h-8 px-4 text-[11px] sm:h-9 sm:px-5 sm:text-[12px]'
+                  }`}
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
+                  <span className="relative z-10">Dashboard</span>
+                </Link>
+              ) : (
+                <Link
+                  href="/ai-diagnosis"
+                  className={`group relative shrink-0 rounded-[12px] sm:rounded-[15px] flex items-center justify-center no-underline overflow-hidden transition-all duration-300 shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] bg-primary text-inverse font-medium ${
+                    isScrolled ? 'h-7 px-2.5 text-[10px] sm:h-8 sm:px-3 sm:text-[11px]' : 'h-8 px-3 text-[11px] sm:h-9 sm:px-3.5 sm:text-[12px]'
+                  }`}
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
+                  <span className="relative z-10">AI 진단 받기</span>
+                </Link>
+              )}
               <button
                 type="button"
                 onClick={() => setMenuOpen((o) => !o)}
@@ -168,14 +203,25 @@ export default function Header() {
                 {label}
               </Link>
             ))}
-            <Link
-              href="/ai-diagnosis"
-              className="group relative mt-4 flex items-center justify-center no-underline overflow-hidden rounded-[15px] bg-primary text-inverse font-medium h-10 px-5 text-[13px] shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] hover:scale-[1.02]"
-              onClick={() => setMenuOpen(false)}
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
-              <span className="relative z-10">AI 진단 받기</span>
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href="/admin/dashboard"
+                className="group relative mt-4 flex items-center justify-center no-underline overflow-hidden rounded-[15px] bg-primary text-inverse font-medium h-10 px-6 text-[13px] shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] hover:scale-[1.02]"
+                onClick={() => setMenuOpen(false)}
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
+                <span className="relative z-10">Dashboard</span>
+              </Link>
+            ) : (
+              <Link
+                href="/ai-diagnosis"
+                className="group relative mt-4 flex items-center justify-center no-underline overflow-hidden rounded-[15px] bg-primary text-inverse font-medium h-10 px-5 text-[13px] shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] hover:scale-[1.02]"
+                onClick={() => setMenuOpen(false)}
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
+                <span className="relative z-10">AI 진단 받기</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>

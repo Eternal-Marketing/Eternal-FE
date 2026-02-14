@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 
 /**
@@ -188,11 +189,7 @@ export default function AboutSection() {
                   AI 마케팅 인텔리전스
                 </p>
                 <div className="w-[180px] h-[164px] md:w-[220px] md:h-[200px] lg:w-[260px] lg:h-[236px] relative" data-node-id="127:917">
-                  <img 
-                    alt="Laptop" 
-                    className="w-full h-full object-contain" 
-                    src="/images/laptop.svg" 
-                  />
+                  <Image alt="Laptop" fill className="object-contain" src="/images/laptop.svg" sizes="260px" />
                 </div>
               </div>
 
@@ -249,12 +246,8 @@ export default function AboutSection() {
 
             <SlideIn direction="right" delay={600} className="flex-shrink-0">
               <div className="flex flex-col items-center" data-node-id="158:25">
-                <div className="w-[140px] h-[120px] sm:w-[160px] sm:h-[136px] md:w-[240px] md:h-[204px] lg:w-[280px] lg:h-[238px]">
-                  <img 
-                    alt="Graph" 
-                    className="w-full h-full object-contain" 
-                    src="/images/graph.svg" 
-                  />
+                <div className="w-[140px] h-[120px] sm:w-[160px] sm:h-[136px] md:w-[240px] md:h-[204px] lg:w-[280px] lg:h-[238px] relative">
+                  <Image alt="Graph" fill className="object-contain" src="/images/graph.svg" sizes="280px" />
                 </div>
                 <p className="font-sans text-[12px] sm:text-[14px] md:text-[16px] font-bold text-sub1 text-center mt-3 sm:mt-4" data-node-id="127:912">
                   업종별 최상위 전문 마케터
@@ -268,12 +261,8 @@ export default function AboutSection() {
           <div className="flex flex-col lg:flex-row lg:items-center gap-6 sm:gap-8 lg:gap-16 lg:ml-32 xl:ml-64">
             <SlideIn direction="left" delay={700} className="flex-shrink-0">
               <div className="flex flex-col items-center" data-node-id="127:918">
-                <div className="w-[200px] sm:w-[240px] md:w-[300px] lg:w-[360px] h-auto relative">
-                  <img 
-                    alt="Team Structure" 
-                    className="w-full h-auto object-contain" 
-                    src="/images/wave1.svg" 
-                  />
+                <div className="w-[200px] sm:w-[240px] md:w-[300px] lg:w-[360px] relative aspect-[360/120]">
+                  <Image alt="Team Structure" fill className="object-contain" src="/images/wave1.svg" sizes="360px" />
                 </div>
                 <p className="font-sans text-[12px] sm:text-[14px] md:text-[16px] font-bold text-sub1 text-center -mt-12 sm:-mt-16 md:-mt-20 lg:-mt-[80px]" data-node-id="127:936">
                   업종별 전문 인력으로 전담 팀 구성

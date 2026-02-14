@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 
 /**
  * 공통 푸터
@@ -74,7 +75,7 @@ export default function Footer() {
                   aria-label="Instagram"
                   className="inline-flex items-center justify-center"
                 >
-                  <img src="/images/footer/Instagram.svg" alt="" className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px]" />
+                  <Image src="/images/footer/Instagram.svg" alt="" width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px] object-contain" />
                 </a>
                 <a
                   href="https://www.kakaocorp.com/"
@@ -83,7 +84,7 @@ export default function Footer() {
                   aria-label="Kakao"
                   className="inline-flex items-center justify-center"
                 >
-                  <img src="/images/footer/kakao.svg" alt="" className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                  <Image src="/images/footer/kakao.svg" alt="" width={18} height={18} className="w-4 h-4 sm:w-[18px] sm:h-[18px] object-contain" />
                 </a>
               </div>
             </div>

@@ -5,6 +5,7 @@
  * - activeCategoryIndex로 현재 카테고리 결정, 탭 클릭 시 /column 또는 /column/category/:slug 이동
  */
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const CATEGORIES = [
   '바이럴 마케팅',
@@ -36,7 +37,17 @@ export default function ColumnPageContent({ activeCategoryIndex }: { activeCateg
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
       <section className="relative w-full min-h-[240px] sm:min-h-[280px] md:h-[340px] lg:h-[386px] overflow-hidden" data-node-id="804:486">
-        <img src="/images/column/column-background.svg" alt="" className="absolute inset-0 w-full h-full object-cover animate-fade-in-up" style={{ animationDuration: '0.6s', animationFillMode: 'both' }} />
+        <div className="absolute inset-0">
+          <Image
+            src="/images/column/column-background.svg"
+            alt=""
+            fill
+            className="object-cover animate-fade-in-up"
+            sizes="100vw"
+            priority
+            style={{ animationDuration: '0.6s', animationFillMode: 'both' }}
+          />
+        </div>
         <div className="relative z-10 h-full min-h-[240px] sm:min-h-[280px] md:min-h-0 flex flex-col items-center justify-center text-center px-4 py-10 sm:py-14">
           <h1 className="m-0 font-sans text-[24px] sm:text-[28px] md:text-[32px] font-bold leading-normal text-white animate-fade-in-up" data-node-id="804:497" style={{ animationDelay: '0.2s', animationFillMode: 'both', animationDuration: '0.6s' }}>
             이터널 마케팅 칼럼

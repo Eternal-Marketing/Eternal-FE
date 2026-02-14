@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 
 /**
@@ -122,10 +123,13 @@ export default function PlatformsSection() {
                       key={`${setIndex}-${platform.name}-${index}`}
                       className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-[120px] md:h-[120px] lg:w-[160px] lg:h-[160px] desktop:w-[180px] desktop:h-[180px] flex-shrink-0"
                     >
-                      <img 
+                      <Image 
                         src={platform.image} 
                         alt={platform.name}
+                        width={180}
+                        height={180}
                         className="w-full h-full object-contain"
+                        sizes="180px"
                       />
                     </div>
                   ))}
