@@ -7,7 +7,9 @@ export { getColumns, getColumnBySlug, getColumnById, createColumn, updateColumn,
 export { getCategories, getCategoryById, createCategory, updateCategory, deleteCategory } from './categories.api';
 export { getDailyDiagnosticCount } from './stats.api';
 export { uploadMedia } from './media.api';
+export { createSubscription, getSubscriptionCount, getSubscriptions, getSubscriptionById, deleteSubscription } from './subscriptions.api';
 export type { Media } from './media.api';
+export type { SubscriptionFormPayload, Subscription, GetSubscriptionsParams } from './subscriptions.api';
 export type {
   Column,
   ColumnsData,

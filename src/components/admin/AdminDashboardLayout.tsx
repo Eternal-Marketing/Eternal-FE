@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { HomeIcon, ChartBarIcon, FolderIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, ChartBarIcon, FolderIcon, ClipboardDocumentListIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
 import { logout } from '@/lib/api';
 import { hasTokens, getRefreshToken, clearTokens, getAdminInfo } from '@/lib/auth/token';
 
@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { href: '/', label: '홈', Icon: HomeIcon },
   { href: '/admin/dashboard', label: '대시보드', Icon: ChartBarIcon },
   { href: '/admin/dashboard/categories', label: '카테고리 관리', Icon: FolderIcon },
+  { href: '/admin/dashboard/subscriptions', label: '상담신청', Icon: ClipboardDocumentListIcon },
 ] as const;
 
 export default function AdminDashboardLayout({
