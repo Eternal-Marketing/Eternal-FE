@@ -30,14 +30,17 @@ export default function ServicePage() {
           />
         </div>
         <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] md:min-h-0 flex flex-col items-center justify-center text-center px-4 py-12 sm:py-16">
-          <h1 className="m-0 font-sans text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-normal">
-            <span className="text-white/90">SERVICE</span>{' '}
-            <span className="text-primary">이터널 마케팅</span>
+        <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] md:min-h-0 flex flex-col items-center justify-center text-center px-4 gap-8 sm:gap-10">
+          <h1 className="m-0 font-sans text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-normal">
+            <span className="text-white/80">ETERNAL MARKETING</span>{' '}
+            <span className="text-[#6d94ff]">SERVICE</span>
           </h1>
-          <p className="m-0 mt-3 sm:mt-4 font-sans text-[14px] sm:text-[16px] md:text-[18px] font-medium leading-normal text-white">
-            정답만 선택하는 마케팅, 이터널이 함께합니다
-          </p>
+          <Image src="/images/logo.svg" alt="Eternal Marketing Logo" width={80} height={46} className="w-[70px] sm:w-[84px] md:w-[96px] lg:w-[110px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]" />
+          <div className="font-sans text-[12px] sm:text-[14px] md:text-[16px] leading-snug text-white">
+            <p className="m-0 font-sans font-extralight">각종 마케팅 너무 복잡하고 막막하신가요?</p>
+            <p className="m-0 font-sans font-extralight">이터널이 제일 잘 하고 자신있는 것</p>
+            <p className="m-0 font-sans font-extralight">대표님의 기준에 맞춰 핵심만 보여드리겠습니다</p>
+          </div>
         </div>
       </section>
 

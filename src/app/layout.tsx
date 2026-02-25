@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import HealthLogger from "@/components/layout/HealthLogger";
 import "./globals.css";
 
 /**
@@ -54,6 +55,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://my.spline.design" />
       </head>
       <body className="antialiased font-sans bg-bg text-main" suppressHydrationWarning>
+        <HealthLogger />
         {children}
       </body>
     </html>

@@ -807,3 +807,22 @@ body {
 .service-category-card:hover .service-category-card-inner {
   transform: scale(1.04);
 }
+
+/* 말풍선 통통 튀는 애니메이션 */
+@keyframes bubble-bounce {
+  0%   { opacity: 0; transform: scale(0.3) translateY(10px); }
+  50%  { transform: scale(1.15) translateY(-6px); }
+  70%  { transform: scale(0.95) translateY(2px); }
+  85%  { transform: scale(1.05) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes bubble-float {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(-6px) rotate(1deg); }
+}
+
+.animate-bubble-bounce {
+  animation: bubble-bounce 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both,
+             bubble-float 3s ease-in-out 1.5s infinite;
+}

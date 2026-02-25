@@ -155,14 +155,14 @@ export default function AboutSection() {
 
         <FadeIn>
           <div className="text-center mb-4 sm:mb-6 md:mb-8" data-node-id="127:908">
-            <h2 className="font-sans text-[16px] sm:text-[18px] md:text-[22px] lg:text-[28px] font-bold leading-tight text-main">
+            <h2 className="font-sans text-[24px] sm:text-[30px] md:text-[36px] lg:text-[44px] font-bold leading-tight text-main">
               정답은 이미{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#000d2a] via-[#3273ff] to-black">
                 데이터
               </span>{" "}
               속에 존재합니다.
             </h2>
-            <p className="font-sans text-[16px] sm:text-[18px] md:text-[22px] lg:text-[28px] font-bold leading-tight text-main">
+            <p className="font-sans text-[24px] sm:text-[30px] md:text-[36px] lg:text-[44px] font-bold leading-tight text-main">
               문제는 그것을 보지 않는 선택입니다.
             </p>
           </div>
@@ -170,11 +170,11 @@ export default function AboutSection() {
 
         <FadeIn delay={200}>
           <div className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-[100px] desktop:mb-[120px]" data-node-id="127:909">
-            <p className="font-sans text-[11px] sm:text-[12px] md:text-[13px] font-medium leading-relaxed text-main">
+            <p className="font-sans text-[15px] sm:text-[17px] md:text-[19px] lg:text-[22px] font-medium leading-relaxed text-main text-center">
               수많은 대행사의 결과물 및 서비스 구조를 담은{" "}
               <span className="text-[#134bc4]">AI</span>와
             </p>
-            <p className="font-sans text-[11px] sm:text-[12px] md:text-[13px] font-medium leading-relaxed text-main">
+            <p className="font-sans text-[15px] sm:text-[17px] md:text-[19px] lg:text-[22px] font-medium leading-relaxed text-main text-center">
               다년간의 실무 경험을 축적한{" "}
               <span className="text-[#134bc4]">전문 마케터</span>가 함께 판단합니다.
             </p>
@@ -261,12 +261,12 @@ export default function AboutSection() {
           <div className="flex flex-col lg:flex-row lg:items-center gap-6 sm:gap-8 lg:gap-16 lg:ml-32 xl:ml-64">
             <SlideIn direction="left" delay={700} className="flex-shrink-0">
               <div className="flex flex-col items-center" data-node-id="127:918">
-                <div className="w-[200px] sm:w-[240px] md:w-[300px] lg:w-[360px] relative aspect-[360/120]">
-                  <Image alt="Team Structure" fill className="object-contain" src="/images/wave1.svg" sizes="360px" />
+                <div className="w-[240px] h-[210px] sm:w-[300px] sm:h-[260px] md:w-[380px] md:h-[330px] lg:w-[460px] lg:h-[400px] relative">
+                  <Image alt="Team Structure" fill className="object-contain" src="/images/wave1.svg" sizes="(max-width: 640px) 240px, (max-width: 768px) 300px, (max-width: 1024px) 380px, 460px" />
+                  <p className="absolute bottom-16 left-1/2 -translate-x-1/2 font-sans text-[12px] sm:text-[14px] md:text-[16px] font-bold text-sub1 text-center w-full" data-node-id="127:936">
+                    업종별 전문 인력으로 전담 팀 구성
+                  </p>
                 </div>
-                <p className="font-sans text-[12px] sm:text-[14px] md:text-[16px] font-bold text-sub1 text-center -mt-12 sm:-mt-16 md:-mt-20 lg:-mt-[80px]" data-node-id="127:936">
-                  업종별 전문 인력으로 전담 팀 구성
-                </p>
               </div>
             </SlideIn>
 

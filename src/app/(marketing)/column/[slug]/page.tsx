@@ -1,63 +1,53 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CATEGORY_NAMES, getArticleCategoryIndex, getCategoryIndex } from "../categorySlug";
+import { notFound } from "next/navigation";
+import { CATEGORY_NAMES, getCategoryIndex } from "../categorySlug";
+import { getColumnBySlug } from "@/lib/api";
+import AdminColumnActions from "@/components/column/AdminColumnActions";
 
 /**
  * 칼럼 상세 페이지 (/column/:slug)
- * - slug로 아티클 식별, searchParams.category로 카테고리 보정. 브레드크럼·본문·관련 아티클
+ * - GET /api/columns/slug/:slug 연동
+ * - searchParams.category로 카테고리명 보정
  */
-export const metadata: Metadata = {
-  title: "칼럼 | Eternal Marketing",
-};
-
-const getArticleData = (category: string) => ({
-  category,
-  title: "제목",
-  subtitle: "소제목 입니다. Lorem Ipsum is simply",
-  date: "Dec 03, 2025",
-  image: "/images/column/column-background.svg",
-  sections: [
-    {
-      title: "섹션 1",
-      content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    },
-  ],
-});
-
-const RELATED_ARTICLES = [
-  {
-    id: 1,
-    title: "제목",
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    date: "Dec 03, 2025",
-  },
-  {
-    id: 2,
-    title: "제목",
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    date: "Dec 03, 2025",
-  },
-  {
-    id: 3,
-    title: "제목",
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    date: "Dec 03, 2025",
-  },
-];
 
 type PageProps = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ category?: string }>;
 };
 
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const column = await getColumnBySlug(slug);
+  return {
+    title: column ? `${column.title} | Eternal Marketing` : "칼럼 | Eternal Marketing",
+    description: column?.excerpt ?? undefined,
+  };
+}
+
+function formatDate(isoString: string): string {
+  try {
+    return new Date(isoString).toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  } catch {
+    return isoString;
+  }
+}
+
 export default async function ColumnDetailPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
   const { category: categoryFromQuery } = await searchParams;
-  const categoryIndex = categoryFromQuery
-    ? getCategoryIndex(categoryFromQuery)
-    : getArticleCategoryIndex(slug);
+
+  const column = await getColumnBySlug(slug, true);
+  if (!column) notFound();
+
+  const categoryIndex = categoryFromQuery ? getCategoryIndex(categoryFromQuery) : 0;
   const categoryName = CATEGORY_NAMES[categoryIndex];
-  const article = getArticleData(categoryName);
+  const thumbnailSrc = column.thumbnailUrl || "/images/column/column-background.svg";
+  const publishedDate = formatDate(column.publishedAt);
 
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
@@ -68,38 +58,44 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
             <span className="mx-3 text-sub3">|</span>
             <Link href="/column" className="text-main no-underline hover:text-primary transition-colors">칼럼</Link>
             <span className="mx-3 text-sub3">|</span>
-            <span className="font-normal">{article.category}</span>
+            <span className="font-normal">{categoryName}</span>
           </p>
         </div>
       </div>
 
       <article className="w-full max-w-[603px] mx-auto px-4 pb-[80px]" data-node-id="804:791">
-        <div 
+        <div
           className="inline-flex items-center justify-center px-[6px] py-[2px] bg-[#f6f6f6] rounded-[3px] mb-6"
           data-node-id="804:792"
         >
           <span className="font-sans text-[12px] font-light text-sub1" data-node-id="804:793">
-            {article.category}
+            {categoryName}
           </span>
         </div>
 
-        <h1 
-          className="m-0 font-sans text-[32px] font-semibold leading-normal text-main mb-4"
+        <div className="flex items-start gap-4 mb-4">
+        <h1
+          className="m-0 font-sans text-[32px] font-semibold leading-normal text-main mb-4 flex-1 min-w-0"
           data-node-id="804:794"
         >
-          {article.title}
+          {column.title}
         </h1>
 
-        <p 
-          className="m-0 font-sans text-[14px] font-normal leading-relaxed text-sub1 mb-2"
-          data-node-id="804:796"
-        >
-          {article.subtitle}
-        </p>
+        <AdminColumnActions columnId={column.id} columnSlug={column.slug} />
+        </div>
+
+        {column.excerpt && (
+          <p
+            className="m-0 font-sans text-[14px] font-normal leading-relaxed text-sub1 mb-2"
+            data-node-id="804:796"
+          >
+            {column.excerpt}
+          </p>
+        )}
 
         <div className="flex items-center gap-3 mb-6">
           <span className="font-sans text-[10px] font-thin text-main" data-node-id="804:800">
-            {article.date}
+            {publishedDate}
           </span>
           <div className="flex items-center gap-2">
             <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
@@ -111,34 +107,24 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
           </div>
         </div>
 
-        <div 
+        <div
           className="w-full h-[280px] md:h-[314px] mb-10 overflow-hidden"
           data-node-id="804:803"
         >
-          <img 
-            src={article.image} 
-            alt="" 
+          <img
+            src={thumbnailSrc}
+            alt=""
             className="w-full h-full object-cover"
           />
         </div>
 
-        {/* Sections (Figma 804:795, 804:798) */}
-        {article.sections.map((section, idx) => (
-          <div key={idx} className="mb-10">
-            <h2 
-              className="m-0 font-sans text-[22px] font-semibold leading-normal text-main mb-4"
-              data-node-id="804:795"
-            >
-              {section.title}
-            </h2>
-            <p 
-              className="m-0 font-sans text-[14px] font-normal leading-relaxed text-main"
-              data-node-id="804:798"
-            >
-              {section.content}
-            </p>
-          </div>
-        ))}
+        {/* 본문 */}
+        {column.content && (
+          <div
+            className="font-sans text-[14px] font-normal leading-relaxed text-main mb-10"
+            dangerouslySetInnerHTML={{ __html: column.content }}
+          />
+        )}
 
         {/* Share Article (Figma 804:799, 804:804~805) */}
         <div className="mt-12 mb-16">
@@ -176,33 +162,7 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
           {/* Divider (Figma 804:807) */}
           <div className="w-full h-[1px] bg-sub3/50 mb-6" data-node-id="804:807" />
 
-          {/* Related Articles (Figma 804:809~) */}
-          <div className="flex flex-col gap-[18px]" data-node-id="804:809">
-            {RELATED_ARTICLES.map((item, idx) => (
-              <Link 
-                key={item.id} 
-                href={`/column/${item.id}`}
-                className="no-underline"
-              >
-                <div className="flex items-start justify-between gap-4 pb-4 border-b last:border-b-0" style={{ borderColor: 'rgba(153, 153, 153, 0.3)' }}>
-                  {/* Content */}
-                  <div className="flex flex-col gap-2 flex-1">
-                    <h4 className="m-0 font-sans text-[18px] font-medium leading-normal text-main">
-                      {item.title}
-                    </h4>
-                    <p className="m-0 font-sans text-[14px] font-light leading-relaxed text-main line-clamp-2">
-                      {item.description}
-                    </p>
-                    <p className="m-0 font-sans text-[10px] font-thin text-main mt-2">
-                      {item.date}
-                    </p>
-                  </div>
-                  {/* Thumbnail */}
-                  <div className="w-[180px] md:w-[204px] h-[90px] md:h-[102px] bg-[#d9d9d9] rounded-[3px] flex-shrink-0" />
-                </div>
-              </Link>
-            ))}
-          </div>
+          {/* 관련 칼럼: 추후 API 연동 예정 */}
         </section>
       </article>
     </main>

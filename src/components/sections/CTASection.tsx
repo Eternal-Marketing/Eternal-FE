@@ -5,6 +5,7 @@
  */
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { getDailyDiagnosticCount } from '@/lib/api';
 
 function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -99,6 +100,14 @@ interface CTASectionProps {
 }
 
 export default function CTASection({ imageSrc = "/images/about-page/last-background.svg" }: CTASectionProps) {
+  const [dailyCount, setDailyCount] = useState(0);
+
+  useEffect(() => {
+    getDailyDiagnosticCount()
+      .then(setDailyCount)
+      .catch(() => {});
+  }, []);
+
   return (
     <ExpandCTABackground imageSrc={imageSrc}>
       <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 md:px-8 h-full min-h-[140px] sm:min-h-[160px] md:min-h-0 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 sm:gap-6 md:gap-10 py-6 sm:py-0">
@@ -118,8 +127,8 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
         <div className="flex items-center gap-2 sm:gap-3">
           <Image src="/images/about-page/infinity.svg" alt="" width={40} height={40} className="w-9 h-auto sm:w-10 md:w-11 lg:w-[40px] opacity-40 shrink-0 object-contain" />
           <div className="text-white/80 text-[14px] sm:text-[15px] md:text-[16px] lg:text-[14px]">
-            <span>실시간 진단 진행 중</span>
-            <span className="ml-1 sm:ml-2 text-[18px] sm:text-[20px] md:text-[22px] lg:text-[20px] font-bold text-white"><CountUp end={124} duration={1500} /></span>
+            <span>당일 기준 누적 진단 진행</span>
+            <span className="ml-1 sm:ml-2 text-[18px] sm:text-[20px] md:text-[22px] lg:text-[20px] font-bold text-white"><CountUp end={dailyCount} duration={1500} /></span>
             <span className="ml-0.5 sm:ml-1">건</span>
           </div>
         </div>

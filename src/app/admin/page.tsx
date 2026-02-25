@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
       const data = await loginAdmin({ email: email.trim(), password });
       setTokens(data.accessToken, data.refreshToken);
       if (data.admin) setAdminInfo({ name: data.admin.name, email: data.admin.email });
-      router.push('/admin/dashboard');
+      router.push('/');
     } catch (err) {
       setError(err instanceof ApiClientError ? err.message : '로그인 중 오류가 발생했습니다.');
     } finally {
@@ -41,20 +41,19 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden bg-[#1c1c21]">
-      {/* 메시 그라디언트 배경 */}
+    <main className="min-h-screen flex flex-col items-center justify-center px-4 relative bg-[#1c1c21]">
+      {/* 배경 - 살짝 그라디언트 + 그리드 */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0 opacity-20"
           style={{
             background: `
-              radial-gradient(ellipse 80% 50% at 50% -20%, rgba(24, 75, 186, 0.25), transparent),
-              radial-gradient(ellipse 60% 40% at 100% 50%, rgba(99, 102, 241, 0.15), transparent),
-              radial-gradient(ellipse 50% 30% at 0% 80%, rgba(59, 130, 246, 0.1), transparent)
+              radial-gradient(ellipse 80% 50% at 50% -20%, rgba(24, 75, 186, 0.2), transparent),
+              radial-gradient(ellipse 60% 40% at 100% 50%, rgba(99, 102, 241, 0.08), transparent),
+              radial-gradient(ellipse 50% 30% at 0% 80%, rgba(59, 130, 246, 0.06), transparent)
             `,
           }}
         />
-        {/* 그리드 패턴 */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -63,12 +62,9 @@ export default function AdminLoginPage() {
             backgroundSize: '48px 48px',
           }}
         />
-        {/* 플로팅 오브 */}
-        <div className="absolute top-[15%] right-[10%] w-64 h-64 rounded-full bg-primary/20 blur-[100px] animate-pulse" />
-        <div className="absolute bottom-[20%] left-[5%] w-48 h-48 rounded-full bg-indigo-500/15 blur-[80px]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-[440px] animate-fade-in-up">
+      <div className="relative z-10 w-full max-w-[440px]">
         {/* 로고 */}
         <Link
           href="/"
@@ -103,16 +99,9 @@ export default function AdminLoginPage() {
           </p>
         </div>
 
-        {/* 로그인 카드 - 글래스모피즘 + 네온 보더 */}
-        <div className="relative group">
-          <div
-            className="absolute -inset-px rounded-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"
-            style={{
-              background: 'linear-gradient(135deg, rgba(24,75,186,0.4), rgba(99,102,241,0.2), transparent, rgba(59,130,246,0.2))',
-              filter: 'blur(8px)',
-            }}
-          />
-          <div className="relative rounded-2xl bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] p-8 sm:p-10 shadow-2xl">
+        {/* 로그인 카드 - 블러/네온 없이 단순 테두리 */}
+        <div className="relative">
+          <div className="relative rounded-2xl bg-[#25252a] border border-white/[0.08] p-8 sm:p-10 shadow-xl">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* 이메일 */}
               <div className="group/input">

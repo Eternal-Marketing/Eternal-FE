@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
+import { getDailyDiagnosticCount } from '@/lib/api';
 
 /**
  * AI 진단 CTA 섹션 (홈)
@@ -153,6 +154,13 @@ function ScaleIn({ children, delay = 0, className = '', style }: { children: Rea
 export default function DiagnosisSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [bgExpanded, setBgExpanded] = useState(false);
+  const [dailyCount, setDailyCount] = useState(0);
+
+  useEffect(() => {
+    getDailyDiagnosticCount()
+      .then(setDailyCount)
+      .catch(() => { /* 실패 시 0 유지 */ });
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -223,6 +231,16 @@ export default function DiagnosisSection() {
                 <Link href="/ai-diagnosis" className="diagnosis-cta-btn inline-block no-underline">
                   AI 진단 받기
                 </Link>
+                {/* 말풍선 - 버튼 오른쪽 */}
+                <div className="flex justify-end -mt-2 translate-x-[80px] sm:translate-x-[110px] md:translate-x-[140px]">
+                  <Image
+                    src="/images/Group 86.svg"
+                    alt="진단 참여만으로 실무용 AI 세팅 가이드 받아보세요"
+                    width={140}
+                    height={60}
+                    className="w-[120px] sm:w-[130px] md:w-[140px] h-auto animate-bubble-bounce"
+                  />
+                </div>
               </div>
             </ScaleIn>
 
@@ -233,9 +251,9 @@ export default function DiagnosisSection() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-3 w-3 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-3 lg:w-3 bg-green-500" />
                   </span>
-                  <span>실시간 진단 진행 중</span>
-                  <span className="inline-block min-w-[3rem] sm:min-w-[4rem] md:min-w-[3.5rem] lg:min-w-[60px] text-left font-sans text-[32px] sm:text-[40px] md:text-[44px] lg:text-[48px] font-semibold leading-normal text-inverse">
-                    <CountUpNumber end={124} duration={2000} />
+                  <span>당일 기준 누적 진단 진행</span>
+                  <span className="inline-block min-w-[3rem] sm:min-w-[4rem] md:min-w-[3.5rem] lg:min-w-[60px] text-right tabular-nums font-sans text-[32px] sm:text-[40px] md:text-[44px] lg:text-[48px] font-semibold leading-normal text-inverse">
+                    <CountUpNumber end={dailyCount} duration={2000} />
                   </span>
                   <span>건</span>
                 </div>

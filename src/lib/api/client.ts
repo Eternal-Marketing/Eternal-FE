@@ -59,3 +59,9 @@ export const get = <T>(path: string, options?: Omit<RequestOptions, 'method' | '
 
 export const post = <T>(path: string, body?: unknown, options?: Omit<RequestOptions, 'method' | 'body'>) =>
   request<T>(path, { ...options, method: 'POST', body });
+
+export const put = <T>(path: string, body?: unknown, options?: Omit<RequestOptions, 'method' | 'body'>) =>
+  request<T>(path, { ...options, method: 'PUT', body });
+
+export const del = <T>(path: string, options?: Omit<RequestOptions, 'method' | 'body'>) =>
+  request<T>(path, { ...options, method: 'DELETE' });

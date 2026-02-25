@@ -43,7 +43,7 @@ export default function HeroSection() {
           </h1>
 
           <div className="text-sm sm:text-base md:text-lg lg:text-h4 text-inverse/80 mt-3 sm:mt-5 lg:mt-[20px] animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
-            <p className="mb-1 sm:mb-2" data-node-id="24:19">마침내 탄생한 최적 효율의 마케팅</p>
+            <p className="mb-1 sm:mb-2" data-node-id="24:19">마침내 탄생한 업계 최고효율의 마케팅</p>
             <p data-node-id="24:20">&ldquo;마케팅 인텔리전스 AI&rdquo;</p>
           </div>
         </div>

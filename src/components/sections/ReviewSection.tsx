@@ -187,8 +187,8 @@ export default function ReviewSection() {
     { image: '/images/reviewSection/reward4.svg' },
   ];
 
-  const cardW = 'min-w-[240px] w-[240px] sm:min-w-[280px] sm:w-[280px] md:min-w-[320px] md:w-[320px] lg:min-w-[360px] lg:w-[360px]';
-  const cardH = 'h-[164px] sm:h-[192px] md:h-[220px] lg:h-[248px]';
+  const cardW = 'min-w-[260px] w-[260px] sm:min-w-[320px] sm:w-[320px] md:min-w-[370px] md:w-[370px] lg:min-w-[420px] lg:w-[420px]';
+  const cardH = 'h-[203px] sm:h-[250px] md:h-[289px] lg:h-[328px]';
 
   return (
     <section id="review" className="relative overflow-hidden z-30 w-full min-h-[880px] sm:min-h-[1200px] md:min-h-[1400px] lg:min-h-[1600px] xl:min-h-[1687px]">
@@ -220,7 +220,7 @@ export default function ReviewSection() {
                           key={`${repeatIndex}-${index}`}
                           className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 overflow-hidden relative ${cardW} ${cardH}`}
                         >
-                          <Image src={review.image} alt={`Review ${index + 1}`} fill className="object-cover object-center" sizes="360px" />
+                          <Image src={review.image} alt={`Review ${index + 1}`} fill className="object-contain" sizes="360px" />
                         </div>
                       ))}
                     </div>
