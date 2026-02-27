@@ -7,7 +7,22 @@ import DiagnosisFormStep2 from "./DiagnosisFormStep2";
  * - 히어로 + "기본 정보" 폼(지역, 연락처, 이메일, 상담 희망 시간대)
  */
 export const metadata: Metadata = {
-  title: "AI 진단받기 | Eternal Marketing",
+  title: "AI 진단받기 (2단계)",
+  description:
+    "AI 진단 신청을 위한 기본 정보를 입력합니다. 입력하신 정보로 상담 및 진단 결과 안내를 진행합니다.",
+  openGraph: {
+    title: "이터널마케팅 | AI 진단받기 (2단계)",
+    description:
+      "AI 진단 신청을 위한 기본 정보를 입력합니다. 입력하신 정보로 상담 및 진단 결과 안내를 진행합니다.",
+    url: "/ai-diagnosis/step-2",
+    images: ["/images/big-logo.svg"],
+  },
+  twitter: {
+    title: "이터널마케팅 | AI 진단받기 (2단계)",
+    description:
+      "AI 진단 신청을 위한 기본 정보를 입력합니다. 입력하신 정보로 상담 및 진단 결과 안내를 진행합니다.",
+    images: ["/images/big-logo.svg"],
+  },
 };
 
 export default function AiDiagnosisStep2Page() {

@@ -83,24 +83,62 @@ export interface Subscription {
 
 /** API 응답( snake_case 포함) → Subscription 정규화 */
 function normalizeSubscription(raw: Record<string, unknown>): Subscription {
+  const nestedSubscription =
+    raw['subscription'] && typeof raw['subscription'] === 'object'
+      ? (raw['subscription'] as Record<string, unknown>)
+      : undefined;
+
   return {
-    id: String(raw.id ?? raw.subscription?.id ?? ''),
-    name: String(raw.name ?? ''),
-    email: String(raw.email ?? ''),
-    phone: String(raw.phone ?? ''),
-    companyName: raw.companyName != null ? String(raw.companyName) : (raw.company_name != null ? String(raw.company_name) : undefined),
-    industry: String(raw.industry ?? ''),
-    industryOther: raw.industryOther != null ? String(raw.industryOther) : (raw.industry_other != null ? String(raw.industry_other) : undefined),
-    concerns: Array.isArray(raw.concerns) ? raw.concerns.map(String) : Array.isArray(raw.concern_codes) ? raw.concern_codes.map(String) : [],
-    marketingStatus: String(raw.marketingStatus ?? raw.marketing_status ?? ''),
-    interestedChannels: Array.isArray(raw.interestedChannels) ? raw.interestedChannels.map(String) : Array.isArray(raw.interested_channels) ? raw.interested_channels.map(String) : [],
-    channelsOther: raw.channelsOther != null ? String(raw.channelsOther) : (raw.channels_other != null ? String(raw.channels_other) : undefined),
-    message: raw.message != null ? String(raw.message) : undefined,
-    region: raw.region != null ? String(raw.region) : undefined,
-    contactTimeSlots: Array.isArray(raw.contactTimeSlots) ? raw.contactTimeSlots.map(String) : Array.isArray(raw.contact_time_slots) ? raw.contact_time_slots.map(String) : [],
-    contactTimeOther: raw.contactTimeOther != null ? String(raw.contactTimeOther) : (raw.contact_time_other != null ? String(raw.contact_time_other) : undefined),
-    status: raw.status != null ? String(raw.status) : undefined,
-    createdAt: raw.createdAt != null ? String(raw.createdAt) : (raw.created_at != null ? String(raw.created_at) : undefined),
+    id: String(raw['id'] ?? nestedSubscription?.['id'] ?? ''),
+    name: String(raw['name'] ?? ''),
+    email: String(raw['email'] ?? ''),
+    phone: String(raw['phone'] ?? ''),
+    companyName:
+      raw['companyName'] != null
+        ? String(raw['companyName'])
+        : raw['company_name'] != null
+          ? String(raw['company_name'])
+          : undefined,
+    industry: String(raw['industry'] ?? ''),
+    industryOther:
+      raw['industryOther'] != null
+        ? String(raw['industryOther'])
+        : raw['industry_other'] != null
+          ? String(raw['industry_other'])
+          : undefined,
+    concerns: Array.isArray(raw['concerns'])
+      ? raw['concerns'].map(String)
+      : Array.isArray(raw['concern_codes'])
+        ? raw['concern_codes'].map(String)
+        : [],
+    marketingStatus: String(raw['marketingStatus'] ?? raw['marketing_status'] ?? ''),
+    interestedChannels: Array.isArray(raw['interestedChannels'])
+      ? raw['interestedChannels'].map(String)
+      : Array.isArray(raw['interested_channels'])
+        ? raw['interested_channels'].map(String)
+        : [],
+    channelsOther:
+      raw['channelsOther'] != null
+        ? String(raw['channelsOther'])
+        : raw['channels_other'] != null
+          ? String(raw['channels_other'])
+          : undefined,
+    message: raw['message'] != null ? String(raw['message']) : undefined,
+    region: raw['region'] != null ? String(raw['region']) : undefined,
+    contactTimeSlots: Array.isArray(raw['contactTimeSlots'])
+      ? raw['contactTimeSlots'].map(String)
+      : Array.isArray(raw['contact_time_slots'])
+        ? raw['contact_time_slots'].map(String)
+        : [],
+    contactTimeOther:
+      raw['contactTimeOther'] != null
+        ? String(raw['contactTimeOther'])
+        : raw['contact_time_other'] != null
+          ? String(raw['contact_time_other'])
+          : undefined,
+    status: raw['status'] != null ? String(raw['status']) : undefined,
+    createdAt:
+      raw['createdAt'] != null ? String(raw['createdAt']) : raw['created_at'] != null ? String(raw['created_at']) : undefined,
   };
 }
 
@@ -156,16 +194,26 @@ export async function getSubscriptions(params: GetSubscriptionsParams = {}): Pro
   if (params.offset != null) qs.set('offset', String(params.offset));
   const query = qs.toString();
   const path = `${SUBSCRIPTIONS_BASE}${query ? `?${query}` : ''}`;
-  const res = await doWithAuthRetry((token) =>
+  const res = await doWithAuthRetry<unknown>((token) =>
     get(path, { headers: { Authorization: `Bearer ${token}` } })
   );
-  const rawList: Record<string, unknown>[] = Array.isArray(res)
-    ? res
-    : 'data' in res && res.data
-      ? (Array.isArray((res as { data: unknown }).data)
-        ? (res as { data: Record<string, unknown>[] }).data
-        : ((res as { data: { subscriptions?: Record<string, unknown>[] } }).data?.subscriptions ?? []))
-      : (res as { subscriptions?: Record<string, unknown>[] })?.subscriptions ?? [];
+
+  const rawList: Record<string, unknown>[] = (() => {
+    if (Array.isArray(res)) return res as Record<string, unknown>[];
+    if (!res || typeof res !== 'object') return [];
+    const obj = res as Record<string, unknown>;
+    const data = obj['data'];
+
+    if (Array.isArray(data)) return data as Record<string, unknown>[];
+    if (data && typeof data === 'object') {
+      const subs = (data as Record<string, unknown>)['subscriptions'];
+      if (Array.isArray(subs)) return subs as Record<string, unknown>[];
+    }
+
+    const subs = obj['subscriptions'];
+    if (Array.isArray(subs)) return subs as Record<string, unknown>[];
+    return [];
+  })();
   return rawList.map((r) => normalizeSubscription(r as Record<string, unknown>));
 }
 

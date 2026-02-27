@@ -172,8 +172,8 @@ function SlideInRight({ children, delay = 0, className = '', style = {} }: { chi
 export default function InfiniteSection() {
   const stepCardClass = 'relative step-card rounded-xl';
   const stepCardInner = 'p-3 sm:p-4';
-  const stepTitleClass = 'font-sans text-[13px] sm:text-[14px] font-semibold leading-normal text-main text-left';
-  const stepDescClass = 'font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub1';
+  const stepTitleClass = 'font-sans text-[18px] sm:text-[14px] font-bold leading-normal text-main text-center sm:text-left';
+  const stepDescClass = 'font-sans text-[13px] sm:text-[12px] font-medium leading-normal text-sub1 text-center sm:text-left';
 
   return (
     <section 
@@ -184,7 +184,7 @@ export default function InfiniteSection() {
         {/* 섹션 제목 - 모바일만 반응형, lg 이상은 원래 값 */}
         <FadeIn>
           <div className="text-center mt-8 sm:mt-10 mb-4 sm:mb-5 lg:mt-[60px] lg:mb-5">
-          <div className="inline-block px-4 sm:px-6 py-3 sm:py-4 lg:px-8 lg:py-6">
+          <div className="w-full px-4 sm:px-6 py-3 sm:py-4 lg:px-8 lg:py-6">
             <h2 
               className="mb-1 sm:mb-2 font-sans text-[22px] sm:text-[26px] font-bold leading-normal text-main text-center lg:mb-2 lg:text-[34px]"
             >
@@ -208,7 +208,7 @@ export default function InfiniteSection() {
           {/* 중앙 무한대 루프 아이콘 */}
           <ScaleIn 
             delay={200} 
-            className="order-3 w-full max-w-[260px] sm:max-w-[320px] mx-auto aspect-[480/230] lg:absolute lg:top-[35%] lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:w-[480px] lg:max-w-none lg:aspect-auto lg:h-[230px] z-10 shrink-0"
+            className="order-first w-full max-w-[320px] sm:max-w-[320px] mx-auto aspect-[480/230] my-8 sm:my-0 lg:absolute lg:top-[35%] lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:w-[480px] lg:max-w-none lg:aspect-auto lg:h-[230px] z-10 shrink-0 lg:order-none lg:my-0"
           >
             <div className="relative w-full h-full">
               <Image
@@ -240,9 +240,18 @@ export default function InfiniteSection() {
           {/* STEP 01 */}
             <SlideInLeft 
               delay={400} 
-              className="order-1 w-full max-w-[280px] mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%-250px)] lg:left-[15%]"
+              className="order-1 w-full mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%-250px)] lg:left-[15%]"
             >
-              <div className={stepCardClass}>
+              <div className="sm:hidden border-b border-black/8 py-6 flex flex-col items-center text-center">
+                <Image src="/images/reviewSection/Magnifier.svg" alt="Magnifier Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
+                <h3 className={stepTitleClass}>STEP 01</h3>
+                <p className={`${stepDescClass} mt-2`}>
+                  AI 진단 문진표를 기반으로<br />
+                  대표님의 업체를 분석하고<br />
+                  문제 지점을 데이터로 구조화합니다.
+                </p>
+              </div>
+              <div className={`hidden sm:block ${stepCardClass}`}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
                     <Image src="/images/reviewSection/Magnifier.svg" alt="Magnifier Icon" width={18} height={17} className="w-4 h-[17px] sm:w-[18px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
@@ -257,31 +266,20 @@ export default function InfiniteSection() {
               </div>
             </SlideInLeft>
 
-          {/* STEP 03 */}
-            <SlideInRight 
-              delay={600} 
-              className="order-2 w-full max-w-[280px] mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%-250px)] lg:right-[15%]"
-            >
-              <div className={stepCardClass}>
-                <div className={stepCardInner}>
-                  <div className="flex items-center mb-1">
-                    <Image src="/images/reviewSection/arrows.svg" alt="Arrow Icon" width={28} height={22} className="w-6 h-5 sm:w-7 sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
-                    <h3 className={stepTitleClass}>STEP 03</h3>
-                  </div>
-                  <p className={`${stepDescClass} ml-6 sm:ml-8`}>
-                    대표님의 상황과 목표에 맞춰 가장 효율적인<br />
-                    전략으로 실행합니다.
-                  </p>
-                </div>
-              </div>
-            </SlideInRight>
-
           {/* STEP 02 */}
             <SlideInRight 
               delay={500} 
-              className="order-4 w-full max-w-[280px] mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%+150px)] lg:right-[15%]"
+              className="order-2 w-full mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%+150px)] lg:right-[15%]"
             >
-              <div className={stepCardClass}>
+              <div className="sm:hidden border-b border-black/8 py-6 flex flex-col items-center text-center">
+                <Image src="/images/reviewSection/people.svg" alt="People Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
+                <h3 className={stepTitleClass}>STEP 02</h3>
+                <p className={`${stepDescClass} mt-2`}>
+                  분석 결과를 바탕으로 업종과 목표에 맞는<br />
+                  전문 담당 팀을 구성합니다.
+                </p>
+              </div>
+              <div className={`hidden sm:block ${stepCardClass}`}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
                     <Image src="/images/reviewSection/people.svg" alt="People Icon" width={22} height={22} className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
@@ -295,12 +293,47 @@ export default function InfiniteSection() {
               </div>
             </SlideInRight>
 
+          {/* STEP 03 */}
+            <SlideInRight 
+              delay={600} 
+              className="order-4 w-full mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%-250px)] lg:right-[15%]"
+            >
+              <div className="sm:hidden border-b border-black/8 py-6 flex flex-col items-center text-center">
+                <Image src="/images/reviewSection/arrows.svg" alt="Arrow Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
+                <h3 className={stepTitleClass}>STEP 03</h3>
+                <p className={`${stepDescClass} mt-2`}>
+                  대표님의 상황과 목표에 맞춰 가장 효율적인<br />
+                  전략으로 실행합니다.
+                </p>
+              </div>
+              <div className={`hidden sm:block ${stepCardClass}`}>
+                <div className={stepCardInner}>
+                  <div className="flex items-center mb-1">
+                    <Image src="/images/reviewSection/arrows.svg" alt="Arrow Icon" width={28} height={22} className="w-6 h-5 sm:w-7 sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
+                    <h3 className={stepTitleClass}>STEP 03</h3>
+                  </div>
+                  <p className={`${stepDescClass} ml-6 sm:ml-8`}>
+                    대표님의 상황과 목표에 맞춰 가장 효율적인<br />
+                    전략으로 실행합니다.
+                  </p>
+                </div>
+              </div>
+            </SlideInRight>
+
           {/* STEP 04 */}
             <SlideInLeft 
               delay={700} 
-              className="order-5 w-full max-w-[280px] mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%+150px)] lg:left-[15%]"
+              className="order-5 w-full mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%+150px)] lg:left-[15%]"
             >
-              <div className={stepCardClass}>
+              <div className="sm:hidden py-6 flex flex-col items-center text-center">
+                <Image src="/images/reviewSection/pen.svg" alt="Pen Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
+                <h3 className={stepTitleClass}>STEP 04</h3>
+                <p className={`${stepDescClass} mt-2`}>
+                  AI 세밀 분석 리포트로 성과를<br />
+                  상시 관리하고 상세히 보고합니다.
+                </p>
+              </div>
+              <div className={`hidden sm:block ${stepCardClass}`}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
                     <Image src="/images/reviewSection/pen.svg" alt="Pen Icon" width={22} height={22} className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />

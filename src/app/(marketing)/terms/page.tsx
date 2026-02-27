@@ -6,7 +6,19 @@ import Link from "next/link";
  * - 브레드크럼, 개인정보/이용약관 탭, 목차, 제1~8조 본문
  */
 export const metadata: Metadata = {
-  title: "이용약관 | Eternal Marketing",
+  title: "이용약관",
+  description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
+  openGraph: {
+    title: "이터널마케팅 | 이용약관",
+    description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
+    url: "/terms",
+    images: ["/images/big-logo.svg"],
+  },
+  twitter: {
+    title: "이터널마케팅 | 이용약관",
+    description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
+    images: ["/images/big-logo.svg"],
+  },
 };
 
 export default function TermsPage() {

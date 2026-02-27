@@ -100,10 +100,10 @@ export default function Header() {
                 sizes="69px"
               />
               <div className="ml-1.5 sm:ml-2 lg:ml-[9px]">
-                <p className={`mb-0 text-primary leading-tight transition-all duration-500 ${
+                <p className={`mb-0 text-primary leading-tight transition-all duration-500 font-bold sm:font-normal ${
                   isScrolled ? 'text-[9px] sm:text-[10px]' : 'text-[11px] sm:text-[12px] lg:text-logo'
                 }`}>ETERNAL </p>
-                <p className={`text-primary leading-tight transition-all duration-500 ${
+                <p className={`text-primary leading-tight transition-all duration-500 font-bold sm:font-normal ${
                   isScrolled ? 'text-[9px] sm:text-[10px]' : 'text-[11px] sm:text-[12px] lg:text-logo'
                 }`}>MARKETING</p>
               </div>
@@ -143,14 +143,11 @@ export default function Header() {
                 aria-expanded={menuOpen}
               >
                 <span className={`block w-6 h-0.5 rounded-full bg-current transition-all duration-300 ${
-                  isScrolled ? 'text-main' : isLightBgPage ? 'text-main' : 'text-inverse'
-                } ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-                <span className={`block w-6 h-0.5 rounded-full mt-1.5 bg-current transition-all duration-300 ${
-                  isScrolled ? 'text-main' : isLightBgPage ? 'text-main' : 'text-inverse'
-                } ${menuOpen ? 'opacity-0 scale-0' : ''}`} />
-                <span className={`block w-6 h-0.5 rounded-full mt-1.5 bg-current transition-all duration-300 ${
-                  isScrolled ? 'text-main' : isLightBgPage ? 'text-main' : 'text-inverse'
-                } ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
+                  isScrolled ? 'text-gray-800' : isLightBgPage ? 'text-gray-800' : 'text-gray-800'
+                } ${menuOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
+                <span className={`block w-6 h-0.5 rounded-full mt-[8px] bg-current transition-all duration-300 ${
+                  isScrolled ? 'text-gray-800' : isLightBgPage ? 'text-gray-800' : 'text-gray-800'
+                } ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`} />
               </button>
             </div>
           </div>

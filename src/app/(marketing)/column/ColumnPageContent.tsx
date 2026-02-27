@@ -1,13 +1,13 @@
 'use client';
 /**
  * 칼럼 목록/카테고리 공통 콘텐츠
- * - 히어로 → 브레드크럼 → 카테고리 탭 (API categories 또는 고정 목록) → 픽처드 아티클 → 아티클 그리드
- * - activeCategorySlug로 현재 카테고리 결정, 탭 클릭 시 /column 또는 /column/category/:slug 이동
- * - GET /api/columns 연동 (categoryId 또는 categoryCode, status=PUBLISHED)
+ * - 히어로 섹션은 React.memo로 마운트 후 리렌더링 없음
+ * - 탭 클릭 시 URL 변경 없이 state로 카테고리 전환 → 히어로 유지
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { getColumns } from '@/lib/api';
 import type { Column } from '@/lib/api';
 import { hasTokens } from '@/lib/auth/token';
@@ -36,20 +36,91 @@ function formatColumnDate(isoString: string): string {
   }
 }
 
+/* ─────────────────────────────────────────────
+   히어로 섹션 - memo로 감싸 절대 리렌더링 안 됨
+───────────────────────────────────────────── */
+const ColumnHero = memo(function ColumnHero() {
+  return (
+    <section className="relative w-full min-h-[726px] sm:min-h-[320px] lg:h-[420px] overflow-hidden" data-node-id="804:486">
+      {/* 데스크탑 배경 */}
+      <div className="absolute inset-0 hidden sm:block">
+        <Image
+          src="/images/column/column-background.svg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+      </div>
+      {/* 모바일 배경 */}
+      <div className="absolute inset-0 sm:hidden">
+        <Image
+          src="/images/about-page/coulmn-mobile.svg"
+          alt=""
+          fill
+          className="object-contain object-top"
+          sizes="100vw"
+          priority
+        />
+      </div>
+      <div className="relative z-10 h-full min-h-[726px] sm:min-h-[320px] flex flex-col items-center text-center px-4 pt-0 sm:pt-16 pb-[200px] sm:pb-16 lg:pt-14 lg:pb-20 gap-6 sm:gap-0 justify-center sm:justify-start">
+        <h1
+          className="m-0 mt-0 sm:mt-12 lg:mt-12 font-sans text-[32px] sm:text-[32px] lg:text-[40px] font-bold leading-normal text-center"
+          data-node-id="804:497"
+        >
+          <span className="text-white/80 block sm:inline">COLUMN</span>
+          <span className="text-[#6d94ff] block sm:inline sm:ml-2">ETERNAL MARKETING</span>
+        </h1>
+        <Image
+          src="/images/logo.svg"
+          alt="Eternal Marketing Logo"
+          width={80}
+          height={46}
+          className="w-[70px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:hidden"
+        />
+        <div className="font-sans text-[18px] sm:text-[14px] leading-relaxed text-white text-center sm:absolute sm:bottom-6 sm:left-0 sm:right-0 sm:px-4">
+          <p className="m-0 font-sans font-extralight">막막했던 마케팅,</p>
+          <p className="m-0 font-sans font-extrabold text-[20px] sm:text-[16px]">이터널의 기준과 데이터로 모두 공개합니다</p>
+        </div>
+      </div>
+    </section>
+  );
+});
+
+/* ─────────────────────────────────────────────
+   메인 컴포넌트
+───────────────────────────────────────────── */
 export default function ColumnPageContent({ activeCategorySlug }: { activeCategorySlug?: string }) {
+  const router = useRouter();
   const { categories } = useCategories(false);
   const [columns, setColumns] = useState<Column[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [showAllTabs, setShowAllTabs] = useState(false);
 
+  // 현재 선택된 카테고리 slug를 state로 관리 (URL 변경 없이 전환)
   const useApiCategories = categories.length > 0;
-  const resolvedSlug = activeCategorySlug ?? (useApiCategories ? categories[0]?.slug : FALLBACK_CATEGORIES[0]?.slug) ?? 'bayiral';
+  const defaultSlug = useApiCategories ? (categories[0]?.slug ?? '') : (FALLBACK_CATEGORIES[0]?.slug ?? 'bayiral');
+  const [activeSlug, setActiveSlug] = useState<string>(activeCategorySlug ?? defaultSlug);
+
+  // categories 로드 후 초기 slug 보정
+  useEffect(() => {
+    if (categories.length > 0 && !activeCategorySlug) {
+      setActiveSlug(categories[0].slug);
+    }
+    if (activeCategorySlug) {
+      setActiveSlug(activeCategorySlug);
+    }
+  }, [categories, activeCategorySlug]);
+
   const activeCategory = useApiCategories
-    ? categories.find((c) => c.slug === resolvedSlug) ?? categories[0]
+    ? categories.find((c) => c.slug === activeSlug) ?? categories[0]
     : null;
-  const effectiveSlug = useApiCategories ? (activeCategory?.slug ?? categories[0]?.slug ?? '') : resolvedSlug;
-  const effectiveName = useApiCategories ? (activeCategory?.name ?? categories[0]?.name ?? '') : (FALLBACK_CATEGORIES.find((c) => c.slug === resolvedSlug)?.name ?? FALLBACK_CATEGORIES[0].name);
+  const effectiveName = useApiCategories
+    ? (activeCategory?.name ?? categories[0]?.name ?? '')
+    : (FALLBACK_CATEGORIES.find((c) => c.slug === activeSlug)?.name ?? FALLBACK_CATEGORIES[0].name);
   const tabList = useApiCategories
     ? categories.map((c) => ({ name: c.name, slug: c.slug }))
     : FALLBACK_CATEGORIES;
@@ -63,42 +134,27 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
     setError(null);
     const params = useApiCategories && activeCategory
       ? { page: 1, limit: DEFAULT_LIMIT, status: 'PUBLISHED' as const, categoryId: activeCategory.id, orderBy: 'publishedAt' as const, orderDirection: 'desc' as const }
-      : { page: 1, limit: DEFAULT_LIMIT, status: 'PUBLISHED' as const, categoryCode: getCategoryCode(getCategoryIndex(resolvedSlug)), orderBy: 'publishedAt' as const, orderDirection: 'desc' as const };
+      : { page: 1, limit: DEFAULT_LIMIT, status: 'PUBLISHED' as const, categoryCode: getCategoryCode(getCategoryIndex(activeSlug)), orderBy: 'publishedAt' as const, orderDirection: 'desc' as const };
     getColumns(params)
       .then((data) => setColumns(data.columns ?? []))
       .catch((err) => setError(err?.message ?? '칼럼을 불러오지 못했습니다.'))
       .finally(() => setLoading(false));
-  }, [resolvedSlug, useApiCategories, activeCategory?.id]);
+  }, [activeSlug, useApiCategories, activeCategory?.id]);
+
+  // 탭 클릭: state만 변경 (URL 변경 없음 → 히어로 리렌더링 없음)
+  const handleTabClick = useCallback((slug: string, isFirst: boolean) => {
+    setActiveSlug(slug);
+    // URL도 함께 업데이트 (뒤로가기 등을 위해) - replace로 히스토리 스택 유지
+    router.replace(isFirst ? '/column' : `/column/category/${slug}`, { scroll: false });
+  }, [router]);
 
   const featured = columns[0];
   const listColumns = columns.slice(1);
-  const categorySlug = effectiveSlug;
 
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      <section className="relative w-full min-h-[280px] sm:min-h-[320px] lg:h-[420px] overflow-hidden" data-node-id="804:486">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/column/column-background.svg"
-            alt=""
-            fill
-            className="object-cover animate-fade-in-up"
-            sizes="100vw"
-            priority
-            style={{ animationDuration: '0.6s', animationFillMode: 'both' }}
-          />
-        </div>
-        <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] flex flex-col items-center justify-center text-center px-4 gap-6 sm:gap-8">
-          <h1 className="m-0 font-sans text-[26px] sm:text-[32px] lg:text-[40px] font-bold leading-normal animate-fade-in-up" data-node-id="804:497" style={{ animationDelay: '0.2s', animationFillMode: 'both', animationDuration: '0.6s' }}>
-            <span className="text-white/80">ETERNAL MARKETING</span> <span className="text-[#6d94ff]">COLUMN</span>
-          </h1>
-          <Image src="/images/logo.svg" alt="Eternal Marketing Logo" width={80} height={46} className="w-[70px] sm:w-[84px] lg:w-[110px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'both', animationDuration: '0.6s' }} />
-          <div className="font-sans text-[12px] sm:text-[14px] leading-snug text-white animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'both', animationDuration: '0.6s' }}>
-            <p className="m-0 font-sans font-extralight">막막했던 마케팅,</p>
-            <p className="m-0 font-sans font-extralight">이터널의 기준과 데이터로 모두 공개합니다</p>
-          </div>
-        </div>
-      </section>
+      {/* 히어로: memo로 감싸져 있어 탭 전환 시 리렌더링 안 됨 */}
+      <ColumnHero />
 
       <section className="w-full bg-[#f6f6f6]" data-node-id="804:499">
         <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-8 sm:py-10 lg:py-[60px]">
@@ -106,49 +162,72 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
             className="font-sans text-[14px] font-thin text-main mb-4 animate-fade-in-up"
             style={{ animationDelay: '0.5s', animationFillMode: 'both', animationDuration: '0.5s' }}
           >
-            <Link href="/" className="text-main no-underline hover:text-primary transition-colors">
-              홈
-            </Link>
+            <Link href="/" className="text-main no-underline hover:text-primary transition-colors">홈</Link>
             <span className="mx-3 text-sub3">|</span>
-            <Link href="/column" className="text-main no-underline hover:text-primary transition-colors">
-              칼럼
-            </Link>
+            <Link href="/column" className="text-main no-underline hover:text-primary transition-colors">칼럼</Link>
             <span className="mx-3 text-sub3">|</span>
             <span className="font-normal">{effectiveName}</span>
           </p>
 
           <div
-            className="flex flex-wrap items-center gap-2 sm:gap-4 mb-8 sm:mb-10 animate-fade-in-up"
+            className="animate-fade-in-up mb-8 sm:mb-10"
             style={{ animationDelay: '0.6s', animationFillMode: 'both', animationDuration: '0.5s' }}
           >
-            {tabList.map((cat, idx) => (
-              <Link
-                key={cat.slug}
-                href={idx === 0 ? '/column' : `/column/category/${cat.slug}`}
-                className={`py-1 px-0 font-sans text-[14px] sm:text-[16px] transition-all duration-200 border-0 bg-transparent cursor-pointer no-underline border-b-2 hover:text-primary hover:border-primary ${
-                  effectiveSlug === cat.slug
-                    ? 'font-medium text-primary border-primary'
-                    : 'font-light text-main border-transparent'
-                }`}
-                data-node-id={`804:${500 + idx}`}
-              >
-                {cat.name}
-              </Link>
-            ))}
+            {/* 탭 목록 + 데스크탑에서만 칼럼생성하기 같은 줄 */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+              {(showAllTabs ? tabList : tabList.slice(0, 4)).map((cat) => {
+                const globalIdx = tabList.indexOf(cat);
+                const isFirst = globalIdx === 0;
+                return (
+                  <button
+                    key={cat.slug}
+                    type="button"
+                    onClick={() => handleTabClick(cat.slug, isFirst)}
+                    className={`py-1 px-0 font-sans text-[14px] sm:text-[16px] transition-all duration-200 border-0 bg-transparent cursor-pointer border-b-2 hover:text-primary hover:border-primary ${
+                      activeSlug === cat.slug
+                        ? 'font-medium text-primary border-primary'
+                        : 'font-light text-main border-gray-300'
+                    }`}
+                  >
+                    {cat.name}
+                  </button>
+                );
+              })}
+              {tabList.length > 4 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAllTabs((v) => !v)}
+                  className="py-1 px-0 font-sans text-[14px] sm:text-[16px] font-light text-sub2 border-b-2 border-gray-300 hover:text-primary hover:border-primary transition-all duration-200 bg-transparent cursor-pointer"
+                >
+                  {showAllTabs ? '접기 ↑' : '더보기 ↓'}
+                </button>
+              )}
+              {/* 데스크탑: 칼럼 생성하기 탭과 같은 줄 오른쪽 */}
+              {mounted && hasTokens() && (
+                <Link
+                  href="/column/new"
+                  className="hidden sm:inline-block ml-auto py-2 px-4 font-sans text-[14px] font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors no-underline"
+                >
+                  칼럼 생성하기
+                </Link>
+              )}
+            </div>
+
+            {/* 모바일: 칼럼 생성하기 별도 줄 */}
             {mounted && hasTokens() && (
-              <Link
-                href="/column/new"
-                className="ml-auto py-2 px-4 font-sans text-[14px] font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors no-underline"
-              >
-                칼럼 생성하기
-              </Link>
+              <div className="sm:hidden mt-3">
+                <Link
+                  href="/column/new"
+                  className="inline-block py-2 px-4 font-sans text-[14px] font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors no-underline"
+                >
+                  칼럼 생성하기
+                </Link>
+              </div>
             )}
           </div>
 
           {error && (
-            <p className="font-sans text-[14px] text-sub1 mb-6" role="alert">
-              {error}
-            </p>
+            <p className="font-sans text-[14px] text-sub1 mb-6" role="alert">{error}</p>
           )}
 
           {loading ? (
@@ -159,7 +238,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
             <>
               {featured && (
                 <Link
-                  href={`/column/${featured.slug}?category=${categorySlug}`}
+                  href={`/column/${featured.slug}`}
                   className="flex flex-col lg:flex-row gap-6 sm:gap-8 mb-10 sm:mb-12 no-underline group animate-fade-in-up"
                   style={{ animationDelay: '0.7s', animationFillMode: 'both', animationDuration: '0.5s' }}
                 >
@@ -176,7 +255,6 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
                       unoptimized={featured.thumbnailUrl?.startsWith('http') === true}
                     />
                   </div>
-
                   <div className="flex flex-col justify-center">
                     <h2
                       className="m-0 font-sans text-[24px] sm:text-[28px] font-bold leading-normal text-main mb-3 sm:mb-6 group-hover:text-primary transition-colors"
@@ -203,7 +281,6 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
                     key={column.id}
                     column={column}
                     nodeId={`804:${508 + idx * 5}`}
-                    categorySlug={categorySlug}
                     style={{ animationDelay: `${0.85 + idx * 0.08}s`, animationFillMode: 'both', animationDuration: '0.5s' }}
                   />
                 ))}
@@ -216,21 +293,22 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
   );
 }
 
+/* ─────────────────────────────────────────────
+   아티클 카드
+───────────────────────────────────────────── */
 function ArticleCard({
   column,
   nodeId,
-  categorySlug,
   style: animationStyle,
 }: {
   column: Column;
   nodeId: string;
-  categorySlug: string;
   style?: React.CSSProperties;
 }) {
   const thumbSrc = column.thumbnailUrl || PLACEHOLDER_IMAGE;
   return (
     <Link
-      href={`/column/${column.slug}?category=${categorySlug}`}
+      href={`/column/${column.slug}`}
       className="flex flex-col cursor-pointer group no-underline animate-fade-in-up"
       data-node-id={nodeId}
       style={animationStyle}
@@ -245,7 +323,6 @@ function ArticleCard({
           unoptimized={column.thumbnailUrl?.startsWith('http') === true}
         />
       </div>
-
       <h3 className="m-0 mt-2 font-sans text-[15px] sm:text-[18px] font-medium leading-normal text-main">{column.title}</h3>
       <p className="m-0 mt-1 font-sans text-[12px] sm:text-[14px] font-light leading-relaxed text-main line-clamp-2">
         {column.excerpt || column.title}

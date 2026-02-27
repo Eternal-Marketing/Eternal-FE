@@ -187,8 +187,8 @@ export default function ReviewSection() {
     { image: '/images/reviewSection/reward4.svg' },
   ];
 
-  const cardW = 'min-w-[260px] w-[260px] sm:min-w-[320px] sm:w-[320px] lg:min-w-[420px] lg:w-[420px]';
-  const cardH = 'h-[203px] sm:h-[250px] lg:h-[328px]';
+  const cardW = 'min-w-[340px] w-[340px] sm:min-w-[320px] sm:w-[320px] lg:min-w-[420px] lg:w-[420px]';
+  const cardH = 'h-[280px] sm:h-[250px] lg:h-[328px]';
 
   return (
     <section id="review" className="relative overflow-hidden z-30 w-full min-h-[880px] sm:min-h-[1200px] lg:min-h-[1600px] xl:min-h-[1687px]">
@@ -201,7 +201,7 @@ export default function ReviewSection() {
           <FadeIn>
             <div className="text-center pt-16 sm:pt-24 lg:pt-[241px] pb-10 sm:pb-14 lg:pb-[114px]">
               <h2
-                className="font-sans text-[20px] sm:text-[24px] lg:text-[36px] font-bold leading-normal text-inverse text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+                className="font-sans text-[23px] sm:text-[24px] lg:text-[36px] font-bold leading-normal text-inverse text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
               >
                 판단은 이미 증명되어 있었고,<br />
                 AI는 그 판단을 정교하게 만들었습니다

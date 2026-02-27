@@ -108,7 +108,7 @@ export default function DiagnosisFormStep2() {
         .map((i) => CHANNEL_CODES[i]);
       const contactTimeSlots = timeSelected
         .map((sel, i) => (sel ? TIME_CODES[i] : null))
-        .filter((c): c is string => !!c);
+        .filter((c): c is (typeof TIME_CODES)[number] => c !== null);
       const payload = {
         name: name.trim(),
         email: email.trim(),

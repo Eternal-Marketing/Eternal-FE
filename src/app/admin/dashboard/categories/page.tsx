@@ -155,29 +155,28 @@ export default function AdminCategoriesPage() {
 
       {loading ? (
         <p className="text-white/60 text-[14px]">카테고리를 불러오는 중...</p>
+      ) : categories.length === 0 ? (
+        <div className="rounded-3xl bg-white/[0.05] border border-white/10 px-6 py-12 text-center text-white/45 text-[14px]">
+          등록된 카테고리가 없습니다. 추가해 주세요.
+        </div>
       ) : (
-        <div className="rounded-3xl bg-white/[0.05] backdrop-blur-xl border border-white/10 overflow-hidden">
-          <table className="w-full table-fixed">
-            <thead>
-              <tr className="border-b border-white/10">
-                <th className="w-[28%] px-6 py-4 text-left text-[13px] font-semibold text-white/70 align-middle">이름</th>
-                <th className="w-auto px-6 py-4 text-center text-[13px] font-semibold text-white/70 align-middle">설명</th>
-                <th className="w-[120px] px-6 py-4 text-right text-[13px] font-semibold text-white/70 align-middle">관리</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.length === 0 ? (
-                <tr>
-                  <td colSpan={3} className="px-6 py-12 text-center text-white/45 text-[14px]">
-                    등록된 카테고리가 없습니다. 추가해 주세요.
-                  </td>
+        <>
+          {/* 데스크탑: 테이블 */}
+          <div className="hidden sm:block rounded-3xl bg-white/[0.05] backdrop-blur-xl border border-white/10 overflow-hidden">
+            <table className="w-full table-fixed">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="w-[28%] px-6 py-4 text-left text-[13px] font-semibold text-white/70">이름</th>
+                  <th className="w-auto px-6 py-4 text-center text-[13px] font-semibold text-white/70">설명</th>
+                  <th className="w-[120px] px-6 py-4 text-right text-[13px] font-semibold text-white/70">관리</th>
                 </tr>
-              ) : (
-                categories.map((c) => (
+              </thead>
+              <tbody>
+                {categories.map((c) => (
                   <tr key={c.id} className="border-b border-white/5 hover:bg-white/[0.02]">
-                    <td className="w-[28%] px-6 py-4 text-left text-[14px] text-white/90 align-middle">{c.name}</td>
-                    <td className="px-6 py-4 text-center text-[14px] text-white/50 line-clamp-1 align-middle">{c.description || '-'}</td>
-                    <td className="w-[120px] px-6 py-4 text-right align-middle">
+                    <td className="px-6 py-4 text-[14px] text-white/90">{c.name}</td>
+                    <td className="px-6 py-4 text-center text-[14px] text-white/50 truncate">{c.description || '-'}</td>
+                    <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button
                           type="button"
@@ -199,16 +198,54 @@ export default function AdminCategoriesPage() {
                       </div>
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* 모바일: 카드형 */}
+          <div className="sm:hidden flex flex-col gap-3">
+            {categories.map((c) => (
+              <div
+                key={c.id}
+                className="rounded-2xl bg-white/[0.05] backdrop-blur-xl border border-white/10 px-4 py-4"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[15px] font-semibold text-white mb-0.5">{c.name}</p>
+                    {c.description && (
+                      <p className="text-[13px] text-white/50 truncate">{c.description}</p>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-1 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => openEdit(c)}
+                      className="p-2 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-colors"
+                      title="수정"
+                    >
+                      <PencilSquareIcon className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openDeleteConfirm(c.id)}
+                      disabled={submitting}
+                      className="p-2 rounded-lg text-white/60 hover:bg-rose-500/10 hover:text-rose-400 transition-colors disabled:opacity-50"
+                      title="삭제"
+                    >
+                      <TrashIcon className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
 
       {modal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-          <div className="w-full max-w-[420px] rounded-2xl bg-[#1a1f2e] border border-white/10 p-6 shadow-xl">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60">
+          <div className="w-full sm:max-w-[420px] rounded-t-2xl sm:rounded-2xl bg-[#1a1f2e] border border-white/10 p-6 shadow-xl">
             <h3 className="text-lg font-semibold text-white mb-6">
               {modal === 'add' ? '카테고리 추가' : '카테고리 수정'}
             </h3>

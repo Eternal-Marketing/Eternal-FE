@@ -22,7 +22,7 @@ export default function HeroSection() {
 
       <div className="relative h-full flex flex-col items-center justify-center z-20 px-4">
         <div className="text-center text-inverse mt-4 sm:mt-6 lg:mt-[100px] relative z-10 max-w-[90vw]">
-          <div className="absolute top-[-8px] sm:top-[-10px] left-1/2 -translate-x-1/2 sm:left-[calc(50%-105px)] sm:translate-x-0 w-14 h-14 sm:w-20 sm:h-20 z-[-1] animate-pulse-slow">
+          <div className="absolute top-[-20px] sm:top-[-10px] left-[-6%] sm:left-[calc(50%-105px)] sm:translate-x-0 w-14 h-14 sm:w-20 sm:h-20 z-[-1] animate-pulse-slow">
             <Image
               src={circleIcon}
               alt=""

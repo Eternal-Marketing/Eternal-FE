@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { PencilSquareIcon, TrashIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -16,9 +16,13 @@ export default function AdminColumnActions({ columnId }: AdminColumnActionsProps
   const router = useRouter();
   const [deleting, setDeleting] = useState(false);
   const [confirming, setConfirming] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  if (typeof window === 'undefined') return null;
-  if (!hasTokens()) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !hasTokens()) return null;
 
   const handleDelete = async () => {
     setDeleting(true);

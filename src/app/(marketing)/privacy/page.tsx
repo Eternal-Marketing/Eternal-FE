@@ -6,7 +6,22 @@ import Link from "next/link";
  * - 브레드크럼, 개인정보/이용약관 탭, 목차(TOC), 1~9절 본문
  */
 export const metadata: Metadata = {
-  title: "개인정보처리방침 | Eternal Marketing",
+  title: "개인정보처리방침",
+  description:
+    "이터널마케팅 서비스 이용과 관련한 개인정보 수집 항목, 이용 목적, 보유 기간 및 처리 기준을 안내합니다.",
+  openGraph: {
+    title: "이터널마케팅 | 개인정보처리방침",
+    description:
+      "이터널마케팅 서비스 이용과 관련한 개인정보 수집 항목, 이용 목적, 보유 기간 및 처리 기준을 안내합니다.",
+    url: "/privacy",
+    images: ["/images/big-logo.svg"],
+  },
+  twitter: {
+    title: "이터널마케팅 | 개인정보처리방침",
+    description:
+      "이터널마케팅 서비스 이용과 관련한 개인정보 수집 항목, 이용 목적, 보유 기간 및 처리 기준을 안내합니다.",
+    images: ["/images/big-logo.svg"],
+  },
 };
 
 export default function PrivacyPage() {

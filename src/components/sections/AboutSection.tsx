@@ -151,7 +151,7 @@ function SlideIn({ children, direction = 'left', delay = 0, className = '' }: { 
 export default function AboutSection() {
   return (
     <section id="about" className="bg-[#fdfeff] overflow-hidden relative z-30 rounded-t-2xl sm:rounded-t-3xl lg:rounded-t-[80px]" data-node-id="127:907">
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 desktop:px-[60px] pt-10 sm:pt-14 lg:pt-[100px] desktop:pt-[120px] pb-10 sm:pb-14 lg:pb-[100px] desktop:pb-[120px]">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 desktop:px-[60px] pt-16 sm:pt-14 lg:pt-[100px] desktop:pt-[120px] pb-16 sm:pb-14 lg:pb-[100px] desktop:pb-[120px]">
 
         <FadeIn>
           <div className="text-center mb-4 sm:mb-6" data-node-id="127:908">

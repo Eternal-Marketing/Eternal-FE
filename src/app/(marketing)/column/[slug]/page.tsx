@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CATEGORY_NAMES, getCategoryIndex } from "../categorySlug";
 import { getColumnBySlug } from "@/lib/api";
 import AdminColumnActions from "@/components/column/AdminColumnActions";
 
@@ -13,15 +12,34 @@ import AdminColumnActions from "@/components/column/AdminColumnActions";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const column = await getColumnBySlug(slug);
+  const title = column?.title ?? "마케팅 칼럼";
+  const description =
+    column?.excerpt ??
+    "맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 전략과 사례를 칼럼으로 정리했습니다.";
+
+  const imageUrl = "/images/big-logo.svg";
+
   return {
-    title: column ? `${column.title} | Eternal Marketing` : "칼럼 | Eternal Marketing",
-    description: column?.excerpt ?? undefined,
+    title,
+    description,
+    openGraph: {
+      title: `이터널마케팅 | ${title}`,
+      description,
+      url: `/column/${slug}`,
+      type: "article",
+      images: [{ url: imageUrl }],
+    },
+    twitter: {
+      title: `이터널마케팅 | ${title}`,
+      description,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -39,13 +57,12 @@ function formatDate(isoString: string): string {
 
 export default async function ColumnDetailPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
-  const { category: categoryFromQuery } = await searchParams;
+  await searchParams;
 
   const column = await getColumnBySlug(slug, true);
   if (!column) notFound();
 
-  const categoryIndex = categoryFromQuery ? getCategoryIndex(categoryFromQuery) : 0;
-  const categoryName = CATEGORY_NAMES[categoryIndex];
+  const categoryName = column.category?.name ?? '칼럼';
   const thumbnailSrc = column.thumbnailUrl || "/images/column/column-background.svg";
   const publishedDate = formatDate(column.publishedAt);
 

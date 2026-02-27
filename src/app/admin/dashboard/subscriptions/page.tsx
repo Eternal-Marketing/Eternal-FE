@@ -86,37 +86,36 @@ export default function AdminSubscriptionsPage() {
 
       {loading ? (
         <p className="text-white/60 text-[14px]">상담신청 목록을 불러오는 중...</p>
+      ) : subscriptions.length === 0 ? (
+        <div className="rounded-3xl bg-white/[0.05] border border-white/10 px-6 py-12 text-center text-white/45 text-[14px]">
+          상담신청 내역이 없습니다.
+        </div>
       ) : (
-        <div className="rounded-3xl bg-white/[0.05] backdrop-blur-xl border border-white/10 overflow-hidden">
-          <table className="w-full table-fixed">
-            <thead>
-              <tr className="border-b border-white/10">
-                <th className="w-[20%] px-6 py-4 text-left text-[13px] font-semibold text-white/70 align-middle">담당자</th>
-                <th className="w-[24%] px-6 py-4 text-left text-[13px] font-semibold text-white/70 align-middle">업체명</th>
-                <th className="w-[22%] px-6 py-4 text-left text-[13px] font-semibold text-white/70 align-middle">연락처</th>
-                <th className="w-[22%] px-6 py-4 text-left text-[13px] font-semibold text-white/70 align-middle">신청일</th>
-                <th className="w-[100px] px-6 py-4 text-right text-[13px] font-semibold text-white/70 align-middle">관리</th>
-              </tr>
-            </thead>
-            <tbody>
-              {subscriptions.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="px-6 py-12 text-center text-white/45 text-[14px]">
-                    상담신청 내역이 없습니다.
-                  </td>
+        <>
+          {/* 데스크탑: 테이블 */}
+          <div className="hidden sm:block rounded-3xl bg-white/[0.05] backdrop-blur-xl border border-white/10 overflow-hidden">
+            <table className="w-full table-fixed">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="w-[20%] px-6 py-4 text-left text-[13px] font-semibold text-white/70">담당자</th>
+                  <th className="w-[24%] px-6 py-4 text-left text-[13px] font-semibold text-white/70">업체명</th>
+                  <th className="w-[22%] px-6 py-4 text-left text-[13px] font-semibold text-white/70">연락처</th>
+                  <th className="w-[22%] px-6 py-4 text-left text-[13px] font-semibold text-white/70">신청일</th>
+                  <th className="w-[100px] px-6 py-4 text-right text-[13px] font-semibold text-white/70">관리</th>
                 </tr>
-              ) : (
-                subscriptions.map((s) => (
+              </thead>
+              <tbody>
+                {subscriptions.map((s) => (
                   <tr
                     key={s.id}
                     className="border-b border-white/5 hover:bg-white/[0.02] cursor-pointer"
                     onClick={() => openDetail(s.id)}
                   >
-                    <td className="px-6 py-4 text-left text-[14px] text-white/90 align-middle">{s.name}</td>
-                    <td className="px-6 py-4 text-left text-[14px] text-white/70 line-clamp-1 align-middle">{s.companyName || '-'}</td>
-                    <td className="px-6 py-4 text-left text-[14px] text-white/70 align-middle">{s.phone}</td>
-                    <td className="px-6 py-4 text-left text-[14px] text-white/50 align-middle">{formatDate(s.createdAt)}</td>
-                    <td className="px-6 py-4 text-right align-middle" onClick={(e) => e.stopPropagation()}>
+                    <td className="px-6 py-4 text-[14px] text-white/90">{s.name}</td>
+                    <td className="px-6 py-4 text-[14px] text-white/70 truncate">{s.companyName || '-'}</td>
+                    <td className="px-6 py-4 text-[14px] text-white/70">{s.phone}</td>
+                    <td className="px-6 py-4 text-[14px] text-white/50">{formatDate(s.createdAt)}</td>
+                    <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
                       <button
                         type="button"
                         onClick={() => setDeleteConfirm(s.id)}
@@ -128,21 +127,65 @@ export default function AdminSubscriptionsPage() {
                       </button>
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* 모바일: 카드형 */}
+          <div className="sm:hidden flex flex-col gap-3">
+            {subscriptions.map((s) => (
+              <div
+                key={s.id}
+                className="rounded-2xl bg-white/[0.05] backdrop-blur-xl border border-white/10 px-4 py-4 cursor-pointer hover:bg-white/[0.08] transition-colors"
+                onClick={() => openDetail(s.id)}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-[15px] font-semibold text-white">{s.name}</span>
+                      {s.companyName && (
+                        <span className="text-[12px] text-white/50 truncate">{s.companyName}</span>
+                      )}
+                    </div>
+                    <div className="text-[13px] text-white/60 mb-1">{s.phone}</div>
+                    <div className="text-[12px] text-white/40">{formatDate(s.createdAt)}</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); setDeleteConfirm(s.id); }}
+                    disabled={submitting}
+                    className="p-2 rounded-lg text-white/40 hover:bg-rose-500/10 hover:text-rose-400 transition-colors disabled:opacity-50 shrink-0"
+                    title="삭제"
+                  >
+                    <TrashIcon className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
 
       {/* 상세 모달 */}
       {detailModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={() => setDetailModal(null)}>
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60" onClick={() => setDetailModal(null)}>
           <div
-            className="w-full max-w-[520px] max-h-[90vh] overflow-auto rounded-2xl bg-[#1a1f2e] border border-white/10 p-6 shadow-xl"
+            className="w-full sm:max-w-[520px] max-h-[90vh] overflow-auto rounded-t-2xl sm:rounded-2xl bg-[#1a1f2e] border border-white/10 p-6 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-lg font-semibold text-white mb-6">상담신청 상세</h3>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-semibold text-white">상담신청 상세</h3>
+              <button
+                type="button"
+                onClick={() => setDetailModal(null)}
+                className="p-1.5 rounded-lg text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
             <dl className="space-y-3 text-[14px]">
               <div>
                 <dt className="text-white/50 mb-0.5">담당자</dt>

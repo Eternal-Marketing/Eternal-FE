@@ -101,10 +101,10 @@ export default function PlatformsSection() {
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 desktop:px-[60px]">
         <FadeIn delay={200}>
           <div className="text-center mb-8 sm:mb-10 lg:mb-16 desktop:mb-[80px]">
-            <h2 className="mb-2 font-sans text-[22px] sm:text-[28px] lg:text-[44px] font-semibold leading-tight text-main text-center">
+            <h2 className="mb-2 font-sans text-[30px] sm:text-[28px] lg:text-[44px] font-semibold leading-tight text-main text-center">
               수많은 실전 결과를 통해 검증된
             </h2>
-            <p className="font-sans text-[22px] sm:text-[28px] lg:text-[44px] font-semibold leading-tight text-main text-center">
+            <p className="font-sans text-[30px] sm:text-[28px] lg:text-[44px] font-semibold leading-tight text-main text-center">
               <span className="inline-block bg-gradient-to-r from-[#1a4fd6] to-[#3273ff] text-white px-3 py-0.5 sm:px-4 sm:py-1 rounded-lg sm:rounded-xl shadow-md shadow-[#1a4fd6]/15">
                 마케팅
               </span>{" "}
@@ -121,7 +121,7 @@ export default function PlatformsSection() {
                   {platforms.map((platform, index) => (
                     <div
                       key={`${setIndex}-${platform.name}-${index}`}
-                      className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 lg:w-[160px] lg:h-[160px] desktop:w-[180px] desktop:h-[180px] flex-shrink-0"
+                      className="flex items-center justify-center w-44 h-44 sm:w-20 sm:h-20 lg:w-[160px] lg:h-[160px] desktop:w-[180px] desktop:h-[180px] flex-shrink-0"
                     >
                       <Image 
                         src={platform.image} 

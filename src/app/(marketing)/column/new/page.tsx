@@ -8,6 +8,7 @@ import { createColumn, ApiClientError, uploadMedia } from '@/lib/api';
 import type { CreateColumnPayload } from '@/lib/api';
 import { hasTokens } from '@/lib/auth/token';
 import CategorySelect from '@/components/shared/CategorySelect';
+import { useCategories } from '@/hooks/useCategories';
 
 /** 제목에서 URL용 슬러그 자동 생성 (영문·숫자·하이픈만 허용, 공백→하이픈) */
 function slugFromTitle(title: string): string {
@@ -25,12 +26,13 @@ function slugFromTitle(title: string): string {
 export default function ColumnNewPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const { categories } = useCategories(false);
   const [form, setForm] = useState<Omit<CreateColumnPayload, 'slug' | 'status'> & { slug?: string }>({
     title: '',
     content: '',
     excerpt: '',
     thumbnailUrl: '',
-    categoryCode: 'VIRAL_MARKETING',
+    categoryCode: undefined,
     categoryId: undefined,
   });
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
@@ -49,6 +51,13 @@ export default function ColumnNewPage() {
       router.replace('/admin');
     }
   }, [mounted, router]);
+
+  // API 카테고리가 로드되면 첫 번째 카테고리를 기본값으로 설정
+  useEffect(() => {
+    if (categories.length > 0 && !form.categoryId && !form.categoryCode) {
+      setForm((p) => ({ ...p, categoryId: categories[0].id, categoryCode: undefined }));
+    }
+  }, [categories]);
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

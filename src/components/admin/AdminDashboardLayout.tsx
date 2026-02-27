@@ -59,7 +59,7 @@ export default function AdminDashboardLayout({
   if (!hasTokens()) return null;
 
   return (
-    <div className="min-h-screen flex bg-[#0b1020] text-white relative overflow-hidden">
+    <div className="min-h-screen flex flex-col sm:flex-row bg-[#0b1020] text-white relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute inset-0 opacity-45"
@@ -80,7 +80,47 @@ export default function AdminDashboardLayout({
         />
       </div>
 
-      <aside className="relative w-[252px] shrink-0 flex flex-col border-r border-white/10">
+      {/* 모바일: 상단 네비게이션 바 */}
+      <header className="sm:hidden relative z-10 bg-[#0d1530]/95 backdrop-blur-xl border-b border-white/10">
+        <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-white/10 ring-1 ring-white/15 flex items-center justify-center text-white text-sm font-bold">
+              {adminName.charAt(0)}
+            </div>
+            <span className="text-white text-[13px] font-semibold">{adminName}</span>
+          </div>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-white/70 hover:text-white hover:bg-white/[0.06] transition-all text-xs font-semibold"
+          >
+            <ArrowRightOnRectangleIcon className="w-4 h-4 shrink-0" />
+            로그아웃
+          </button>
+        </div>
+        <nav className="flex border-t border-white/10 overflow-x-auto">
+          {NAV_ITEMS.map(({ href, label, Icon }) => {
+            const isActive = pathname === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`flex-shrink-0 flex items-center gap-1.5 px-4 py-3 text-xs font-semibold transition-all border-b-2 ${
+                  isActive
+                    ? 'text-white border-white/60'
+                    : 'text-white/60 hover:text-white border-transparent'
+                }`}
+              >
+                <Icon className="w-4 h-4 shrink-0" />
+                {label}
+              </Link>
+            );
+          })}
+        </nav>
+      </header>
+
+      {/* 데스크탑: 사이드바 */}
+      <aside className="hidden sm:flex relative w-[252px] shrink-0 flex-col border-r border-white/10">
         <div className="absolute inset-0 bg-[#0d1530]/85 backdrop-blur-xl" />
         <div className="relative p-6 border-b border-white/10">
           <div className="w-12 h-12 rounded-2xl bg-white/10 ring-1 ring-white/15 flex items-center justify-center text-white text-xl font-bold mb-3 shadow-[0_18px_50px_-30px_rgba(0,0,0,0.9)]">
@@ -123,18 +163,18 @@ export default function AdminDashboardLayout({
         </div>
       </aside>
 
-      <main className="relative flex-1 overflow-auto p-6 lg:p-10">
+      <main className="relative flex-1 overflow-auto p-4 sm:p-6 lg:p-10">
         <div className="max-w-[1280px] mx-auto">
-          <div className="flex justify-between items-center mb-7">
+          <div className="flex flex-wrap justify-between items-start sm:items-center gap-3 mb-6 sm:mb-7">
             <div>
               <p className="text-white/40 text-[11px] font-semibold tracking-[0.22em] uppercase mb-1">Console</p>
-              <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+              <h1 className="text-xl sm:text-2xl font-semibold tracking-tight">{title}</h1>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
               {actions}
               <Link
                 href="/"
-                className="rounded-2xl bg-white/[0.05] border border-white/10 px-4 py-2 text-[13px] font-semibold text-white/80 hover:text-white hover:bg-white/[0.08] transition-all shadow-[0_22px_80px_-55px_rgba(0,0,0,0.95)]"
+                className="rounded-2xl bg-white/[0.05] border border-white/10 px-3 py-1.5 sm:px-4 sm:py-2 text-[12px] sm:text-[13px] font-semibold text-white/80 hover:text-white hover:bg-white/[0.08] transition-all"
               >
                 홈으로
               </Link>

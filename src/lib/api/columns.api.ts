@@ -26,6 +26,13 @@ export type ColumnOrderBy = 'createdAt' | 'publishedAt' | 'viewCount' | 'title';
 /** 정렬 방향 */
 export type ColumnOrderDirection = 'asc' | 'desc';
 
+/** 칼럼에 포함된 카테고리 요약 정보 */
+export interface ColumnCategory {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 /** 단일 칼럼 (API 응답) */
 export interface Column {
   id: string;
@@ -37,6 +44,7 @@ export interface Column {
   status: ColumnStatus;
   authorId: string;
   categoryId: string;
+  category?: ColumnCategory;
   viewCount: number;
   publishedAt: string;
   createdAt: string;

@@ -366,14 +366,21 @@ body {
   background: linear-gradient(135deg, #184BBA 0%, #2563eb 50%, #184BBA 100%);
   background-size: 200% 200%;
   animation: diagnosis-btn-pulse 2s ease-in-out infinite;
-  font-size: 24px;
-  padding: 16px 32px;
+  font-size: 14px;
+  padding: 10px 20px;
   border-radius: 15px;
   font-weight: 600;
   color: white;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .diagnosis-cta-btn {
+    font-size: 24px;
+    padding: 16px 32px;
+  }
 }
 
 .diagnosis-cta-btn::before {

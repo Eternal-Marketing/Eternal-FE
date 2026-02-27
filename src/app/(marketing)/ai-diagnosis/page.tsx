@@ -7,7 +7,22 @@ import DiagnosisFormStep1 from "./DiagnosisFormStep1";
  * - 히어로 + "고객님에 대해 알려주세요" 폼(업체명, 업종, 고민 영역 등)
  */
 export const metadata: Metadata = {
-  title: "AI 진단받기 | Eternal Marketing",
+  title: "AI 진단받기",
+  description:
+    "AI 기반으로 현재 마케팅 상황을 진단하고, 맘카페·블로그·커뮤니티·인스타그램 등 채널에 맞는 실행 방향을 제안합니다.",
+  openGraph: {
+    title: "이터널마케팅 | AI 진단받기",
+    description:
+      "AI 기반으로 현재 마케팅 상황을 진단하고, 맘카페·블로그·커뮤니티·인스타그램 등 채널에 맞는 실행 방향을 제안합니다.",
+    url: "/ai-diagnosis",
+    images: ["/images/big-logo.svg"],
+  },
+  twitter: {
+    title: "이터널마케팅 | AI 진단받기",
+    description:
+      "AI 기반으로 현재 마케팅 상황을 진단하고, 맘카페·블로그·커뮤니티·인스타그램 등 채널에 맞는 실행 방향을 제안합니다.",
+    images: ["/images/big-logo.svg"],
+  },
 };
 
 export default function DiagnosisPage() {

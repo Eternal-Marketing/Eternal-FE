@@ -8,13 +8,14 @@ import ServicePerformanceSection from './ServicePerformanceSection';
 import ServicePrinciplesSection from './ServicePrinciplesSection';
 import ServiceIntelligenceSection from './ServiceIntelligenceSection';
 import ServiceCaseStudySection from './ServiceCaseStudySection';
-import CTASection from '@/components/sections/CTASection';
+import DiagnosisSection from '@/components/sections/DiagnosisSection';
 
 export default function ServicePageClient() {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      <section className="relative w-full min-h-[280px] sm:min-h-[320px] lg:h-[420px] overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="relative w-full min-h-[726px] sm:min-h-[320px] lg:h-[420px] overflow-hidden">
+        {/* 데스크탑 배경 */}
+        <div className="absolute inset-0 hidden sm:block">
           <Image
             src="/images/service-page/service-background.svg"
             alt=""
@@ -24,23 +25,34 @@ export default function ServicePageClient() {
             priority
           />
         </div>
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] flex flex-col items-center justify-center text-center px-4 gap-8 sm:gap-10">
-          <h1 className="m-0 font-sans text-[26px] sm:text-[32px] lg:text-[40px] font-bold leading-normal">
-            <span className="text-white/80">ETERNAL MARKETING</span>{' '}
-            <span className="text-[#6d94ff]">SERVICE</span>
+        {/* 모바일 배경 */}
+        <div className="absolute inset-0 sm:hidden">
+          <Image
+            src="/images/about-page/service-mobile.svg"
+            alt=""
+            fill
+            className="object-contain object-top"
+            sizes="100vw"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-black/40 hidden sm:block" />
+        <div className="relative z-10 h-full min-h-[726px] sm:min-h-[320px] flex flex-col items-center text-center px-4 pt-0 sm:pt-16 pb-[200px] sm:pb-16 lg:pt-14 lg:pb-20 gap-6 sm:gap-0 justify-center sm:justify-start">
+          <h1 className="m-0 mt-0 sm:mt-12 lg:mt-12 font-sans text-[32px] sm:text-[32px] lg:text-[40px] font-bold leading-normal text-center">
+            <span className="text-white/80 block sm:inline">SERVICE</span>
+            <span className="text-[#6d94ff] block sm:inline sm:ml-2">ETERNAL MARKETING</span>
           </h1>
           <Image
             src="/images/logo.svg"
             alt="Eternal Marketing Logo"
             width={80}
             height={46}
-            className="w-[70px] sm:w-[84px] lg:w-[110px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
+            className="w-[70px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:hidden"
           />
-          <div className="font-sans text-[12px] sm:text-[14px] leading-snug text-white">
+          <div className="font-sans text-[18px] sm:text-[14px] leading-relaxed text-white text-center sm:absolute sm:bottom-6 sm:left-0 sm:right-0 sm:px-4">
             <p className="m-0 font-sans font-extralight">각종 마케팅 너무 복잡하고 막막하신가요?</p>
             <p className="m-0 font-sans font-extralight">이터널이 제일 잘 하고 자신있는 것</p>
-            <p className="m-0 font-sans font-extralight">대표님의 기준에 맞춰 핵심만 보여드리겠습니다</p>
+            <p className="m-0 font-sans font-extrabold text-[20px] sm:text-[16px]">대표님의 기준에 맞춰 핵심만 보여드리겠습니다</p>
           </div>
         </div>
       </section>
@@ -122,7 +134,7 @@ export default function ServicePageClient() {
 
       <ServiceCaseStudySection />
 
-      <CTASection />
+      <DiagnosisSection />
     </main>
   );
 }
