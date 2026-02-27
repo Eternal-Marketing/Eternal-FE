@@ -56,7 +56,7 @@ export default function Header() {
 
   const desktopNavLinks = [
     ...navLinks,
-    ...(isLoggedIn ? [{ href: '/admin/dashboard' as const, label: 'CONSOLE' as const }] : []),
+    ...(isLoggedIn ? [{ href: '/admin/dashboard/subscriptions' as const, label: 'CONSOLE' as const }] : []),
   ];
 
   return (
@@ -64,7 +64,7 @@ export default function Header() {
       <header
         className={`fixed z-50 ${
           isScrolled
-            ? 'top-2 left-1/2 -translate-x-1/2 w-[92%] sm:w-[88%] md:w-[82%] lg:w-[75%] max-w-[900px]'
+            ? 'top-2 left-1/2 -translate-x-1/2 w-[92%] sm:w-[88%] lg:w-[75%] max-w-[900px]'
             : 'top-0 left-0 right-0 w-full translate-x-0'
         }`}
         style={{ transition: 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)' }}
@@ -73,7 +73,7 @@ export default function Header() {
           className={`${
             isScrolled
               ? 'bg-white/70 backdrop-blur-lg rounded-full shadow-xl border border-white/30 px-3 sm:px-4'
-              : 'bg-transparent px-4 sm:px-6 md:px-8 lg:px-4'
+              : 'bg-transparent px-4 sm:px-6 lg:px-4'
           }`}
           style={{ transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
         >
@@ -85,7 +85,7 @@ export default function Header() {
             <Link
               href="/"
               className={`flex items-center no-underline transition-all duration-500 ${
-                isScrolled ? 'ml-4 sm:ml-6 lg:ml-10 scale-90' : 'ml-4 sm:ml-6 md:ml-10 lg:ml-16 mt-0.5 lg:mt-1'
+                isScrolled ? 'ml-4 sm:ml-6 lg:ml-10 scale-90' : 'ml-4 sm:ml-6 lg:ml-16 mt-0.5 lg:mt-1'
               }`}
             >
               <Image
@@ -186,7 +186,7 @@ export default function Header() {
             ))}
             {isLoggedIn && (
               <Link
-                href="/admin/dashboard"
+                href="/admin/dashboard/subscriptions"
                 className="nav-link-hover py-4 text-main hover:!text-primary text-[16px] font-medium no-underline border-b border-black/5"
                 onClick={() => setMenuOpen(false)}
               >

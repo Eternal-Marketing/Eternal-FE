@@ -1,21 +1,5 @@
-import type { Metadata } from 'next';
-import AboutPageClient from './AboutPageClient';
-
-export const metadata: Metadata = {
-  title: '회사 소개 | 이터널마케팅',
-  description: '이터널마케팅의 스토리와 철학, 인텔리전스, 전문 조직 체계를 소개합니다.',
-};
-
-export default function AboutPage() {
-  return <AboutPageClient />;
-}
-
 'use client';
-/**
- * 어바웃 페이지
- * - 히어로 → Our Story & Philosophy → 파란 문구 스트립 → 이터널이 기준이 되는 이유 → 인텔리전스 → Our Team → CTA(진단 받기)
- * - FadeIn/SlideIn/ExpandBackground 등 뷰포트 진입 애니메이션
- */
+
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import CTASection from '@/components/sections/CTASection';
@@ -157,7 +141,7 @@ function ExpandBackground({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function AboutPage() {
+export default function AboutPageClient() {
   const storySectionRef = useRef<HTMLElement>(null);
   const whyEternalSectionRef = useRef<HTMLElement>(null);
   const intelligenceSectionRef = useRef<HTMLElement>(null);
@@ -235,14 +219,7 @@ export default function AboutPage() {
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
       <section className="relative w-full min-h-[280px] sm:min-h-[320px] md:h-[380px] lg:h-[420px] overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="/images/about-page/firstimage.svg"
-            alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
+          <Image src="/images/about-page/firstimage.svg" alt="" fill className="object-cover" sizes="100vw" priority />
         </div>
         <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] md:min-h-0 flex flex-col items-center text-center px-4 pt-12 sm:pt-16 pb-12 sm:pb-16 md:pt-12 md:pb-20 lg:pt-14 lg:pb-20">
           <h1 className="m-0 mt-8 sm:mt-12 md:mt-8 lg:mt-12 font-sans text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-normal">
@@ -281,7 +258,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 파란 배경 스트립: "이터널마케팅은 ... 질문을 던지는 것에서 시작했습니다" */}
       <ExpandBackground>
         <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 lg:py-[60px] text-center">
           <p className="m-0 font-sans font-semibold leading-tight sm:leading-[38px] md:leading-[50px]">
@@ -296,11 +272,9 @@ export default function AboutPage() {
         </div>
       </ExpandBackground>
 
-      {/* 이터널이 기준이 되는 이유: 왼쪽 문단 + 오른쪽 인피니티 다이어그램 */}
       <section ref={whyEternalSectionRef} className="w-full bg-bg">
         <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-24 lg:py-[200px] relative">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-center">
-            {/* 왼쪽: 텍스트 */}
             <div className={`flex-1 pl-0 md:pl-10 lg:pl-[80px] ${whyEternalVisible ? 'about-story-animate' : ''}`}>
               <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[24px] sm:text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-normal text-main">
                 <span className="text-primary">이터널</span>이 기준이 되는 이유
@@ -316,8 +290,7 @@ export default function AboutPage() {
                 <p className="about-story-line about-story-delay-8 m-0">결정됩니다.</p>
               </div>
             </div>
-            
-            {/* 오른쪽: 인피니티 */}
+
             <SlideInRight delay={400}>
               <div className="w-full max-w-[320px] sm:max-w-[360px] lg:max-w-none lg:w-[400px] flex-shrink-0 lg:ml-[120px] mx-auto lg:mx-0">
                 <Image src="/images/about-page/infinity.svg" alt="" width={400} height={300} className="w-full h-auto" sizes="(max-width: 1024px) 100vw, 400px" />
@@ -333,7 +306,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 인텔리전스: 퍼즐 배경 + "마케팅의 정답을 가려내는 인텔리전스" 문구 */}
       <section ref={intelligenceSectionRef} className="relative w-full min-h-[420px] sm:min-h-[520px] md:min-h-[620px] lg:h-[720px] overflow-hidden">
         <div className="absolute inset-0">
           <Image src="/images/about-page/puzzle-background.svg" alt="" fill className="object-cover" sizes="100vw" />
@@ -342,7 +314,7 @@ export default function AboutPage() {
 
         <div className={`relative z-10 w-full max-w-[1163px] mx-auto px-4 sm:px-6 h-full min-h-[420px] sm:min-h-[520px] md:min-h-[620px] lg:min-h-0 ${intelligenceVisible ? 'about-story-animate' : ''}`}>
           <h2 className="about-story-line about-story-delay-0 m-0 pt-16 sm:pt-24 md:pt-32 lg:pt-[200px] font-sans text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] font-bold leading-normal text-white text-right">
-            마케팅의 정답을 가려내는{" "}
+            마케팅의 정답을 가려내는{' '}
             <span className="bg-primary px-2 sm:px-3 py-0.5 sm:py-1">인텔리전스</span>
           </h2>
 
@@ -361,7 +333,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Team: 조직 구조 이미지 — 스크롤 시 타이틀·문단·이미지 순차 등장 */}
       <section ref={teamSectionRef} className="w-full bg-[#f6f6f6]">
         <div className={`w-full max-w-[1163px] mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 lg:py-[100px] ${teamVisible ? 'about-story-animate' : ''}`}>
           <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[24px] sm:text-[28px] md:text-[32px] font-bold leading-normal text-primary">Our Team</h2>
@@ -381,8 +352,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA: 공통 CTASection (정답은 이미 여기 있습니다 + AI 진단 받기 + 실시간 건수) */}
       <CTASection imageSrc="/images/about-page/last-background.svg" />
     </main>
   );
 }
+

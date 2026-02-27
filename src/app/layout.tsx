@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import HealthLogger from "@/components/layout/HealthLogger";
 import "./globals.css";
 
@@ -8,12 +9,20 @@ import "./globals.css";
  * - body 기본 폰트·배경
  */
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://eternalmarketing.co.kr";
+const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const naverSiteVerification = process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "이터널 마케팅 (Eternal Marketing)",
   description:
     "막막했던 마케팅, 이터널의 기준과 데이터로 모두 공개합니다. 바이럴, 퍼포먼스, SNS 마케팅.",
+  ...(googleSiteVerification || naverSiteVerification
+    ? {
+        verification: googleSiteVerification ? { google: googleSiteVerification } : undefined,
+        other: naverSiteVerification ? { "naver-site-verification": naverSiteVerification } : undefined,
+      }
+    : {}),
   openGraph: {
     title: "이터널 마케팅 (Eternal Marketing)",
     description:
@@ -47,12 +56,31 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <html lang="ko">
       <head>
         {/* Spline 3D 첫 진입 시 끊김 방지: 연결 미리 수립 */}
         <link rel="preconnect" href="https://my.spline.design" />
         <link rel="dns-prefetch" href="https://my.spline.design" />
+
+        {gaId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}');
+              `}
+            </Script>
+          </>
+        ) : null}
       </head>
       <body className="antialiased font-sans bg-bg text-main" suppressHydrationWarning>
         <HealthLogger />

@@ -172,26 +172,26 @@ function SlideInRight({ children, delay = 0, className = '', style = {} }: { chi
 export default function InfiniteSection() {
   const stepCardClass = 'relative step-card rounded-xl';
   const stepCardInner = 'p-3 sm:p-4';
-  const stepTitleClass = 'font-sans text-[13px] sm:text-[14px] md:text-[16px] font-semibold leading-normal text-main text-left';
-  const stepDescClass = 'font-sans text-[11px] sm:text-[12px] md:text-[13px] font-medium leading-normal text-sub1';
+  const stepTitleClass = 'font-sans text-[13px] sm:text-[14px] font-semibold leading-normal text-main text-left';
+  const stepDescClass = 'font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub1';
 
   return (
     <section 
       id="infinite" 
-      className="relative overflow-hidden z-30 w-full bg-[#F6F6F6] min-h-0 py-10 sm:py-14 md:py-16 lg:h-[1000px] lg:py-[80px]"
+      className="relative overflow-hidden z-30 w-full bg-[#F6F6F6] min-h-0 py-10 sm:py-14 lg:h-[1000px] lg:py-[80px]"
       >
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-[32px] lg:px-[40px] desktop:px-[60px] relative z-10">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[40px] desktop:px-[60px] relative z-10">
         {/* 섹션 제목 - 모바일만 반응형, lg 이상은 원래 값 */}
         <FadeIn>
-          <div className="text-center mt-8 sm:mt-10 md:mt-12 mb-4 sm:mb-5 md:mb-6 lg:mt-[60px] lg:mb-5">
-          <div className="inline-block px-4 sm:px-6 md:px-8 py-3 sm:py-4 lg:px-8 lg:py-6">
+          <div className="text-center mt-8 sm:mt-10 mb-4 sm:mb-5 lg:mt-[60px] lg:mb-5">
+          <div className="inline-block px-4 sm:px-6 py-3 sm:py-4 lg:px-8 lg:py-6">
             <h2 
-              className="mb-1 sm:mb-2 font-sans text-[22px] sm:text-[26px] md:text-[30px] font-bold leading-normal text-main text-center lg:mb-2 lg:text-[34px]"
+              className="mb-1 sm:mb-2 font-sans text-[22px] sm:text-[26px] font-bold leading-normal text-main text-center lg:mb-2 lg:text-[34px]"
             >
               결과가 왜 다를까요?
             </h2>
             <h2 
-              className="font-sans text-[22px] sm:text-[26px] md:text-[30px] font-bold leading-normal text-main text-center lg:text-[34px]"
+              className="font-sans text-[22px] sm:text-[26px] font-bold leading-normal text-main text-center lg:text-[34px]"
             >
               이터널은{" "}
               <span className="inline-block bg-gradient-to-r from-[#1a4fd6] to-[#3273ff] text-white px-2 sm:px-3 py-0.5 rounded-lg shadow-md shadow-[#1a4fd6]/15">
@@ -203,12 +203,12 @@ export default function InfiniteSection() {
         </div>
         </FadeIn>
 
-        {/* 메인 콘텐츠: 모바일은 세로 배치, md 이상은 기존 절대 위치 */}
-        <div className="relative w-full flex flex-col gap-4 sm:gap-6 md:block md:min-h-[750px]">
-          {/* 중앙 무한대 루프 아이콘 - 모바일에서는 순서 3으로 중앙, md+ 에서는 absolute */}
+        {/* 메인 콘텐츠: 모바일은 세로 배치, lg 이상은 기존 절대 위치 */}
+        <div className="relative w-full flex flex-col gap-4 sm:gap-6 lg:block lg:min-h-[750px]">
+          {/* 중앙 무한대 루프 아이콘 */}
           <ScaleIn 
             delay={200} 
-            className="order-3 w-full max-w-[260px] sm:max-w-[320px] mx-auto aspect-[480/230] md:absolute md:top-[35%] md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[340px] md:max-w-none md:aspect-auto md:h-[165px] lg:w-[480px] lg:h-[230px] z-10 shrink-0"
+            className="order-3 w-full max-w-[260px] sm:max-w-[320px] mx-auto aspect-[480/230] lg:absolute lg:top-[35%] lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:w-[480px] lg:max-w-none lg:aspect-auto lg:h-[230px] z-10 shrink-0"
           >
             <div className="relative w-full h-full">
               <Image
@@ -216,31 +216,31 @@ export default function InfiniteSection() {
                 alt="Infinite Loop"
                 fill
                 className="object-contain"
-                sizes="(max-width: 768px) 320px, 480px"
+                sizes="(max-width: 1024px) 320px, 480px"
               />
               {/* 01 - 왼쪽 상단 */}
-              <div className="absolute text-white font-bold text-[10px] sm:text-[12px] md:text-[14px]" style={{ top: '10%', left: '21%' }}>
+              <div className="absolute text-white font-bold text-[10px] sm:text-[12px]" style={{ top: '10%', left: '21%' }}>
                 01
               </div>
               {/* 03 - 오른쪽 상단 */}
-              <div className="absolute text-white font-bold text-[10px] sm:text-[12px] md:text-[14px]" style={{ top: '10%', right: '21%' }}>
+              <div className="absolute text-white font-bold text-[10px] sm:text-[12px]" style={{ top: '10%', right: '21%' }}>
                 03
               </div>
               {/* 04 - 왼쪽 하단 */}
-              <div className="absolute text-white font-bold text-[10px] sm:text-[12px] md:text-[14px]" style={{ bottom: '11%', left: '25%' }}>
+              <div className="absolute text-white font-bold text-[10px] sm:text-[12px]" style={{ bottom: '11%', left: '25%' }}>
                 04
               </div>
               {/* 02 - 오른쪽 하단 */}
-              <div className="absolute text-white font-bold text-[10px] sm:text-[12px] md:text-[14px]" style={{ bottom: '11%', right: '25%' }}>
+              <div className="absolute text-white font-bold text-[10px] sm:text-[12px]" style={{ bottom: '11%', right: '25%' }}>
                 02
               </div>
             </div>
           </ScaleIn>
 
-          {/* STEP 01 - 모바일 order 1, md+ absolute 왼쪽 상단 */}
+          {/* STEP 01 */}
             <SlideInLeft 
               delay={400} 
-              className="order-1 w-full max-w-[280px] mx-auto md:mx-0 md:absolute md:left-[4%] md:z-20 md:w-[280px] md:top-[calc(35%-250px)] lg:left-[15%]"
+              className="order-1 w-full max-w-[280px] mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%-250px)] lg:left-[15%]"
             >
               <div className={stepCardClass}>
                 <div className={stepCardInner}>
@@ -257,10 +257,10 @@ export default function InfiniteSection() {
               </div>
             </SlideInLeft>
 
-          {/* STEP 03 - 모바일 order 2, md+ absolute 오른쪽 상단 */}
+          {/* STEP 03 */}
             <SlideInRight 
               delay={600} 
-              className="order-2 w-full max-w-[280px] mx-auto md:mx-0 md:absolute md:right-[4%] md:z-20 md:w-[280px] md:top-[calc(35%-250px)] lg:right-[15%]"
+              className="order-2 w-full max-w-[280px] mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%-250px)] lg:right-[15%]"
             >
               <div className={stepCardClass}>
                 <div className={stepCardInner}>
@@ -268,7 +268,7 @@ export default function InfiniteSection() {
                     <Image src="/images/reviewSection/arrows.svg" alt="Arrow Icon" width={28} height={22} className="w-6 h-5 sm:w-7 sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 03</h3>
                   </div>
-                  <p className={`${stepDescClass} ml-6 sm:ml-8 md:ml-[34px]`}>
+                  <p className={`${stepDescClass} ml-6 sm:ml-8`}>
                     대표님의 상황과 목표에 맞춰 가장 효율적인<br />
                     전략으로 실행합니다.
                   </p>
@@ -276,10 +276,10 @@ export default function InfiniteSection() {
               </div>
             </SlideInRight>
 
-          {/* STEP 02 - 모바일 order 4, md+ absolute 오른쪽 하단 */}
+          {/* STEP 02 */}
             <SlideInRight 
               delay={500} 
-              className="order-4 w-full max-w-[280px] mx-auto md:mx-0 md:absolute md:right-[4%] md:z-20 md:w-[280px] md:top-[calc(35%+150px)] lg:right-[15%]"
+              className="order-4 w-full max-w-[280px] mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%+150px)] lg:right-[15%]"
             >
               <div className={stepCardClass}>
                 <div className={stepCardInner}>
@@ -287,7 +287,7 @@ export default function InfiniteSection() {
                     <Image src="/images/reviewSection/people.svg" alt="People Icon" width={22} height={22} className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 02</h3>
                   </div>
-                  <p className={`${stepDescClass} ml-5 sm:ml-7 md:ml-[28px]`}>
+                  <p className={`${stepDescClass} ml-5 sm:ml-7`}>
                     분석 결과를 바탕으로 업종과 목표에 맞는<br />
                     전문 담당 팀을 구성합니다.
                   </p>
@@ -295,10 +295,10 @@ export default function InfiniteSection() {
               </div>
             </SlideInRight>
 
-          {/* STEP 04 - 모바일 order 5, md+ absolute 왼쪽 하단 */}
+          {/* STEP 04 */}
             <SlideInLeft 
               delay={700} 
-              className="order-5 w-full max-w-[280px] mx-auto md:mx-0 md:absolute md:left-[4%] md:z-20 md:w-[280px] md:top-[calc(35%+150px)] lg:left-[15%]"
+              className="order-5 w-full max-w-[280px] mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%+150px)] lg:left-[15%]"
             >
               <div className={stepCardClass}>
                 <div className={stepCardInner}>
@@ -306,7 +306,7 @@ export default function InfiniteSection() {
                     <Image src="/images/reviewSection/pen.svg" alt="Pen Icon" width={22} height={22} className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 04</h3>
                   </div>
-                  <p className={`${stepDescClass} ml-5 sm:ml-7 md:ml-[28px]`}>
+                  <p className={`${stepDescClass} ml-5 sm:ml-7`}>
                     AI 세밀 분석 리포트로 성과를<br />
                     상시 관리하고 상세히 보고합니다.
                   </p>

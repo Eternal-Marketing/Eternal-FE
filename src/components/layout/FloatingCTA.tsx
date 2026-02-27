@@ -72,7 +72,7 @@ export default function FloatingCTA() {
   const showOverlay = showModal || isClosing;
 
   const modalContent = showOverlay && (
-    <div className="fixed right-3 top-4 bottom-20 sm:right-4 sm:top-5 sm:bottom-24 lg:right-6 lg:top-6 lg:bottom-24 z-[99998] w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] sm:max-w-[420px] md:max-w-[460px] lg:w-[480px] lg:max-w-[480px] overflow-hidden">
+    <div className="fixed right-3 top-4 bottom-20 sm:right-4 sm:top-5 sm:bottom-24 lg:right-6 lg:top-6 lg:bottom-24 z-[99998] w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] sm:max-w-[420px] lg:w-[480px] lg:max-w-[480px] overflow-hidden">
       <div
         className={`h-full rounded-[28px] bg-gradient-to-b from-white/98 to-white/95 backdrop-blur-2xl overflow-hidden flex flex-col will-change-transform transition-transform duration-[360ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isClosing
