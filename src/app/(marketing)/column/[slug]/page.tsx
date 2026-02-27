@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getColumnBySlug, getColumns } from "@/lib/api";
+import { getColumnBySlug } from "@/lib/api";
 import AdminColumnActions from "@/components/column/AdminColumnActions";
-import IncrementColumnView from "./IncrementColumnView";
 
 /**
  * 칼럼 상세 페이지 (/column/:slug)
@@ -15,31 +14,6 @@ type PageProps = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
-
-// 정적 호스팅/정적 export 배포에서도 상세 라우트가 404가 되지 않도록,
-// 배포 시점에 존재하는 slug들을 미리 생성한다.
-export async function generateStaticParams() {
-  const slugs: string[] = [];
-  const limit = 50;
-
-  for (let page = 1; page <= 50; page += 1) {
-    const { columns, pagination } = await getColumns({
-      page,
-      limit,
-      status: "PUBLISHED",
-      orderBy: "publishedAt",
-      orderDirection: "desc",
-    });
-
-    slugs.push(...(columns ?? []).map((c) => c.slug).filter(Boolean));
-
-    const totalPages = pagination?.totalPages;
-    if (typeof totalPages === "number" && page >= totalPages) break;
-    if ((columns ?? []).length < limit) break;
-  }
-
-  return Array.from(new Set(slugs)).map((slug) => ({ slug }));
-}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -85,9 +59,7 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
   const { slug } = await params;
   await searchParams;
 
-  // 서버 렌더링/정적 생성 단계에서 조회수를 올리면 안 되므로,
-  // 조회수 증가는 클라이언트에서만 수행한다.
-  const column = await getColumnBySlug(slug);
+  const column = await getColumnBySlug(slug, true);
   if (!column) notFound();
 
   const categoryName = column.category?.name ?? '칼럼';
@@ -96,7 +68,6 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
 
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      <IncrementColumnView slug={slug} />
       <div className="w-full pt-[74px]">
         <div className="w-full max-w-[1163px] mx-auto px-4 py-4">
           <p className="font-sans text-[14px] font-thin text-main" data-node-id="804:836">
