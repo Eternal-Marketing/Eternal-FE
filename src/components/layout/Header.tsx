@@ -1,8 +1,10 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { hasTokens } from "@/lib/auth/token";
 
 const logoImage = "/images/logo.svg";
 
@@ -20,7 +22,12 @@ const navLinks = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setIsLoggedIn(hasTokens());
+  }, [pathname]);
 
   const isLightBgPage = pathname === '/privacy' || pathname === '/terms' || pathname.startsWith('/column/');
 
@@ -28,7 +35,7 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -47,12 +54,17 @@ export default function Header() {
       scrolled ? 'h-[32px] w-[95px] text-[12px]' : 'h-[36px] w-[105px] text-body-sm'
     }`;
 
+  const desktopNavLinks = [
+    ...navLinks,
+    ...(isLoggedIn ? [{ href: '/admin/dashboard/subscriptions' as const, label: 'CONSOLE' as const }] : []),
+  ];
+
   return (
     <>
       <header
         className={`fixed z-50 ${
           isScrolled
-            ? 'top-2 left-1/2 -translate-x-1/2 w-[92%] sm:w-[88%] md:w-[82%] lg:w-[75%] max-w-[900px]'
+            ? 'top-2 left-1/2 -translate-x-1/2 w-[92%] sm:w-[88%] lg:w-[75%] max-w-[900px]'
             : 'top-0 left-0 right-0 w-full translate-x-0'
         }`}
         style={{ transition: 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)' }}
@@ -61,7 +73,7 @@ export default function Header() {
           className={`${
             isScrolled
               ? 'bg-white/70 backdrop-blur-lg rounded-full shadow-xl border border-white/30 px-3 sm:px-4'
-              : 'bg-transparent px-4 sm:px-6 md:px-8 lg:px-4'
+              : 'bg-transparent px-4 sm:px-6 lg:px-4'
           }`}
           style={{ transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
         >
@@ -73,21 +85,25 @@ export default function Header() {
             <Link
               href="/"
               className={`flex items-center no-underline transition-all duration-500 ${
-                isScrolled ? 'ml-4 sm:ml-6 lg:ml-10 scale-90' : 'ml-4 sm:ml-6 md:ml-10 lg:ml-16 mt-0.5 lg:mt-1'
+                isScrolled ? 'ml-4 sm:ml-6 lg:ml-10 scale-90' : 'ml-4 sm:ml-6 lg:ml-16 mt-0.5 lg:mt-1'
               }`}
             >
-              <img
+              <Image
                 src={logoImage}
                 alt="ETERNAL MARKETING"
-                className={`transition-all duration-500 ${
+                width={69}
+                height={40}
+                className={`transition-all duration-500 object-contain ${
                   isScrolled ? 'w-[48px] h-[28px] sm:w-[55px] sm:h-[32px]' : 'w-[56px] h-[32px] sm:w-[62px] sm:h-[36px] lg:w-[69px] lg:h-[40px]'
                 }`}
+                priority
+                sizes="69px"
               />
               <div className="ml-1.5 sm:ml-2 lg:ml-[9px]">
-                <p className={`mb-0 text-primary leading-tight transition-all duration-500 ${
+                <p className={`mb-0 text-primary leading-tight transition-all duration-500 font-bold sm:font-normal ${
                   isScrolled ? 'text-[9px] sm:text-[10px]' : 'text-[11px] sm:text-[12px] lg:text-logo'
                 }`}>ETERNAL </p>
-                <p className={`text-primary leading-tight transition-all duration-500 ${
+                <p className={`text-primary leading-tight transition-all duration-500 font-bold sm:font-normal ${
                   isScrolled ? 'text-[9px] sm:text-[10px]' : 'text-[11px] sm:text-[12px] lg:text-logo'
                 }`}>MARKETING</p>
               </div>
@@ -97,7 +113,7 @@ export default function Header() {
             <nav className={`hidden lg:flex items-center transition-all duration-500 ${
               isScrolled ? 'mr-10 scale-95' : 'mr-16 mt-1'
             }`}>
-              {navLinks.map(({ href, label }) => (
+              {desktopNavLinks.map(({ href, label }) => (
                 <Link key={href} href={href} className={`ml-8 first:ml-0 ${navLinkClass(isScrolled)}`}>
                   {label}
                 </Link>
@@ -108,7 +124,7 @@ export default function Header() {
               </Link>
             </nav>
 
-            {/* 모바일/태블릿: 햄버거 + CTA 또는 햄버거만 */}
+            {/* 모바일/태블릿: 햄버거 + CTA */}
             <div className="flex lg:hidden items-center gap-2">
               <Link
                 href="/ai-diagnosis"
@@ -127,14 +143,11 @@ export default function Header() {
                 aria-expanded={menuOpen}
               >
                 <span className={`block w-6 h-0.5 rounded-full bg-current transition-all duration-300 ${
-                  isScrolled ? 'text-main' : isLightBgPage ? 'text-main' : 'text-inverse'
-                } ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-                <span className={`block w-6 h-0.5 rounded-full mt-1.5 bg-current transition-all duration-300 ${
-                  isScrolled ? 'text-main' : isLightBgPage ? 'text-main' : 'text-inverse'
-                } ${menuOpen ? 'opacity-0 scale-0' : ''}`} />
-                <span className={`block w-6 h-0.5 rounded-full mt-1.5 bg-current transition-all duration-300 ${
-                  isScrolled ? 'text-main' : isLightBgPage ? 'text-main' : 'text-inverse'
-                } ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
+                  isScrolled ? 'text-gray-800' : isLightBgPage ? 'text-gray-800' : 'text-gray-800'
+                } ${menuOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
+                <span className={`block w-6 h-0.5 rounded-full mt-[8px] bg-current transition-all duration-300 ${
+                  isScrolled ? 'text-gray-800' : isLightBgPage ? 'text-gray-800' : 'text-gray-800'
+                } ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`} />
               </button>
             </div>
           </div>
@@ -168,6 +181,15 @@ export default function Header() {
                 {label}
               </Link>
             ))}
+            {isLoggedIn && (
+              <Link
+                href="/admin/dashboard/subscriptions"
+                className="nav-link-hover py-4 text-main hover:!text-primary text-[16px] font-medium no-underline border-b border-black/5"
+                onClick={() => setMenuOpen(false)}
+              >
+                CONSOLE
+              </Link>
+            )}
             <Link
               href="/ai-diagnosis"
               className="group relative mt-4 flex items-center justify-center no-underline overflow-hidden rounded-[15px] bg-primary text-inverse font-medium h-10 px-5 text-[13px] shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] hover:scale-[1.02]"

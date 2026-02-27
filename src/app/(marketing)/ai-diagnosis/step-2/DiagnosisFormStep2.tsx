@@ -1,12 +1,27 @@
 'use client';
 /**
  * AI 진단 2단계 폼
- * - 지역, 연락처(10~11자리 검사), 이메일(형식 검사), 상담 희망 시간대
- * - 제출 시 유효성 통과 후 TODO: 실제 제출 로직
+ * - 담당자명, 지역, 연락처(10~11자리 검사), 이메일(형식 검사), 상담 희망 시간대
+ * - 제출 시 POST /api/subscriptions (상담신청 생성)
  */
-import { useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
+import { createSubscription, ApiClientError } from '@/lib/api';
+import { loadStep1Data, clearStep1Data } from '../diagnosisFormStorage';
+import {
+  INDUSTRY_LABELS,
+  INDUSTRY_CODES,
+  CONCERN_LABELS,
+  CONCERN_CODES,
+  MARKETING_STATUS_LABELS,
+  MARKETING_STATUS_CODES,
+  CHANNEL_LABELS,
+  CHANNEL_CODES,
+  TIME_LABELS,
+  TIME_CODES,
+} from '../subscriptionMappings';
 
-const TIME_OPTIONS = ["09:00~12:00", "12:00~15:00", "15:00~18:00", "18:00~00:00", "무관", "특정시간대(직접 입력)"];
+const TIME_OPTIONS = TIME_LABELS;
 
 function isValidContact(value: string): boolean {
   const digits = value.replace(/\D/g, '');
@@ -19,12 +34,25 @@ function isValidEmail(value: string): boolean {
 }
 
 export default function DiagnosisFormStep2() {
+  const router = useRouter();
+  const [step1Data, setStep1Data] = useState<ReturnType<typeof loadStep1Data>>(null);
+  const [name, setName] = useState('');
   const [region, setRegion] = useState('');
   const [contact, setContact] = useState('');
   const [email, setEmail] = useState('');
   const [timeSelected, setTimeSelected] = useState<boolean[]>(() => TIME_OPTIONS.map((_, i) => i === 0));
+  const [contactTimeOther, setContactTimeOther] = useState('');
   const [touchedContact, setTouchedContact] = useState(false);
   const [touchedEmail, setTouchedEmail] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  useEffect(() => {
+    const data = loadStep1Data();
+    setStep1Data(data);
+    if (!data) router.replace('/ai-diagnosis');
+  }, [router]);
 
   const contactError = useMemo(() => {
     if (!touchedContact) return null;
@@ -41,10 +69,12 @@ export default function DiagnosisFormStep2() {
   }, [touchedEmail, email]);
 
   const isFormValid = useMemo(() => {
+    const hasName = name.trim().length > 0;
     const hasRegion = region.trim().length > 0;
     const hasTime = timeSelected.some(Boolean);
-    return hasRegion && isValidContact(contact) && isValidEmail(email) && hasTime;
-  }, [region, contact, email, timeSelected]);
+    const hasOtherTime = timeSelected[5] ? contactTimeOther.trim().length > 0 : true;
+    return hasName && hasRegion && isValidContact(contact) && isValidEmail(email) && hasTime && hasOtherTime;
+  }, [name, region, contact, email, timeSelected, contactTimeOther]);
 
   const handleContactChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value.replace(/\D/g, '').slice(0, 11);
@@ -59,13 +89,82 @@ export default function DiagnosisFormStep2() {
     });
   };
 
-  const handleSubmit = () => {
-    if (!isFormValid) return;
-    // TODO: 실제 제출 로직
+  const handleSubmit = async () => {
+    if (!isFormValid || !step1Data) return;
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      const industryIdx = INDUSTRY_LABELS.indexOf(step1Data.industry as (typeof INDUSTRY_LABELS)[number]);
+      const industryCode = industryIdx >= 0 ? INDUSTRY_CODES[industryIdx] : 'OTHER';
+      const concerns = step1Data.concerns
+        .map((c) => CONCERN_LABELS.indexOf(c as (typeof CONCERN_LABELS)[number]))
+        .filter((i) => i >= 0)
+        .map((i) => CONCERN_CODES[i]);
+      const statusIdx = MARKETING_STATUS_LABELS.indexOf(step1Data.marketingStatus as (typeof MARKETING_STATUS_LABELS)[number]);
+      const marketingStatus = statusIdx >= 0 ? MARKETING_STATUS_CODES[statusIdx] : 'NONE';
+      const channels = step1Data.interestedChannels
+        .map((c) => CHANNEL_LABELS.indexOf(c as (typeof CHANNEL_LABELS)[number]))
+        .filter((i) => i >= 0)
+        .map((i) => CHANNEL_CODES[i]);
+      const contactTimeSlots = timeSelected
+        .map((sel, i) => (sel ? TIME_CODES[i] : null))
+        .filter((c): c is (typeof TIME_CODES)[number] => c !== null);
+      const payload = {
+        name: name.trim(),
+        email: email.trim(),
+        phone: contact.replace(/\D/g, ''),
+        companyName: step1Data.companyName || undefined,
+        industry: industryCode,
+        industryOther: industryIdx === 6 ? step1Data.industryOther : undefined,
+        concerns,
+        marketingStatus,
+        interestedChannels: channels,
+        channelsOther: step1Data.channelsOther || undefined,
+        message: step1Data.message || undefined,
+        region: region.trim() || undefined,
+        contactTimeSlots,
+        contactTimeOther: timeSelected[5] ? contactTimeOther.trim() : undefined,
+      };
+      await createSubscription(payload);
+      clearStep1Data();
+      setSubmitSuccess(true);
+    } catch (err) {
+      setSubmitError(err instanceof ApiClientError ? err.message : '상담 신청에 실패했습니다.');
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+  if (!step1Data) return null;
 
   return (
     <form className="mt-4 sm:mt-[22px]" onSubmit={(e) => e.preventDefault()}>
+      {submitSuccess && (
+        <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
+          상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
+        </div>
+      )}
+      {submitError && (
+        <div className="mb-6 p-4 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-600 font-sans text-[14px]" role="alert">
+          {submitError}
+        </div>
+      )}
+
+      {/* 담당자명* */}
+      <div className="py-4 sm:py-5 border-b border-divider">
+        <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">
+          담당자명<span className="text-[#ff3434]">*</span>
+        </label>
+        <input
+          type="text"
+          placeholder="홍길동"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="mt-3 sm:mt-4 w-full max-w-[261px] h-10 sm:h-[42px] px-3 sm:px-[18px] border outline-none text-[13px] sm:text-[14px] text-main placeholder:text-sub3 bg-white"
+          style={{ borderColor: 'rgba(153, 153, 153, 0.3)' }}
+        />
+      </div>
+
       {/* 지역* */}
       <div className="py-4 sm:py-5 border-b border-divider">
         <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">
@@ -142,9 +241,19 @@ export default function DiagnosisFormStep2() {
             </label>
           ))}
         </div>
+        {timeSelected[5] && (
+          <input
+            type="text"
+            placeholder="희망 시간대를 입력해 주세요"
+            value={contactTimeOther}
+            onChange={(e) => setContactTimeOther(e.target.value)}
+            className="mt-3 w-full max-w-[261px] h-10 px-3 border outline-none text-[13px] text-main placeholder:text-sub3 bg-white"
+            style={{ borderColor: 'rgba(153, 153, 153, 0.3)' }}
+          />
+        )}
       </div>
 
-      <div className="pt-8 sm:pt-12 md:pt-[54px] flex flex-col items-center">
+      <div className="pt-8 sm:pt-12 flex flex-col items-center">
         <p className="m-0 font-sans text-[12px] sm:text-[13px] font-normal leading-normal text-sub1 text-center px-2">
           AI 마케팅 인텔리전스가 1차 분석을 진행하며,
           <br />
@@ -154,10 +263,10 @@ export default function DiagnosisFormStep2() {
         <button
           type="button"
           onClick={handleSubmit}
-          disabled={!isFormValid}
-          className="mt-6 sm:mt-8 md:mt-[34px] h-10 sm:h-[44px] min-w-[120px] w-[139px] max-w-full text-white text-[13px] sm:text-[14px] font-medium border-0 bg-[#2b2b2b] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-opacity rounded-sm"
+          disabled={!isFormValid || submitting}
+          className="mt-6 sm:mt-8 h-10 sm:h-[44px] min-w-[120px] w-[139px] max-w-full text-white text-[13px] sm:text-[14px] font-medium border-0 bg-[#2b2b2b] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-opacity rounded-sm"
         >
-          진단 신청하기
+          {submitting ? '신청 중...' : '진단 신청하기'}
         </button>
       </div>
     </form>

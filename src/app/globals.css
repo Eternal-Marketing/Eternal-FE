@@ -366,14 +366,21 @@ body {
   background: linear-gradient(135deg, #184BBA 0%, #2563eb 50%, #184BBA 100%);
   background-size: 200% 200%;
   animation: diagnosis-btn-pulse 2s ease-in-out infinite;
-  font-size: 24px;
-  padding: 16px 32px;
+  font-size: 14px;
+  padding: 10px 20px;
   border-radius: 15px;
   font-weight: 600;
   color: white;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .diagnosis-cta-btn {
+    font-size: 24px;
+    padding: 16px 32px;
+  }
 }
 
 .diagnosis-cta-btn::before {
@@ -723,6 +730,40 @@ body {
   transform: translateX(0);
 }
 
+/* Admin Console - Select 스타일 (다크 테마) */
+.console-select {
+  appearance: none;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  color: white;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.6)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.25rem;
+}
+.console-select:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.console-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+.console-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.console-select option {
+  background-color: #1a1f2e;
+  color: white;
+}
+
 .reveal-scale {
   opacity: 0;
   transform: scale(0.92);
@@ -806,4 +847,23 @@ body {
 }
 .service-category-card:hover .service-category-card-inner {
   transform: scale(1.04);
+}
+
+/* 말풍선 통통 튀는 애니메이션 */
+@keyframes bubble-bounce {
+  0%   { opacity: 0; transform: scale(0.3) translateY(10px); }
+  50%  { transform: scale(1.15) translateY(-6px); }
+  70%  { transform: scale(0.95) translateY(2px); }
+  85%  { transform: scale(1.05) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes bubble-float {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(-6px) rotate(1deg); }
+}
+
+.animate-bubble-bounce {
+  animation: bubble-bounce 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both,
+             bubble-float 3s ease-in-out 1.5s infinite;
 }

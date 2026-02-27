@@ -6,7 +6,19 @@ import Link from "next/link";
  * - 브레드크럼, 개인정보/이용약관 탭, 목차, 제1~8조 본문
  */
 export const metadata: Metadata = {
-  title: "이용약관 | Eternal Marketing",
+  title: "이용약관",
+  description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
+  openGraph: {
+    title: "이터널마케팅 | 이용약관",
+    description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
+    url: "/terms",
+    images: ["/images/big-logo.svg"],
+  },
+  twitter: {
+    title: "이터널마케팅 | 이용약관",
+    description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
+    images: ["/images/big-logo.svg"],
+  },
 };
 
 export default function TermsPage() {
@@ -22,9 +34,9 @@ export default function TermsPage() {
   ] as const;
 
   return (
-    <main className="min-h-screen bg-bg text-main break-keep whitespace-normal pt-16 sm:pt-18 md:pt-[74px]">
+    <main className="min-h-screen bg-bg text-main break-keep whitespace-normal pt-16 sm:pt-18">
       <div className="w-full border-t border-sub3/50" />
-      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-5">
+      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-4 sm:py-5">
         <p className="text-[12px] sm:text-caption text-sub1 m-0">
           <Link href="/" className="text-sub1 no-underline hover:text-primary transition-colors">
             홈
@@ -34,17 +46,17 @@ export default function TermsPage() {
       </div>
       <div className="w-full border-b border-sub3/50 mb-10"></div>
 
-      <section className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-16 md:pb-20 lg:pb-[120px]">
-        <div className="pl-0 sm:pl-2 md:pl-[20px]">
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-[38px] mb-4 sm:mb-6 md:mb-[26px]">
-            <Link href="/privacy" className="m-0 text-lg sm:text-xl md:text-h4 text-sub2 no-underline hover:text-primary transition-colors">
+      <section className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 pb-12 sm:pb-16 lg:pb-[120px]">
+        <div className="pl-0 sm:pl-2">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-4 sm:mb-6">
+            <Link href="/privacy" className="m-0 text-lg sm:text-xl text-sub2 no-underline hover:text-primary transition-colors">
               개인정보 처리 방침
             </Link>
-            <p className="m-0 text-lg sm:text-xl md:text-h4 text-main underline">이용 약관</p>
+            <p className="m-0 text-lg sm:text-xl text-main underline">이용 약관</p>
           </div>
 
-          <div className="border border-sub1 w-full h-auto py-4 sm:py-[18px] mb-8 sm:mb-10 md:mb-[49px]">
-            <div className="px-4 sm:px-6 md:px-[38px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 md:gap-x-[60px] gap-y-2 sm:gap-y-[14px]">
+          <div className="border border-sub1 w-full h-auto py-4 sm:py-[18px] mb-8 sm:mb-10">
+            <div className="px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-[14px]">
               {toc.map((item) => (
                 <p key={item.href} className="m-0 text-body-sm text-sub1">
                   <a href={item.href} className="text-sub1 no-underline hover:text-primary transition-colors">
@@ -60,7 +72,7 @@ export default function TermsPage() {
             기본적인 사항을 규정합니다.
           </p>
 
-          <hr className="border-0 border-t border-sub3 mt-8 sm:mt-10 md:mt-[50px] mb-10 sm:mb-12 md:mb-[66px] w-full" />
+          <hr className="border-0 border-t border-sub3 mt-8 sm:mt-10 mb-10 sm:mb-12 w-full" />
 
           <section id="article-1" className="scroll-mt-[110px]">
             <h2 className="text-h4 text-main m-0">제 1조 (목적)</h2>
@@ -73,7 +85,7 @@ export default function TermsPage() {
                 <li>이메일, 전화, 카카오톡 상담</li>
               </ul>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8" />
           </section>
 
           {/* 제 2조 */}
@@ -88,7 +100,7 @@ export default function TermsPage() {
                 <li>마케팅 관련 정보 제공</li>
               </ul>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8" />
           </section>
 
           {/* 제 3조 */}
@@ -99,7 +111,7 @@ export default function TermsPage() {
               <p className="m-0">정보 제공 및 컨설팅을 목적으로 하며,</p>
               <p className="m-0">특정 매출, 노출 순위, 방문자 수 등 성과를 보장하지 않습니다.</p>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8" />
           </section>
 
           {/* 제 4조 */}
@@ -108,7 +120,7 @@ export default function TermsPage() {
             <p className="mt-[15px] ml-[2px] text-body-sm text-sub1 w-[calc(100%-2px)] max-w-none">
               이용자는 회사가 제공한 정보 및 자료를 참고하여 자신의 판단과 책임 하에 서비스를 이용해야 합니다.
             </p>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8" />
           </section>
 
           {/* 제 5조 */}
@@ -118,7 +130,7 @@ export default function TermsPage() {
               본 사이트에 게시된 모든 콘텐츠의 저작권은 회사에 귀속되며, 사전 동의 없이 무단 복제, 배포, 상업적 이용을
               금합니다.
             </p>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8" />
           </section>
 
           {/* 제 6조 */}
@@ -127,7 +139,7 @@ export default function TermsPage() {
             <p className="mt-[15px] ml-[3px] text-body-sm text-sub1 w-[calc(100%-3px)] max-w-none">
               회사는 천재지변, 시스템 장애 등 불가항력적인 사유로 인한 서비스 제공 중단에 대해 책임을 지지 않습니다.
             </p>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8" />
           </section>
 
           {/* 제 7조 */}
@@ -136,7 +148,7 @@ export default function TermsPage() {
             <p className="mt-[15px] ml-[1px] text-body-sm text-sub1 w-[calc(100%-1px)] max-w-none">
               본 약관은 필요 시 변경될 수 있으며, 변경 사항은 본 페이지를 통해 공지합니다.
             </p>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8" />
           </section>
 
           {/* 제 8조 */}
@@ -145,11 +157,11 @@ export default function TermsPage() {
             <p className="mt-[15px] ml-[2px] text-body-sm text-sub1 w-[calc(100%-2px)] max-w-none">
               본 약관과 관련된 분쟁에 대해서는 대한민국 법을 적용하며, 관할 법원은 회사의 본점 소재지를 따릅니다.
             </p>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] mt-6 sm:mt-8" />
           </section>
 
           {/* 하단 문구 */}
-          <p className="text-body text-main mt-10 sm:mt-12 md:mt-[80px] ml-0 md:ml-[-6px] w-full max-w-none">
+          <p className="text-body text-main mt-10 sm:mt-12 ml-0 w-full max-w-none">
             본 사이트는 이터널마케팅의 마케팅 컨설팅 및 AI 진단 서비스 안내를 목적으로 운영됩니다.
           </p>
         </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 
 /**
  * 공통 푸터
@@ -12,10 +13,10 @@ export default function Footer() {
       id="footer"
       className="relative w-full z-30 bg-[#f6f6f6]"
     >
-      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-[32px] lg:px-[40px] desktop:px-[60px] py-[40px] md:py-[50px]">
+      <div className="w-full max-w-[1440px] mx-auto px-4 lg:px-[40px] desktop:px-[60px] py-[40px]">
         {/* 상단 섹션: 로고와 회사 정보 */}
         <div
-          className="flex flex-col md:flex-row gap-6 md:gap-10"
+          className="flex flex-col gap-6"
           style={{
             width: '1164px',
             maxWidth: '100%',
@@ -24,11 +25,11 @@ export default function Footer() {
           }}
         >
           {/* 로고 영역 */}
-          <div className="flex items-center gap-[10px] flex-shrink-0 self-start ml-4 md:ml-8 mt-2">
+          <div className="flex items-center gap-[10px] flex-shrink-0 self-start ml-4 mt-2">
             <img
               src="/images/logo.svg"
               alt="ETERNAL MARKETING"
-              className="w-16 h-9 sm:w-20 sm:h-12 md:w-[90px] md:h-[52px]"
+              className="w-16 h-9 sm:w-20 sm:h-12"
             />
             <div>
               <p className="m-0 font-sans text-[16px] sm:text-[18px] font-semibold leading-tight text-primary">
@@ -42,10 +43,10 @@ export default function Footer() {
 
           {/* 회사 정보 영역 (오른쪽 정렬) */}
           <div
-            className="text-left mb-5 md:mb-[20px] md:ml-auto"
+            className="text-left mb-5"
           >
             {/* 회사명, 대표자명, 사업자등록번호, 이메일, 주소, 도메인 */}
-            <div className="mb-4 font-sans text-[12px] sm:text-[13px] md:text-[14px] font-medium leading-normal text-sub1 space-y-1">
+            <div className="mb-4 font-sans text-[12px] sm:text-[13px] font-medium leading-normal text-sub1 space-y-1">
               <p className="m-0">회사명 : 이터널 마케팅 | 대표자명 : 정세훈, 이훈</p>
               <p className="m-0">사업자 등록번호 : 604-28-20699 | 이메일 : info@eternalmarketing.co.kr</p>
               <p className="m-0">주소 : 경기도 부천시 원미구 소향로13번길 14-22, 8층 802-라54호(상동, 금호프라자)</p>
@@ -59,9 +60,7 @@ export default function Footer() {
               </h3>
               <p className="m-0 font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub3 leading-relaxed">
                 이터널마케팅의 AI 분석 결과는 마케팅 전략 수립을 위한 참고 자료로 활용되며,
-                <br className="hidden md:block" />
                 최종 판단과 실행은 전문 마케터의 검토를 통해 이루어집니다. 분석 과정에 활용되는
-                <br className="hidden md:block" />
                 데이터는 내부 기준에 따라 관리되며, 외부에 무단 제공되지 않습니다.
               </p>
 
@@ -74,7 +73,7 @@ export default function Footer() {
                   aria-label="Instagram"
                   className="inline-flex items-center justify-center"
                 >
-                  <img src="/images/footer/Instagram.svg" alt="" className="w-5 h-5 sm:w-6 sm:h-6 md:w-[24px] md:h-[24px]" />
+                  <Image src="/images/footer/Instagram.svg" alt="" width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
                 </a>
                 <a
                   href="https://www.kakaocorp.com/"
@@ -83,7 +82,7 @@ export default function Footer() {
                   aria-label="Kakao"
                   className="inline-flex items-center justify-center"
                 >
-                  <img src="/images/footer/kakao.svg" alt="" className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                  <Image src="/images/footer/kakao.svg" alt="" width={18} height={18} className="w-4 h-4 sm:w-[18px] sm:h-[18px] object-contain" />
                 </a>
               </div>
             </div>
@@ -91,11 +90,11 @@ export default function Footer() {
         </div>
 
         {/* 상단과 하단을 구분하는 선 */}
-        <div className="w-full max-w-[1164px] mx-auto border-t border-sub1 mt-0 mb-5 md:mb-[20px]" />
+        <div className="w-full max-w-[1164px] mx-auto border-t border-sub1 mt-0 mb-5" />
 
         {/* 하단 섹션: 네비게이션 링크와 저작권 */}
         <div
-          className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0"
+          className="flex flex-col justify-between items-center gap-4"
           style={{
             width: '1164px',
             maxWidth: '100%',
@@ -103,7 +102,7 @@ export default function Footer() {
           }}
         >
           {/* 페이지 네비게이션 메뉴 */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6 md:gap-8">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
             <Link
               href="/about"
               className="font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-main no-underline transition-colors hover:text-primary"
@@ -123,10 +122,10 @@ export default function Footer() {
               SERVICE
             </Link>
             <Link
-              href="/#contact"
+              href="/admin"
               className="font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-main no-underline transition-colors hover:text-primary"
             >
-              CONTACT
+              ADMIN
             </Link>
             <Link
               href="/privacy"
@@ -137,7 +136,7 @@ export default function Footer() {
           </div>
 
           {/* 저작권 표시 */}
-          <p className="m-0 font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub1 text-center md:text-left">
+          <p className="m-0 font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub1 text-center">
             © 2025 Eternal Marketing. All Rights Reserved.
           </p>
         </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import * as ReactDOM from 'react-dom';
 
 const CONCERN_OPTIONS = [
@@ -71,7 +72,7 @@ export default function FloatingCTA() {
   const showOverlay = showModal || isClosing;
 
   const modalContent = showOverlay && (
-    <div className="fixed right-3 top-4 bottom-20 sm:right-4 sm:top-5 sm:bottom-24 lg:right-6 lg:top-6 lg:bottom-24 z-[99998] w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] sm:max-w-[420px] md:max-w-[460px] lg:w-[480px] lg:max-w-[480px] overflow-hidden">
+    <div className="fixed right-3 top-4 bottom-20 sm:right-4 sm:top-5 sm:bottom-24 lg:right-6 lg:top-6 lg:bottom-24 z-[99998] w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] sm:max-w-[420px] lg:w-[480px] lg:max-w-[480px] overflow-hidden">
       <div
         className={`h-full rounded-[28px] bg-gradient-to-b from-white/98 to-white/95 backdrop-blur-2xl overflow-hidden flex flex-col will-change-transform transition-transform duration-[360ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isClosing
@@ -83,7 +84,7 @@ export default function FloatingCTA() {
       >
         <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-6 pt-4 sm:pt-6 pb-4 sm:pb-5">
           <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[56px] lg:h-[56px] rounded-xl sm:rounded-2xl bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] flex items-center justify-center overflow-hidden shrink-0">
-            <img src="/images/logo.svg" alt="" className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9" aria-hidden />
+            <Image src="/images/logo.svg" alt="" width={36} height={36} className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 object-contain" aria-hidden />
           </div>
           <div className="flex-1 min-w-0">
             <p className="m-0 font-sans text-[18px] sm:text-[20px] lg:text-[22px] font-bold text-main truncate">간편 문의하기</p>
@@ -326,7 +327,7 @@ export default function FloatingCTA() {
           style={{ position: 'fixed' }}
           aria-label="간편 문의하기"
         >
-          <img src="/images/logo.svg" alt="AI 진단 받기" className="w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9" />
+          <Image src="/images/logo.svg" alt="AI 진단 받기" width={36} height={36} className="w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9 object-contain" />
         </button>
       )}
       {showModal && (
@@ -339,7 +340,7 @@ export default function FloatingCTA() {
           style={{ position: 'fixed' }}
           aria-label="닫기"
         >
-          <img src="/images/x%20.svg" alt="" className="w-4 h-4 sm:w-5 sm:h-5 brightness-0 invert" />
+          <Image src="/images/x%20.svg" alt="" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 brightness-0 invert object-contain" />
         </button>
       )}
     </>

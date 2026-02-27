@@ -1,9 +1,26 @@
+import type { Metadata } from 'next';
 import ColumnPageContent from './ColumnPageContent';
 
 /**
  * 칼럼 목록 페이지 (/column)
- * - 바이럴 마케팅이 기본 선택, 내용은 ColumnPageContent에서 카테고리 탭·픽처드·그리드 공통 사용
+ * - activeCategorySlug 미지정 시 첫 카테고리 사용 (API 또는 기본 목록)
  */
+export const metadata: Metadata = {
+  title: '마케팅 칼럼',
+  description: '맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 전략과 사례를 칼럼으로 정리했습니다.',
+  openGraph: {
+    title: '이터널마케팅 | 마케팅 칼럼',
+    description: '맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 전략과 사례를 칼럼으로 정리했습니다.',
+    url: '/column',
+    images: ['/images/big-logo.svg'],
+  },
+  twitter: {
+    title: '이터널마케팅 | 마케팅 칼럼',
+    description: '맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 전략과 사례를 칼럼으로 정리했습니다.',
+    images: ['/images/big-logo.svg'],
+  },
+};
+
 export default function ColumnPage() {
-  return <ColumnPageContent activeCategoryIndex={0} />;
+  return <ColumnPageContent />;
 }
