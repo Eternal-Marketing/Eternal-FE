@@ -234,9 +234,9 @@ export default function ServiceCaseStudySection() {
         />
       </div>
 
-      <div className="case-study-content relative z-10 w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24 lg:py-[180px] opacity-0">
+      <div className="case-study-content relative z-10 w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-[180px] opacity-0">
         {/* 현재 슬라이드 제목 2줄 */}
-        <h2 className="m-0 font-sans text-[18px] sm:text-[20px] md:text-[24px] font-semibold text-white text-center leading-tight">
+        <h2 className="m-0 font-sans text-[18px] sm:text-[20px] font-semibold text-white text-center leading-tight">
           {currentSlide.titleLines[0]}
           <br />
           {currentSlide.titleLines[1]}
@@ -244,7 +244,7 @@ export default function ServiceCaseStudySection() {
 
         {/* 이전 버튼 + 카드 그리드 + 다음 버튼 (스와이프 지원) */}
         <div
-          className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 flex items-center justify-center gap-2 sm:gap-4 lg:gap-6 touch-pan-y"
+          className="mt-8 sm:mt-12 lg:mt-20 flex items-center justify-center gap-2 sm:gap-4 lg:gap-6 touch-pan-y"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >

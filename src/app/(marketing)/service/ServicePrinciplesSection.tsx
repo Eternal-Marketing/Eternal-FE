@@ -11,8 +11,8 @@ function CircleIcon({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[190px] md:h-[190px] rounded-full border border-primary/30 bg-white flex items-center justify-center flex-shrink-0">
-      <div className="w-[88px] h-[88px] sm:w-[110px] sm:h-[110px] md:w-[140px] md:h-[140px] rounded-full border border-primary/15 bg-white flex items-center justify-center">
+    <div className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] rounded-full border border-primary/30 bg-white flex items-center justify-center flex-shrink-0">
+      <div className="w-[88px] h-[88px] sm:w-[110px] sm:h-[110px] rounded-full border border-primary/15 bg-white flex items-center justify-center">
         {children}
       </div>
     </div>
@@ -20,7 +20,7 @@ function CircleIcon({
 }
 
 function SimpleIcon({ name }: { name: 'headphones' | 'avatar' | 'key' | 'dna' }) {
-  const common = 'w-7 h-7 sm:w-9 sm:h-9 md:w-[42px] md:h-[42px] text-primary';
+  const common = 'w-7 h-7 sm:w-9 sm:h-9 text-primary';
   switch (name) {
     case 'headphones':
       return (
@@ -60,15 +60,15 @@ function SimpleIcon({ name }: { name: 'headphones' | 'avatar' | 'key' | 'dna' })
 export default function ServicePrinciplesSection() {
   return (
     <section className="bg-white w-full">
-      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 lg:py-[90px]">
-        <h2 className="m-0 font-sans text-[22px] sm:text-[26px] md:text-[32px] font-semibold leading-normal text-center text-main">
+      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-[90px]">
+        <h2 className="m-0 font-sans text-[22px] sm:text-[26px] font-semibold leading-normal text-center text-main">
           마케팅의 새로운 기준, 기본부터 다릅니다.
         </h2>
 
         {/* 연한 보라 스트립 + 4열 원칙 카드 */}
-        <div className="mt-6 sm:mt-8 md:mt-10 bg-[#e7ebff] py-8 sm:py-10">
-          <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 items-start justify-items-center">
-            <div className="text-center max-w-[280px] md:max-w-none mx-auto md:mx-0">
+        <div className="mt-6 sm:mt-8 bg-[#e7ebff] py-8 sm:py-10">
+          <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-4 gap-8 sm:gap-10 items-start justify-items-center">
+            <div className="text-center max-w-[280px] mx-auto">
               <CircleIcon>
                 <SimpleIcon name="headphones" />
               </CircleIcon>
@@ -82,7 +82,7 @@ export default function ServicePrinciplesSection() {
               </p>
             </div>
 
-            <div className="text-center max-w-[280px] md:max-w-none mx-auto md:mx-0">
+            <div className="text-center max-w-[280px] mx-auto">
               <CircleIcon>
                 <SimpleIcon name="avatar" />
               </CircleIcon>
@@ -98,7 +98,7 @@ export default function ServicePrinciplesSection() {
               </p>
             </div>
 
-            <div className="text-center max-w-[280px] md:max-w-none mx-auto md:mx-0">
+            <div className="text-center max-w-[280px] mx-auto">
               <CircleIcon>
                 <SimpleIcon name="key" />
               </CircleIcon>

@@ -108,7 +108,7 @@ export default async function ColumnDetailPage({ params, searchParams }: PagePro
         </div>
 
         <div
-          className="w-full h-[280px] md:h-[314px] mb-10 overflow-hidden"
+          className="w-full h-[280px] mb-10 overflow-hidden"
           data-node-id="804:803"
         >
           <img

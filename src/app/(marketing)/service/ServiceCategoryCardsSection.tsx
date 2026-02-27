@@ -48,15 +48,15 @@ export default function ServiceCategoryCardsSection({
 
   return (
     <section ref={sectionRef} className={`${backgroundClassName} w-full`}>
-      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 lg:py-[90px]">
+      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-[90px]">
         <h2
-          className={`m-0 font-sans text-[22px] sm:text-[26px] md:text-[32px] font-semibold leading-normal text-center ${titleColorClassName}`}
+          className={`m-0 font-sans text-[22px] sm:text-[26px] font-semibold leading-normal text-center ${titleColorClassName}`}
         >
           {title}
         </h2>
 
         {/* 카테고리 라벨 (| 구분) */}
-        <div className="mt-4 sm:mt-6 md:mt-8 text-center font-sans text-[10px] sm:text-[14px] md:text-[16px] text-sub1">
+        <div className="mt-4 sm:mt-6 text-center font-sans text-[10px] sm:text-[14px] text-sub1">
           {categories.map((c, idx) => (
             <span key={c}>
               {c}
@@ -67,7 +67,7 @@ export default function ServiceCategoryCardsSection({
 
         {/* 카드 그리드: 모바일 2열 나란히, sm 2열, lg 4열 */}
         <div
-          className={`mt-8 sm:mt-10 md:mt-12 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 ${visible ? 'service-category-cards-visible' : ''}`}
+          className={`mt-8 sm:mt-10 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 ${visible ? 'service-category-cards-visible' : ''}`}
         >
           {cards.map((card, idx) => (
             <div

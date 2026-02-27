@@ -48,16 +48,16 @@ export default function ServiceOfferingsSection() {
       <div className="max-w-[1163px] mx-auto">
         {/* 섹션 제목 + 부제 (진입 시 페이드업) */}
         <div className={`reveal-fade-up mb-12 ${visible ? 'is-visible' : ''}`}>
-          <h2 className="font-sans text-[28px] md:text-[36px] font-bold leading-tight text-main mb-4">
+          <h2 className="font-sans text-[28px] font-bold leading-tight text-main mb-4">
             우리가 제공하는 <span className="text-primary">마케팅 서비스</span>
           </h2>
-          <p className="font-sans text-[16px] md:text-[18px] font-light leading-relaxed text-sub1">
+          <p className="font-sans text-[16px] font-light leading-relaxed text-sub1">
             채널별 최적화부터 전환까지, 이터널이 정답을 찾아드립니다.
           </p>
         </div>
 
         {/* 채널별 카드 그리드 (카드별 delay로 순차 등장) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
           {SERVICES.map((service, idx) => (
             <div
               key={service.name}
@@ -66,14 +66,14 @@ export default function ServiceOfferingsSection() {
               }`}
               style={{ transitionDelay: `${idx * 50}ms` }}
             >
-              <div className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] flex items-center justify-center mb-4">
+              <div className="w-[80px] h-[80px] flex items-center justify-center mb-4">
                 <img
                   src={service.icon}
                   alt=""
                   className="max-w-full max-h-full object-contain"
                 />
               </div>
-              <p className="font-sans text-[14px] md:text-[16px] font-medium text-main">
+              <p className="font-sans text-[14px] font-medium text-main">
                 {service.name}
               </p>
             </div>

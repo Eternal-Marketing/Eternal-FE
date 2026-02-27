@@ -13,7 +13,7 @@ import CTASection from '@/components/sections/CTASection';
 export default function ServicePageClient() {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      <section className="relative w-full min-h-[280px] sm:min-h-[320px] md:h-[380px] lg:h-[420px] overflow-hidden">
+      <section className="relative w-full min-h-[280px] sm:min-h-[320px] lg:h-[420px] overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/service-page/service-background.svg"
@@ -25,8 +25,8 @@ export default function ServicePageClient() {
           />
         </div>
         <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] md:min-h-0 flex flex-col items-center justify-center text-center px-4 gap-8 sm:gap-10">
-          <h1 className="m-0 font-sans text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-normal">
+        <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] flex flex-col items-center justify-center text-center px-4 gap-8 sm:gap-10">
+          <h1 className="m-0 font-sans text-[26px] sm:text-[32px] lg:text-[40px] font-bold leading-normal">
             <span className="text-white/80">ETERNAL MARKETING</span>{' '}
             <span className="text-[#6d94ff]">SERVICE</span>
           </h1>
@@ -35,9 +35,9 @@ export default function ServicePageClient() {
             alt="Eternal Marketing Logo"
             width={80}
             height={46}
-            className="w-[70px] sm:w-[84px] md:w-[96px] lg:w-[110px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
+            className="w-[70px] sm:w-[84px] lg:w-[110px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
           />
-          <div className="font-sans text-[12px] sm:text-[14px] md:text-[16px] leading-snug text-white">
+          <div className="font-sans text-[12px] sm:text-[14px] leading-snug text-white">
             <p className="m-0 font-sans font-extralight">각종 마케팅 너무 복잡하고 막막하신가요?</p>
             <p className="m-0 font-sans font-extralight">이터널이 제일 잘 하고 자신있는 것</p>
             <p className="m-0 font-sans font-extralight">대표님의 기준에 맞춰 핵심만 보여드리겠습니다</p>

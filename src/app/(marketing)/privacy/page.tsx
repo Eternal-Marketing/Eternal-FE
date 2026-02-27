@@ -23,9 +23,9 @@ export default function PrivacyPage() {
   ] as const;
 
   return (
-    <main className="min-h-screen bg-bg text-main break-keep whitespace-normal pt-16 sm:pt-18 md:pt-[74px]">
+    <main className="min-h-screen bg-bg text-main break-keep whitespace-normal pt-16 sm:pt-18">
       <div className="w-full border-t border-sub3/50" />
-      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-5">
+      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-4 sm:py-5">
         <p className="text-[12px] sm:text-caption text-sub1 m-0">
           <Link href="/" className="text-sub1 no-underline hover:text-primary transition-colors">
             홈
@@ -35,17 +35,17 @@ export default function PrivacyPage() {
       </div>
       <div className="w-full border-b border-sub3/50 mb-10"></div>
 
-      <section className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-16 md:pb-20 lg:pb-[120px]">
-        <div className="pl-0 sm:pl-2 md:pl-[20px]">
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-[38px] mb-4 sm:mb-6 md:mb-[26px]">
-            <p className="m-0 text-lg sm:text-xl md:text-h4 text-main underline">개인정보 처리 방침</p>
-            <Link href="/terms" className="m-0 text-lg sm:text-xl md:text-h4 text-sub2 no-underline hover:text-primary transition-colors">
+      <section className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 pb-12 sm:pb-16 lg:pb-[120px]">
+        <div className="pl-0 sm:pl-2">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-4 sm:mb-6">
+            <p className="m-0 text-lg sm:text-xl text-main underline">개인정보 처리 방침</p>
+            <Link href="/terms" className="m-0 text-lg sm:text-xl text-sub2 no-underline hover:text-primary transition-colors">
               이용 약관
             </Link>
           </div>
 
-          <div className="border border-sub1 w-full h-auto py-4 sm:py-[18px] mb-8 sm:mb-10 md:mb-[49px]">
-            <ol className="m-0 px-4 sm:px-6 md:px-[38px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 md:gap-x-[60px] gap-y-2 sm:gap-y-[14px] list-decimal">
+          <div className="border border-sub1 w-full h-auto py-4 sm:py-[18px] mb-8 sm:mb-10">
+            <ol className="m-0 px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-[14px] list-decimal">
               {toc.map((item) => (
                 <li key={item.href} className="text-body-sm text-sub1">
                   <a href={item.href} className="text-sub1 no-underline hover:text-primary transition-colors">
@@ -64,7 +64,7 @@ export default function PrivacyPage() {
             개인정보의 처리 기준을 안내합니다
           </p>
 
-          <hr className="border-0 border-t border-sub3 mt-6 sm:mt-8 md:mt-[32px] mb-10 sm:mb-12 md:mb-[66px] w-full max-w-[1163px] ml-0 md:ml-[13px]" />
+          <hr className="border-0 border-t border-sub3 mt-6 sm:mt-8 mb-10 sm:mb-12 w-full max-w-[1163px] ml-0" />
 
           <section id="section-1" className="scroll-mt-[110px]">
             <h2 className="text-h4 text-main m-0">1. 개인정보의 수집 항목 및 방법</h2>
@@ -88,7 +88,7 @@ export default function PrivacyPage() {
                 <li>이메일, 전화, 카카오톡 상담</li>
               </ul>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 md:ml-[13px] mt-6 sm:mt-8 md:mt-[32px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 mt-6 sm:mt-8" />
           </section>
 
           <section id="section-2" className="scroll-mt-[110px] mt-[33px]">
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
                 <li>문의 이력 관리</li>
               </ul>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 md:ml-[13px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 mt-6 sm:mt-8" />
           </section>
 
           {/* 3 */}
@@ -115,7 +115,7 @@ export default function PrivacyPage() {
                 다만, 관련 법령에 따라 보관이 필요한 경우에는 해당 법령에서 정한 기간 동안 보관할 수 있습니다.
               </p>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 md:ml-[13px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 mt-6 sm:mt-8" />
           </section>
 
           {/* 4 */}
@@ -125,7 +125,7 @@ export default function PrivacyPage() {
               <p className="m-0">회사는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다.</p>
               <p className="m-0">다만, 법령에 따라 요구되는 경우에는 관련 법령에 따라 제공될 수 있습니다.</p>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 md:ml-[13px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 mt-6 sm:mt-8" />
           </section>
 
           {/* 5 */}
@@ -135,7 +135,7 @@ export default function PrivacyPage() {
               <p className="m-0">회사는 서비스 제공을 위해 개인정보 처리 업무를 외부에 위탁하지 않습니다.</p>
               <p className="m-0">향후 위탁이 필요한 경우, 사전에 그 사실을 고지하겠습니다.</p>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 md:ml-[13px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 mt-6 sm:mt-8" />
           </section>
 
           {/* 6 */}
@@ -151,7 +151,7 @@ export default function PrivacyPage() {
                 <li>종이 문서 형태: 분쇄 또는 소각</li>
               </ul>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 md:ml-[13px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 mt-6 sm:mt-8" />
           </section>
 
           {/* 7 */}
@@ -160,7 +160,7 @@ export default function PrivacyPage() {
             <p className="mt-[15px] ml-[31px] text-body-sm text-sub1 w-[calc(100%-31px)] max-w-none">
               회사는 개인정보의 안전한 관리를 위해 관리적·기술적 보호 조치를 시행하고 있습니다.
             </p>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 md:ml-[13px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 mt-6 sm:mt-8" />
           </section>
 
           {/* 8 */}
@@ -175,7 +175,7 @@ export default function PrivacyPage() {
                 <li>이메일: info@eternalmarketing.co.kr</li>
               </ul>
             </div>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 md:ml-[13px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 mt-6 sm:mt-8" />
           </section>
 
           {/* 9 */}
@@ -184,11 +184,11 @@ export default function PrivacyPage() {
             <p className="mt-[15px] ml-[31px] text-body-sm text-sub1 w-[calc(100%-31px)] max-w-none">
               본 개인정보처리방침은 관련 법령 또는 내부 정책에 따라 변경될 수 있으며, 변경 시 본 페이지를 통해 공지합니다.
             </p>
-            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 md:ml-[13px] mt-6 sm:mt-8 md:mt-[36px]" />
+            <hr className="border-0 border-t border-sub3 w-full max-w-[773px] ml-0 mt-6 sm:mt-8" />
           </section>
 
           {/* 하단 문구 */}
-          <p className="text-body text-main mt-10 sm:mt-12 md:mt-[80px] ml-0 md:ml-[-6px] w-full max-w-none">
+          <p className="text-body text-main mt-10 sm:mt-12 ml-0 w-full max-w-none">
             본 사이트는 이터널마케팅의 마케팅 컨설팅 및 AI 진단 서비스 안내를 목적으로 운영됩니다.
           </p>
         </div>

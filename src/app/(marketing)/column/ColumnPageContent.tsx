@@ -76,7 +76,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
 
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
-      <section className="relative w-full min-h-[280px] sm:min-h-[320px] md:h-[380px] lg:h-[420px] overflow-hidden" data-node-id="804:486">
+      <section className="relative w-full min-h-[280px] sm:min-h-[320px] lg:h-[420px] overflow-hidden" data-node-id="804:486">
         <div className="absolute inset-0">
           <Image
             src="/images/column/column-background.svg"
@@ -88,12 +88,12 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
             style={{ animationDuration: '0.6s', animationFillMode: 'both' }}
           />
         </div>
-        <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] md:min-h-0 flex flex-col items-center justify-center text-center px-4 gap-6 sm:gap-8">
-          <h1 className="m-0 font-sans text-[26px] sm:text-[32px] md:text-[36px] lg:text-[40px] font-bold leading-normal animate-fade-in-up" data-node-id="804:497" style={{ animationDelay: '0.2s', animationFillMode: 'both', animationDuration: '0.6s' }}>
+        <div className="relative z-10 h-full min-h-[280px] sm:min-h-[320px] flex flex-col items-center justify-center text-center px-4 gap-6 sm:gap-8">
+          <h1 className="m-0 font-sans text-[26px] sm:text-[32px] lg:text-[40px] font-bold leading-normal animate-fade-in-up" data-node-id="804:497" style={{ animationDelay: '0.2s', animationFillMode: 'both', animationDuration: '0.6s' }}>
             <span className="text-white/80">ETERNAL MARKETING</span> <span className="text-[#6d94ff]">COLUMN</span>
           </h1>
-          <Image src="/images/logo.svg" alt="Eternal Marketing Logo" width={80} height={46} className="w-[70px] sm:w-[84px] md:w-[96px] lg:w-[110px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'both', animationDuration: '0.6s' }} />
-          <div className="font-sans text-[12px] sm:text-[14px] md:text-[16px] leading-snug text-white animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'both', animationDuration: '0.6s' }}>
+          <Image src="/images/logo.svg" alt="Eternal Marketing Logo" width={80} height={46} className="w-[70px] sm:w-[84px] lg:w-[110px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] animate-fade-in-up" style={{ animationDelay: '0.3s', animationFillMode: 'both', animationDuration: '0.6s' }} />
+          <div className="font-sans text-[12px] sm:text-[14px] leading-snug text-white animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'both', animationDuration: '0.6s' }}>
             <p className="m-0 font-sans font-extralight">막막했던 마케팅,</p>
             <p className="m-0 font-sans font-extralight">이터널의 기준과 데이터로 모두 공개합니다</p>
           </div>
@@ -101,7 +101,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
       </section>
 
       <section className="w-full bg-[#f6f6f6]" data-node-id="804:499">
-        <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-10 md:py-12 lg:py-[60px]">
+        <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-8 sm:py-10 lg:py-[60px]">
           <p
             className="font-sans text-[14px] font-thin text-main mb-4 animate-fade-in-up"
             style={{ animationDelay: '0.5s', animationFillMode: 'both', animationDuration: '0.5s' }}
@@ -125,7 +125,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
               <Link
                 key={cat.slug}
                 href={idx === 0 ? '/column' : `/column/category/${cat.slug}`}
-                className={`py-1 px-0 font-sans text-[14px] sm:text-[16px] md:text-[18px] transition-all duration-200 border-0 bg-transparent cursor-pointer no-underline border-b-2 hover:text-primary hover:border-primary ${
+                className={`py-1 px-0 font-sans text-[14px] sm:text-[16px] transition-all duration-200 border-0 bg-transparent cursor-pointer no-underline border-b-2 hover:text-primary hover:border-primary ${
                   effectiveSlug === cat.slug
                     ? 'font-medium text-primary border-primary'
                     : 'font-light text-main border-transparent'
@@ -160,7 +160,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
               {featured && (
                 <Link
                   href={`/column/${featured.slug}?category=${categorySlug}`}
-                  className="flex flex-col lg:flex-row gap-6 sm:gap-8 mb-10 sm:mb-12 md:mb-16 no-underline group animate-fade-in-up"
+                  className="flex flex-col lg:flex-row gap-6 sm:gap-8 mb-10 sm:mb-12 no-underline group animate-fade-in-up"
                   style={{ animationDelay: '0.7s', animationFillMode: 'both', animationDuration: '0.5s' }}
                 >
                   <div
@@ -179,13 +179,13 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
 
                   <div className="flex flex-col justify-center">
                     <h2
-                      className="m-0 font-sans text-[24px] sm:text-[28px] md:text-[32px] font-bold leading-normal text-main mb-3 sm:mb-6 group-hover:text-primary transition-colors"
+                      className="m-0 font-sans text-[24px] sm:text-[28px] font-bold leading-normal text-main mb-3 sm:mb-6 group-hover:text-primary transition-colors"
                       data-node-id="804:539"
                     >
                       {featured.title}
                     </h2>
                     <p
-                      className="m-0 font-sans text-[16px] sm:text-[18px] md:text-[20px] font-light leading-relaxed text-main mb-4 sm:mb-6 md:mb-8 max-w-[439px] line-clamp-3"
+                      className="m-0 font-sans text-[16px] sm:text-[18px] font-light leading-relaxed text-main mb-4 sm:mb-6 max-w-[439px] line-clamp-3"
                       data-node-id="804:541"
                     >
                       {featured.excerpt || featured.title}

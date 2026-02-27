@@ -253,7 +253,7 @@ export default function DiagnosisFormStep2() {
         )}
       </div>
 
-      <div className="pt-8 sm:pt-12 md:pt-[54px] flex flex-col items-center">
+      <div className="pt-8 sm:pt-12 flex flex-col items-center">
         <p className="m-0 font-sans text-[12px] sm:text-[13px] font-normal leading-normal text-sub1 text-center px-2">
           AI 마케팅 인텔리전스가 1차 분석을 진행하며,
           <br />
@@ -264,7 +264,7 @@ export default function DiagnosisFormStep2() {
           type="button"
           onClick={handleSubmit}
           disabled={!isFormValid || submitting}
-          className="mt-6 sm:mt-8 md:mt-[34px] h-10 sm:h-[44px] min-w-[120px] w-[139px] max-w-full text-white text-[13px] sm:text-[14px] font-medium border-0 bg-[#2b2b2b] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-opacity rounded-sm"
+          className="mt-6 sm:mt-8 h-10 sm:h-[44px] min-w-[120px] w-[139px] max-w-full text-white text-[13px] sm:text-[14px] font-medium border-0 bg-[#2b2b2b] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-opacity rounded-sm"
         >
           {submitting ? '신청 중...' : '진단 신청하기'}
         </button>
