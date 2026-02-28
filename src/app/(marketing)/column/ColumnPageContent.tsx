@@ -238,7 +238,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
             <>
               {featured && (
                 <Link
-                  href={`/column/${featured.slug}`}
+                  href={`/column/id/${featured.id}`}
                   className="flex flex-col lg:flex-row gap-6 sm:gap-8 mb-10 sm:mb-12 no-underline group animate-fade-in-up"
                   style={{ animationDelay: '0.7s', animationFillMode: 'both', animationDuration: '0.5s' }}
                 >
@@ -308,7 +308,7 @@ function ArticleCard({
   const thumbSrc = column.thumbnailUrl || PLACEHOLDER_IMAGE;
   return (
     <Link
-      href={`/column/${column.slug}`}
+      href={`/column/id/${column.id}`}
       className="flex flex-col cursor-pointer group no-underline animate-fade-in-up"
       data-node-id={nodeId}
       style={animationStyle}

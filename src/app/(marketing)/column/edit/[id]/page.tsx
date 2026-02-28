@@ -105,7 +105,7 @@ export default function ColumnEditPage() {
         thumbnailUrl = media.url;
       }
       const newSlug = form.title ? slugFromTitle(form.title) : (form.slug ?? column.slug);
-      await updateColumn(column.id, {
+      const updated = await updateColumn(column.id, {
         title: form.title ?? column.title,
         slug: newSlug,
         content: form.content ?? column.content,
@@ -116,7 +116,7 @@ export default function ColumnEditPage() {
         categoryCode: (form.categoryId ?? column.categoryId) ? undefined : (form.categoryCode ?? 'VIRAL_MARKETING'),
       });
       setSuccess(true);
-      setTimeout(() => router.push(`/column/${newSlug}`), 1500);
+      setTimeout(() => router.push(`/column/id/${updated.id}`), 1500);
     } catch (err) {
       setError(err instanceof ApiClientError ? err.message : '칼럼 수정에 실패했습니다.');
     } finally {
@@ -256,7 +256,7 @@ export default function ColumnEditPage() {
             >
               {submitting ? '수정 중...' : '칼럼 수정'}
             </button>
-            <Link href={`/column/${column.slug}`} className="font-sans text-[14px] text-sub2 hover:text-primary transition-colors no-underline">
+            <Link href={`/column/id/${column.id}`} className="font-sans text-[14px] text-sub2 hover:text-primary transition-colors no-underline">
               취소
             </Link>
           </div>
