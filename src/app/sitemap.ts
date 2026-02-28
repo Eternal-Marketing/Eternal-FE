@@ -34,9 +34,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       orderDirection: 'desc',
     });
     const columnEntries: MetadataRoute.Sitemap = (data.columns ?? [])
-      .filter((c) => Boolean(c?.slug))
+      .filter((c) => Boolean(c?.id))
       .map((c) => ({
-        url: toUrl(`/column/${c.slug}`),
+        url: toUrl(`/column/id/${c.id}`),
         lastModified: c.updatedAt ? c.updatedAt : c.publishedAt ? c.publishedAt : lastModified,
         changeFrequency: 'monthly' as const,
         priority: 0.6,
