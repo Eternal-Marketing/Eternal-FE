@@ -13,10 +13,10 @@ export default function Footer() {
       id="footer"
       className="relative w-full z-30 bg-[#f6f6f6]"
     >
-      <div className="w-full max-w-[1440px] mx-auto px-4 lg:px-[40px] desktop:px-[60px] py-[40px]">
+      <div className="w-full max-w-[1440px] mx-auto px-4 lg:px-[40px] desktop:px-[60px] py-[40px] lg:py-[70px]">
         {/* 상단 섹션: 로고와 회사 정보 */}
         <div
-          className="flex flex-col gap-6"
+          className="flex flex-col lg:flex-row lg:justify-between gap-6"
           style={{
             width: '1164px',
             maxWidth: '100%',
@@ -25,7 +25,7 @@ export default function Footer() {
           }}
         >
           {/* 로고 영역 */}
-          <div className="flex items-center gap-[10px] flex-shrink-0 self-start ml-4 mt-2">
+          <div className="flex items-center gap-[10px] flex-shrink-0 self-start">
             <img
               src="/images/logo.svg"
               alt="ETERNAL MARKETING"
@@ -41,10 +41,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* 회사 정보 영역 (오른쪽 정렬) */}
-          <div
-            className="text-left mb-5"
-          >
+          {/* 회사 정보 영역 (데스크탑: 오른쪽, 모바일: 아래) */}
+          <div className="text-left lg:text-left mb-5 lg:ml-[200px]">
             {/* 회사명, 대표자명, 사업자등록번호, 이메일, 주소, 도메인 */}
             <div className="mb-4 font-sans text-[12px] sm:text-[13px] font-medium leading-normal text-sub1 space-y-1">
               <p className="m-0">회사명 : 이터널 마케팅 | 대표자명 : 정세훈, 이훈</p>
@@ -55,13 +53,11 @@ export default function Footer() {
 
             {/* AI 데이터 활용에 대한 안내 문구 */}
             <div>
-              <h3 className="m-0 mb-1 sm:mb-2 font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub3">
+              <h3 className="m-0 font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub3">
                 AI · 데이터 활용 고지
               </h3>
-              <p className="m-0 font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub3 leading-relaxed">
-                이터널마케팅의 AI 분석 결과는 마케팅 전략 수립을 위한 참고 자료로 활용되며,
-                최종 판단과 실행은 전문 마케터의 검토를 통해 이루어집니다. 분석 과정에 활용되는
-                데이터는 내부 기준에 따라 관리되며, 외부에 무단 제공되지 않습니다.
+              <p className="m-0 font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub3 leading-relaxed whitespace-pre-line">
+                {`이터널마케팅의 AI 분석 결과는 마케팅 전략 수립을 위한 참고 자료로 활용되며,\n최종 판단과 실행은 전문 마케터의 검토를 통해 이루어집니다. 분석 과정에 활용되는 \n데이터는 내부 기준에 따라 관리되며,외부에 무단 제공되지 않습니다.`}
               </p>
 
               {/* 소셜 아이콘 */}
@@ -94,7 +90,7 @@ export default function Footer() {
 
         {/* 하단 섹션: 네비게이션 링크와 저작권 */}
         <div
-          className="flex flex-col justify-between items-center gap-4"
+          className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4"
           style={{
             width: '1164px',
             maxWidth: '100%',
@@ -102,7 +98,7 @@ export default function Footer() {
           }}
         >
           {/* 페이지 네비게이션 메뉴 */}
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6">
             <Link
               href="/about"
               className="font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-main no-underline transition-colors hover:text-primary"
@@ -136,7 +132,7 @@ export default function Footer() {
           </div>
 
           {/* 저작권 표시 */}
-          <p className="m-0 font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub1 text-center">
+          <p className="m-0 font-sans text-[11px] sm:text-[12px] font-medium leading-normal text-sub1 text-center lg:text-right">
             © 2025 Eternal Marketing. All Rights Reserved.
           </p>
         </div>
