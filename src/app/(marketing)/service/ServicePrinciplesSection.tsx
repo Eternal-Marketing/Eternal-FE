@@ -60,13 +60,13 @@ function SimpleIcon({ name }: { name: 'headphones' | 'avatar' | 'key' | 'dna' })
 export default function ServicePrinciplesSection() {
   return (
     <section className="bg-white w-full">
-      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-[90px]">
+      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-[130px]">
         <h2 className="m-0 font-sans text-[22px] sm:text-[26px] font-semibold leading-normal text-center text-main">
           마케팅의 새로운 기준, 기본부터 다릅니다.
         </h2>
 
         {/* 연한 보라 스트립 + 4열 원칙 카드 */}
-        <div className="mt-6 sm:mt-8 bg-[#e7ebff] py-8 sm:py-10">
+        <div className="mt-6 sm:mt-8 bg-[#e7ebff] py-14 sm:py-16 lg:py-20">
           <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-4 gap-8 sm:gap-10 items-start justify-items-center">
             <div className="text-center max-w-[280px] mx-auto">
               <CircleIcon>

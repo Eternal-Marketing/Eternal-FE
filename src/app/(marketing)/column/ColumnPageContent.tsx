@@ -50,13 +50,13 @@ const ColumnHero = memo(function ColumnHero() {
           fill
           className="object-cover"
           sizes="100vw"
-          priority
+          loading="eager"
         />
       </div>
       {/* 모바일 배경 */}
       <div className="absolute inset-0 sm:hidden">
         <Image
-          src="/images/about-page/coulmn-mobile.svg"
+          src="/images/pngs/column-mobile-png.png"
           alt=""
           fill
           className="object-contain object-top"
@@ -69,17 +69,17 @@ const ColumnHero = memo(function ColumnHero() {
           className="m-0 mt-0 sm:mt-12 lg:mt-12 font-sans text-[32px] sm:text-[32px] lg:text-[40px] font-bold leading-normal text-center"
           data-node-id="804:497"
         >
-          <span className="text-white/80 block sm:inline">COLUMN</span>
-          <span className="text-[#6d94ff] block sm:inline sm:ml-2">ETERNAL MARKETING</span>
+          <span className="text-[#6d94ff] block sm:inline">ETERNAL MARKETING</span>
+          <span className="text-white/80 block sm:inline sm:ml-2">COLUMN</span>
         </h1>
         <Image
           src="/images/logo.svg"
           alt="Eternal Marketing Logo"
           width={80}
           height={46}
-          className="w-[70px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:hidden"
+          className="w-[70px] sm:w-[80px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:mt-6"
         />
-        <div className="font-sans text-[18px] sm:text-[14px] leading-relaxed text-white text-center sm:absolute sm:bottom-6 sm:left-0 sm:right-0 sm:px-4">
+        <div className="font-sans text-[18px] sm:text-[14px] leading-relaxed text-white text-center sm:mt-8 sm:px-4">
           <p className="m-0 font-sans font-extralight">막막했던 마케팅,</p>
           <p className="m-0 font-sans font-extrabold text-[20px] sm:text-[16px]">이터널의 기준과 데이터로 모두 공개합니다</p>
         </div>

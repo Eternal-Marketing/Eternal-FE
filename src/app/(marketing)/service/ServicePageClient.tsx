@@ -22,13 +22,13 @@ export default function ServicePageClient() {
             fill
             className="object-cover"
             sizes="100vw"
-            priority
+            loading="eager"
           />
         </div>
         {/* 모바일 배경 */}
         <div className="absolute inset-0 sm:hidden">
           <Image
-            src="/images/about-page/service-mobile.svg"
+            src="/images/pngs/service-mobile-png.png"
             alt=""
             fill
             className="object-contain object-top"
@@ -39,17 +39,17 @@ export default function ServicePageClient() {
         <div className="absolute inset-0 bg-black/40 hidden sm:block" />
         <div className="relative z-10 h-full min-h-[726px] sm:min-h-[320px] flex flex-col items-center text-center px-4 pt-0 sm:pt-16 pb-[200px] sm:pb-16 lg:pt-14 lg:pb-20 gap-6 sm:gap-0 justify-center sm:justify-start">
           <h1 className="m-0 mt-0 sm:mt-12 lg:mt-12 font-sans text-[32px] sm:text-[32px] lg:text-[40px] font-bold leading-normal text-center">
-            <span className="text-white/80 block sm:inline">SERVICE</span>
-            <span className="text-[#6d94ff] block sm:inline sm:ml-2">ETERNAL MARKETING</span>
+            <span className="text-[#6d94ff] block sm:inline">ETERNAL MARKETING</span>
+            <span className="text-white/80 block sm:inline sm:ml-2">SERVICE</span>
           </h1>
           <Image
             src="/images/logo.svg"
             alt="Eternal Marketing Logo"
             width={80}
             height={46}
-            className="w-[70px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:hidden"
+            className="w-[70px] sm:w-[80px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:mt-6"
           />
-          <div className="font-sans text-[18px] sm:text-[14px] leading-relaxed text-white text-center sm:absolute sm:bottom-6 sm:left-0 sm:right-0 sm:px-4">
+          <div className="font-sans text-[18px] sm:text-[14px] leading-relaxed text-white text-center sm:mt-8 sm:px-4">
             <p className="m-0 font-sans font-extralight">각종 마케팅 너무 복잡하고 막막하신가요?</p>
             <p className="m-0 font-sans font-extralight">이터널이 제일 잘 하고 자신있는 것</p>
             <p className="m-0 font-sans font-extrabold text-[20px] sm:text-[16px]">대표님의 기준에 맞춰 핵심만 보여드리겠습니다</p>
