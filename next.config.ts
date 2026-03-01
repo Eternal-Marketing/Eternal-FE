@@ -3,8 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
   images: {
-    // 로컬 /public 이미지는 기본 지원. 외부 도메인 쓸 때만 추가
-    // remotePatterns: [{ hostname: 'example.com', pathname: '/images/**' }],
+    formats: ['image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
   },
 };
 

@@ -31,18 +31,18 @@ export default function ServiceIntroSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-white min-h-0 py-10 sm:py-14 lg:min-h-[571px] lg:py-[80px] px-4 sm:px-6 flex items-center"
+      className="bg-white min-h-0 py-16 sm:py-20 lg:min-h-[700px] lg:py-[120px] px-4 sm:px-6 flex items-center"
     >
       <div className={`max-w-[1163px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 sm:gap-12 lg:gap-24 ${visible ? 'service-intro-animate' : ''}`}>
         {/* 왼쪽: 타이틀 2줄 + 본문 문단 (라인별 delay 적용) */}
         <div className="flex-1 w-full">
-          <h2 className="font-sans text-[20px] sm:text-[24px] font-bold leading-tight text-main mb-4 sm:mb-6 space-y-2">
+          <h2 className="font-sans text-[28px] sm:text-[36px] font-bold leading-tight text-main mb-4 sm:mb-6 space-y-2">
             <span className="service-intro-line service-intro-delay-0 block">무분별한 마케팅은 그만,</span>
             <span className="service-intro-line service-intro-delay-1 block">
               <span className="text-primary">정답</span>만 선택하시면 됩니다
             </span>
           </h2>
-          <div className="font-sans text-[14px] sm:text-[16px] font-light leading-relaxed text-main space-y-1">
+          <div className="font-sans text-[17px] sm:text-[20px] font-light leading-relaxed text-main space-y-1">
             <p className="service-intro-line service-intro-delay-2">유입 경로가 많다고 매출이 함께 늘어나는 것은 아닙니다.</p>
             <p className="service-intro-line service-intro-delay-3">선택이 늘어날수록 비용은 새고, 성과는 명확해지지 않습니다.</p>
             <p className="service-intro-line service-intro-delay-4 font-semibold mt-4">효율적인 마케팅은 많이 하는 일이 아니라</p>
@@ -54,7 +54,7 @@ export default function ServiceIntroSection() {
           <img
             src="/images/service-page/checked.svg"
             alt=""
-            className="w-[140px] sm:w-[180px] h-auto"
+            className="w-[220px] sm:w-[280px] h-auto"
           />
         </div>
       </div>
