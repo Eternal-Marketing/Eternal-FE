@@ -878,3 +878,43 @@ body {
   animation: bubble-bounce 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both,
              bubble-float 3s ease-in-out 1.5s infinite;
 }
+
+/* 트렌디 말풍선 shimmer */
+@keyframes cta-pill-shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(300%) skewX(-15deg); }
+}
+
+@keyframes cta-pill-glow {
+  0%, 100% { box-shadow: 0 0 12px 2px rgba(255,255,255,0.06), inset 0 0 10px rgba(255,255,255,0.03); }
+  50%       { box-shadow: 0 0 22px 5px rgba(255,255,255,0.13), inset 0 0 16px rgba(255,255,255,0.06); }
+}
+
+@keyframes cta-pill-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+@keyframes cta-tip-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+.cta-pill-box {
+  animation: cta-pill-glow 2.5s ease-in-out infinite,
+             cta-pill-float 3.5s ease-in-out infinite;
+}
+
+.cta-pill-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+  animation: cta-pill-shimmer 2.8s ease-in-out infinite;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.cta-tip-dot {
+  animation: cta-tip-pulse 2.5s ease-in-out infinite;
+}
