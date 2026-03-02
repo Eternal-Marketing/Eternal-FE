@@ -191,13 +191,14 @@ export default function ReviewSection() {
   const cardH = 'h-[280px] sm:h-[250px] lg:h-[328px]';
 
   return (
-    <section id="review" className="relative overflow-hidden z-30 w-full min-h-[880px] sm:min-h-[1200px] lg:min-h-[1600px] xl:min-h-[1687px]">
+    <section id="review" className="relative overflow-x-hidden z-30 w-full min-h-[880px] sm:min-h-[1200px] lg:min-h-[1600px] xl:min-h-[1687px]">
       <div className="absolute inset-0 w-full h-full">
         <Image src="/images/reviewSection/section.svg" alt="Review Section Background" fill className="object-cover" sizes="100vw" />
       </div>
 
       <div className="absolute inset-0 w-full h-full flex flex-col">
-          <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 desktop:px-[60px] flex-1 flex flex-col">
+        {/* 제목 - 컨테이너 안 */}
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 desktop:px-[60px]">
           <FadeIn>
             <div className="text-center pt-16 sm:pt-24 lg:pt-[241px] pb-10 sm:pb-14 lg:pb-[114px]">
               <h2
@@ -208,28 +209,33 @@ export default function ReviewSection() {
               </h2>
             </div>
           </FadeIn>
+        </div>
 
-          <ScaleIn delay={200}>
-            <div className="flex justify-center items-center pb-12 sm:pb-16 lg:pb-[200px]">
-              <div className="overflow-hidden w-full">
-                <div className="review-scroll">
-                  {[...Array(2)].map((_, repeatIndex) => (
-                    <div key={repeatIndex} className="flex items-center flex-shrink-0">
-                      {reviews.map((review, index) => (
-                        <div
-                          key={`${repeatIndex}-${index}`}
-                          className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 overflow-hidden relative ${cardW} ${cardH}`}
-                        >
-                          <Image src={review.image} alt={`Review ${index + 1}`} fill className="object-contain" sizes="360px" />
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
+        {/* 리뷰 카드 스크롤 - 화면 전체 너비 */}
+        <ScaleIn delay={200}>
+          <div className="pb-12 sm:pb-16 lg:pb-[200px]">
+            <div className="w-screen" style={{ clipPath: 'inset(0 0 0 0)' }}>
+              <div className="review-scroll py-8">
+                {[...Array(2)].map((_, repeatIndex) => (
+                  <div key={repeatIndex} className="flex items-center flex-shrink-0">
+                    {reviews.map((review, index) => (
+                      <div
+                        key={`${repeatIndex}-${index}`}
+                        className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 relative ${cardW} ${cardH} transition-all duration-300 ease-out hover:scale-[1.15] hover:-translate-y-4 hover:z-10`}
+                      >
+                        <Image src={review.image} alt={`Review ${index + 1}`} fill className="object-contain" sizes="360px" />
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
             </div>
-          </ScaleIn>
+          </div>
+        </ScaleIn>
 
+
+        {/* 하단 텍스트 + 상장 - 컨테이너 안 */}
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 desktop:px-[60px] flex-1 flex flex-col">
           <ScaleIn delay={300}>
             <div className="text-center mb-8 sm:mb-10 lg:mb-[60px]">
               <h3 className="font-sans text-[20px] sm:text-[24px] lg:text-[32px] font-bold leading-normal text-inverse text-center">
