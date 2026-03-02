@@ -29,6 +29,7 @@ export default function ServiceCategoryCardsSection({
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+  const [activeCard, setActiveCard] = useState<string | null>(null);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -69,42 +70,46 @@ export default function ServiceCategoryCardsSection({
         <div
           className={`mt-8 sm:mt-10 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 ${visible ? 'service-category-cards-visible' : ''}`}
         >
-          {cards.map((card, idx) => (
-            <div
-              key={card.title}
-              className={`service-category-card flex flex-col items-center group ${idx % 2 === 1 ? 'lg:mt-[56px]' : ''}`}
-            >
-              <div className="service-category-card-inner relative w-full max-w-full sm:max-w-[260px] aspect-square flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl">
-                <img
-                  src={card.imageSrc}
-                  alt=""
-                  className="absolute inset-0 w-full h-full object-contain"
-                />
-                {card.description ? (
-                  <div
-                    className="absolute top-0.5 bottom-0.5 left-3 right-3 sm:left-5 sm:right-5 flex items-center justify-center rounded-[5px] bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-3 py-4 sm:px-4 sm:py-5"
-                    aria-hidden
-                  >
-                    <p className="font-sans text-[12px] sm:text-[14px] leading-relaxed text-white text-center whitespace-pre-line">
-                      {card.description}
-                    </p>
-                  </div>
-                ) : null}
-              </div>
-              <div className="mt-2 sm:mt-4 w-full max-w-full sm:max-w-[260px] text-left pl-1 sm:pl-[17px] mx-auto sm:mx-0">
-                <p className="m-0 font-sans text-[14px] sm:text-[16px] font-medium text-black">
-                  {card.title}
-                </p>
-                <p className="m-0 mt-0.5 sm:mt-1 font-sans text-[13px] sm:text-[16px] font-thin text-sub1">
-                  {card.subtitle}
-                </p>
-              </div>
-            </div>
-          ))}
+          {cards.map((card, idx) => {
+            const isActive = activeCard === card.title;
+            return (
+              <div
+                key={card.title}
+                className={`service-category-card flex flex-col items-center group ${idx % 2 === 1 ? 'lg:mt-[56px]' : ''}`}
+              >
+                <div
+                  className="service-category-card-inner relative w-full max-w-full sm:max-w-[260px] aspect-square flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer"
+                  onClick={() => setActiveCard(isActive ? null : card.title)}
+                >
+                  <img
+                    src={card.imageSrc}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  {card.description ? (
+                    <div
+                      className={`absolute top-0.5 bottom-0.5 left-3 right-3 sm:left-5 sm:right-5 flex items-center justify-center rounded-[5px] bg-black/50 transition-opacity duration-300 px-3 py-4 sm:px-4 sm:py-5 opacity-0 group-hover:opacity-100 ${isActive ? '!opacity-100' : ''}`}
+                      aria-hidden
+                    >
+                      <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                        {card.description}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+                <div className="mt-2 sm:mt-4 w-full max-w-full sm:max-w-[260px] text-left pl-1 sm:pl-[17px] mx-auto sm:mx-0">
+                  <p className="m-0 font-sans text-[14px] sm:text-[16px] font-medium text-black">
+                    {card.title}
+                  </p>
+                  <p className="m-0 mt-0.5 sm:mt-1 font-sans text-[13px] sm:text-[16px] font-thin text-sub1">
+                    {card.subtitle}
+                  </p>
+                </div>
+                </div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
-
-

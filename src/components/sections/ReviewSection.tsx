@@ -187,6 +187,8 @@ export default function ReviewSection() {
     { image: '/images/reviewSection/reward4.svg' },
   ];
 
+  const [activeCard, setActiveCard] = useState<string | null>(null);
+
   const cardW = 'min-w-[340px] w-[340px] sm:min-w-[320px] sm:w-[320px] lg:min-w-[420px] lg:w-[420px]';
   const cardH = 'h-[280px] sm:h-[250px] lg:h-[328px]';
 
@@ -218,14 +220,20 @@ export default function ReviewSection() {
               <div className="review-scroll py-8">
                 {[...Array(2)].map((_, repeatIndex) => (
                   <div key={repeatIndex} className="flex items-center flex-shrink-0">
-                    {reviews.map((review, index) => (
-                      <div
-                        key={`${repeatIndex}-${index}`}
-                        className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 relative ${cardW} ${cardH} transition-all duration-300 ease-out hover:scale-[1.15] hover:-translate-y-4 hover:z-10`}
-                      >
-                        <Image src={review.image} alt={`Review ${index + 1}`} fill className="object-contain" sizes="360px" />
-                      </div>
-                    ))}
+                    {reviews.map((review, index) => {
+                      const cardKey = `${repeatIndex}-${index}`;
+                      const isActive = activeCard === cardKey;
+                      return (
+                        <div
+                          key={cardKey}
+                          className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 relative ${cardW} ${cardH} transition-all duration-300 ease-out hover:scale-[1.15] hover:-translate-y-4 hover:z-10 cursor-pointer`}
+                          style={isActive ? { transform: 'scale(1.15) translateY(-16px)', zIndex: 10 } : {}}
+                          onClick={() => setActiveCard(isActive ? null : cardKey)}
+                        >
+                          <Image src={review.image} alt={`Review ${index + 1}`} fill className="object-contain" sizes="360px" />
+                        </div>
+                      );
+                    })}
                   </div>
                 ))}
               </div>

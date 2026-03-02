@@ -1,320 +1,161 @@
 'use client';
-/**
- * 케이스 스터디 섹션
- * - 슬라이드별 고객 사례(제목 2줄 + 카드 여러 개)
- * - 이전/다음 버튼 + 터치 스와이프, 진입 시 콘텐츠 페이드인
- */
 
-import { useMemo, useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
+import { useRef, useEffect, useState } from 'react';
 
-const SWIPE_THRESHOLD = 50;
-
-type Card = {
-  id: string;
-  title: string;
-  caption: React.ReactNode;
-  lines: string[];
-};
-
-type Slide = {
-  titleLines: [string, string];
-  cards: Card[];
-};
+const SLIDES = [
+  {
+    category: '패션 브랜드 D2C 쇼핑몰',
+    title: '숏폼 마케팅',
+    description: '알고리즘 변화를 지속적으로 반영해 트렌드를 선제적으로 반영하고,\n고객의 기억에 각인되는 숏폼 콘텐츠로 기획·운영합니다',
+    images: ['/images/service-page/service-1.png', '/images/service-page/service-2.png'],
+    tags: ['유투브숏츠', '인스타릴스', '틱톡인피드', '플랫폼별맞춤기획', '알고리즘분석', '노출값극대화', 'AI정답키워드세팅'],
+  },
+];
 
 export default function ServiceCaseStudySection() {
-  // 슬라이드 데이터: S패션/K외식/Y의료 등 고객 유형별 카드 목록
-  const slides = useMemo((): Slide[] => {
-    return [
-      {
-        titleLines: ['S 패션 브랜드 D2C 쇼핑몰', 'D2C 쇼핑몰'],
-        cards: [
-          {
-            id: 'base-setup',
-            title: '기초 사업자 세팅',
-            caption: '초기사업자분들이 놓치기 쉬운 손실 요인을 사전에 차단합니다',
-            lines: [
-              '카카오페이, 쿠팡, 필수AI 사업자 세팅',
-              '플랫폼 별 통합 정리',
-              '업종별 최적화 AI 기본 세팅',
-            ],
-          },
-          {
-            id: 'brand-web-seo',
-            title: '기초 사업자 세팅',
-            caption: (
-              <>
-                브랜드의 고유한 특성과 대표님의 목적을 정밀하게 분석하여
-                <br />
-                기획 및 디자인을 진행하며 매출 전환에 필요한 모든 기능이
-                <br />
-                구현 가능하도록 개발합니다
-              </>
-            ),
-            lines: [
-              '브랜드 아이덴티티 기반 스토리 기획',
-              '브랜드 장르를 반영한 웹 디자인 설계',
-              '검색 알고리즘 분석 기반 SEO 최적화 개발',
-            ],
-          },
-          {
-            id: 'shortform-ops',
-            title: '기초 사업자 세팅',
-            caption: (
-              <>
-                알고리즘을 변화를 지속적으로 반영해 트렌드를 선제적으로 반영하고,
-                <br />
-                고객의 기억에 각인되는 숏폼 콘텐츠로 기획·운영합니다
-              </>
-            ),
-            lines: [
-              '유투브 숏츠, 인스타 릴스, 틱톡 인피드',
-              '플랫폼별 맞춤 기획',
-              '알고리즘 분석 및 최신화',
-              '노출값 극대화',
-              'AI정답 키워드 세팅',
-            ],
-          },
-        ],
-      },
-      {
-        titleLines: ['K', '육류 전문 외식업체'],
-        cards: [
-          {
-            id: 'catering-setting',
-            title: '요식업 전문 세팅',
-            caption: '각 플랫폼별 브랜드 스토리 기반 계정 디자인 통일화',
-            lines: [
-              '검색광고 엔진 시간대, 요일, 상권별 특화 노출 전략 세팅',
-              '(비용대비 최대의 성과로 최적의 효율을 도출합니다)',
-            ],
-          },
-          {
-            id: 'naver-marketing',
-            title: '네이버 마케팅',
-            caption: (
-              <>
-                브랜드의 고유한 특성과 대표님의 목적을 정밀하게 분석하여
-                <br />
-                기획 및 디자인을 진행하며 매출 전환에 필요한 모든 기능이
-                <br />
-                구현 가능하도록 개발합니다
-              </>
-            ),
-            lines: [
-              '브랜드 아이덴티티 기반 스토리 기획',
-              '브랜드 장르를 반영한 웹 디자인 설계',
-              '검색 알고리즘 분석 기반 SEO 최적화 개발',
-            ],
-          },
-          {
-            id: 'meta-search-ads',
-            title: '메타 검색 광고',
-            caption: (
-              <>
-                지역 상권 내에서 인지도와 신뢰를 자연스럽게 구축해
-                <br />
-                친숙한 브랜드 인식을 형성하고 실제 방문으로 이어지도록 설계합니다.
-              </>
-            ),
-            lines: [
-              '지역·검색 기반 AI정답키워드 확립',
-              '광고 계정 전용 세팅',
-              '문구 기획 운영 가이드 제공',
-            ],
-          },
-        ],
-      },
-      {
-        titleLines: ['Y', '의료 서비스 전문 기관'],
-        cards: [
-          {
-            id: 'branding-unify',
-            title: '브랜딩 획일화',
-            caption: (
-              <>
-                브랜드별 이미지·비주얼을 기획·적용하여
-                <br />
-                전문적인 인상 구축과 신뢰 강화를 이룹니다.
-              </>
-            ),
-            lines: [
-              '네이버, 인스타그램, 카카오톡 등 플랫폼별 브랜드 디자인 스킨 제작',
-              '브랜드 전문가 칼럼 콘텐츠 제작',
-              '플랫폼별 설정에 따른 고객 문의 최적화',
-            ],
-          },
-          {
-            id: 'naver-momcafe',
-            title: '네이버 맘카페 커뮤니티 마케팅',
-            caption: (
-              <>
-                지역 상권 내에서 인지도와 신뢰를 자연스럽게 구축해
-                <br />
-                친숙한 브랜드 인식을 형성하고 실제 방문·전환으로 이어지도록 설계합니다.
-              </>
-            ),
-            lines: [
-              '브랜드 특화 자연 노출·신뢰 축적형 후기 구조',
-              '후기 콘텐츠 기획 및 운영',
-            ],
-          },
-        ],
-      },
-    ];
-  }, []);
-
-  const [idx, setIdx] = useState(0);
-  const [direction, setDirection] = useState(0); // 1: 다음, -1: 이전 (애니 클래스용)
-  const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const touchStartX = useRef(0);
+  const [visible, setVisible] = useState(false);
+  const [current, setCurrent] = useState(0);
+  const total = SLIDES.length;
 
-  const canPrev = idx > 0;
-  const canNext = idx < slides.length - 1;
-  const currentSlide = slides[idx];
-  const cards = currentSlide.cards;
-
-  // 섹션 진입 시 isInView → 콘텐츠 opacity 전환 (CSS)
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsInView(true);
+          setVisible(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.1 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  // 터치 스와이프: 일정 거리 이상이면 이전/다음 슬라이드
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const endX = e.changedTouches[0].clientX;
-    const diff = endX - touchStartX.current;
-    if (diff < -SWIPE_THRESHOLD) goNext();
-    else if (diff > SWIPE_THRESHOLD) goPrev();
-  };
+  const fade = (delay: number) => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? 'translateY(0)' : 'translateY(18px)',
+    transition: `opacity 0.65s ease-out ${delay}ms, transform 0.65s ease-out ${delay}ms`,
+  });
 
-  const goPrev = () => {
-    if (!canPrev) return;
-    setDirection(-1);
-    setIdx((v) => v - 1);
-  };
-  const goNext = () => {
-    if (!canNext) return;
-    setDirection(1);
-    setIdx((v) => v + 1);
-  };
-
-  const slideAnimationClass =
-    direction === 1
-      ? 'animate-slide-in-from-right'
-      : direction === -1
-        ? 'animate-slide-in-from-left'
-        : 'animate-fade-in-up';
+  const slide = SLIDES[current];
 
   return (
-    <section
-      ref={sectionRef}
-      className={`relative w-full overflow-hidden ${isInView ? 'case-study-in-view' : ''}`}
-    >
-      {/* 배경 이미지 */}
-      <div className="absolute inset-0">
-        <img
-          src="/images/service-page/d2c-background.svg"
-          alt=""
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <section ref={sectionRef} className="w-full bg-[#f6f6f6] overflow-hidden">
+      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-[60px]">
 
-      <div className="case-study-content relative z-10 w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-[180px] opacity-0">
-        {/* 현재 슬라이드 제목 2줄 */}
-        <h2 className="m-0 font-sans text-[18px] sm:text-[20px] font-semibold text-white text-center leading-tight">
-          {currentSlide.titleLines[0]}
-          <br />
-          {currentSlide.titleLines[1]}
-        </h2>
+        {/* 상단 텍스트 — 중앙 정렬 */}
+        <div className="text-center">
+          <p className="m-0 font-sans text-[12px] sm:text-[13px] font-semibold text-primary tracking-[0.12em] uppercase" style={fade(0)}>
+            {slide.category}
+          </p>
+          <h2 className="m-0 mt-2 font-sans text-[26px] sm:text-[32px] lg:text-[38px] font-bold text-main leading-tight" style={fade(80)}>
+            {slide.title}
+          </h2>
+          <p className="m-0 mt-4 font-sans text-[13px] sm:text-[15px] font-light text-sub1 leading-[1.85] max-w-[500px] mx-auto whitespace-pre-line text-left" style={fade(160)}>
+            {slide.description}
+          </p>
+        </div>
 
-        {/* 이전 버튼 + 카드 그리드 + 다음 버튼 (스와이프 지원) */}
-        <div
-          className="mt-8 sm:mt-12 lg:mt-20 flex items-center justify-center gap-2 sm:gap-4 lg:gap-6 touch-pan-y"
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
+        {/* 화살표 + 폰 목업 */}
+        <div className="mt-12 sm:mt-16 relative flex items-end justify-center gap-5 sm:gap-8 lg:gap-10">
+
+          {/* 왼쪽 화살표 */}
           <button
-            type="button"
-            onClick={goPrev}
-            disabled={!canPrev}
-            className={`group flex-shrink-0 p-1 sm:p-2 disabled:opacity-40 ${canPrev ? 'case-study-swipe-hint-left' : ''}`}
-            aria-label="Previous"
+            onClick={() => setCurrent((c) => (c - 1 + total) % total)}
+            disabled={total <= 1}
+            className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center justify-center text-[#555555] hover:text-[#222222] transition-colors duration-200 disabled:opacity-20 disabled:cursor-not-allowed z-10"
+            aria-label="이전"
           >
-            <svg
-              viewBox="0 0 30 53"
-              fill="none"
-              className="w-5 h-9 sm:w-7 sm:h-[50px] -scale-x-100 [&_path]:transition-[fill] [&_path]:duration-300 [&_path]:fill-white/70 group-hover:[&_path]:fill-white"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M1.09835 1.10219C2.56282 -0.367397 4.93718 -0.367397 6.40165 1.10219L28.9017 23.6809C30.3661 25.1505 30.3661 27.5331 28.9017 29.0027L6.40165 51.5814C4.93718 53.051 2.56282 53.051 1.09835 51.5814C-0.366117 50.1118 -0.366117 47.7292 1.09835 46.2596L20.9467 26.3418L1.09835 6.42404C-0.366117 4.95445 -0.366117 2.57178 1.09835 1.10219Z"
-              />
+            <svg width="32" height="54" viewBox="0 0 28 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="22 4 6 24 22 44" />
             </svg>
           </button>
 
-          {/* 현재 슬라이드 카드들: 모바일 1열, 태블릿·lg는 카드 수에 따라 2열 또는 3열(3개일 때 빈 칸 없음) */}
+          {/* 왼쪽 폰 — 살짝 아래 */}
           <div
-            key={idx}
-            className={`grid grid-cols-1 gap-3 sm:gap-4 lg:gap-5 max-w-[900px] w-full ${cards.length === 2 ? 'sm:grid-cols-2 lg:grid-cols-2' : 'sm:grid-cols-3 lg:grid-cols-3'} ${slideAnimationClass}`}
+            className="relative w-[145px] sm:w-[195px] lg:w-[245px] aspect-[271/574]"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateY(32px)' : 'translateY(60px)',
+              transition: 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms',
+            }}
           >
-            {cards.map((c) => (
-              <div
-                key={c.id}
-                className="rounded-[5px] bg-white/85 shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] px-3 py-3 sm:px-4 sm:py-5 min-w-0"
-              >
-                <p className="m-0 font-sans text-[13px] sm:text-[18px] font-medium text-main leading-tight">{c.title}</p>
-                <p className="m-0 mt-1 sm:mt-3 font-sans text-[10px] sm:text-[11px] font-light text-sub1 leading-relaxed">
-                  {c.caption}
-                </p>
-                <div className="mt-1.5 sm:mt-4 font-sans text-[11px] sm:text-[13px] text-main leading-relaxed">
-                  {c.lines.map((line) => (
-                    <p key={line} className="m-0">
-                      {line}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            ))}
+            <Image
+              src={slide.images[0]}
+              alt={`${slide.title} 예시 1`}
+              fill
+              className="object-contain"
+              sizes="(max-width: 640px) 145px, (max-width: 1024px) 195px, 245px"
+            />
           </div>
 
-          <button
-            type="button"
-            onClick={goNext}
-            disabled={!canNext}
-            className={`group flex-shrink-0 p-1 sm:p-2 disabled:opacity-40 ${canNext ? 'case-study-swipe-hint-right' : ''}`}
-            aria-label="Next"
+          {/* 오른쪽 폰 — 위에 */}
+          <div
+            className="relative w-[145px] sm:w-[195px] lg:w-[245px] aspect-[271/574]"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateY(0)' : 'translateY(60px)',
+              transition: 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms',
+            }}
           >
-            <svg
-              viewBox="0 0 30 53"
-              fill="none"
-              className="w-5 h-9 sm:w-7 sm:h-[50px] [&_path]:transition-[fill] [&_path]:duration-300 [&_path]:fill-white/70 group-hover:[&_path]:fill-white"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M1.09835 1.10219C2.56282 -0.367397 4.93718 -0.367397 6.40165 1.10219L28.9017 23.6809C30.3661 25.1505 30.3661 27.5331 28.9017 29.0027L6.40165 51.5814C4.93718 53.051 2.56282 53.051 1.09835 51.5814C-0.366117 50.1118 -0.366117 47.7292 1.09835 46.2596L20.9467 26.3418L1.09835 6.42404C-0.366117 4.95445 -0.366117 2.57178 1.09835 1.10219Z"
-              />
+            <Image
+              src={slide.images[1]}
+              alt={`${slide.title} 예시 2`}
+              fill
+              className="object-contain"
+              sizes="(max-width: 640px) 145px, (max-width: 1024px) 195px, 245px"
+            />
+          </div>
+
+          {/* 오른쪽 화살표 */}
+          <button
+            onClick={() => setCurrent((c) => (c + 1) % total)}
+            disabled={total <= 1}
+            className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center text-[#555555] hover:text-[#222222] transition-colors duration-200 disabled:opacity-20 disabled:cursor-not-allowed z-10"
+            aria-label="다음"
+          >
+            <svg width="32" height="54" viewBox="0 0 28 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 4 22 24 6 44" />
             </svg>
           </button>
         </div>
+
+        {/* 페이지 인디케이터 */}
+        {total > 1 && (
+          <div className="mt-6 flex justify-center gap-1.5" style={fade(400)}>
+            {SLIDES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`rounded-full transition-all duration-300 ${i === current ? 'w-5 h-1.5 bg-sub2' : 'w-1.5 h-1.5 bg-sub3/50'}`}
+                aria-label={`슬라이드 ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* 하단 해시태그 목록 */}
+        <div className="mt-10 sm:mt-12 flex flex-wrap justify-center gap-2 sm:gap-2.5" style={fade(520)}>
+          {slide.tags.map((tag, i) => (
+            <span
+              key={tag}
+              className="font-sans text-[12px] sm:text-[13px] font-medium text-primary/80 hover:text-primary transition-colors duration-200 cursor-default"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(8px)',
+                transition: `opacity 0.5s ease-out ${520 + i * 60}ms, transform 0.5s ease-out ${520 + i * 60}ms`,
+              }}
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
+
       </div>
     </section>
   );
 }
-

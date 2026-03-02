@@ -37,14 +37,43 @@ export default function ServiceCTABanner() {
       <div className="cta-banner-spread-right absolute inset-y-0 right-0 w-1/2 bg-[#07276c]" aria-hidden />
       {/* 문구 + 악수 이미지 */}
       <div className="cta-banner-content relative z-10 max-w-[900px] mx-auto flex flex-col lg:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-24">
-        <div className="font-sans text-[18px] sm:text-[22px] lg:text-[26px] font-medium leading-relaxed text-white text-center lg:text-left">
-          <p>복잡한 마케팅은 맡겨주세요</p>
-          <p>기획부터 실행, 관리까지 이터널이 정답입니다</p>
+        <div className="text-center lg:text-left">
+          <div
+            className="font-sans leading-relaxed text-white transition-all duration-700 ease-out"
+            style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(20px)', transitionDelay: '300ms' }}
+          >
+            <p className="m-0 text-[16px] sm:text-[20px] lg:text-[22px] font-light text-white/70 tracking-wide">
+              복잡한 마케팅은 맡겨주세요
+            </p>
+            <p className="m-0 mt-3 text-[22px] sm:text-[30px] lg:text-[36px] font-extrabold leading-tight tracking-tight">
+              기획부터 실행, 관리까지
+              <br />
+              <span className="relative inline-block mt-1">
+                <span className="relative z-10">
+                  이터널이{' '}
+                  <span
+                    className="relative inline-block px-2 transition-all duration-700"
+                    style={{
+                      transitionDelay: '800ms',
+                    }}
+                  >
+                    <span
+                      className="absolute inset-0 rounded-md bg-white/20 transition-transform duration-700 origin-left"
+                      style={{ transform: visible ? 'scaleX(1)' : 'scaleX(0)', transitionDelay: '800ms' }}
+                    />
+                    <span className="relative z-10">정답입니다</span>
+                  </span>
+                </span>
+              </span>
+            </p>
+          </div>
+
         </div>
         <img
           src="/images/service-page/handshake.svg"
           alt=""
           className="w-[180px] sm:w-[220px] lg:w-[260px] h-auto"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? 'scale(1)' : 'scale(0.85)', transition: 'all 0.7s ease-out', transitionDelay: '600ms' }}
         />
       </div>
     </section>

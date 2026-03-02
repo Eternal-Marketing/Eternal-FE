@@ -48,15 +48,15 @@ export default function ServicePerformanceSection() {
           <div className="service-category-card flex flex-col items-center group">
             <div className="service-category-card-inner relative w-full min-h-[220px] sm:min-h-[260px] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl">
               <img
-                src="/images/service-page/responsive.svg"
+                src="/images/service-page/service-responsive.png"
                 alt=""
                 className="absolute inset-0 w-full h-full object-contain"
               />
               <div
-                className="absolute inset-0 rounded-xl sm:rounded-2xl lg:top-0.5 lg:bottom-0.5 lg:left-11 lg:right-11 lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
+                className="absolute inset-0 rounded-xl sm:rounded-2xl lg:top-0 lg:bottom-0.5 lg:left-[65px] lg:right-[65px] lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
                 aria-hidden
               >
-                <p className="font-sans text-[12px] sm:text-[14px] leading-relaxed text-white text-center whitespace-pre-line">
+                <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                   브랜드DNA 기반 디자인과{'\n'}탑티어급 SEO 최적화 세팅
                 </p>
               </div>
@@ -75,10 +75,10 @@ export default function ServicePerformanceSection() {
                 className="absolute inset-0 w-full h-full object-contain"
               />
               <div
-                className="absolute inset-0 rounded-xl sm:rounded-2xl lg:top-0.5 lg:bottom-0.5 lg:left-11 lg:right-11 lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
+                className="absolute inset-0 rounded-xl sm:rounded-2xl lg:top-0 lg:bottom-0.5 lg:left-[65px] lg:right-[65px] lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
                 aria-hidden
               >
-                <p className="font-sans text-[12px] sm:text-[14px] leading-relaxed text-white text-center whitespace-pre-line">
+                <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                   대표 플랫폼 상위노출{'\n'}최고효율 운영
                 </p>
               </div>

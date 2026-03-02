@@ -87,7 +87,7 @@ export default function ServicePageClient() {
           {
             title: 'Homepage Brand Blog',
             subtitle: '홈페이지형 브랜드 블로그 기획',
-            imageSrc: '/images/service-page/homepagebrandblog.svg',
+            imageSrc: '/images/service-page/service-homepage.png',
             description: '브랜드스토리 기반\n톤앤매너로\n브랜드 계정 획일화',
           },
         ]}
@@ -122,7 +122,7 @@ export default function ServicePageClient() {
           {
             title: 'Hot Deal Community',
             subtitle: '핫딜 커뮤니티',
-            imageSrc: '/images/service-page/hot-deal.svg',
+            imageSrc: '/images/service-page/service-hotdeal.png',
             description: '단기간 매출을 집중적으로 끌어올리는\n실시간 이벤트형 전환 전략',
           },
         ]}
