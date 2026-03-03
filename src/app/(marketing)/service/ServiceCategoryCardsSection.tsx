@@ -6,6 +6,7 @@
  */
 
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 
 type Card = {
   title: string;
@@ -81,11 +82,7 @@ export default function ServiceCategoryCardsSection({
                   className="service-category-card-inner relative w-full max-w-full sm:max-w-[260px] aspect-square flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer"
                   onClick={() => setActiveCard(isActive ? null : card.title)}
                 >
-                  <img
-                    src={card.imageSrc}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
+                  <Image src={card.imageSrc} alt="" fill quality={90} className="object-cover" sizes="(max-width: 640px) 50vw, 260px" />
                   {card.description ? (
                     <div
                       className={`absolute top-[-2px] bottom-0.5 left-3 right-3 sm:left-[5px] sm:right-[5px] flex items-center justify-center rounded-[5px] bg-black/50 transition-opacity duration-300 px-3 py-4 sm:px-4 sm:py-5 opacity-0 group-hover:opacity-100 ${isActive ? '!opacity-100' : ''}`}

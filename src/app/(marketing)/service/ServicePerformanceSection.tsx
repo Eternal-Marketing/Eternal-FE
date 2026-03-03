@@ -6,6 +6,7 @@
  */
 
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export default function ServicePerformanceSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -47,10 +48,13 @@ export default function ServicePerformanceSection() {
         >
           <div className="service-category-card flex flex-col items-center group">
             <div className="service-category-card-inner relative w-full min-h-[220px] sm:min-h-[260px] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl">
-              <img
+              <Image
                 src="/images/service-page/service-responsive.png"
                 alt=""
-                className="absolute inset-0 w-full h-full object-contain"
+                fill
+                quality={90}
+                className="object-contain"
+                sizes="(max-width: 640px) 50vw, 560px"
               />
               <div
                 className="absolute inset-0 rounded-xl sm:rounded-2xl lg:top-0 lg:bottom-0.5 lg:left-[65px] lg:right-[65px] lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
@@ -69,10 +73,12 @@ export default function ServicePerformanceSection() {
 
           <div className="service-category-card flex flex-col items-center group">
             <div className="service-category-card-inner relative w-full min-h-[220px] sm:min-h-[260px] flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl">
-              <img
+              <Image
                 src="/images/service-page/seo.svg"
                 alt=""
-                className="absolute inset-0 w-full h-full object-contain"
+                fill
+                className="object-contain"
+                sizes="(max-width: 640px) 50vw, 560px"
               />
               <div
                 className="absolute inset-0 rounded-xl sm:rounded-2xl lg:top-0 lg:bottom-0.5 lg:left-[65px] lg:right-[65px] lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
