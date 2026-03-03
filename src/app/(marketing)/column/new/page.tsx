@@ -3,12 +3,13 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { createColumn, ApiClientError, uploadMedia } from '@/lib/api';
 import type { CreateColumnPayload } from '@/lib/api';
 import { hasTokens } from '@/lib/auth/token';
 import CategorySelect from '@/components/shared/CategorySelect';
 import { useCategories } from '@/hooks/useCategories';
+import { getCategoryCode, getCategoryIndex } from '../categorySlug';
 
 /** 제목에서 URL용 슬러그 자동 생성 (영문·숫자·하이픈만 허용, 공백→하이픈) */
 function slugFromTitle(title: string): string {
@@ -25,6 +26,8 @@ function slugFromTitle(title: string): string {
 
 export default function ColumnNewPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const categorySlugFromUrl = searchParams.get('categorySlug');
   const [mounted, setMounted] = useState(false);
   const { categories } = useCategories(false);
   const [form, setForm] = useState<Omit<CreateColumnPayload, 'slug' | 'status'> & { slug?: string }>({
@@ -52,12 +55,19 @@ export default function ColumnNewPage() {
     }
   }, [mounted, router]);
 
-  // API 카테고리가 로드되면 첫 번째 카테고리를 기본값으로 설정
+  // API 카테고리가 로드되면 URL의 categorySlug에 맞는 카테고리로 설정, 없으면 categoryCode로 폴백
   useEffect(() => {
-    if (categories.length > 0 && !form.categoryId && !form.categoryCode) {
-      setForm((p) => ({ ...p, categoryId: categories[0].id, categoryCode: undefined }));
+    if (categories.length > 0) {
+      const target = categorySlugFromUrl
+        ? categories.find((c) => c.slug === categorySlugFromUrl)
+        : categories[0];
+      const cat = target ?? categories[0];
+      setForm((p) => ({ ...p, categoryId: cat.id, categoryCode: undefined }));
+    } else if (categorySlugFromUrl) {
+      const code = getCategoryCode(getCategoryIndex(categorySlugFromUrl));
+      setForm((p) => ({ ...p, categoryId: undefined, categoryCode: code }));
     }
-  }, [categories]);
+  }, [categories, categorySlugFromUrl]);
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -103,12 +113,15 @@ export default function ColumnNewPage() {
         ...form,
         slug,
         status: 'PUBLISHED',
-        thumbnailUrl: thumbnailUrl || '',
+        thumbnailUrl: thumbnailUrl || '/images/column/column-background.svg',
         categoryId: form.categoryId || undefined,
         categoryCode: form.categoryId ? undefined : form.categoryCode,
       });
       setSuccess(true);
-      setTimeout(() => router.push('/column'), 1500);
+      const redirectTo = categorySlugFromUrl && categorySlugFromUrl !== 'bayiral'
+        ? `/column/category/${categorySlugFromUrl}`
+        : '/column';
+      setTimeout(() => router.push(redirectTo), 1500);
     } catch (err) {
       setError(err instanceof ApiClientError ? err.message : '칼럼 생성에 실패했습니다.');
     } finally {

@@ -195,7 +195,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
               {/* 데스크탑: 칼럼 생성하기 탭과 같은 줄 오른쪽 */}
               {mounted && hasTokens() && (
                 <Link
-                  href="/column/new"
+                  href={`/column/new?categorySlug=${encodeURIComponent(activeSlug)}`}
                   className="hidden sm:inline-block ml-auto py-2 px-4 font-sans text-[14px] font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors no-underline"
                 >
                   칼럼 생성하기
@@ -207,7 +207,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
             {mounted && hasTokens() && (
               <div className="sm:hidden mt-3">
                 <Link
-                  href="/column/new"
+                  href={`/column/new?categorySlug=${encodeURIComponent(activeSlug)}`}
                   className="inline-block py-2 px-4 font-sans text-[14px] font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors no-underline"
                 >
                   칼럼 생성하기
