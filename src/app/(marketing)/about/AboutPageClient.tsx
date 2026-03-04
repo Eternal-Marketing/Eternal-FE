@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { createContext, useContext, useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import DiagnosisSection from '@/components/sections/DiagnosisSection';
+import OurTeamChart from './OurTeamChart';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -100,6 +101,28 @@ function SlideInRight({ children, delay = 0 }: { children: React.ReactNode; dela
   );
 }
 
+const ExpandBackgroundContext = createContext(false);
+
+function ExpandHighlight({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const visible = useContext(ExpandBackgroundContext);
+  return (
+    <span className="relative inline-block">
+      <span
+        className="absolute inset-0 rounded-md bg-white/10"
+        style={{
+          transformOrigin: 'left',
+          transform: visible ? 'scaleX(1)' : 'scaleX(0)',
+          transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)',
+          transitionDelay: `${delay}ms`,
+          zIndex: 0,
+        }}
+        aria-hidden
+      />
+      <span className="relative z-10 text-white font-semibold px-2 py-0.5">{children}</span>
+    </span>
+  );
+}
+
 function ExpandBackground({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -119,25 +142,27 @@ function ExpandBackground({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div ref={ref} className="relative w-full overflow-hidden bg-white">
-      <div
-        className="absolute inset-0 bg-primary"
-        style={{
-          transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
-          transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-          transformOrigin: 'center',
-        }}
-      />
-      <div
-        className="relative z-10"
-        style={{
-          opacity: isVisible ? 1 : 0,
-          transition: 'opacity 0.5s ease-out 0.4s',
-        }}
-      >
-        {children}
+    <ExpandBackgroundContext.Provider value={isVisible}>
+      <div ref={ref} className="relative w-full overflow-hidden bg-white">
+        <div
+          className="absolute inset-0 bg-primary"
+          style={{
+            transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
+            transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+            transformOrigin: 'center',
+          }}
+        />
+        <div
+          className="relative z-10"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transition: 'opacity 0.5s ease-out 0.4s',
+          }}
+        >
+          {children}
+        </div>
       </div>
-    </div>
+    </ExpandBackgroundContext.Provider>
   );
 }
 
@@ -236,10 +261,10 @@ export default function AboutPageClient() {
             height={46}
             className="w-[70px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:hidden"
           />
-          <div className="font-sans text-[18px] sm:text-[14px] leading-relaxed text-white text-center sm:absolute sm:bottom-6 sm:left-0 sm:right-0 sm:px-4">
+          <div className="font-sans text-[18px] sm:text-[16px] lg:text-[18px] leading-relaxed text-white text-center sm:absolute sm:bottom-6 sm:left-0 sm:right-0 sm:px-4">
             <p className="m-0 font-sans font-extralight">마케팅을 얼마나 진지하게 다루는지,</p>
             <p className="m-0 font-sans font-extralight">그리고 왜 결과가 다른지</p>
-            <p className="m-0 font-sans font-extrabold text-[20px] sm:text-[16px]">기준에서 드러납니다</p>
+            <p className="m-0 font-sans font-extrabold text-[22px] sm:text-[20px] lg:text-[22px]">기준에서 드러납니다</p>
           </div>
         </div>
       </section>
@@ -257,12 +282,12 @@ export default function AboutPageClient() {
             </SlideInLeft>
             <div className={`flex-1 flex flex-col sm:block items-center sm:items-start text-center sm:text-left ${storyVisible ? 'about-story-animate' : ''}`}>
               <h3 className="about-story-line about-story-delay-0 m-0 font-sans text-[24px] sm:text-[24px] lg:text-[30px] font-bold leading-normal text-main">왜 결과는 항상 같을까요?</h3>
-              <div className="mt-4 sm:mt-[10px] font-sans text-[18px] sm:text-[16px] lg:text-[20px] leading-[2] sm:leading-relaxed text-main sm:text-main" style={{color: undefined}}>
+              <div className="mt-6 sm:mt-4 font-sans text-[18px] sm:text-[16px] lg:text-[20px] leading-[2] sm:leading-relaxed text-main sm:text-main" style={{color: undefined}}>
                 <p className="about-story-line about-story-delay-1 m-0 text-gray-600 sm:text-main">마케팅은 늘 진행되고 있었지만</p>
-                <p className="about-story-line about-story-delay-2 m-0 text-gray-600 sm:text-main">정작 '왜 이걸 하는지'는 설명되지 않았습니다</p>
-                <p className="about-story-line about-story-delay-3 m-0 text-gray-600 sm:text-main">실행은 많았지만</p>
-                <p className="about-story-line about-story-delay-4 m-0 text-gray-600 sm:text-main">판단은 없었고,</p>
-                <p className="about-story-line about-story-delay-5 m-0 text-gray-600 sm:text-main">성과는 남지 않았습니다.</p>
+                <p className="about-story-line about-story-delay-2 m-0 mt-1 text-gray-600 sm:text-main">정작 '왜 이걸 하는지'는 설명되지 않았습니다</p>
+                <p className="about-story-line about-story-delay-3 m-0 mt-3 text-gray-600 sm:text-main">실행은 많았지만</p>
+                <p className="about-story-line about-story-delay-4 m-0 mt-1 text-gray-600 sm:text-main">판단은 없었고,</p>
+                <p className="about-story-line about-story-delay-5 m-0 mt-1 text-gray-600 sm:text-main">성과는 남지 않았습니다.</p>
               </div>
             </div>
           </div>
@@ -282,13 +307,16 @@ export default function AboutPageClient() {
               <span className="text-white/80 text-[24px]">을 던지는 것에서 시작했습니다</span>
             </p>
           </div>
-          {/* 데스크탑 전용 */}
-          <div className="hidden sm:block">
-            <p className="m-0 font-sans font-semibold leading-[38px]">
-              <span className="text-white text-[28px] lg:text-[40px]">이터널마케팅</span>
-              <span className="text-white/80 text-[22px] lg:text-[30px]">은 이 비효율적인 구조에 </span>
-              <span className="text-white text-[28px] lg:text-[40px]">질문</span>
-              <span className="text-white/80 text-[22px] lg:text-[30px]">을 던지는 것에서 시작했습니다</span>
+          {/* 데스크탑 전용 - 마케팅 인텔리전스 섹션과 동일한 형광 하이라이트 스윽 애니메이션 */}
+          <div className="hidden sm:block text-center">
+            <p className="m-0 font-sans font-semibold text-[28px] lg:text-[36px] leading-relaxed">
+              <ExpandHighlight delay={600}>이터널마케팅</ExpandHighlight>
+              <span className="text-white/70">은</span>
+            </p>
+            <p className="m-0 mt-2 font-sans font-semibold text-[24px] lg:text-[32px] leading-relaxed">
+              <span className="text-white/70">이 비효율적인 구조에 </span>
+              <ExpandHighlight delay={1000}>질문</ExpandHighlight>
+              <span className="text-white/70">을 던지는 것에서 시작했습니다</span>
             </p>
           </div>
         </div>
@@ -299,19 +327,19 @@ export default function AboutPageClient() {
 
           {/* 모바일 레이아웃 */}
           <div className={`sm:hidden ${whyEternalVisible ? 'about-story-animate' : ''}`}>
-            <h2 className="about-story-line about-story-delay-0 m-0 -mt-10 font-sans text-[32px] font-bold leading-normal text-main text-center">
+            <h2 className="about-story-line about-story-delay-0 m-0 -mt-10 font-sans text-[36px] font-bold leading-normal text-main text-center">
               <span className="text-primary">이터널</span>이 기준이 되는 이유
             </h2>
 
             <SlideInRight delay={200}>
               <div className="relative w-full max-w-[220px] mx-auto mt-16 mb-8">
                 <Image src="/images/about-page/infinity.svg" alt="" width={300} height={225} className="w-full h-auto" sizes="300px" />
-                <span className="absolute top-[-16px] left-[14%] text-[11px] text-main">구조 재설계</span>
-                <span className="absolute top-[-16px] right-[10%] text-[11px] text-main">세밀 분석</span>
-                <span className="absolute top-[50%] left-[-24px] -translate-y-1/2 text-[11px] text-main">최적화</span>
-                <span className="absolute top-[50%] right-[-24px] -translate-y-1/2 text-[11px] text-main">최적화</span>
-                <span className="absolute bottom-[-16px] right-[10%] text-[11px] text-main">정밀 판단</span>
-                <span className="absolute bottom-[-16px] left-[14%] text-[11px] text-main">고효율 실행</span>
+                <span className="absolute top-[-16px] left-[14%] text-[14px] text-main">구조 재설계</span>
+                <span className="absolute top-[-16px] right-[10%] text-[14px] text-main">세밀 분석</span>
+                <span className="absolute top-[50%] left-[-24px] -translate-y-1/2 text-[14px] text-main">최적화</span>
+                <span className="absolute top-[50%] right-[-24px] -translate-y-1/2 text-[14px] text-main">최적화</span>
+                <span className="absolute bottom-[-16px] right-[10%] text-[14px] text-main">정밀 판단</span>
+                <span className="absolute bottom-[-16px] left-[14%] text-[14px] text-main">고효율 실행</span>
               </div>
             </SlideInRight>
 
@@ -330,7 +358,7 @@ export default function AboutPageClient() {
           {/* 데스크탑 레이아웃 */}
           <div className={`hidden sm:flex flex-col lg:flex-row gap-8 lg:gap-10 items-center ${whyEternalVisible ? 'about-story-animate' : ''}`}>
             <div className="flex-1 pl-0 lg:pl-[80px]">
-              <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[28px] lg:text-[40px] font-bold leading-normal text-main">
+              <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[32px] lg:text-[48px] font-bold leading-normal text-main">
                 <span className="text-primary">이터널</span>이 기준이 되는 이유
               </h2>
               <div className="mt-4 font-sans text-[16px] lg:text-[20px] font-extralight leading-relaxed text-main">
@@ -348,12 +376,12 @@ export default function AboutPageClient() {
             <SlideInRight delay={400}>
               <div className="relative w-full max-w-[360px] lg:max-w-none lg:w-[400px] flex-shrink-0 lg:ml-[120px] mx-auto lg:mx-0">
                 <Image src="/images/about-page/infinity.svg" alt="" width={400} height={300} className="w-full h-auto" sizes="(max-width: 1024px) 100vw, 400px" />
-                <span className="absolute top-[-20px] left-[75px] text-body-sm text-main">구조 재설계</span>
-                <span className="absolute top-[-20px] left-[255px] text-body-sm text-main">세밀 분석</span>
-                <span className="absolute top-[50%] left-[-44px] -translate-y-1/2 text-body-sm text-main">최적화</span>
-                <span className="absolute top-[50%] right-[-44px] -translate-y-1/2 text-body-sm text-main">최적화</span>
-                <span className="absolute bottom-[-20px] left-[255px] text-body-sm text-main">정밀 판단</span>
-                <span className="absolute bottom-[-20px] left-[75px] text-body-sm text-main">고효율 실행</span>
+                <span className="absolute top-[-20px] left-[75px] text-[15px] sm:text-[16px] text-main">구조 재설계</span>
+                <span className="absolute top-[-20px] left-[255px] text-[15px] sm:text-[16px] text-main">세밀 분석</span>
+                <span className="absolute top-[50%] left-[-44px] -translate-y-1/2 text-[15px] sm:text-[16px] text-main">최적화</span>
+                <span className="absolute top-[50%] right-[-44px] -translate-y-1/2 text-[15px] sm:text-[16px] text-main">최적화</span>
+                <span className="absolute bottom-[-20px] left-[255px] text-[15px] sm:text-[16px] text-main">정밀 판단</span>
+                <span className="absolute bottom-[-20px] left-[75px] text-[15px] sm:text-[16px] text-main">고효율 실행</span>
               </div>
             </SlideInRight>
           </div>
@@ -370,7 +398,20 @@ export default function AboutPageClient() {
         <div className={`relative z-10 w-full max-w-[1163px] mx-auto px-4 sm:px-6 h-full min-h-[420px] sm:min-h-[520px] lg:min-h-0 ${intelligenceVisible ? 'about-story-animate' : ''}`}>
           <h2 className="about-story-line about-story-delay-0 m-0 pt-24 sm:pt-24 lg:pt-[200px] font-sans text-[26px] sm:text-[26px] lg:text-[40px] font-bold leading-normal text-white text-right">
             마케팅의 정답을 가려내는{' '}
-            <span className="bg-primary px-2 sm:px-3 py-0.5 sm:py-1">인텔리전스</span>
+            <span className="relative inline-block">
+              <span
+                className="absolute inset-0 rounded bg-primary"
+                style={{
+                  transformOrigin: 'left',
+                  transform: intelligenceVisible ? 'scaleX(1)' : 'scaleX(0)',
+                  transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)',
+                  transitionDelay: '400ms',
+                  zIndex: 0,
+                }}
+                aria-hidden
+              />
+              <span className="relative z-10 px-2 sm:px-3 py-0.5 sm:py-1 text-white">인텔리전스</span>
+            </span>
           </h2>
 
           <div className="absolute right-4 sm:right-6 left-4 sm:left-auto top-[160px] sm:top-[220px] lg:top-[300px] text-right font-sans text-[17px] sm:text-[16px] lg:text-[20px] leading-relaxed lg:leading-[36px] text-white drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
@@ -398,16 +439,7 @@ export default function AboutPageClient() {
           </div>
 
           <div className="about-story-line about-story-delay-4 mt-6 sm:mt-8 w-full overflow-hidden">
-            <img
-              src="/images/about-page/our%20team.svg"
-              alt="이터널마케팅 조직 구조 - 판단 설계 실행 관리"
-              className="hidden sm:block w-full h-auto max-w-[720px] mx-auto"
-            />
-            <img
-              src="/images/about-page/our_team_mobile.svg"
-              alt="이터널마케팅 조직 구조 - 판단 설계 실행 관리"
-              className="block sm:hidden w-[80%] h-auto mx-auto"
-            />
+            <OurTeamChart visible={teamVisible} />
           </div>
         </div>
       </section>

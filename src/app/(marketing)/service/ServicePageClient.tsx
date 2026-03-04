@@ -49,10 +49,10 @@ export default function ServicePageClient() {
             height={46}
             className="w-[70px] sm:w-[80px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:mt-6"
           />
-          <div className="font-sans text-[18px] sm:text-[14px] leading-relaxed text-white text-center sm:mt-8 sm:px-4">
+          <div className="font-sans text-[19px] sm:text-[17px] lg:text-[18px] leading-relaxed text-white text-center sm:mt-8 sm:px-4">
             <p className="m-0 font-sans font-extralight">각종 마케팅 너무 복잡하고 막막하신가요?</p>
             <p className="m-0 font-sans font-extralight">이터널이 제일 잘 하고 자신있는 것</p>
-            <p className="m-0 font-sans font-extrabold text-[20px] sm:text-[16px]">대표님의 기준에 맞춰 핵심만 보여드리겠습니다</p>
+            <p className="m-0 font-sans font-extrabold text-[22px] sm:text-[18px] lg:text-[21px]">대표님의 기준에 맞춰 핵심만 보여드리겠습니다</p>
           </div>
         </div>
       </section>
@@ -87,7 +87,7 @@ export default function ServicePageClient() {
           {
             title: 'Homepage Brand Blog',
             subtitle: '홈페이지형 브랜드 블로그 기획',
-            imageSrc: '/images/service-page/homepagebrandblog.svg',
+            imageSrc: '/images/service-page/service-homepage.png',
             description: '브랜드스토리 기반\n톤앤매너로\n브랜드 계정 획일화',
           },
         ]}
@@ -122,7 +122,7 @@ export default function ServicePageClient() {
           {
             title: 'Hot Deal Community',
             subtitle: '핫딜 커뮤니티',
-            imageSrc: '/images/service-page/hot-deal.svg',
+            imageSrc: '/images/service-page/service-hotdeal.png',
             description: '단기간 매출을 집중적으로 끌어올리는\n실시간 이벤트형 전환 전략',
           },
         ]}

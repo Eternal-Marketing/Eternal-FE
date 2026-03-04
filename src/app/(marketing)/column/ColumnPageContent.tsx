@@ -98,7 +98,6 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
-  const [showAllTabs, setShowAllTabs] = useState(false);
 
   // 현재 선택된 카테고리 slug를 state로 관리 (URL 변경 없이 전환)
   const useApiCategories = categories.length > 0;
@@ -175,7 +174,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
           >
             {/* 탭 목록 + 데스크탑에서만 칼럼생성하기 같은 줄 */}
             <div className="flex flex-wrap items-center gap-2 sm:gap-4">
-              {(showAllTabs ? tabList : tabList.slice(0, 4)).map((cat) => {
+              {tabList.map((cat) => {
                 const globalIdx = tabList.indexOf(cat);
                 const isFirst = globalIdx === 0;
                 return (
@@ -193,19 +192,10 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
                   </button>
                 );
               })}
-              {tabList.length > 4 && (
-                <button
-                  type="button"
-                  onClick={() => setShowAllTabs((v) => !v)}
-                  className="py-1 px-0 font-sans text-[14px] sm:text-[16px] font-light text-sub2 border-b-2 border-gray-300 hover:text-primary hover:border-primary transition-all duration-200 bg-transparent cursor-pointer"
-                >
-                  {showAllTabs ? '접기 ↑' : '더보기 ↓'}
-                </button>
-              )}
               {/* 데스크탑: 칼럼 생성하기 탭과 같은 줄 오른쪽 */}
               {mounted && hasTokens() && (
                 <Link
-                  href="/column/new"
+                  href={`/column/new?categorySlug=${encodeURIComponent(activeSlug)}`}
                   className="hidden sm:inline-block ml-auto py-2 px-4 font-sans text-[14px] font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors no-underline"
                 >
                   칼럼 생성하기
@@ -217,7 +207,7 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
             {mounted && hasTokens() && (
               <div className="sm:hidden mt-3">
                 <Link
-                  href="/column/new"
+                  href={`/column/new?categorySlug=${encodeURIComponent(activeSlug)}`}
                   className="inline-block py-2 px-4 font-sans text-[14px] font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors no-underline"
                 >
                   칼럼 생성하기

@@ -94,3 +94,25 @@ export const TIME_CODES: ContactTimeCode[] = [
   'ANY',
   'OTHER',
 ];
+
+/** API 코드 → 한글 라벨 변환 (진단상세·콘솔 표시용) */
+export function industryCodeToLabel(code: string): string {
+  const idx = INDUSTRY_CODES.indexOf(code as (typeof INDUSTRY_CODES)[number]);
+  return idx >= 0 ? INDUSTRY_LABELS[idx] : code;
+}
+export function concernCodeToLabel(code: string): string {
+  const idx = CONCERN_CODES.indexOf(code as (typeof CONCERN_CODES)[number]);
+  return idx >= 0 ? CONCERN_LABELS[idx] : code;
+}
+export function marketingStatusCodeToLabel(code: string): string {
+  const idx = MARKETING_STATUS_CODES.indexOf(code as (typeof MARKETING_STATUS_CODES)[number]);
+  return idx >= 0 ? MARKETING_STATUS_LABELS[idx] : code;
+}
+export function channelCodeToLabel(code: string): string {
+  const idx = CHANNEL_CODES.indexOf(code as (typeof CHANNEL_CODES)[number]);
+  return idx >= 0 ? CHANNEL_LABELS[idx] : code;
+}
+export function timeCodeToLabel(code: string): string {
+  const idx = TIME_CODES.indexOf(code as (typeof TIME_CODES)[number]);
+  return idx >= 0 ? TIME_LABELS[idx] : code;
+}

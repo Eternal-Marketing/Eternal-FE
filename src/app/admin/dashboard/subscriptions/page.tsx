@@ -5,6 +5,13 @@ import { getSubscriptions, getSubscriptionById, deleteSubscription, ApiClientErr
 import type { Subscription } from '@/lib/api';
 import AdminDashboardLayout from '@/components/admin/AdminDashboardLayout';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import {
+  industryCodeToLabel,
+  concernCodeToLabel,
+  marketingStatusCodeToLabel,
+  channelCodeToLabel,
+  timeCodeToLabel,
+} from '@/app/(marketing)/ai-diagnosis/subscriptionMappings';
 
 function formatDate(iso?: string): string {
   if (!iso) return '-';
@@ -205,31 +212,31 @@ export default function AdminSubscriptionsPage() {
               </div>
               <div>
                 <dt className="text-white/50 mb-0.5">업종</dt>
-                <dd className="text-white">{detailModal.industry} {detailModal.industryOther ? `(${detailModal.industryOther})` : ''}</dd>
+                <dd className="text-white">{industryCodeToLabel(detailModal.industry)}{detailModal.industryOther ? ` (${detailModal.industryOther})` : ''}</dd>
               </div>
               <div>
-                <dt className="text-white/50 mb-0.5">고민 영역</dt>
-                <dd className="text-white">{detailModal.concerns?.join(', ') || '-'}</dd>
+                <dt className="text-white/50 mb-0.5">현재 가장 고민되는 영역</dt>
+                <dd className="text-white">{detailModal.concerns?.map(concernCodeToLabel).join(', ') || '-'}</dd>
               </div>
               <div>
-                <dt className="text-white/50 mb-0.5">마케팅 진행 상태</dt>
-                <dd className="text-white">{detailModal.marketingStatus}</dd>
+                <dt className="text-white/50 mb-0.5">현재 마케팅 진행 상태</dt>
+                <dd className="text-white">{marketingStatusCodeToLabel(detailModal.marketingStatus)}</dd>
               </div>
               <div>
-                <dt className="text-white/50 mb-0.5">관심 채널</dt>
-                <dd className="text-white">{detailModal.interestedChannels?.join(', ') || '-'} {detailModal.channelsOther ? `(${detailModal.channelsOther})` : ''}</dd>
+                <dt className="text-white/50 mb-0.5">관심 있는 마케팅 채널</dt>
+                <dd className="text-white">{detailModal.interestedChannels?.map(channelCodeToLabel).join(', ') || '-'}{detailModal.channelsOther ? ` (${detailModal.channelsOther})` : ''}</dd>
               </div>
               <div>
                 <dt className="text-white/50 mb-0.5">지역</dt>
                 <dd className="text-white">{detailModal.region || '-'}</dd>
               </div>
               <div>
-                <dt className="text-white/50 mb-0.5">연락 가능 시간</dt>
-                <dd className="text-white">{detailModal.contactTimeSlots?.join(', ') || '-'} {detailModal.contactTimeOther ? `(${detailModal.contactTimeOther})` : ''}</dd>
+                <dt className="text-white/50 mb-0.5">연락 가능 시간대</dt>
+                <dd className="text-white">{detailModal.contactTimeSlots?.map(timeCodeToLabel).join(', ') || '-'}{detailModal.contactTimeOther ? ` (${detailModal.contactTimeOther})` : ''}</dd>
               </div>
               {detailModal.message && (
                 <div>
-                  <dt className="text-white/50 mb-0.5">추가 메시지</dt>
+                  <dt className="text-white/50 mb-0.5">추가로 공유하고 싶은 사항</dt>
                   <dd className="text-white whitespace-pre-wrap">{detailModal.message}</dd>
                 </div>
               )}

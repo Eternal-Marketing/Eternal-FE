@@ -171,9 +171,9 @@ function SlideInRight({ children, delay = 0, className = '', style = {} }: { chi
 
 export default function InfiniteSection() {
   const stepCardClass = 'relative step-card rounded-xl';
-  const stepCardInner = 'p-3 sm:p-4';
-  const stepTitleClass = 'font-sans text-[18px] sm:text-[14px] font-bold leading-normal text-main text-center sm:text-left';
-  const stepDescClass = 'font-sans text-[13px] sm:text-[12px] font-medium leading-normal text-sub1 text-center sm:text-left';
+  const stepCardInner = 'p-4 sm:p-5 lg:p-6';
+  const stepTitleClass = 'font-sans text-[18px] sm:text-[16px] lg:text-[18px] font-bold leading-normal text-main text-center sm:text-left';
+  const stepDescClass = 'font-sans text-[13px] sm:text-[13px] lg:text-[14px] font-medium leading-relaxed text-sub1 text-center sm:text-left';
 
   return (
     <section 
@@ -240,7 +240,7 @@ export default function InfiniteSection() {
           {/* STEP 01 */}
             <SlideInLeft 
               delay={400} 
-              className="order-1 w-full mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%-250px)] lg:left-[15%]"
+              className="order-1 w-full mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[320px] lg:top-[calc(35%-250px)] lg:left-[13%]"
             >
               <div className="sm:hidden border-b border-black/8 py-6 flex flex-col items-center text-center">
                 <Image src="/images/reviewSection/Magnifier.svg" alt="Magnifier Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
@@ -269,7 +269,7 @@ export default function InfiniteSection() {
           {/* STEP 02 */}
             <SlideInRight 
               delay={500} 
-              className="order-2 w-full mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%+150px)] lg:right-[15%]"
+              className="order-2 w-full mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[320px] lg:top-[calc(35%+150px)] lg:right-[13%]"
             >
               <div className="sm:hidden border-b border-black/8 py-6 flex flex-col items-center text-center">
                 <Image src="/images/reviewSection/people.svg" alt="People Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
@@ -296,7 +296,7 @@ export default function InfiniteSection() {
           {/* STEP 03 */}
             <SlideInRight 
               delay={600} 
-              className="order-4 w-full mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%-250px)] lg:right-[15%]"
+              className="order-4 w-full mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[320px] lg:top-[calc(35%-250px)] lg:right-[13%]"
             >
               <div className="sm:hidden border-b border-black/8 py-6 flex flex-col items-center text-center">
                 <Image src="/images/reviewSection/arrows.svg" alt="Arrow Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
@@ -323,7 +323,7 @@ export default function InfiniteSection() {
           {/* STEP 04 */}
             <SlideInLeft 
               delay={700} 
-              className="order-5 w-full mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[280px] lg:top-[calc(35%+150px)] lg:left-[15%]"
+              className="order-5 w-full mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[320px] lg:top-[calc(35%+150px)] lg:left-[13%]"
             >
               <div className="sm:hidden py-6 flex flex-col items-center text-center">
                 <Image src="/images/reviewSection/pen.svg" alt="Pen Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />

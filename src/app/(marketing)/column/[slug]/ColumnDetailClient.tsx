@@ -2,9 +2,11 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { getColumnById, getColumnBySlug } from '@/lib/api';
-import type { Column } from '@/lib/api';
+import Image from 'next/image';
+import { getColumnById, getColumnBySlug, getColumns } from '@/lib/api';
+import type { Column, ColumnCategoryCode } from '@/lib/api';
 import AdminColumnActions from '@/components/column/AdminColumnActions';
+import { getCategoryCode, getCategoryIndex } from '../categorySlug';
 
 function formatDate(isoString: string): string {
   try {
@@ -17,16 +19,32 @@ function formatDate(isoString: string): string {
     return isoString;
   }
 }
+function formatDateShort(isoString: string): string {
+  try {
+    return new Date(isoString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  } catch {
+    return isoString;
+  }
+}
+
+const DEFAULT_THUMBNAIL = '/images/column/column-background.svg';
 
 export default function ColumnDetailClient({ slug }: { slug: string }) {
   const [column, setColumn] = useState<Column | null>(null);
+  const [relatedColumns, setRelatedColumns] = useState<Column[]>([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
     setNotFound(false);
+    setImgError(false);
 
     const looksLikeUuid =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(slug);
@@ -44,6 +62,7 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
           return;
         }
         setColumn(data);
+        setImgError(false);
       })
       .catch(() => {
         if (cancelled) return;
@@ -61,11 +80,32 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
     };
   }, [slug]);
 
+  useEffect(() => {
+    if (!column) return;
+    const categoryId = column.categoryId;
+    const categoryCode: ColumnCategoryCode | undefined = column.category?.slug
+      ? getCategoryCode(getCategoryIndex(column.category.slug))
+      : undefined;
+    getColumns({
+      limit: 6,
+      status: 'PUBLISHED',
+      categoryId: categoryId || undefined,
+      categoryCode: categoryId ? undefined : (categoryCode ?? 'VIRAL_MARKETING'),
+      orderBy: 'publishedAt',
+      orderDirection: 'desc',
+    })
+      .then(({ columns }) => {
+        const filtered = columns.filter((c) => c.id !== column.id).slice(0, 3);
+        setRelatedColumns(filtered);
+      })
+      .catch(() => setRelatedColumns([]));
+  }, [column]);
+
   const categoryName = useMemo(() => column?.category?.name ?? '칼럼', [column]);
-  const thumbnailSrc = useMemo(
-    () => column?.thumbnailUrl || '/images/column/column-background.svg',
-    [column],
-  );
+  const thumbnailSrc = useMemo(() => {
+    if (imgError || !column?.thumbnailUrl?.trim()) return DEFAULT_THUMBNAIL;
+    return column.thumbnailUrl;
+  }, [column, imgError]);
   const publishedDate = useMemo(() => (column?.publishedAt ? formatDate(column.publishedAt) : ''), [column]);
 
   if (loading) {
@@ -156,22 +196,27 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
             {publishedDate}
           </span>
           <div className="flex items-center gap-2">
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <img src="/images/footer/Instagram.svg" alt="" className="w-[13px] h-[13px]" />
-            </a>
-            <a href="https://www.kakaocorp.com" target="_blank" rel="noreferrer" aria-label="Kakao">
+            <a href="https://open.kakao.com/me/eternalmarketing" target="_blank" rel="noreferrer" aria-label="카카오톡 오픈채팅">
               <img src="/images/footer/kakao.svg" alt="" className="w-[10px] h-[9px]" />
+            </a>
+            <a href="https://www.instagram.com/eternal__marketing?igsh=MWVhNHF2dXBiYmU0dw%3D%3D" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <img src="/images/footer/Instagram.svg" alt="" className="w-[13px] h-[13px]" />
             </a>
           </div>
         </div>
 
-        <div className="w-full h-[280px] mb-10 overflow-hidden" data-node-id="804:803">
-          <img src={thumbnailSrc} alt="" className="w-full h-full object-cover" />
+        <div className="w-full h-[280px] mb-10 overflow-hidden bg-[#e5e5e5]" data-node-id="804:803">
+          <img
+            src={thumbnailSrc}
+            alt=""
+            className="w-full h-full object-cover"
+            onError={() => setImgError(true)}
+          />
         </div>
 
         {column.content && (
           <div
-            className="font-sans text-[14px] font-normal leading-relaxed text-main mb-10"
+            className="column-body font-sans text-[17px] font-normal leading-[1.75] text-main mb-10"
             dangerouslySetInnerHTML={{ __html: column.content }}
           />
         )}
@@ -181,27 +226,66 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
             Share article
           </p>
           <div className="flex items-center gap-3">
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <img src="/images/footer/Instagram.svg" alt="" className="w-[24px] h-[24px]" data-node-id="804:805" />
-            </a>
-            <a href="https://www.kakaocorp.com" target="_blank" rel="noreferrer" aria-label="Kakao">
+            <a href="https://open.kakao.com/me/eternalmarketing" target="_blank" rel="noreferrer" aria-label="카카오톡 오픈채팅">
               <img src="/images/footer/kakao.svg" alt="" className="w-[18px] h-[18px]" data-node-id="804:804" />
+            </a>
+            <a href="https://www.instagram.com/eternal__marketing?igsh=MWVhNHF2dXBiYmU0dw%3D%3D" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <img src="/images/footer/Instagram.svg" alt="" className="w-[24px] h-[24px]" data-node-id="804:805" />
             </a>
           </div>
         </div>
 
-        <section className="mt-10" data-node-id="804:806">
+        <section className="mt-10">
           <div className="flex items-center justify-between mb-4">
             <h3 className="m-0 font-sans text-[22px] font-semibold leading-normal text-main">더 많은 칼럼</h3>
             <Link
               href="/column"
               className="font-sans text-[12px] font-light text-main no-underline hover:text-primary transition-colors"
-              data-node-id="804:808"
             >
               See more posts &gt;
             </Link>
           </div>
-          <div className="w-full h-[1px] bg-sub3/50 mb-6" data-node-id="804:807" />
+          <div className="w-full h-[1px] bg-sub3/50 mb-6" />
+          {relatedColumns.length > 0 ? (
+            <div className="space-y-0 divide-y divide-[#eee]">
+              {relatedColumns.map((c) => (
+                <Link
+                  key={c.id}
+                  href={`/column/${c.slug}`}
+                  className="flex gap-4 py-5 first:pt-0 last:pb-0 no-underline text-main hover:opacity-90 transition-opacity"
+                >
+                  <div className="flex-1 min-w-0">
+                    <h4 className="m-0 font-sans text-[16px] font-semibold leading-snug text-main mb-1 line-clamp-2">
+                      {c.title}
+                    </h4>
+                    {c.excerpt && (
+                      <p className="m-0 font-sans text-[14px] font-normal leading-relaxed text-main line-clamp-2 mb-2">
+                        {c.excerpt}
+                      </p>
+                    )}
+                    <span className="font-sans text-[12px] font-light text-sub3">
+                      {c.publishedAt ? formatDateShort(c.publishedAt) : ''}
+                    </span>
+                  </div>
+                  <div className="flex-shrink-0 w-[120px] h-[80px] rounded overflow-hidden bg-[#e5e5e5]">
+                    <Image
+                      src={c.thumbnailUrl || DEFAULT_THUMBNAIL}
+                      alt=""
+                      width={120}
+                      height={80}
+                      className="w-full h-full object-cover"
+                      unoptimized={c.thumbnailUrl?.startsWith('http')}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = DEFAULT_THUMBNAIL;
+                      }}
+                    />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p className="font-sans text-[14px] text-sub2 py-4">다른 칼럼이 없습니다.</p>
+          )}
         </section>
       </article>
     </main>

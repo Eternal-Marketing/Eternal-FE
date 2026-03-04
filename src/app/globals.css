@@ -292,6 +292,17 @@ body {
   animation: scroll-reviews 25s linear infinite;
 }
 
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 /* 버튼 글로우 펄스 애니메이션 */
 @keyframes button-glow {
   0%, 100% {
@@ -867,3 +878,112 @@ body {
   animation: bubble-bounce 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both,
              bubble-float 3s ease-in-out 1.5s infinite;
 }
+
+
+@keyframes cta-pill-shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(300%) skewX(-15deg); }
+}
+
+@keyframes cta-pill-glow {
+  0%, 100% { box-shadow: 0 0 12px 2px rgba(255,255,255,0.06), inset 0 0 10px rgba(255,255,255,0.03); }
+  50%       { box-shadow: 0 0 22px 5px rgba(255,255,255,0.13), inset 0 0 16px rgba(255,255,255,0.06); }
+}
+
+@keyframes cta-pill-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+@keyframes cta-tip-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+.cta-pill-box {
+  animation: cta-pill-glow 2.5s ease-in-out infinite,
+             cta-pill-float 3.5s ease-in-out infinite;
+}
+
+.cta-pill-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+  animation: cta-pill-shimmer 2.8s ease-in-out infinite;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.cta-tip-dot {
+  animation: cta-tip-pulse 2.5s ease-in-out infinite;
+}
+
+/* TipTap / ProseMirror 에디터 */
+.ProseMirror {
+  min-height: 200px;
+  outline: none;
+  font-size: 15px;
+}
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--color-sub3);
+  pointer-events: none;
+  height: 0;
+}
+/* 에디터 내 제목 스타일 (px + !important로 확실히 적용) */
+.column-editor-body .ProseMirror h1,
+.column-editor-body h1 { font-size: 28px !important; font-weight: 700 !important; margin: 0.9em 0 0.4em; line-height: 1.3; }
+.column-editor-body .ProseMirror h2,
+.column-editor-body h2 { font-size: 22px !important; font-weight: 600 !important; margin: 0.8em 0 0.35em; line-height: 1.35; }
+.column-editor-body .ProseMirror h3,
+.column-editor-body h3 { font-size: 18px !important; font-weight: 600 !important; margin: 0.7em 0 0.3em; line-height: 1.4; }
+/* 에디터 내 목록·인용구 (작성 중에도 보이도록 - Tailwind preflight 덮어씀) */
+.column-editor-prose ul,
+.column-editor-body .ProseMirror ul,
+.column-editor-body ul {
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+  padding-left: 1.8em !important;
+  margin: 0.6em 0 !important;
+}
+.column-editor-prose ol,
+.column-editor-body .ProseMirror ol,
+.column-editor-body ol {
+  list-style-type: decimal !important;
+  list-style-position: outside !important;
+  padding-left: 1.8em !important;
+  margin: 0.6em 0 !important;
+}
+.column-editor-prose li,
+.column-editor-body .ProseMirror li,
+.column-editor-body li {
+  margin: 0.25em 0 !important;
+  display: list-item !important;
+}
+.column-editor-prose blockquote,
+.column-editor-body .ProseMirror blockquote,
+.column-editor-body blockquote {
+  margin: 0.8em 0 !important;
+  padding: 0.5em 1em !important;
+  padding-left: 1em !important;
+  border-left: 4px solid var(--color-primary) !important;
+  background: rgba(24, 75, 186, 0.06) !important;
+  color: var(--color-sub1);
+  border-radius: 0 6px 6px 0;
+}
+
+/* 칼럼 상세 본문 (TipTap HTML 렌더링) */
+.column-body h1 { font-size: 1.5em; font-weight: 700; margin: 1.25em 0 0.5em; }
+.column-body h2 { font-size: 1.25em; font-weight: 600; margin: 1.1em 0 0.5em; }
+.column-body h3 { font-size: 1.1em; font-weight: 600; margin: 1em 0 0.4em; }
+.column-body p { margin: 0.6em 0; }
+.column-body ul, .column-body ol { margin: 0.6em 0; padding-left: 1.5em; }
+.column-body blockquote {
+  margin: 0.8em 0;
+  padding-left: 1em;
+  border-left: 3px solid var(--color-primary);
+  color: var(--color-sub1);
+}
+.column-body a { color: var(--color-primary); text-decoration: underline; }

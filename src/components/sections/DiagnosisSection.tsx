@@ -231,15 +231,36 @@ export default function DiagnosisSection() {
                 <Link href="/ai-diagnosis" className="diagnosis-cta-btn inline-block no-underline">
                   AI 진단 받기
                 </Link>
-                {/* 말풍선 - 버튼 오른쪽 */}
-                <div className="flex justify-end -mt-2 translate-x-[80px] sm:translate-x-[110px]">
-                  <Image
-                    src="/images/Group 86.svg"
-                    alt="진단 참여만으로 실무용 AI 세팅 가이드 받아보세요"
-                    width={140}
-                    height={60}
-                    className="w-[120px] sm:w-[130px] h-auto animate-bubble-bounce"
-                  />
+                {/* 유리 말풍선 */}
+                <div className="flex flex-col items-center mt-3" style={{ animation: 'cta-pill-float 3.5s ease-in-out infinite' }}>
+                  {/* 삼각형 꼭지 */}
+                  <svg width="60" height="18" viewBox="0 0 60 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 0 L60 18 L0 18 Z" fill="rgba(255,255,255,0.15)" />
+                  </svg>
+                  {/* 유리 박스 */}
+                  <div
+                    className="relative text-center overflow-hidden"
+                    style={{
+                      padding: '14px 30px',
+                      borderRadius: '18px',
+                      background: 'linear-gradient(160deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%)',
+                      backdropFilter: 'blur(20px)',
+                      WebkitBackdropFilter: 'blur(20px)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      boxShadow: '0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.25)',
+                    }}
+                  >
+                    {/* 유리 상단 광택 */}
+                    <span className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)' }} />
+                    {/* 유리 좌측 광택 */}
+                    <span className="absolute top-0 bottom-0 left-0 w-[1px]" style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.3), transparent)' }} />
+                    <p className="m-0 text-white/90 text-[13px] sm:text-[14px] font-semibold leading-relaxed">
+                      진단 참여만으로 실무용
+                    </p>
+                    <p className="m-0 text-white/90 text-[13px] sm:text-[14px] font-semibold leading-relaxed">
+                      AI 세팅 가이드 받아보세요
+                    </p>
+                  </div>
                 </div>
               </div>
             </ScaleIn>

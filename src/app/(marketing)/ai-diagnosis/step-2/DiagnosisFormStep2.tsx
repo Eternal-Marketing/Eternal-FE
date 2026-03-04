@@ -139,11 +139,6 @@ export default function DiagnosisFormStep2() {
 
   return (
     <form className="mt-4 sm:mt-[22px]" onSubmit={(e) => e.preventDefault()}>
-      {submitSuccess && (
-        <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
-          상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
-        </div>
-      )}
       {submitError && (
         <div className="mb-6 p-4 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-600 font-sans text-[14px]" role="alert">
           {submitError}
@@ -268,6 +263,11 @@ export default function DiagnosisFormStep2() {
         >
           {submitting ? '신청 중...' : '진단 신청하기'}
         </button>
+        {submitSuccess && (
+          <div className="mt-6 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px] text-center">
+            상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
+          </div>
+        )}
       </div>
     </form>
   );

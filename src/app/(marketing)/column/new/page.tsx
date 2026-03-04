@@ -1,14 +1,16 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { Suspense, useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { createColumn, ApiClientError, uploadMedia } from '@/lib/api';
 import type { CreateColumnPayload } from '@/lib/api';
 import { hasTokens } from '@/lib/auth/token';
 import CategorySelect from '@/components/shared/CategorySelect';
+import ColumnEditor from '@/components/column/ColumnEditor';
 import { useCategories } from '@/hooks/useCategories';
+import { getCategoryCode, getCategoryIndex } from '../categorySlug';
 
 /** 제목에서 URL용 슬러그 자동 생성 (영문·숫자·하이픈만 허용, 공백→하이픈) */
 function slugFromTitle(title: string): string {
@@ -23,8 +25,10 @@ function slugFromTitle(title: string): string {
   return slug || `column-${Date.now()}`;
 }
 
-export default function ColumnNewPage() {
+function ColumnNewContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const categorySlugFromUrl = searchParams.get('categorySlug');
   const [mounted, setMounted] = useState(false);
   const { categories } = useCategories(false);
   const [form, setForm] = useState<Omit<CreateColumnPayload, 'slug' | 'status'> & { slug?: string }>({
@@ -52,12 +56,19 @@ export default function ColumnNewPage() {
     }
   }, [mounted, router]);
 
-  // API 카테고리가 로드되면 첫 번째 카테고리를 기본값으로 설정
+  // API 카테고리가 로드되면 URL의 categorySlug에 맞는 카테고리로 설정, 없으면 categoryCode로 폴백
   useEffect(() => {
-    if (categories.length > 0 && !form.categoryId && !form.categoryCode) {
-      setForm((p) => ({ ...p, categoryId: categories[0].id, categoryCode: undefined }));
+    if (categories.length > 0) {
+      const target = categorySlugFromUrl
+        ? categories.find((c) => c.slug === categorySlugFromUrl)
+        : categories[0];
+      const cat = target ?? categories[0];
+      setForm((p) => ({ ...p, categoryId: cat.id, categoryCode: undefined }));
+    } else if (categorySlugFromUrl) {
+      const code = getCategoryCode(getCategoryIndex(categorySlugFromUrl));
+      setForm((p) => ({ ...p, categoryId: undefined, categoryCode: code }));
     }
-  }, [categories]);
+  }, [categories, categorySlugFromUrl]);
 
   const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -88,9 +99,18 @@ export default function ColumnNewPage() {
     return media.url;
   };
 
+  const isEmptyContent = (html: string) => {
+    const t = html?.replace(/<[^>]+>/g, '').trim() ?? '';
+    return !t;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    if (isEmptyContent(form.content)) {
+      setError('본문을 입력해 주세요.');
+      return;
+    }
     setSuccess(false);
     setSubmitting(true);
     try {
@@ -103,14 +123,21 @@ export default function ColumnNewPage() {
         ...form,
         slug,
         status: 'PUBLISHED',
-        thumbnailUrl: thumbnailUrl || '',
+        thumbnailUrl: thumbnailUrl || '/images/column/column-background.svg',
         categoryId: form.categoryId || undefined,
         categoryCode: form.categoryId ? undefined : form.categoryCode,
       });
       setSuccess(true);
-      setTimeout(() => router.push('/column'), 1500);
+      const redirectTo = categorySlugFromUrl && categorySlugFromUrl !== 'bayiral'
+        ? `/column/category/${categorySlugFromUrl}`
+        : '/column';
+      setTimeout(() => router.push(redirectTo), 1500);
     } catch (err) {
-      setError(err instanceof ApiClientError ? err.message : '칼럼 생성에 실패했습니다.');
+      const raw = err instanceof ApiClientError ? err.message : '칼럼 생성에 실패했습니다.';
+      const msg = /slug already exists/i.test(raw)
+        ? '이미 같은 제목의 칼럼이 있습니다. 다른 제목으로 작성해 주세요.'
+        : raw;
+      setError(msg);
     } finally {
       setSubmitting(false);
     }
@@ -131,12 +158,6 @@ export default function ColumnNewPage() {
         </p>
 
         <h1 className="font-sans text-2xl sm:text-3xl font-bold text-main mb-8">칼럼 생성하기</h1>
-
-        {success && (
-          <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
-            칼럼이 생성되었습니다. 칼럼 목록으로 이동합니다.
-          </div>
-        )}
 
         {error && (
           <div className="mb-6 p-4 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-600 font-sans text-[14px]" role="alert">
@@ -214,14 +235,11 @@ export default function ColumnNewPage() {
 
           <div>
             <label htmlFor="content" className="block font-sans text-[13px] font-medium text-main mb-1.5">본문 *</label>
-            <textarea
-              id="content"
-              required
-              rows={10}
+            <ColumnEditor
               value={form.content}
-              onChange={(e) => setForm((p) => ({ ...p, content: e.target.value }))}
-              className="w-full px-4 py-3 rounded-lg border border-[#ddd] bg-white text-main font-sans text-[14px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-y"
+              onChange={(html) => setForm((p) => ({ ...p, content: html }))}
               placeholder="칼럼 본문 내용..."
+              minHeight="320px"
             />
           </div>
 
@@ -251,9 +269,22 @@ export default function ColumnNewPage() {
             >
               목록으로
             </Link>
+            {success && (
+              <div className="w-full mt-4 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
+                칼럼이 생성되었습니다. 칼럼 목록으로 이동합니다.
+              </div>
+            )}
           </div>
         </form>
       </section>
     </main>
+  );
+}
+
+export default function ColumnNewPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-main">로딩 중...</div>}>
+      <ColumnNewContent />
+    </Suspense>
   );
 }

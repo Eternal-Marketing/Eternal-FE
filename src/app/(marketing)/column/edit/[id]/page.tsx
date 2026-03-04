@@ -8,6 +8,7 @@ import { getColumnById, updateColumn, ApiClientError, uploadMedia } from '@/lib/
 import type { Column, UpdateColumnPayload, ColumnCategoryCode } from '@/lib/api';
 import { hasTokens } from '@/lib/auth/token';
 import CategorySelect from '@/components/shared/CategorySelect';
+import ColumnEditor from '@/components/column/ColumnEditor';
 
 /** 제목에서 URL용 슬러그 자동 생성 */
 function slugFromTitle(title: string): string {
@@ -92,10 +93,20 @@ export default function ColumnEditPage() {
     if (thumbnailInputRef.current) thumbnailInputRef.current.value = '';
   };
 
+  const isEmptyContent = (html: string) => {
+    const t = html?.replace(/<[^>]+>/g, '').trim() ?? '';
+    return !t;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!column) return;
     setError('');
+    const contentToCheck = form.content ?? column.content ?? '';
+    if (isEmptyContent(contentToCheck)) {
+      setError('본문을 입력해 주세요.');
+      return;
+    }
     setSuccess(false);
     setSubmitting(true);
     try {
@@ -110,7 +121,7 @@ export default function ColumnEditPage() {
         slug: newSlug,
         content: form.content ?? column.content,
         excerpt: form.excerpt ?? column.excerpt,
-        thumbnailUrl: thumbnailUrl || '',
+        thumbnailUrl: thumbnailUrl || '/images/column/column-background.svg',
         status: 'PUBLISHED',
         categoryId: form.categoryId ?? column.categoryId ?? undefined,
         categoryCode: (form.categoryId ?? column.categoryId) ? undefined : (form.categoryCode ?? 'VIRAL_MARKETING'),
@@ -118,7 +129,11 @@ export default function ColumnEditPage() {
       setSuccess(true);
       setTimeout(() => router.push(`/column/id/${updated.id}`), 1500);
     } catch (err) {
-      setError(err instanceof ApiClientError ? err.message : '칼럼 수정에 실패했습니다.');
+      const raw = err instanceof ApiClientError ? err.message : '칼럼 수정에 실패했습니다.';
+      const msg = /slug already exists/i.test(raw)
+        ? '이미 같은 제목의 칼럼이 있습니다. 다른 제목으로 수정해 주세요.'
+        : raw;
+      setError(msg);
     } finally {
       setSubmitting(false);
     }
@@ -144,12 +159,6 @@ export default function ColumnEditPage() {
         </p>
 
         <h1 className="font-sans text-2xl sm:text-3xl font-bold text-main mb-8">칼럼 수정하기</h1>
-
-        {success && (
-          <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
-            칼럼이 수정되었습니다. 상세 페이지로 이동합니다.
-          </div>
-        )}
 
         {error && (
           <div className="mb-6 p-4 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-600 font-sans text-[14px]" role="alert">
@@ -225,13 +234,11 @@ export default function ColumnEditPage() {
 
           <div>
             <label htmlFor="content" className="block font-sans text-[13px] font-medium text-main mb-1.5">본문 *</label>
-            <textarea
-              id="content"
-              required
-              rows={10}
+            <ColumnEditor
               value={(form.content ?? column.content) ?? ''}
-              onChange={(e) => setForm((p) => ({ ...p, content: e.target.value }))}
-              className="w-full px-4 py-3 rounded-lg border border-[#ddd] bg-white text-main font-sans text-[14px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-y"
+              onChange={(html) => setForm((p) => ({ ...p, content: html }))}
+              placeholder="칼럼 본문 내용..."
+              minHeight="320px"
             />
           </div>
 
@@ -259,6 +266,11 @@ export default function ColumnEditPage() {
             <Link href={`/column/id/${column.id}`} className="font-sans text-[14px] text-sub2 hover:text-primary transition-colors no-underline">
               취소
             </Link>
+            {success && (
+              <div className="w-full mt-4 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
+                칼럼이 수정되었습니다. 상세 페이지로 이동합니다.
+              </div>
+            )}
           </div>
         </form>
       </section>
