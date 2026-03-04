@@ -37,7 +37,7 @@ export default function ServicePageClient() {
           />
         </div>
         <div className="absolute inset-0 bg-black/40 hidden sm:block" />
-        <div className="relative z-10 h-full min-h-[726px] sm:min-h-[320px] flex flex-col items-center text-center px-4 pt-0 sm:pt-16 pb-[200px] sm:pb-16 lg:pt-14 lg:pb-20 gap-6 sm:gap-0 justify-center sm:justify-start">
+        <div className="relative z-10 h-full min-h-[726px] sm:min-h-[320px] flex flex-col items-center text-center px-4 pt-16 sm:pt-16 pb-[200px] sm:pb-16 lg:pt-14 lg:pb-20 gap-6 sm:gap-0 justify-center sm:justify-start">
           <h1 className="m-0 mt-0 sm:mt-12 lg:mt-12 font-sans text-[32px] sm:text-[32px] lg:text-[40px] font-bold leading-normal text-center">
             <span className="text-[#6d94ff] block sm:inline">ETERNAL MARKETING</span>
             <span className="text-white/80 block sm:inline sm:ml-2">SERVICE</span>
@@ -57,11 +57,12 @@ export default function ServicePageClient() {
         </div>
       </section>
 
-      <ServiceIntroSection />
-      <ServiceCTABanner />
+      <div className="flex flex-col gap-8 sm:gap-0">
+        <ServiceIntroSection />
+        <ServiceCTABanner />
 
-      {/* 네이버 마케팅: 플레이스/카페/블로그/홈페이지형 블로그 4종 카드 */}
-      <ServiceCategoryCardsSection
+        {/* 네이버 마케팅: 플레이스/카페/블로그/홈페이지형 블로그 4종 카드 */}
+        <ServiceCategoryCardsSection
         title="NAVER MARKETING"
         titleColorClassName="text-[#02c75c]"
         categories={['Naver Place', 'Naver Cafe', 'Naver Blog', 'Homepage Brand Blog']}
@@ -134,7 +135,8 @@ export default function ServicePageClient() {
 
       <ServiceCaseStudySection />
 
-      <DiagnosisSection />
+        <DiagnosisSection />
+      </div>
     </main>
   );
 }

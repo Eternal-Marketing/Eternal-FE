@@ -104,6 +104,72 @@ function DeptColumn({ icon, label, teams, deptDelay, trunkDelay, v }: {
   );
 }
 
+function MobileDeptBranch({ icon, label, teams, deptDelay, trunkDelay, v, isLast }: {
+  icon: React.ReactNode; label: string; teams: TeamDef[];
+  deptDelay: number; trunkDelay: number; v: boolean;
+  isLast?: boolean;
+}) {
+  return (
+    <div className="flex -ml-[35px] pl-[35px]">
+      <div className="flex flex-shrink-0 flex-col items-center" style={{ width: 20 }}>
+        {/* 마지막 브랜치: L자 - 세로선 후 가로선 */}
+        {isLast ? (
+          <>
+            <div style={{ width: LINE_W, height: 12, background: LINE_COLOR, ...aLine(trunkDelay - 120, v, 'top') }} />
+            <div className="flex items-center" style={{ width: 16, height: LINE_W }}>
+              <div style={{ width: 16, height: LINE_W, background: LINE_COLOR, ...aLine(trunkDelay - 80, v, 'left') }} />
+              <ConnectorDot delay={trunkDelay - 40} v={v} size={6} />
+            </div>
+          </>
+        ) : (
+          <>
+            <div style={{ width: LINE_W, height: 8, background: LINE_COLOR, ...aLine(trunkDelay - 100, v, 'top') }} />
+            <div className="flex items-center">
+              <div style={{ width: 16, height: LINE_W, background: LINE_COLOR, ...aLine(trunkDelay - 80, v, 'left') }} />
+              <ConnectorDot delay={trunkDelay - 40} v={v} size={6} />
+            </div>
+          </>
+        )}
+      </div>
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* 부서 카드: 원형 아이콘 + 연한 회색 라벨 */}
+        <div style={aNode(deptDelay, v)} className="flex items-center">
+          <div className="flex items-center gap-2 rounded-full bg-[#e8e8e8] pl-1.5 pr-3 py-1.5">
+            <div className="w-9 h-9 rounded-full bg-white border-2 border-primary flex items-center justify-center flex-shrink-0">
+              <div className="w-5 h-5 text-primary">{icon}</div>
+            </div>
+            <span className="text-[11px] font-bold text-main">{label}</span>
+          </div>
+        </div>
+        {/* 하위팀 (파란 pill) */}
+        <div className="relative ml-5 mt-2">
+          <div
+            className="absolute left-0 top-0"
+            style={{
+              width: LINE_W, background: LINE_COLOR,
+              height: `calc(100% - ${teams.length === 1 ? 14 : 16}px)`,
+              ...aLine(trunkDelay, v, 'top'),
+            }}
+          />
+          <div className="flex flex-col gap-1.5">
+            {teams.map((team, i) => (
+              <div key={i} className="flex items-center h-8">
+                <div className="flex-shrink-0" style={{ width: 16, height: LINE_W, background: LINE_COLOR, ...aLine(team.delay - 60, v, 'left') }} />
+                <ConnectorDot delay={team.delay - 25} v={v} size={6} />
+                <div style={aNode(team.delay, v)} className="ml-1.5">
+                  <div className="rounded-full px-3 py-1.5" style={{ background: 'linear-gradient(135deg, #1e54c9 0%, #1443a8 100%)', boxShadow: SHADOW_PILL }}>
+                    <span className="text-white text-[10px] font-semibold whitespace-nowrap">{team.label}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function MobileSubTree({ teams, trunkDelay, v }: { teams: TeamDef[]; trunkDelay: number; v: boolean }) {
   return (
     <div className="relative ml-[26px]">
@@ -214,77 +280,70 @@ export default function OurTeamChart({ visible: v }: OurTeamChartProps) {
         </div>
       </div>
 
-      {/* ═══════ 모바일 ═══════ */}
-      <div className="sm:hidden px-4">
+      {/* ═══════ 모바일 (이미지 구조: TEAM → 수직 트렁크 연속 → 가로 분기 → 3개 본부) ═══════ */}
+      <div className="sm:hidden px-4 relative">
+        {/* 연속 수직 트렁크 (TEAM 아래 ~ 맨 아래까지) */}
+        <div
+          className="absolute left-[35px] top-[72px] bottom-0 w-[2.5px]"
+          style={{ background: LINE_COLOR, ...aLine(350, v, 'top') }}
+        />
 
-        {/* ① TEAM */}
-        <div className="flex justify-center" style={aNode(0, v)}>
-          <div
-            className="w-[96px] h-[96px] rounded-full border-[4px] border-primary bg-white flex flex-col items-center justify-center"
-            style={{ boxShadow: SHADOW_TEAM }}
-          >
-            <UserGroupIcon className="w-[28px] h-[28px] text-primary" />
-            <span className="text-[12px] font-extrabold text-main mt-0.5">TEAM</span>
+        {/* ① TEAM (상단 좌측) */}
+        <div className="flex items-start">
+          <div style={aNode(0, v)}>
+            <div
+              className="w-[72px] h-[72px] rounded-full border-[4px] border-primary bg-white flex flex-col items-center justify-center"
+              style={{ boxShadow: SHADOW_TEAM }}
+            >
+              <UserGroupIcon className="w-[22px] h-[22px] text-primary" />
+              <span className="text-[10px] font-extrabold text-main mt-0.5">TEAM</span>
+            </div>
           </div>
         </div>
 
-        {/* 선 쭉~ */}
-        <div className="flex justify-center">
-          <div style={{ width: LINE_W, height: 32, background: LINE_COLOR, ...aLine(350, v, 'top') }} />
+        {/* ② 수직선 (TEAM → 본부들) */}
+        <div className="flex justify-start pl-[35px] -mt-[1px]">
+          <div style={{ width: LINE_W, height: 24, background: LINE_COLOR, ...aLine(350, v, 'top') }} />
         </div>
 
-        {/* 본부 1 딱 → 선 쭉~ → 하위팀 */}
-        <DeptCard icon={<ChatBubbleLeftRightIcon />} label="마케팅 인텔리전스 전략 본부" delay={750} v={v} />
-        <div className="ml-[26px]">
-          <div style={{ width: LINE_W, height: 18, background: LINE_COLOR, ...aLine(1050, v, 'top') }} />
+        {/* ③ 3개 본부: 트렁크에 가로 연결 → 부서카드(아이콘+라벨) → 하위팀 */}
+        <div className="flex flex-col gap-4 pl-[35px] -mt-[1px]">
+          <MobileDeptBranch
+            icon={<ChatBubbleLeftRightIcon />}
+            label="마케팅 인텔리전스 전략 본부"
+            teams={[
+              { label: '데이터·AI 분석팀', delay: 1150 },
+              { label: '채널 전략 설계팀', delay: 1450 },
+            ]}
+            deptDelay={750}
+            trunkDelay={950}
+            v={v}
+          />
+          <MobileDeptBranch
+            icon={<PlayIcon />}
+            label="실행 전문 조직"
+            teams={[
+              { label: '검색·콘텐츠 최적화팀', delay: 2250 },
+              { label: '스마트 플레이스·로컬 마케팅팀', delay: 2550 },
+              { label: '커뮤니티·바이럴 전략팀', delay: 2850 },
+              { label: '퍼포먼스·전환 최적화팀', delay: 3150 },
+            ]}
+            deptDelay={1850}
+            trunkDelay={2050}
+            v={v}
+          />
+          <MobileDeptBranch
+            icon={<ChartPieIcon />}
+            label="운영·관리 조직"
+            teams={[
+              { label: '클라이언트 운영·성과 관리팀', delay: 3850 },
+            ]}
+            deptDelay={3450}
+            trunkDelay={3650}
+            v={v}
+            isLast
+          />
         </div>
-        <MobileSubTree
-          trunkDelay={1250}
-          teams={[
-            { label: '데이터·AI 분석팀', delay: 1450 },
-            { label: '채널 전략 설계팀', delay: 1750 },
-          ]}
-          v={v}
-        />
-
-        {/* 선 쭉~ */}
-        <div className="flex justify-center">
-          <div style={{ width: LINE_W, height: 26, background: LINE_COLOR, ...aLine(2050, v, 'top') }} />
-        </div>
-
-        {/* 본부 2 딱 → 선 쭉~ → 하위팀 */}
-        <DeptCard icon={<PlayIcon />} label="실행 전문 조직" delay={2450} v={v} />
-        <div className="ml-[26px]">
-          <div style={{ width: LINE_W, height: 18, background: LINE_COLOR, ...aLine(2750, v, 'top') }} />
-        </div>
-        <MobileSubTree
-          trunkDelay={2950}
-          teams={[
-            { label: '검색·콘텐츠 최적화팀', delay: 3150 },
-            { label: '스마트 플레이스·로컬 마케팅팀', delay: 3450 },
-            { label: '커뮤니티·바이럴 전략팀', delay: 3750 },
-            { label: '퍼포먼스·전환 최적화팀', delay: 4050 },
-          ]}
-          v={v}
-        />
-
-        {/* 선 쭉~ */}
-        <div className="flex justify-center">
-          <div style={{ width: LINE_W, height: 26, background: LINE_COLOR, ...aLine(4350, v, 'top') }} />
-        </div>
-
-        {/* 본부 3 딱 → 선 쭉~ → 하위팀 */}
-        <DeptCard icon={<ChartPieIcon />} label="운영·관리 조직" delay={4750} v={v} />
-        <div className="ml-[26px]">
-          <div style={{ width: LINE_W, height: 18, background: LINE_COLOR, ...aLine(5050, v, 'top') }} />
-        </div>
-        <MobileSubTree
-          trunkDelay={5250}
-          teams={[
-            { label: '클라이언트 운영·성과 관리팀', delay: 5450 },
-          ]}
-          v={v}
-        />
       </div>
     </div>
   );

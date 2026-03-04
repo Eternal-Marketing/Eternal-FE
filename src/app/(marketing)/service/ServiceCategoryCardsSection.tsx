@@ -85,7 +85,7 @@ export default function ServiceCategoryCardsSection({
                   <Image src={card.imageSrc} alt="" fill quality={90} className="object-cover" sizes="(max-width: 640px) 50vw, 260px" />
                   {card.description ? (
                     <div
-                      className={`absolute top-[-2px] bottom-0.5 left-3 right-3 sm:left-[5px] sm:right-[5px] flex items-center justify-center rounded-[5px] bg-black/50 transition-opacity duration-300 px-3 py-4 sm:px-4 sm:py-5 opacity-0 group-hover:opacity-100 ${isActive ? '!opacity-100' : ''}`}
+                      className={`absolute top-[-2px] bottom-0.5 left-[1.5px] right-[1.5px] sm:left-[5px] sm:right-[5px] flex items-center justify-center rounded-[5px] bg-black/50 transition-opacity duration-300 px-3 py-4 sm:px-4 sm:py-5 opacity-0 group-hover:opacity-100 ${isActive ? '!opacity-100' : ''}`}
                       aria-hidden
                     >
                       <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">

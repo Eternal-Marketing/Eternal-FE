@@ -78,7 +78,7 @@ export default function ServiceIntroSection() {
             ETERNAL INTELLIGENCE
           </span>
 
-          <h2 className="font-sans text-[28px] sm:text-[36px] font-bold leading-tight text-main mb-4 sm:mb-6 space-y-2">
+          <h2 className="font-sans text-[26px] sm:text-[36px] font-bold leading-tight text-main mb-4 sm:mb-6 space-y-2">
             <AnimLine delay={200} visible={visible}>
               무분별한 마케팅은 그만,
             </AnimLine>
@@ -87,7 +87,7 @@ export default function ServiceIntroSection() {
             </AnimLine>
           </h2>
 
-          <div className="font-sans text-[15px] sm:text-[17px] font-light leading-relaxed text-sub1 space-y-2">
+          <div className="font-sans text-[16px] sm:text-[17px] font-light leading-relaxed text-sub1 space-y-2">
             <AnimLine delay={600} visible={visible}>
               유입 경로가 많다고 매출이 함께 늘어나는 것은 아닙니다.
             </AnimLine>
@@ -98,7 +98,7 @@ export default function ServiceIntroSection() {
               <span className="font-semibold text-main">효율적인 마케팅은 많이 하는 일이 아니라</span>
             </AnimLine>
             <AnimLine delay={1200} visible={visible}>
-              <span className="font-bold text-[17px] sm:text-[20px] text-primary">정답을 고르는 일입니다.</span>
+              <span className="font-bold text-[18px] sm:text-[20px] text-primary">정답을 고르는 일입니다.</span>
             </AnimLine>
           </div>
         </div>
@@ -108,7 +108,7 @@ export default function ServiceIntroSection() {
           <img
             src="/images/service-page/checked.svg"
             alt=""
-            className="w-[220px] sm:w-[280px] h-auto"
+            className="w-[160px] sm:w-[220px] lg:w-[280px] h-auto"
           />
         </div>
       </div>

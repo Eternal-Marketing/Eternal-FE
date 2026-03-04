@@ -60,10 +60,17 @@ const SLIDES: Slide[] = [
   },
 ];
 
+const SWIPE_THRESHOLD = 40;
+
 export default function ServiceCaseStudySection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const swipeAreaRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number>(0);
+  const touchStartY = useRef<number>(0);
+  const currentRef = useRef(0);
   const [visible, setVisible] = useState(false);
   const [current, setCurrent] = useState(0);
+  currentRef.current = current;
   const [animating, setAnimating] = useState(false);
   const [slideVisible, setSlideVisible] = useState(true);
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
@@ -102,6 +109,30 @@ export default function ServiceCaseStudySection() {
   const prev = () => goTo((current - 1 + total) % total, 'prev');
   const next = () => goTo((current + 1) % total, 'next');
 
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }, []);
+
+  useEffect(() => {
+    const el = swipeAreaRef.current;
+    if (!el) return;
+    const onTouchMove = (e: TouchEvent) => {
+      const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
+      const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
+      if (dx > dy && dx > 15) e.preventDefault();
+    };
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    return () => el.removeEventListener('touchmove', onTouchMove);
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const curr = currentRef.current;
+    if (deltaX > SWIPE_THRESHOLD) goTo((curr - 1 + total) % total, 'prev');
+    else if (deltaX < -SWIPE_THRESHOLD) goTo((curr + 1) % total, 'next');
+  }, [total, goTo]);
+
   const fade = (delay: number) => ({
     opacity: visible ? 1 : 0,
     transform: visible ? 'translateY(0)' : 'translateY(18px)',
@@ -122,27 +153,27 @@ export default function ServiceCaseStudySection() {
 
   return (
     <section ref={sectionRef} className="w-full bg-[#f6f6f6] overflow-hidden">
-      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 lg:px-12 py-10 sm:py-14 lg:py-[72px]">
+      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14 lg:py-[72px]">
 
-        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-20 gap-10" style={slideTransition}>
+        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-20 gap-12 sm:gap-10" style={slideTransition}>
 
           {/* ── 왼쪽: 텍스트 + 태그 ── */}
           <div className="flex-shrink-0 lg:w-[300px] xl:w-[340px] flex flex-col justify-between lg:py-6">
             <div>
               <span
-                className="inline-block mb-3 px-3 py-1 rounded-full bg-primary/8 text-primary font-sans text-[11px] sm:text-[12px] font-semibold tracking-[0.08em]"
+                className="inline-block mb-2 sm:mb-3 px-3 py-1 rounded-full bg-primary/8 text-primary font-sans text-[11px] sm:text-[12px] font-semibold tracking-[0.08em]"
                 style={fade(0)}
               >
                 {slide.category}
               </span>
               <h2
-                className="m-0 font-sans text-[28px] sm:text-[32px] lg:text-[38px] font-bold text-main leading-[1.15]"
+                className="m-0 font-sans text-[24px] sm:text-[32px] lg:text-[38px] font-bold text-main leading-[1.2]"
                 style={fade(100)}
               >
                 {slide.title}
               </h2>
               <p
-                className="m-0 mt-5 font-sans text-[13px] sm:text-[14px] font-light text-sub1 leading-[1.9] whitespace-pre-line"
+                className="m-0 mt-4 sm:mt-5 font-sans text-[13px] sm:text-[14px] font-light text-sub1 leading-[1.85] whitespace-pre-line"
                 style={fade(200)}
               >
                 {slide.description}
@@ -182,16 +213,22 @@ export default function ServiceCaseStudySection() {
               aria-hidden
             />
 
-            <div className="relative flex items-end justify-center gap-3 sm:gap-5 lg:gap-6 min-h-[360px] sm:min-h-[460px] lg:min-h-[520px]">
+            <div
+              ref={swipeAreaRef}
+              className="relative flex flex-col sm:flex-row items-center sm:items-end justify-center gap-4 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] -mt-8 sm:mt-0 select-none"
+              style={{ touchAction: 'pan-y' }}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
 
-              {/* 왼쪽 화살표 */}
+              {/* 왼쪽 화살표 - 모바일에서 숨김 */}
               <button
                 onClick={prev}
                 disabled={animating}
-                className="absolute -left-6 sm:-left-10 top-1/2 -translate-y-1/2 flex items-center justify-center text-[#555555] hover:text-[#222222] transition-colors duration-200 z-10 disabled:pointer-events-none"
+                className="hidden sm:flex absolute -left-10 top-1/2 -translate-y-1/2 items-center justify-center text-[#555555] hover:text-[#222222] transition-colors duration-200 z-10 disabled:pointer-events-none"
                 aria-label="이전"
               >
-                <svg width="28" height="48" viewBox="0 0 28 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-7 h-12" viewBox="0 0 28 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="22 4 6 24 22 44" />
                 </svg>
               </button>
@@ -200,7 +237,7 @@ export default function ServiceCaseStudySection() {
 
               {layout === 'single' && (
                 <div
-                  className="relative w-full max-w-[540px] lg:max-w-[620px] aspect-[16/10] z-[1] self-center"
+                  className="relative w-full max-w-[600px] lg:max-w-[680px] aspect-[16/10] z-[1] self-center"
                   style={{
                     opacity: visible ? 1 : 0,
                     transform: visible ? 'translateY(0)' : 'translateY(40px)',
@@ -213,7 +250,7 @@ export default function ServiceCaseStudySection() {
                     fill
                     quality={90}
                     className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]"
-                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 540px, 620px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 600px, 680px"
                   />
                 </div>
               )}
@@ -223,7 +260,7 @@ export default function ServiceCaseStudySection() {
                   <div className="flex flex-col items-center z-[1]">
                     {slide.imageLabels?.[0] && (
                       <span
-                        className="mb-2 mt-12 font-sans text-[13px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.18em] text-sub2 italic lowercase"
+                        className="mb-1 sm:mb-2 mt-0 sm:mt-12 font-sans text-[11px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2"
                         style={{
                           opacity: visible ? 1 : 0,
                           transform: visible ? 'translateY(0)' : 'translateY(8px)',
@@ -234,10 +271,10 @@ export default function ServiceCaseStudySection() {
                       </span>
                     )}
                     <div
-                      className="relative w-[135px] sm:w-[170px] lg:w-[210px] xl:w-[240px] aspect-[271/574]"
+                      className="relative w-[200px] sm:w-[250px] lg:w-[260px] xl:w-[280px] aspect-[271/574]"
                       style={{
                         opacity: visible ? 1 : 0,
-                        transform: visible ? 'translateY(32px)' : 'translateY(60px)',
+                        transform: visible ? 'translateY(8px) sm:translateY(32px)' : 'translateY(30px) sm:translateY(60px)',
                         transition: 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms',
                       }}
                     >
@@ -247,14 +284,14 @@ export default function ServiceCaseStudySection() {
                         fill
                         quality={90}
                         className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
-                        sizes="(max-width: 640px) 135px, (max-width: 1024px) 170px, 240px"
+                        sizes="(max-width: 640px) 200px, (max-width: 1024px) 250px, 280px"
                       />
                     </div>
                   </div>
                   <div className="flex flex-col items-center z-[2]">
                     {slide.imageLabels?.[1] && (
                       <span
-                        className="mb-2 mt-12 font-sans text-[13px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.18em] text-sub2 italic lowercase"
+                        className="mb-1 sm:mb-2 mt-2 sm:mt-12 font-sans text-[11px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2"
                         style={{
                           opacity: visible ? 1 : 0,
                           transform: visible ? 'translateY(0)' : 'translateY(8px)',
@@ -265,10 +302,10 @@ export default function ServiceCaseStudySection() {
                       </span>
                     )}
                     <div
-                      className="relative w-[135px] sm:w-[170px] lg:w-[210px] xl:w-[240px] aspect-[271/574]"
+                      className="relative w-[200px] sm:w-[250px] lg:w-[260px] xl:w-[280px] aspect-[271/574]"
                       style={{
                         opacity: visible ? 1 : 0,
-                        transform: visible ? 'translateY(0)' : 'translateY(60px)',
+                        transform: visible ? 'translateY(0)' : 'translateY(30px) sm:translateY(60px)',
                         transition: 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms',
                       }}
                     >
@@ -278,7 +315,7 @@ export default function ServiceCaseStudySection() {
                         fill
                         quality={90}
                         className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
-                        sizes="(max-width: 640px) 135px, (max-width: 1024px) 170px, 240px"
+                        sizes="(max-width: 640px) 200px, (max-width: 1024px) 250px, 280px"
                       />
                     </div>
                   </div>
@@ -286,11 +323,11 @@ export default function ServiceCaseStudySection() {
               )}
 
               {layout === 'cards' && (
-                <div className="flex items-end gap-4 sm:gap-6 self-center">
+                <div className="flex flex-col sm:flex-row items-center sm:items-end gap-8 sm:gap-10 self-center">
                   {/* 카드 1 — 가로형 (아래쪽 배치) */}
                   <div className="flex flex-col">
                     <div
-                      className="relative w-[160px] sm:w-[220px] lg:w-[280px] xl:w-[310px] aspect-[870/660] z-[1] rounded-lg overflow-hidden"
+                      className="relative w-[210px] sm:w-[270px] lg:w-[300px] xl:w-[340px] aspect-[870/660] z-[1] rounded-lg overflow-hidden"
                       style={{
                         opacity: visible ? 1 : 0,
                         transform: visible ? 'translateY(20px)' : 'translateY(50px)',
@@ -303,7 +340,7 @@ export default function ServiceCaseStudySection() {
                         fill
                         quality={90}
                         className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]"
-                        sizes="(max-width: 640px) 160px, (max-width: 1024px) 220px, 310px"
+                        sizes="(max-width: 640px) 210px, (max-width: 1024px) 270px, 340px"
                       />
                     </div>
                   </div>
@@ -323,7 +360,7 @@ export default function ServiceCaseStudySection() {
                       </p>
                     )}
                     <div
-                      className="relative w-[160px] sm:w-[220px] lg:w-[280px] xl:w-[310px] aspect-square z-[2] rounded-lg overflow-hidden"
+                      className="relative w-[210px] sm:w-[270px] lg:w-[300px] xl:w-[340px] aspect-square z-[2] rounded-lg overflow-hidden"
                       style={{
                         opacity: visible ? 1 : 0,
                         transform: visible ? 'translateY(0)' : 'translateY(50px)',
@@ -336,21 +373,21 @@ export default function ServiceCaseStudySection() {
                         fill
                         quality={90}
                         className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]"
-                        sizes="(max-width: 640px) 160px, (max-width: 1024px) 220px, 310px"
+                        sizes="(max-width: 640px) 210px, (max-width: 1024px) 270px, 340px"
                       />
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* 오른쪽 화살표 */}
+              {/* 오른쪽 화살표 - 모바일에서 숨김 */}
               <button
                 onClick={next}
                 disabled={animating}
-                className="absolute -right-6 sm:-right-10 top-1/2 -translate-y-1/2 flex items-center justify-center text-[#555555] hover:text-[#222222] transition-colors duration-200 z-10 disabled:pointer-events-none"
+                className="hidden sm:flex absolute -right-10 top-1/2 -translate-y-1/2 items-center justify-center text-[#555555] hover:text-[#222222] transition-colors duration-200 z-10 disabled:pointer-events-none"
                 aria-label="다음"
               >
-                <svg width="28" height="48" viewBox="0 0 28 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-7 h-12" viewBox="0 0 28 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="6 4 22 24 6 44" />
                 </svg>
               </button>
@@ -358,13 +395,13 @@ export default function ServiceCaseStudySection() {
 
             {/* 태그 - 모바일에서만 목업 아래 표시 */}
             <div
-              className="flex lg:hidden flex-wrap justify-center gap-2 mt-8"
+              className="flex lg:hidden flex-wrap justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8"
               style={fade(350)}
             >
               {slide.tags.map((tag, i) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-full bg-white text-sub2 font-sans text-[11px] sm:text-[12px] font-medium ring-1 ring-black/[0.06]"
+                  className="px-2.5 py-0.5 rounded-full bg-white text-sub2 font-sans text-[10px] sm:text-[12px] font-medium ring-1 ring-black/[0.06]"
                   style={{
                     opacity: visible ? 1 : 0,
                     transform: visible ? 'translateY(0) scale(1)' : 'translateY(6px) scale(0.96)',
@@ -377,7 +414,7 @@ export default function ServiceCaseStudySection() {
             </div>
 
             {/* 페이지 인디케이터 */}
-            <div className="mt-6 flex justify-center gap-1.5" style={fade(400)}>
+            <div className="mt-5 sm:mt-6 flex justify-center gap-1.5" style={fade(400)}>
               {SLIDES.map((_, i) => (
                 <button
                   key={i}

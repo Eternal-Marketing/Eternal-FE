@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 const cards = [
   {
     src: '/images/service-page/1.svg',
+    srcMobile: '/images/service-page/Key-mobile.svg',
     badge: 'NO LOCK-IN',
     title: <>모든 계약,{' '}<span className="text-primary">약정 없는</span>{' '}운영 원칙</>,
     desc: (
@@ -20,6 +21,7 @@ const cards = [
   },
   {
     src: '/images/service-page/2.svg',
+    srcMobile: '/images/service-page/headphone-mobile.svg',
     badge: 'REAL-TIME',
     title: <>경쟁 분석부터 대응까지,{' '}<span className="text-primary">하나의 시스템</span>으로</>,
     desc: (
@@ -29,6 +31,7 @@ const cards = [
   },
   {
     src: '/images/service-page/3.svg',
+    srcMobile: '/images/service-page/Avatar-mobile.svg',
     badge: 'AI POWERED',
     title: <>정답 키워드{' '}<span className="text-primary">AI 세팅</span></>,
     desc: (
@@ -38,6 +41,7 @@ const cards = [
   },
   {
     src: '/images/service-page/4.svg',
+    srcMobile: '/images/service-page/dna-mobile.svg',
     badge: 'BRAND DNA',
     title: <>브랜드 DNA{' '}<span className="text-primary">정밀 파악</span></>,
     desc: (
@@ -67,30 +71,18 @@ export default function ServicePrinciplesSection() {
 
   return (
     <section ref={sectionRef} className="bg-white w-full relative overflow-hidden">
-      {/* 파란 배경 스트립 - 가운데서 좌우로 펼쳐지는 애니메이션 */}
-      <div
-        className="absolute left-1/2 right-auto bg-[#e7ebff] transition-all duration-700 ease-out"
-        style={{
-          top: '44%',
-          transform: 'translateY(-50%)',
-          height: '180px',
-          width: animated ? '100%' : '0%',
-          left: animated ? '0%' : '50%',
-        }}
-      />
-
       <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-16 sm:py-24 lg:py-[180px]">
         <h2 className="m-0 font-sans text-[22px] sm:text-[26px] font-semibold leading-normal text-center text-main">
           마케팅의 새로운 기준,{' '}
           <span className="relative inline-block">
             <span className="relative z-10">기본부터 다릅니다.</span>
-            <span className="absolute bottom-0 left-0 right-0 h-[6px] bg-primary/20 rounded-sm" />
+            <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-primary/20 rounded-sm" />
           </span>
         </h2>
 
         {/* 4열 원칙 카드 */}
         <div className="mt-6 sm:mt-8 relative">
-          <div className="relative w-full max-w-[1163px] mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-4 gap-8 sm:gap-10 items-start justify-items-center">
+          <div className="relative w-full max-w-[1163px] mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-4 gap-14 sm:gap-10 items-start justify-items-center">
             {cards.map((card, i) => (
               <div key={i} className="text-center max-w-[280px] mx-auto">
                 {/* 뱃지 - 가장 먼저 */}
@@ -115,11 +107,18 @@ export default function ServicePrinciplesSection() {
                   }}
                 >
                   <Image
+                    src={card.srcMobile}
+                    alt=""
+                    width={228}
+                    height={240}
+                    className="sm:hidden w-[110px] h-auto mx-auto relative z-10"
+                  />
+                  <Image
                     src={card.src}
                     alt=""
                     width={228}
                     height={240}
-                    className="w-[180px] h-auto sm:w-[228px] mx-auto relative z-10"
+                    className="hidden sm:block w-[150px] h-auto mx-auto relative z-10"
                   />
                 </div>
 
