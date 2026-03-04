@@ -226,7 +226,7 @@ export default function ReviewSection() {
                       return (
                         <div
                           key={cardKey}
-                          className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 relative ${cardW} ${cardH} transition-all duration-300 ease-out hover:scale-[1.15] hover:-translate-y-4 hover:z-10 cursor-pointer`}
+                          className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 relative ${cardW} ${cardH} transition-all duration-300 ease-out [@media(hover:hover)]:hover:scale-[1.15] [@media(hover:hover)]:hover:-translate-y-4 [@media(hover:hover)]:hover:z-10 cursor-pointer`}
                           style={isActive ? { transform: 'scale(1.15) translateY(-16px)', zIndex: 10 } : {}}
                           onClick={() => setActiveCard(isActive ? null : cardKey)}
                         >

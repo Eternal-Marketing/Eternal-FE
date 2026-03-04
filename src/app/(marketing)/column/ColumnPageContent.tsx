@@ -27,15 +27,6 @@ export type CategorySlug = (typeof CATEGORY_SLUGS)[number];
 const PLACEHOLDER_IMAGE = '/images/column/column-background.svg';
 const DEFAULT_LIMIT = 10;
 
-function formatColumnDate(isoString: string): string {
-  try {
-    const d = new Date(isoString);
-    return d.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
-  } catch {
-    return isoString;
-  }
-}
-
 /* ─────────────────────────────────────────────
    히어로 섹션 - memo로 감싸 절대 리렌더링 안 됨
 ───────────────────────────────────────────── */
@@ -258,9 +249,6 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
                     >
                       {featured.excerpt || featured.title}
                     </p>
-                    <p className="m-0 font-sans text-[12px] sm:text-[14px] font-thin text-main" data-node-id="804:540">
-                      {formatColumnDate(featured.publishedAt)}
-                    </p>
                   </div>
                 </Link>
               )}
@@ -317,7 +305,6 @@ function ArticleCard({
       <p className="m-0 mt-1 font-sans text-[12px] sm:text-[14px] font-light leading-relaxed text-main line-clamp-2">
         {column.excerpt || column.title}
       </p>
-      <p className="m-0 mt-2 font-sans text-[10px] font-thin text-main">{formatColumnDate(column.publishedAt)}</p>
     </Link>
   );
 }

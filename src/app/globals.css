@@ -974,6 +974,20 @@ body {
   border-radius: 0 6px 6px 0;
 }
 
+/* 에디터 내 이미지 */
+.column-editor-prose img,
+.column-editor-body .ProseMirror img,
+.column-editor-body img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 8px;
+  margin: 0.8em 0 !important;
+}
+.column-editor-body .ProseMirror img.ProseMirror-selectednode {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 /* 칼럼 상세 본문 (TipTap HTML 렌더링) */
 .column-body h1 { font-size: 1.5em; font-weight: 700; margin: 1.25em 0 0.5em; }
 .column-body h2 { font-size: 1.25em; font-weight: 600; margin: 1.1em 0 0.5em; }
@@ -987,3 +1001,9 @@ body {
   color: var(--color-sub1);
 }
 .column-body a { color: var(--color-primary); text-decoration: underline; }
+.column-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0.8em 0;
+}

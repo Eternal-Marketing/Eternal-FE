@@ -111,25 +111,11 @@ function MobileDeptBranch({ icon, label, teams, deptDelay, trunkDelay, v, isLast
 }) {
   return (
     <div className="flex -ml-[35px] pl-[35px]">
-      <div className="flex flex-shrink-0 flex-col items-center" style={{ width: 20 }}>
-        {/* 마지막 브랜치: L자 - 세로선 후 가로선 */}
-        {isLast ? (
-          <>
-            <div style={{ width: LINE_W, height: 12, background: LINE_COLOR, ...aLine(trunkDelay - 120, v, 'top') }} />
-            <div className="flex items-center" style={{ width: 16, height: LINE_W }}>
-              <div style={{ width: 16, height: LINE_W, background: LINE_COLOR, ...aLine(trunkDelay - 80, v, 'left') }} />
-              <ConnectorDot delay={trunkDelay - 40} v={v} size={6} />
-            </div>
-          </>
-        ) : (
-          <>
-            <div style={{ width: LINE_W, height: 8, background: LINE_COLOR, ...aLine(trunkDelay - 100, v, 'top') }} />
-            <div className="flex items-center">
-              <div style={{ width: 16, height: LINE_W, background: LINE_COLOR, ...aLine(trunkDelay - 80, v, 'left') }} />
-              <ConnectorDot delay={trunkDelay - 40} v={v} size={6} />
-            </div>
-          </>
-        )}
+      <div className="flex flex-shrink-0 items-start pt-3" style={{ width: 20 }}>
+        <div className="flex items-center">
+          <div style={{ width: 16, height: LINE_W, background: LINE_COLOR, ...aLine(trunkDelay - 80, v, 'left') }} />
+          <ConnectorDot delay={trunkDelay - 40} v={v} size={6} />
+        </div>
       </div>
       <div className="flex-1 min-w-0 flex flex-col">
         {/* 부서 카드: 원형 아이콘 + 연한 회색 라벨 */}
@@ -284,7 +270,7 @@ export default function OurTeamChart({ visible: v }: OurTeamChartProps) {
       <div className="sm:hidden px-4 relative">
         {/* 연속 수직 트렁크 (TEAM 아래 ~ 맨 아래까지) */}
         <div
-          className="absolute left-[35px] top-[72px] bottom-0 w-[2.5px]"
+          className="absolute left-[51px] top-[72px] bottom-0 w-[2.5px]"
           style={{ background: LINE_COLOR, ...aLine(350, v, 'top') }}
         />
 

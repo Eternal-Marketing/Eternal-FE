@@ -85,7 +85,9 @@ export default function DiagnosisFormStep1() {
       <form className="mt-4 sm:mt-[18px] space-y-4 sm:space-y-5" onSubmit={(e) => e.preventDefault()}>
         {/* 업체명 */}
         <div className="py-4 sm:py-5 border-b border-divider">
-          <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">업체명</label>
+          <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">
+            업체명 <span className="font-normal text-[12px] sm:text-[13px] text-sub3">(기업의 경우 담당자 직책과 성함을 함께 기입해 주세요)</span>
+          </label>
           <input
             type="text"
             placeholder="내용 작성해 주세요."

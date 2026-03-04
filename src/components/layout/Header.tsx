@@ -154,7 +154,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* 모바일/태블릿 드로어 - 네비바 위에 덮이도록 z-[60] */}
+      {/* 모바일/태블릿 드로어 */}
       <div
         className={`fixed inset-0 z-[60] lg:hidden transition-opacity duration-300 ${
           menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -162,43 +162,100 @@ export default function Header() {
         aria-hidden={!menuOpen}
       >
         <div
-          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/50 backdrop-blur-md"
           onClick={() => setMenuOpen(false)}
         />
         <div
-          className={`absolute top-0 right-0 w-full max-w-[320px] sm:max-w-[360px] h-full bg-white shadow-2xl transition-transform duration-300 ease-out ${
+          className={`absolute top-0 right-0 w-full max-w-[300px] sm:max-w-[340px] h-full bg-[#0a0f1e] shadow-2xl transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             menuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <div className="pt-[72px] px-6 pb-8 flex flex-col gap-1">
-            {navLinks.map(({ href, label }) => (
+          {/* 닫기 버튼 */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen(false)}
+            className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center hover:opacity-70 transition-opacity"
+            aria-label="메뉴 닫기"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="white" strokeWidth="1.2" strokeLinecap="round">
+              <line x1="5" y1="5" x2="15" y2="15" />
+              <line x1="15" y1="5" x2="5" y2="15" />
+            </svg>
+          </button>
+
+          {/* 로고 */}
+          <div className="pt-6 px-7">
+            <Link href="/" className="flex items-center no-underline" onClick={() => setMenuOpen(false)}>
+              <Image src={logoImage} alt="ETERNAL MARKETING" width={48} height={28} className="w-[48px] h-[28px] object-contain" />
+              <div className="ml-2">
+                <p className="mb-0 text-primary text-[10px] leading-tight font-bold">ETERNAL</p>
+                <p className="text-primary text-[10px] leading-tight font-bold">MARKETING</p>
+              </div>
+            </Link>
+          </div>
+
+          {/* 네비게이션 링크 */}
+          <nav className="mt-10 px-7 flex flex-col gap-0">
+            {navLinks.map(({ href, label }, idx) => (
               <Link
                 key={href}
                 href={href}
-                className="nav-link-hover py-4 text-main hover:!text-primary text-[16px] font-medium no-underline border-b border-black/5 last:border-0"
+                className="group flex items-center justify-between py-4 no-underline border-b border-white/10 transition-all duration-200"
                 onClick={() => setMenuOpen(false)}
+                style={{
+                  opacity: menuOpen ? 1 : 0,
+                  transform: menuOpen ? 'translateX(0)' : 'translateX(20px)',
+                  transition: `opacity 0.3s ease-out ${150 + idx * 70}ms, transform 0.3s ease-out ${150 + idx * 70}ms`,
+                }}
               >
-                {label}
+                <span className="text-white/90 group-hover:text-primary text-[15px] font-medium tracking-wide transition-colors duration-200">
+                  {label}
+                </span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white/30 group-hover:text-primary group-hover:translate-x-1 transition-all duration-200">
+                  <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </Link>
             ))}
             {isLoggedIn && (
               <Link
                 href="/admin/dashboard/subscriptions"
-                className="nav-link-hover py-4 text-main hover:!text-primary text-[16px] font-medium no-underline border-b border-black/5"
+                className="group flex items-center justify-between py-4 no-underline border-b border-white/10 transition-all duration-200"
                 onClick={() => setMenuOpen(false)}
+                style={{
+                  opacity: menuOpen ? 1 : 0,
+                  transform: menuOpen ? 'translateX(0)' : 'translateX(20px)',
+                  transition: `opacity 0.3s ease-out ${150 + navLinks.length * 70}ms, transform 0.3s ease-out ${150 + navLinks.length * 70}ms`,
+                }}
               >
-                CONSOLE
+                <span className="text-white/90 group-hover:text-primary text-[15px] font-medium tracking-wide transition-colors duration-200">
+                  CONSOLE
+                </span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white/30 group-hover:text-primary group-hover:translate-x-1 transition-all duration-200">
+                  <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </Link>
             )}
+          </nav>
+
+          {/* AI 진단 받기 CTA */}
+          <div
+            className="mt-8 px-7"
+            style={{
+              opacity: menuOpen ? 1 : 0,
+              transform: menuOpen ? 'translateY(0)' : 'translateY(12px)',
+              transition: 'opacity 0.4s ease-out 400ms, transform 0.4s ease-out 400ms',
+            }}
+          >
             <Link
               href="/ai-diagnosis"
-              className="group relative mt-4 flex items-center justify-center no-underline overflow-hidden rounded-[15px] bg-primary text-inverse font-medium h-10 px-5 text-[13px] shadow-[0_8px_20px_-5px_rgba(99,102,241,0.5)] transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_12px_25px_-5px_rgba(99,102,241,0.6)] hover:scale-[1.02]"
+              className="group relative flex items-center justify-center no-underline overflow-hidden rounded-xl bg-primary text-white font-semibold h-12 text-[14px] tracking-wide shadow-[0_8px_24px_-4px_rgba(24,75,186,0.5)] transition-all duration-300 hover:shadow-[0_12px_28px_-4px_rgba(24,75,186,0.6)] hover:scale-[1.02]"
               onClick={() => setMenuOpen(false)}
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine" />
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shine" />
               <span className="relative z-10">AI 진단 받기</span>
             </Link>
           </div>
+
         </div>
       </div>
     </>
