@@ -40,8 +40,8 @@ export default function AiDiagnosisStep2Page() {
           />
         </div>
         <div className="relative z-10 h-full min-h-[240px] sm:min-h-[280px] flex flex-col items-center justify-center text-center px-4 py-10 sm:py-14">
-          <h1 className="m-0 font-sans text-[24px] sm:text-[28px] font-bold leading-normal text-white">AI 진단받기</h1>
-          <p className="m-0 mt-2 sm:mt-3 font-sans text-[12px] sm:text-[14px] font-normal leading-normal text-white">
+          <h1 className="m-0 font-sans text-[28px] sm:text-[36px] font-bold leading-normal text-white">AI 진단받기</h1>
+          <p className="m-0 mt-2 sm:mt-3 font-sans text-[15px] sm:text-[17px] font-normal leading-normal text-white">
             무한한 가능성을 결과로 바꾸는 과정을 보여드리겠습니다.
             <br />
             이터널과 함께 가보시죠

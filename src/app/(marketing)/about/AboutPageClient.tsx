@@ -284,10 +284,16 @@ export default function AboutPageClient() {
               <h3 className="about-story-line about-story-delay-0 m-0 font-sans text-[24px] sm:text-[24px] lg:text-[30px] font-bold leading-normal text-main">왜 결과는 항상 같을까요?</h3>
               <div className="mt-6 sm:mt-4 font-sans text-[18px] sm:text-[16px] lg:text-[20px] leading-[2] sm:leading-relaxed text-main sm:text-main" style={{color: undefined}}>
                 <p className="about-story-line about-story-delay-1 m-0 text-gray-600 sm:text-main">마케팅은 늘 진행되고 있었지만</p>
-                <p className="about-story-line about-story-delay-2 m-0 mt-1 text-gray-600 sm:text-main">정작 '왜 이걸 하는지'는 설명되지 않았습니다</p>
+                <p className="about-story-line about-story-delay-2 m-0 mt-1 text-gray-600 sm:text-main">
+                  정작 <span className="font-semibold text-primary">'왜 이걸 하는지'는 설명되지 않았습니다</span>
+                </p>
                 <p className="about-story-line about-story-delay-3 m-0 mt-3 text-gray-600 sm:text-main">실행은 많았지만</p>
-                <p className="about-story-line about-story-delay-4 m-0 mt-1 text-gray-600 sm:text-main">판단은 없었고,</p>
-                <p className="about-story-line about-story-delay-5 m-0 mt-1 text-gray-600 sm:text-main">성과는 남지 않았습니다.</p>
+                <p className="about-story-line about-story-delay-4 m-0 mt-1 text-gray-600 sm:text-main">
+                  <span className="font-semibold text-primary">판단은 없었고,</span>
+                </p>
+                <p className="about-story-line about-story-delay-5 m-0 mt-1 text-gray-600 sm:text-main">
+                  <span className="font-semibold text-primary">성과는 남지 않았습니다.</span>
+                </p>
               </div>
             </div>
           </div>
@@ -298,13 +304,13 @@ export default function AboutPageClient() {
         <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-24 sm:py-10 lg:py-[60px] text-center">
           {/* 모바일 전용 */}
           <div className="sm:hidden">
-            <p className="m-0 font-sans font-semibold leading-snug">
-              <span className="text-white text-[28px]">이터널마케팅</span>
-              <span className="text-white/80 text-[24px]">은 이 비효율적인 구조에</span>
+            <p className="m-0 font-sans font-semibold leading-snug text-[24px]">
+              <ExpandHighlight delay={600}>이터널마케팅</ExpandHighlight>
+              <span className="text-white/80">은 이 비효율적인 구조에</span>
             </p>
-            <p className="m-0 font-sans font-semibold leading-snug mt-2">
-              <span className="text-white text-[28px]">질문</span>
-              <span className="text-white/80 text-[24px]">을 던지는 것에서 시작했습니다</span>
+            <p className="m-0 font-sans font-semibold leading-snug mt-2 text-[24px]">
+              <ExpandHighlight delay={1000}>질문</ExpandHighlight>
+              <span className="text-white/80">을 던지는 것에서 시작했습니다</span>
             </p>
           </div>
           {/* 데스크탑 전용 - 마케팅 인텔리전스 섹션과 동일한 형광 하이라이트 스윽 애니메이션 */}
@@ -345,7 +351,7 @@ export default function AboutPageClient() {
 
             <div className="font-sans text-[17px] font-extralight leading-[1.6] text-main mt-20 text-left w-fit mx-auto">
               <p className="about-story-line about-story-delay-1 m-0">이터널은 '일단 해보는 마케팅'이 아니라 될 가능성이 있는</p>
-              <p className="about-story-line about-story-delay-2 m-0">선택만 남기는 마케팅을 설계합니다. 성과로 검증된 데이터와</p>
+              <p className="about-story-line about-story-delay-2 m-0"><span className="font-semibold text-primary">선택만 남기는 마케팅</span>을 설계합니다. 성과로 검증된 데이터와</p>
               <p className="about-story-line about-story-delay-3 m-0">실제 운영 결과를 토대로 불필요한 시도는 배제하고, 매출로</p>
               <p className="about-story-line about-story-delay-4 m-0">이어질 수 있는 흐름만 구조화합니다.</p>
               <p className="about-story-line about-story-delay-5 m-0">&nbsp;</p>
@@ -363,7 +369,7 @@ export default function AboutPageClient() {
               </h2>
               <div className="mt-4 font-sans text-[16px] lg:text-[20px] font-extralight leading-relaxed text-main">
                 <p className="about-story-line about-story-delay-1 m-0">이터널은 '일단 해보는 마케팅'이 아니라 될 가능성이 있는</p>
-                <p className="about-story-line about-story-delay-2 m-0">선택만 남기는 마케팅을 설계합니다. 성과로 검증된 데이터와</p>
+                <p className="about-story-line about-story-delay-2 m-0"><span className="font-semibold text-primary">선택만 남기는 마케팅</span>을 설계합니다. 성과로 검증된 데이터와</p>
                 <p className="about-story-line about-story-delay-3 m-0">실제 운영 결과를 토대로 불필요한 시도는 배제하고, 매출로</p>
                 <p className="about-story-line about-story-delay-4 m-0">이어질 수 있는 흐름만 구조화합니다.</p>
                 <p className="about-story-line about-story-delay-5 m-0">&nbsp;</p>
@@ -418,12 +424,12 @@ export default function AboutPageClient() {
             <p className="about-story-line about-story-delay-1 m-0">마케팅 인텔리전스는</p>
             <p className="about-story-line about-story-delay-2 m-0">AI 기술 전문가와 업계 최상위 마케터가 함께 설계한</p>
             <p className="about-story-line about-story-delay-3 m-0">
-              <span className="font-bold">결과 중심 판단 시스템</span>입니다.
+              <span className="font-semibold text-primary">결과 중심 판단 시스템</span>입니다.
             </p>
             <p className="about-story-line about-story-delay-4 m-0">수년간 축적된 마케팅 성과와 실패 사례,</p>
             <p className="about-story-line about-story-delay-5 m-0">채널별 운영 결과 데이터를 기반으로</p>
             <p className="about-story-line about-story-delay-6 m-0">
-              대표님에게 <span className="font-bold">가장 가능성 높은 선택</span>만 도출하도록 만들어졌습니다
+              대표님에게 <span className="font-semibold text-primary">가장 가능성 높은 선택</span>만 도출하도록 만들어졌습니다
             </p>
           </div>
         </div>
@@ -431,8 +437,8 @@ export default function AboutPageClient() {
 
       <section ref={teamSectionRef} className="w-full bg-[#f6f6f6] min-h-screen sm:min-h-0">
         <div className={`w-full max-w-[1163px] mx-auto px-4 sm:px-6 pt-16 pb-12 sm:py-16 lg:py-[100px] ${teamVisible ? 'about-story-animate' : ''}`}>
-          <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[24px] sm:text-[28px] font-bold leading-normal text-primary pl-4 sm:pl-0">Our Team</h2>
-          <div className="mt-4 sm:mt-[10px] font-sans text-[18px] sm:text-[16px] font-semibold sm:font-medium leading-[2.5] sm:leading-relaxed text-main pl-4 sm:pl-0">
+          <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[28px] sm:text-[34px] font-bold leading-normal text-primary pl-4 sm:pl-0">Our Team</h2>
+          <div className="mt-4 sm:mt-[10px] font-sans text-[20px] sm:text-[22px] font-semibold sm:font-medium leading-[2.5] sm:leading-relaxed text-main pl-4 sm:pl-0">
             <p className="about-story-line about-story-delay-1 m-0">이터널마케팅은</p>
             <p className="about-story-line about-story-delay-2 m-0">판단–설계–실행–관리까지</p>
             <p className="about-story-line about-story-delay-3 m-0">역할이 분리된 전문 조직 체계로 운영됩니다.</p>

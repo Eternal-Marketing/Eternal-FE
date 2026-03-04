@@ -36,7 +36,7 @@ const SLIDES: Slide[] = [
   {
     category: '육류 전문 외식업체',
     title: '플레이스 프리미엄 솔루션',
-    description: '플레이스의 모든 세팅 요소를 정밀 분석·최적화해\n지도 검색 노출을 안정적으로 확보하고\n실제 방문 전환율을 증대시킵니다',
+    description: '플레이스의 모든 세팅 요소를 정밀 분석·최적화하여\n지도 검색 노출을 안정적으로 확보하고\n실제 방문 전환율을 증대시킵니다',
     images: ['/images/service-page/service-5.png'],
     tags: ['네이버플레이스', '지도검색최적화', '방문전환율', '플레이스세팅', '파워링크', '키워드노출', '리뷰관리'],
     layout: 'single',
@@ -44,7 +44,7 @@ const SLIDES: Slide[] = [
   {
     category: 'H헤어 디자인 전문 살롱',
     title: '인스타그램 매니지먼트',
-    description: '인스타그램 계정을 사업 목적에 맞게 정밀 세팅해\n피드·하이라이트·소개글까지 전문적으로 구성하고\n브랜드 인식 개선과 매출 전환을 강화합니다',
+    description: '인스타그램 계정을 사업 목적에 맞게 정밀 세팅하여\n피드·하이라이트·소개글까지 전문적으로 구성하고\n브랜드 인식 개선과 매출 전환을 강화합니다',
     images: ['/images/service-page/service-6.png', '/images/service-page/service-7.png'],
     tags: ['인스타그램', '계정최적화', '피드디자인', '하이라이트구성', '브랜드이미지', '매출전환', '소개글세팅'],
     layout: 'phones',

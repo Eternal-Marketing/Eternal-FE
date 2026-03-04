@@ -3,8 +3,10 @@
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
+import { ImageWithDeleteExtension } from './ImageWithDeleteExtension';
 import Placeholder from '@tiptap/extension-placeholder';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { uploadMedia } from '@/lib/api';
 
 interface ColumnEditorProps {
   value: string;
@@ -18,6 +20,7 @@ export default function ColumnEditor({ value, onChange, placeholder = '칼럼 �
     extensions: [
       StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
       Link.configure({ openOnClick: false, HTMLAttributes: { target: '_blank', rel: 'noopener noreferrer' } }),
+      ImageWithDeleteExtension,
       Placeholder.configure({ placeholder }),
     ],
     content: value || '',
@@ -59,6 +62,26 @@ export default function ColumnEditor({ value, onChange, placeholder = '칼럼 �
 }
 
 function Toolbar({ editor }: { editor: ReturnType<typeof useEditor> }) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleImageUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !editor) return;
+    if (!file.type.startsWith('image/')) return;
+
+    setUploading(true);
+    try {
+      const media = await uploadMedia(file);
+      editor.chain().focus().setImage({ src: media.url, alt: file.name }).run();
+    } catch {
+      alert('이미지 업로드에 실패했습니다.');
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  }, [editor]);
+
   if (!editor) return null;
 
   return (
@@ -121,6 +144,30 @@ function Toolbar({ editor }: { editor: ReturnType<typeof useEditor> }) {
       >
         &ldquo;
       </ToolBtn>
+      <span className="w-px h-5 bg-[#ddd] mx-1" />
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        onChange={handleImageUpload}
+        className="hidden"
+      />
+      <ToolBtn
+        onRun={() => fileInputRef.current?.click()}
+        isActive={false}
+        title="이미지 삽입"
+        disabled={uploading}
+      >
+        {uploading ? (
+          <span className="text-[11px]">...</span>
+        ) : (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21 15 16 10 5 21" />
+          </svg>
+        )}
+      </ToolBtn>
     </div>
   );
 }
@@ -130,21 +177,25 @@ function ToolBtn({
   isActive,
   title,
   children,
+  disabled,
 }: {
   onRun: () => void;
   isActive: boolean;
   title: string;
   children: React.ReactNode;
+  disabled?: boolean;
 }) {
   return (
     <button
       type="button"
+      disabled={disabled}
       onMouseDown={(e) => {
         e.preventDefault();
-        onRun();
+        if (!disabled) onRun();
       }}
       title={title}
       className={`px-2 py-1 rounded text-[12px] font-sans transition-colors ${
+        disabled ? 'opacity-50 cursor-not-allowed text-sub3' :
         isActive ? 'bg-primary/20 text-primary' : 'text-main hover:bg-[#eee]'
       }`}
     >

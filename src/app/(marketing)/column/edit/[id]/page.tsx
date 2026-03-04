@@ -180,17 +180,6 @@ export default function ColumnEditPage() {
           </div>
 
           <div>
-            <label htmlFor="excerpt" className="block font-sans text-[13px] font-medium text-main mb-1.5">요약</label>
-            <input
-              id="excerpt"
-              type="text"
-              value={(form.excerpt ?? column.excerpt) ?? ''}
-              onChange={(e) => setForm((p) => ({ ...p, excerpt: e.target.value }))}
-              className="w-full px-4 py-3 rounded-lg border border-[#ddd] bg-white text-main font-sans text-[14px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-            />
-          </div>
-
-          <div>
             <label className="block font-sans text-[13px] font-medium text-main mb-1.5">썸네일 이미지</label>
             <input
               ref={thumbnailInputRef}

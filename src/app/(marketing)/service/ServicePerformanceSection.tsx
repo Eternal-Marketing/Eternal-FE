@@ -11,6 +11,7 @@ import Image from 'next/image';
 export default function ServicePerformanceSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+  const [activeCard, setActiveCard] = useState<'rwd' | 'seo' | null>(null);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -42,12 +43,23 @@ export default function ServicePerformanceSection() {
           <span>Search Engine Optimization</span>
         </div>
 
+        {/* 모바일 전용: 클릭 안내 (lg 이상에서는 숨김) */}
+        <p className="mt-3 mb-0 text-center font-sans text-[12px] text-sub1 lg:hidden">
+          탭해서 더 보기
+        </p>
+
         {/* 2열 카드: 모바일 1열 세로, sm 이상 2열 가로 */}
         <div
           className={`mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 ${visible ? 'service-category-cards-visible' : ''}`}
         >
           <div className="service-category-card flex flex-col items-start group">
-            <div className="service-category-card-inner relative w-full max-w-[520px] sm:max-w-none aspect-[4/3] sm:min-h-[260px] sm:aspect-auto flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl">
+            <div
+              className="service-category-card-inner relative w-full max-w-[520px] sm:max-w-none aspect-[4/3] sm:min-h-[260px] sm:aspect-auto flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer"
+              onClick={() => setActiveCard((prev) => (prev === 'rwd' ? null : 'rwd'))}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && setActiveCard((prev) => (prev === 'rwd' ? null : 'rwd'))}
+            >
               <Image
                 src="/images/service-page/service-responsive.png"
                 alt=""
@@ -57,7 +69,7 @@ export default function ServicePerformanceSection() {
                 sizes="(max-width: 640px) 50vw, 560px"
               />
               <div
-                className="absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-[21.5px] lg:bottom-[21.5px] lg:left-[65px] lg:right-[65px] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
+                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-[21.5px] lg:bottom-[21.5px] lg:left-[65px] lg:right-[65px] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'rwd' ? '!opacity-100' : ''}`}
                 aria-hidden
               >
                 <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
@@ -72,7 +84,13 @@ export default function ServicePerformanceSection() {
           </div>
 
           <div className="service-category-card flex flex-col items-start group">
-            <div className="service-category-card-inner relative w-full max-w-[520px] sm:max-w-none aspect-[4/3] sm:min-h-[260px] sm:aspect-auto flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl">
+            <div
+              className="service-category-card-inner relative w-full max-w-[520px] sm:max-w-none aspect-[4/3] sm:min-h-[260px] sm:aspect-auto flex items-center justify-center overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer"
+              onClick={() => setActiveCard((prev) => (prev === 'seo' ? null : 'seo'))}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && setActiveCard((prev) => (prev === 'seo' ? null : 'seo'))}
+            >
               <Image
                 src="/images/service-page/seo.svg"
                 alt=""
@@ -81,7 +99,7 @@ export default function ServicePerformanceSection() {
                 sizes="(max-width: 640px) 50vw, 560px"
               />
               <div
-                className="absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-[21.5px] lg:bottom-[21.5px] lg:left-[65px] lg:right-[65px] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-5"
+                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-[21.5px] lg:bottom-[21.5px] lg:left-[65px] lg:right-[65px] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'seo' ? '!opacity-100' : ''}`}
                 aria-hidden
               >
                 <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">

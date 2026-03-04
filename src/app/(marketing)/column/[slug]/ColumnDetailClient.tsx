@@ -8,29 +8,6 @@ import type { Column, ColumnCategoryCode } from '@/lib/api';
 import AdminColumnActions from '@/components/column/AdminColumnActions';
 import { getCategoryCode, getCategoryIndex } from '../categorySlug';
 
-function formatDate(isoString: string): string {
-  try {
-    return new Date(isoString).toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  } catch {
-    return isoString;
-  }
-}
-function formatDateShort(isoString: string): string {
-  try {
-    return new Date(isoString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
-  } catch {
-    return isoString;
-  }
-}
-
 const DEFAULT_THUMBNAIL = '/images/column/column-background.svg';
 
 export default function ColumnDetailClient({ slug }: { slug: string }) {
@@ -106,8 +83,6 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
     if (imgError || !column?.thumbnailUrl?.trim()) return DEFAULT_THUMBNAIL;
     return column.thumbnailUrl;
   }, [column, imgError]);
-  const publishedDate = useMemo(() => (column?.publishedAt ? formatDate(column.publishedAt) : ''), [column]);
-
   if (loading) {
     return (
       <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
@@ -192,9 +167,6 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
         )}
 
         <div className="flex items-center gap-3 mb-6">
-          <span className="font-sans text-[10px] font-thin text-main" data-node-id="804:800">
-            {publishedDate}
-          </span>
           <div className="flex items-center gap-2">
             <a href="https://open.kakao.com/me/eternalmarketing" target="_blank" rel="noreferrer" aria-label="카카오톡 오픈채팅">
               <img src="/images/footer/kakao.svg" alt="" className="w-[10px] h-[9px]" />
@@ -263,9 +235,6 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
                         {c.excerpt}
                       </p>
                     )}
-                    <span className="font-sans text-[12px] font-light text-sub3">
-                      {c.publishedAt ? formatDateShort(c.publishedAt) : ''}
-                    </span>
                   </div>
                   <div className="flex-shrink-0 w-[120px] h-[80px] rounded overflow-hidden bg-[#e5e5e5]">
                     <Image
