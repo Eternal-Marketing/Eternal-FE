@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 const circleIcon = "/images/elipse.svg";
-const splineUrl = "https://my.spline.design/motiontrails-7nu0l9wGTzn5nWxGtrBcWZHT/";
 
 /**
  * 홈 히어로 섹션
@@ -10,19 +9,21 @@ const splineUrl = "https://my.spline.design/motiontrails-7nu0l9wGTzn5nWxGtrBcWZH
 export default function HeroSection() {
   return (
     <section className="relative w-full h-screen overflow-hidden z-20" data-node-id="24:6">
-      <div className="absolute top-0 left-0 right-0 h-full w-full pointer-events-none z-10">
-        <iframe
-          src={splineUrl}
-          className="w-full h-full border-0"
-          allow="fullscreen"
-          allowFullScreen
-          title="Spline 3D Animation"
+      <div className="absolute top-0 left-0 right-0 h-full w-full pointer-events-none z-10 overflow-hidden">
+        <video
+          src="/images/spline-3D.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+          aria-hidden
         />
       </div>
 
       <div className="relative h-full flex flex-col items-center justify-center z-20 px-4">
         <div className="text-center text-inverse mt-4 sm:mt-6 lg:mt-[100px] relative z-10 max-w-[90vw]">
-          <div className="absolute top-[-20px] sm:top-[-10px] left-[-6%] sm:left-[calc(50%-105px)] lg:left-[calc(50%-170px)] sm:translate-x-0 w-14 h-14 sm:w-20 sm:h-20 z-[-1] animate-pulse-slow">
+          <div className="absolute top-[-20px] sm:top-[-10px] left-[-6%] sm:left-[calc(50%-105px)] lg:left-[calc(50%-210px)] sm:translate-x-0 w-14 h-14 sm:w-20 sm:h-20 z-[-1] animate-pulse-slow">
             <Image
               src={circleIcon}
               alt=""
@@ -35,14 +36,14 @@ export default function HeroSection() {
             />
           </div>
 
-          <h1 className="text-[28px] sm:text-[36px] lg:text-[52px] font-extrabold mb-0 relative z-10 animate-fade-in-up leading-tight" data-node-id="24:14" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
+          <h1 className="text-[34px] sm:text-[44px] lg:text-[64px] font-extrabold mb-0 relative z-10 animate-fade-in-up leading-tight" data-node-id="24:14" style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
             마케팅의 기준을
           </h1>
-          <h1 className="text-[28px] sm:text-[36px] lg:text-[52px] font-extrabold mb-3 sm:mb-4 relative z-10 animate-fade-in-up leading-tight" data-node-id="24:17" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
+          <h1 className="text-[34px] sm:text-[44px] lg:text-[64px] font-extrabold mb-3 sm:mb-4 relative z-10 animate-fade-in-up leading-tight" data-node-id="24:17" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
             다시 설계합니다
           </h1>
 
-          <div className="text-sm sm:text-base lg:text-h4 text-inverse/80 mt-3 sm:mt-5 lg:mt-[20px] animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
+          <div className="text-base sm:text-lg lg:text-[24px] text-inverse/80 mt-3 sm:mt-5 lg:mt-[24px] animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.6s', animationFillMode: 'both' }}>
             <p className="mb-1 sm:mb-2" data-node-id="24:19">마침내 탄생한 업계 최고효율의 마케팅</p>
             <p data-node-id="24:20">&ldquo;마케팅 인텔리전스 AI&rdquo;</p>
           </div>

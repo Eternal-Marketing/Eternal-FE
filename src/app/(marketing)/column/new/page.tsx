@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { Suspense, useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -25,7 +25,7 @@ function slugFromTitle(title: string): string {
   return slug || `column-${Date.now()}`;
 }
 
-export default function ColumnNewPage() {
+function ColumnNewContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const categorySlugFromUrl = searchParams.get('categorySlug');
@@ -159,12 +159,6 @@ export default function ColumnNewPage() {
 
         <h1 className="font-sans text-2xl sm:text-3xl font-bold text-main mb-8">칼럼 생성하기</h1>
 
-        {success && (
-          <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
-            칼럼이 생성되었습니다. 칼럼 목록으로 이동합니다.
-          </div>
-        )}
-
         {error && (
           <div className="mb-6 p-4 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-600 font-sans text-[14px]" role="alert">
             {error}
@@ -275,9 +269,22 @@ export default function ColumnNewPage() {
             >
               목록으로
             </Link>
+            {success && (
+              <div className="w-full mt-4 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
+                칼럼이 생성되었습니다. 칼럼 목록으로 이동합니다.
+              </div>
+            )}
           </div>
         </form>
       </section>
     </main>
+  );
+}
+
+export default function ColumnNewPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-main">로딩 중...</div>}>
+      <ColumnNewContent />
+    </Suspense>
   );
 }

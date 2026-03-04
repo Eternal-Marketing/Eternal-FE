@@ -196,11 +196,11 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
             {publishedDate}
           </span>
           <div className="flex items-center gap-2">
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <img src="/images/footer/Instagram.svg" alt="" className="w-[13px] h-[13px]" />
-            </a>
-            <a href="https://www.kakaocorp.com" target="_blank" rel="noreferrer" aria-label="Kakao">
+            <a href="https://open.kakao.com/me/eternalmarketing" target="_blank" rel="noreferrer" aria-label="카카오톡 오픈채팅">
               <img src="/images/footer/kakao.svg" alt="" className="w-[10px] h-[9px]" />
+            </a>
+            <a href="https://www.instagram.com/eternal__marketing?igsh=MWVhNHF2dXBiYmU0dw%3D%3D" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <img src="/images/footer/Instagram.svg" alt="" className="w-[13px] h-[13px]" />
             </a>
           </div>
         </div>
@@ -226,11 +226,11 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
             Share article
           </p>
           <div className="flex items-center gap-3">
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <img src="/images/footer/Instagram.svg" alt="" className="w-[24px] h-[24px]" data-node-id="804:805" />
-            </a>
-            <a href="https://www.kakaocorp.com" target="_blank" rel="noreferrer" aria-label="Kakao">
+            <a href="https://open.kakao.com/me/eternalmarketing" target="_blank" rel="noreferrer" aria-label="카카오톡 오픈채팅">
               <img src="/images/footer/kakao.svg" alt="" className="w-[18px] h-[18px]" data-node-id="804:804" />
+            </a>
+            <a href="https://www.instagram.com/eternal__marketing?igsh=MWVhNHF2dXBiYmU0dw%3D%3D" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <img src="/images/footer/Instagram.svg" alt="" className="w-[24px] h-[24px]" data-node-id="804:805" />
             </a>
           </div>
         </div>

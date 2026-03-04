@@ -60,25 +60,25 @@ export default function Footer() {
                 {`이터널마케팅의 AI 분석 결과는 마케팅 전략 수립을 위한 참고 자료로 활용되며,\n최종 판단과 실행은 전문 마케터의 검토를 통해 이루어집니다. 분석 과정에 활용되는 \n데이터는 내부 기준에 따라 관리되며,외부에 무단 제공되지 않습니다.`}
               </p>
 
-              {/* 소셜 아이콘 */}
+              {/* 소셜 아이콘 (카카오톡 오픈채팅 → 인스타그램) */}
               <div className="mt-3 sm:mt-4 flex items-center gap-2">
                 <a
-                  href="https://www.instagram.com/"
+                  href="https://open.kakao.com/me/eternalmarketing"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="카카오톡 오픈채팅"
+                  className="inline-flex items-center justify-center"
+                >
+                  <Image src="/images/footer/kakao.svg" alt="" width={18} height={18} className="w-4 h-4 sm:w-[18px] sm:h-[18px] object-contain" />
+                </a>
+                <a
+                  href="https://www.instagram.com/eternal__marketing?igsh=MWVhNHF2dXBiYmU0dw%3D%3D"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Instagram"
                   className="inline-flex items-center justify-center"
                 >
                   <Image src="/images/footer/Instagram.svg" alt="" width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
-                </a>
-                <a
-                  href="https://www.kakaocorp.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Kakao"
-                  className="inline-flex items-center justify-center"
-                >
-                  <Image src="/images/footer/kakao.svg" alt="" width={18} height={18} className="w-4 h-4 sm:w-[18px] sm:h-[18px] object-contain" />
                 </a>
               </div>
             </div>

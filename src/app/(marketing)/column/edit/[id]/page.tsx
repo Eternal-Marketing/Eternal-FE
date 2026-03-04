@@ -160,12 +160,6 @@ export default function ColumnEditPage() {
 
         <h1 className="font-sans text-2xl sm:text-3xl font-bold text-main mb-8">칼럼 수정하기</h1>
 
-        {success && (
-          <div className="mb-6 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
-            칼럼이 수정되었습니다. 상세 페이지로 이동합니다.
-          </div>
-        )}
-
         {error && (
           <div className="mb-6 p-4 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-600 font-sans text-[14px]" role="alert">
             {error}
@@ -272,6 +266,11 @@ export default function ColumnEditPage() {
             <Link href={`/column/id/${column.id}`} className="font-sans text-[14px] text-sub2 hover:text-primary transition-colors no-underline">
               취소
             </Link>
+            {success && (
+              <div className="w-full mt-4 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
+                칼럼이 수정되었습니다. 상세 페이지로 이동합니다.
+              </div>
+            )}
           </div>
         </form>
       </section>
