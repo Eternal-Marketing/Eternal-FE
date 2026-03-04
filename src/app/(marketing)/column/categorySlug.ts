@@ -13,21 +13,30 @@ export const CATEGORY_SLUGS = ['bayiral', 'performance', 'sns', 'video'] as cons
 
 export const CATEGORY_NAMES = ['바이럴 마케팅', '퍼포먼스 마케팅', 'SNS 마케팅', '영상 콘텐츠 마케팅'] as const;
 
-/** API categoryCode (인덱스 0~3에 대응, 4번째는 ETERNAL_MARKETING) */
+/** API categoryCode (인덱스 0~4) */
 export const CATEGORY_CODES: ColumnCategoryCode[] = [
   'VIRAL_MARKETING',
   'PERFORMANCE_MARKETING',
   'SNS_MARKETING',
   'VIDEO_CONTENT_MARKETING',
+  'ETERNAL_MARKETING',
 ];
 
 export function getCategoryCode(index: number): ColumnCategoryCode {
-  return CATEGORY_CODES[index] ?? CATEGORY_CODES[0];
+  return (CATEGORY_CODES[index] ?? CATEGORY_CODES[0]) as ColumnCategoryCode;
 }
 
 export function getCategoryIndex(slug: string): number {
-  const idx = CATEGORY_SLUGS.indexOf(slug as (typeof CATEGORY_SLUGS)[number]);
-  return idx >= 0 ? idx : 0;
+  const s = (slug || '').toLowerCase().trim();
+  const idx = CATEGORY_SLUGS.indexOf(s as (typeof CATEGORY_SLUGS)[number]);
+  if (idx >= 0) return idx;
+  // API가 반환할 수 있는 slug 형식 매핑 (viral-marketing, performance 등)
+  if (/viral|bayiral/.test(s)) return 0;
+  if (/performance/.test(s)) return 1;
+  if (/sns/.test(s)) return 2;
+  if (/video|영상/.test(s)) return 3;
+  if (/eternal/.test(s)) return 4;
+  return 0;
 }
 
 export function getArticleCategoryIndex(articleSlug: string): number {

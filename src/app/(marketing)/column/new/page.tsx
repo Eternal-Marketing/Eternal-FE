@@ -8,6 +8,7 @@ import { createColumn, ApiClientError, uploadMedia } from '@/lib/api';
 import type { CreateColumnPayload } from '@/lib/api';
 import { hasTokens } from '@/lib/auth/token';
 import CategorySelect from '@/components/shared/CategorySelect';
+import ColumnEditor from '@/components/column/ColumnEditor';
 import { useCategories } from '@/hooks/useCategories';
 import { getCategoryCode, getCategoryIndex } from '../categorySlug';
 
@@ -98,9 +99,18 @@ export default function ColumnNewPage() {
     return media.url;
   };
 
+  const isEmptyContent = (html: string) => {
+    const t = html?.replace(/<[^>]+>/g, '').trim() ?? '';
+    return !t;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    if (isEmptyContent(form.content)) {
+      setError('본문을 입력해 주세요.');
+      return;
+    }
     setSuccess(false);
     setSubmitting(true);
     try {
@@ -123,7 +133,11 @@ export default function ColumnNewPage() {
         : '/column';
       setTimeout(() => router.push(redirectTo), 1500);
     } catch (err) {
-      setError(err instanceof ApiClientError ? err.message : '칼럼 생성에 실패했습니다.');
+      const raw = err instanceof ApiClientError ? err.message : '칼럼 생성에 실패했습니다.';
+      const msg = /slug already exists/i.test(raw)
+        ? '이미 같은 제목의 칼럼이 있습니다. 다른 제목으로 작성해 주세요.'
+        : raw;
+      setError(msg);
     } finally {
       setSubmitting(false);
     }
@@ -227,14 +241,11 @@ export default function ColumnNewPage() {
 
           <div>
             <label htmlFor="content" className="block font-sans text-[13px] font-medium text-main mb-1.5">본문 *</label>
-            <textarea
-              id="content"
-              required
-              rows={10}
+            <ColumnEditor
               value={form.content}
-              onChange={(e) => setForm((p) => ({ ...p, content: e.target.value }))}
-              className="w-full px-4 py-3 rounded-lg border border-[#ddd] bg-white text-main font-sans text-[14px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-y"
+              onChange={(html) => setForm((p) => ({ ...p, content: html }))}
               placeholder="칼럼 본문 내용..."
+              minHeight="320px"
             />
           </div>
 
