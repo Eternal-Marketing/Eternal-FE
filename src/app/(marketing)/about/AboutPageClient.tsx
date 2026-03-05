@@ -424,12 +424,41 @@ export default function AboutPageClient() {
             <p className="about-story-line about-story-delay-1 m-0">마케팅 인텔리전스는</p>
             <p className="about-story-line about-story-delay-2 m-0">AI 기술 전문가와 업계 최상위 마케터가 함께 설계한</p>
             <p className="about-story-line about-story-delay-3 m-0">
-              <span className="font-semibold text-primary">결과 중심 판단 시스템</span>입니다.
+              <span className="relative inline-block font-semibold">
+                <span
+                  className="absolute inset-0 rounded bg-primary/40"
+                  style={{
+                    transformOrigin: 'left',
+                    transform: intelligenceVisible ? 'scaleX(1)' : 'scaleX(0)',
+                    transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)',
+                    transitionDelay: '700ms',
+                    zIndex: 0,
+                  }}
+                  aria-hidden
+                />
+                <span className="relative z-10 px-1 text-white">결과 중심 판단 시스템</span>
+              </span>
+              입니다.
             </p>
             <p className="about-story-line about-story-delay-4 m-0">수년간 축적된 마케팅 성과와 실패 사례,</p>
             <p className="about-story-line about-story-delay-5 m-0">채널별 운영 결과 데이터를 기반으로</p>
             <p className="about-story-line about-story-delay-6 m-0">
-              대표님에게 <span className="font-semibold text-primary">가장 가능성 높은 선택</span>만 도출하도록 만들어졌습니다
+              대표님에게{' '}
+              <span className="relative inline-block font-semibold">
+                <span
+                  className="absolute inset-0 rounded bg-primary/40"
+                  style={{
+                    transformOrigin: 'left',
+                    transform: intelligenceVisible ? 'scaleX(1)' : 'scaleX(0)',
+                    transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)',
+                    transitionDelay: '1000ms',
+                    zIndex: 0,
+                  }}
+                  aria-hidden
+                />
+                <span className="relative z-10 px-1 text-white">가장 가능성 높은 선택</span>
+              </span>
+              만 도출하도록 만들어졌습니다
             </p>
           </div>
         </div>
@@ -437,8 +466,8 @@ export default function AboutPageClient() {
 
       <section ref={teamSectionRef} className="w-full bg-[#f6f6f6] min-h-screen sm:min-h-0">
         <div className={`w-full max-w-[1163px] mx-auto px-4 sm:px-6 pt-16 pb-12 sm:py-16 lg:py-[100px] ${teamVisible ? 'about-story-animate' : ''}`}>
-          <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[28px] sm:text-[34px] font-bold leading-normal text-primary pl-4 sm:pl-0">Our Team</h2>
-          <div className="mt-4 sm:mt-[10px] font-sans text-[20px] sm:text-[22px] font-semibold sm:font-medium leading-[2.5] sm:leading-relaxed text-main pl-4 sm:pl-0">
+          <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[28px] sm:text-[34px] font-bold leading-tight tracking-tight text-primary pl-4 sm:pl-0">Our Team</h2>
+          <div className="mt-4 sm:mt-[10px] font-sans text-[20px] sm:text-[22px] font-semibold sm:font-medium leading-[1.6] sm:leading-snug tracking-tight text-main pl-4 sm:pl-0">
             <p className="about-story-line about-story-delay-1 m-0">이터널마케팅은</p>
             <p className="about-story-line about-story-delay-2 m-0">판단–설계–실행–관리까지</p>
             <p className="about-story-line about-story-delay-3 m-0">역할이 분리된 전문 조직 체계로 운영됩니다.</p>
