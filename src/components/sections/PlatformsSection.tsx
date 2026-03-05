@@ -114,7 +114,7 @@ export default function PlatformsSection() {
         </FadeIn>
 
         <ScaleIn delay={400}>
-          <div className="overflow-hidden w-full">
+          <div className="overflow-hidden w-full -mx-4 sm:mx-0">
             <div className="platform-scroll">
               {[...Array(2)].map((_, setIndex) => (
                 <div key={setIndex} className="flex items-center flex-shrink-0 gap-8 sm:gap-10 lg:gap-20 px-4 sm:px-6 lg:px-10">

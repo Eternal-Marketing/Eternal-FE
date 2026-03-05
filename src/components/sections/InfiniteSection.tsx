@@ -243,7 +243,7 @@ export default function InfiniteSection() {
               className="order-1 w-full mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[320px] lg:top-[calc(35%-250px)] lg:left-[13%]"
             >
               <div className="sm:hidden border-b border-black/8 py-6 flex flex-col items-center text-center">
-                <Image src="/images/reviewSection/Magnifier.svg" alt="Magnifier Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
+                <Image src="/Magnifier.svg" alt="Magnifier Icon" width={48} height={48} className="w-12 h-12 object-contain mb-3" />
                 <h3 className={stepTitleClass}>STEP 01</h3>
                 <p className={`${stepDescClass} mt-2`}>
                   AI 진단 문진표를 기반으로<br />
@@ -254,7 +254,7 @@ export default function InfiniteSection() {
               <div className={`hidden sm:block ${stepCardClass}`}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
-                    <Image src="/images/reviewSection/Magnifier.svg" alt="Magnifier Icon" width={18} height={17} className="w-4 h-[17px] sm:w-[18px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
+                    <Image src="/Magnifier.svg" alt="Magnifier Icon" width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 01</h3>
                   </div>
                   <p className={`${stepDescClass} ml-5 sm:ml-6`}>
@@ -272,7 +272,7 @@ export default function InfiniteSection() {
               className="order-2 w-full mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[320px] lg:top-[calc(35%+150px)] lg:right-[13%]"
             >
               <div className="sm:hidden border-b border-black/8 py-6 flex flex-col items-center text-center">
-                <Image src="/images/reviewSection/people.svg" alt="People Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
+                <Image src="/images/Group%204.svg" alt="People Icon" width={48} height={48} className="w-12 h-12 object-contain mb-3" />
                 <h3 className={stepTitleClass}>STEP 02</h3>
                 <p className={`${stepDescClass} mt-2`}>
                   분석 결과를 바탕으로 업종과 목표에 맞는<br />
@@ -282,7 +282,7 @@ export default function InfiniteSection() {
               <div className={`hidden sm:block ${stepCardClass}`}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
-                    <Image src="/images/reviewSection/people.svg" alt="People Icon" width={22} height={22} className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
+                    <Image src="/images/Group%204.svg" alt="People Icon" width={28} height={28} className="w-6 h-6 sm:w-7 sm:h-7 flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 02</h3>
                   </div>
                   <p className={`${stepDescClass} ml-5 sm:ml-7`}>
@@ -299,7 +299,7 @@ export default function InfiniteSection() {
               className="order-4 w-full mx-auto lg:mx-0 lg:absolute lg:right-[4%] lg:z-20 lg:w-[320px] lg:top-[calc(35%-250px)] lg:right-[13%]"
             >
               <div className="sm:hidden border-b border-black/8 py-6 flex flex-col items-center text-center">
-                <Image src="/images/reviewSection/arrows.svg" alt="Arrow Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
+                <Image src="/Arrow.svg" alt="Arrow Icon" width={48} height={48} className="w-12 h-12 object-contain mb-3" />
                 <h3 className={stepTitleClass}>STEP 03</h3>
                 <p className={`${stepDescClass} mt-2`}>
                   대표님의 상황과 목표에 맞춰 가장 효율적인<br />
@@ -309,7 +309,7 @@ export default function InfiniteSection() {
               <div className={`hidden sm:block ${stepCardClass}`}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
-                    <Image src="/images/reviewSection/arrows.svg" alt="Arrow Icon" width={28} height={22} className="w-6 h-5 sm:w-7 sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
+                    <Image src="/Arrow.svg" alt="Arrow Icon" width={32} height={28} className="w-7 h-6 sm:w-8 sm:h-7 flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 03</h3>
                   </div>
                   <p className={`${stepDescClass} ml-6 sm:ml-8`}>
@@ -326,7 +326,7 @@ export default function InfiniteSection() {
               className="order-5 w-full mx-auto lg:mx-0 lg:absolute lg:left-[4%] lg:z-20 lg:w-[320px] lg:top-[calc(35%+150px)] lg:left-[13%]"
             >
               <div className="sm:hidden py-6 flex flex-col items-center text-center">
-                <Image src="/images/reviewSection/pen.svg" alt="Pen Icon" width={40} height={40} className="w-10 h-10 object-contain mb-3" />
+                <Image src="/Pen.svg" alt="Pen Icon" width={48} height={48} className="w-12 h-12 object-contain mb-3" />
                 <h3 className={stepTitleClass}>STEP 04</h3>
                 <p className={`${stepDescClass} mt-2`}>
                   AI 세밀 분석 리포트로 성과를<br />
@@ -336,7 +336,7 @@ export default function InfiniteSection() {
               <div className={`hidden sm:block ${stepCardClass}`}>
                 <div className={stepCardInner}>
                   <div className="flex items-center mb-1">
-                    <Image src="/images/reviewSection/pen.svg" alt="Pen Icon" width={22} height={22} className="w-5 h-5 sm:w-[22px] sm:h-[22px] flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
+                    <Image src="/Pen.svg" alt="Pen Icon" width={28} height={28} className="w-6 h-6 sm:w-7 sm:h-7 flex-shrink-0 mr-1.5 sm:mr-[6px] object-contain" />
                     <h3 className={stepTitleClass}>STEP 04</h3>
                   </div>
                   <p className={`${stepDescClass} ml-5 sm:ml-7`}>
