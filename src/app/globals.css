@@ -377,9 +377,9 @@ body {
   background: linear-gradient(135deg, #184BBA 0%, #2563eb 50%, #184BBA 100%);
   background-size: 200% 200%;
   animation: diagnosis-btn-pulse 2s ease-in-out infinite;
-  font-size: 14px;
-  padding: 10px 20px;
-  border-radius: 15px;
+  font-size: 16px;
+  padding: 12px 26px;
+  border-radius: 16px;
   font-weight: 600;
   color: white;
   border: none;
@@ -389,8 +389,9 @@ body {
 
 @media (min-width: 640px) {
   .diagnosis-cta-btn {
-    font-size: 24px;
-    padding: 16px 32px;
+    font-size: 26px;
+    padding: 20px 44px;
+    border-radius: 18px;
   }
 }
 
