@@ -80,6 +80,15 @@ export default function Footer() {
                 >
                   <Image src="/images/footer/Instagram.svg" alt="" width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
                 </a>
+                <a
+                  href="https://blog.naver.com/eternal_marketing"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="네이버 블로그"
+                  className="inline-flex items-center justify-center"
+                >
+                  <Image src="/images/footer/naver-blog.svg" alt="" width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
+                </a>
               </div>
             </div>
           </div>

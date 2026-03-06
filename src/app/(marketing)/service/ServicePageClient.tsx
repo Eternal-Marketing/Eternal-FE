@@ -71,19 +71,19 @@ export default function ServicePageClient() {
             title: 'Naver Place',
             subtitle: '네이버 플레이스',
             imageSrc: '/images/service-page/naverplace.svg',
-            description: '플레이스 관련 종합\n최적화 세팅,\n플레이스 순위 상승',
+            description: '플레이스 관련\n종합 최적화 세팅,\n플레이스 순위 상승',
           },
           {
             title: 'Naver Cafe',
             subtitle: '네이버 맘카페 커뮤니티',
             imageSrc: '/images/service-page/navercafe.svg',
-            description: '전국/지역 중심 신뢰 기반\n후기 확산으로\n지역 내 신뢰도와\n입지를 안정적으로 구축',
+            description: '전국/지역 중심\n신뢰 기반 후기 확산으로\n지역 내 신뢰도와 입지를\n안정적으로 구축',
           },
           {
             title: 'Naver Blog',
             subtitle: '네이버 블로그',
             imageSrc: '/images/service-page/naverblog.svg',
-            description: '블로그 고품질 리뷰 수\n증가로 브랜드 신뢰감 형성\n및 실제 매출 전환 유도,\n대표 키워드 세팅으로\n상위노출 보장',
+            description: '블로그 고품질 리뷰 수 증가로\n브랜드 신뢰감 형성 및\n실제 매출 전환 유도,\n대표 키워드 세팅으로\n상위노출 보장',
           },
           {
             title: 'Homepage Brand Blog',
@@ -106,13 +106,13 @@ export default function ServicePageClient() {
             title: 'In App Ads',
             subtitle: '플랫폼별 인앱 광고',
             imageSrc: '/images/service-page/inappads.svg',
-            description: '각 플랫폼 별 상위 노출 구조 설계,\n인기 콘텐츠 도달 가속화,\n계정 반응 수치 증폭 운영',
+            description: '각 플랫폼 별\n상위 노출 구조 설계,\n인기 콘텐츠 도달 가속화,\n계정 반응 수치 증폭 운영',
           },
           {
             title: 'Short Form Ads',
             subtitle: '숏폼 광고',
             imageSrc: '/images/service-page/shortform.svg',
-            description: '알고리즘에 최적화된 숏폼 기획 및\n시스템 기반 운영으로 단기간\n최대 도달과 성과 구현',
+            description: '알고리즘에 최적화된\n숏폼 기획 및 시스템 기반\n운영으로 단기간\n최대 도달과 성과 구현',
           },
           {
             title: 'Instagram Management',

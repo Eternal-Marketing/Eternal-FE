@@ -328,66 +328,73 @@ export default function AboutPageClient() {
         </div>
       </ExpandBackground>
 
-      <section ref={whyEternalSectionRef} className="w-full bg-bg min-h-[900px] sm:min-h-0 flex items-center sm:block">
-        <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-20 sm:py-16 lg:py-[200px] relative">
+      <section ref={whyEternalSectionRef} className="relative w-full min-h-[900px] sm:min-h-0 flex items-center sm:block overflow-hidden">
+        {/* 배경: 부드러운 그라데이션 + 장식 원형 */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#F8FAFF] via-white to-[#F5F7FF]" aria-hidden />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-primary/5 to-transparent blur-3xl pointer-events-none" aria-hidden />
+        <div className="absolute -right-40 -top-20 w-[400px] h-[400px] rounded-full bg-primary/[0.03] blur-2xl pointer-events-none" aria-hidden />
+
+        <div className="relative w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-20 sm:py-16 lg:py-[120px]">
 
           {/* 모바일 레이아웃 */}
           <div className={`sm:hidden ${whyEternalVisible ? 'about-story-animate' : ''}`}>
-            <h2 className="about-story-line about-story-delay-0 m-0 -mt-10 font-sans text-[36px] font-bold leading-normal text-main text-center">
-              <span className="text-primary">이터널</span>이 기준이 되는 이유
-            </h2>
+            <div className="relative pl-4 border-l-4 border-primary">
+              <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[36px] font-bold leading-[1.25] text-main">
+                <span className="text-primary">이터널</span>이 기준이 되는 이유
+              </h2>
+            </div>
 
             <SlideInRight delay={200}>
-              <div className="relative w-full max-w-[220px] mx-auto mt-16 mb-8">
-                <Image src="/images/about-page/infinity.svg" alt="" width={300} height={225} className="w-full h-auto" sizes="300px" />
-                <span className="absolute top-[-16px] left-[14%] text-[14px] text-main">구조 재설계</span>
-                <span className="absolute top-[-16px] right-[10%] text-[14px] text-main">세밀 분석</span>
-                <span className="absolute top-[50%] left-[-24px] -translate-y-1/2 text-[14px] text-main">최적화</span>
-                <span className="absolute top-[50%] right-[-24px] -translate-y-1/2 text-[14px] text-main">최적화</span>
-                <span className="absolute bottom-[-16px] right-[10%] text-[14px] text-main">정밀 판단</span>
-                <span className="absolute bottom-[-16px] left-[14%] text-[14px] text-main">고효율 실행</span>
+              <div className="relative w-full max-w-[220px] mx-auto mt-12 mb-10 p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-primary/10 shadow-[0_8px_32px_rgba(24,75,186,0.08)]">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" aria-hidden />
+                <div className="relative">
+                  <Image src="/images/infinite.svg" alt="" width={300} height={225} className="w-full h-auto drop-shadow-sm" sizes="300px" />
+                  <span className="absolute top-[-8px] left-[12%] px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-semibold">구조 재설계</span>
+                  <span className="absolute top-[-8px] right-[8%] px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-semibold">세밀 분석</span>
+                  <span className="absolute top-[50%] left-[-20px] -translate-y-1/2 px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-semibold">최적화</span>
+                  <span className="absolute top-[50%] right-[-20px] -translate-y-1/2 px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-semibold">최적화</span>
+                  <span className="absolute bottom-[-8px] right-[8%] px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-semibold">정밀 판단</span>
+                  <span className="absolute bottom-[-8px] left-[12%] px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-semibold">고효율 실행</span>
+                </div>
               </div>
             </SlideInRight>
 
-            <div className="font-sans text-[17px] font-extralight leading-[1.6] text-main mt-20 text-left w-fit mx-auto">
-              <p className="about-story-line about-story-delay-1 m-0">이터널은 '일단 해보는 마케팅'이 아니라 될 가능성이 있는</p>
-              <p className="about-story-line about-story-delay-2 m-0"><span className="font-semibold text-primary">선택만 남기는 마케팅</span>을 설계합니다. 성과로 검증된 데이터와</p>
-              <p className="about-story-line about-story-delay-3 m-0">실제 운영 결과를 토대로 불필요한 시도는 배제하고, 매출로</p>
-              <p className="about-story-line about-story-delay-4 m-0">이어질 수 있는 흐름만 구조화합니다.</p>
-              <p className="about-story-line about-story-delay-5 m-0">&nbsp;</p>
-              <p className="about-story-line about-story-delay-6 m-0">그리고 그 구조는 마케팅 전용으로 설계된 인텔리전스와</p>
-              <p className="about-story-line about-story-delay-7 m-0">현장을 완벽하게 이해하고 있는 전문 마케터의 판단을 통해</p>
-              <p className="about-story-line about-story-delay-8 m-0">결정됩니다.</p>
+            <div className="font-sans text-[17px] font-light leading-[1.85] text-main mt-8 text-left space-y-3">
+              <p className="about-story-line about-story-delay-1 m-0">이터널은 <span className="text-sub2 line-through">&lsquo;일단 해보는 마케팅&rsquo;</span>이 아니라 될 가능성이 있는</p>
+              <p className="about-story-line about-story-delay-2 m-0"><span className="font-bold text-primary">선택만 남기는 마케팅</span>을 설계합니다. 성과로 검증된 데이터와 실제 운영 결과를 토대로 불필요한 시도는 배제하고, 매출로 이어질 수 있는 흐름만 구조화합니다.</p>
+              <p className="about-story-line about-story-delay-3 m-0 mt-6 pt-6 border-t border-primary/15">그리고 그 구조는 <span className="font-semibold text-main">마케팅 전용 인텔리전스</span>와 현장을 완벽하게 이해하고 있는 <span className="font-semibold text-main">전문 마케터의 판단</span>을 통해 결정됩니다.</p>
             </div>
           </div>
 
           {/* 데스크탑 레이아웃 */}
-          <div className={`hidden sm:flex flex-col lg:flex-row gap-8 lg:gap-10 items-center ${whyEternalVisible ? 'about-story-animate' : ''}`}>
-            <div className="flex-1 pl-0 lg:pl-[80px]">
-              <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[32px] lg:text-[48px] font-bold leading-normal text-main">
+          <div className={`hidden sm:flex flex-col lg:flex-row gap-12 lg:gap-16 items-center ${whyEternalVisible ? 'about-story-animate' : ''}`}>
+            <div className="flex-1 pl-0 lg:pl-[60px]">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <span className="w-1 h-8 bg-primary rounded-full" />
+                <span className="text-primary font-sans text-[13px] font-semibold tracking-wider uppercase">Why Eternal</span>
+              </div>
+              <h2 className="about-story-line about-story-delay-0 m-0 font-sans text-[32px] lg:text-[44px] font-bold leading-[1.2] text-main">
                 <span className="text-primary">이터널</span>이 기준이 되는 이유
               </h2>
-              <div className="mt-4 font-sans text-[16px] lg:text-[20px] font-extralight leading-relaxed text-main">
-                <p className="about-story-line about-story-delay-1 m-0">이터널은 '일단 해보는 마케팅'이 아니라 될 가능성이 있는</p>
-                <p className="about-story-line about-story-delay-2 m-0"><span className="font-semibold text-primary">선택만 남기는 마케팅</span>을 설계합니다. 성과로 검증된 데이터와</p>
-                <p className="about-story-line about-story-delay-3 m-0">실제 운영 결과를 토대로 불필요한 시도는 배제하고, 매출로</p>
-                <p className="about-story-line about-story-delay-4 m-0">이어질 수 있는 흐름만 구조화합니다.</p>
-                <p className="about-story-line about-story-delay-5 m-0">&nbsp;</p>
-                <p className="about-story-line about-story-delay-6 m-0">그리고 그 구조는 마케팅 전용으로 설계된 인텔리전스와</p>
-                <p className="about-story-line about-story-delay-7 m-0">현장을 완벽하게 이해하고 있는 전문 마케터의 판단을 통해</p>
-                <p className="about-story-line about-story-delay-8 m-0">결정됩니다.</p>
+              <div className="mt-6 lg:mt-8 font-sans text-[16px] lg:text-[18px] font-light leading-[2] text-main space-y-2">
+                <p className="about-story-line about-story-delay-1 m-0">이터널은 &lsquo;일단 해보는 마케팅&rsquo;이 아니라 <span className="font-semibold text-primary">될 가능성이 있는 선택만 남기는 마케팅</span>을 설계합니다.</p>
+                <p className="about-story-line about-story-delay-2 m-0">성과로 검증된 데이터와 실제 운영 결과를 토대로 불필요한 시도는 배제하고, 매출로 이어질 수 있는 흐름만 구조화합니다.</p>
+                <p className="about-story-line about-story-delay-3 m-0 mt-6 pt-6 border-t border-primary/15">그리고 그 구조는 <span className="font-semibold text-main">마케팅 전용 인텔리전스</span>와 현장을 완벽하게 이해하고 있는 <span className="font-semibold text-main">전문 마케터의 판단</span>을 통해 결정됩니다.</p>
               </div>
             </div>
 
             <SlideInRight delay={400}>
-              <div className="relative w-full max-w-[360px] lg:max-w-none lg:w-[400px] flex-shrink-0 lg:ml-[120px] mx-auto lg:mx-0">
-                <Image src="/images/about-page/infinity.svg" alt="" width={400} height={300} className="w-full h-auto" sizes="(max-width: 1024px) 100vw, 400px" />
-                <span className="absolute top-[-20px] left-[75px] text-[15px] sm:text-[16px] text-main">구조 재설계</span>
-                <span className="absolute top-[-20px] left-[255px] text-[15px] sm:text-[16px] text-main">세밀 분석</span>
-                <span className="absolute top-[50%] left-[-44px] -translate-y-1/2 text-[15px] sm:text-[16px] text-main">최적화</span>
-                <span className="absolute top-[50%] right-[-44px] -translate-y-1/2 text-[15px] sm:text-[16px] text-main">최적화</span>
-                <span className="absolute bottom-[-20px] left-[255px] text-[15px] sm:text-[16px] text-main">정밀 판단</span>
-                <span className="absolute bottom-[-20px] left-[75px] text-[15px] sm:text-[16px] text-main">고효율 실행</span>
+              <div className="relative w-full max-w-[340px] lg:w-[420px] flex-shrink-0 mx-auto lg:mx-0 p-8 rounded-3xl bg-white/90 backdrop-blur-sm border border-primary/10 shadow-[0_12px 48px_rgba(24,75,186,0.1)]">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/[0.06] via-transparent to-primary/[0.03] pointer-events-none" aria-hidden />
+                <div className="relative">
+                  <Image src="/images/infinite.svg" alt="" width={400} height={300} className="w-full h-auto drop-shadow-md" sizes="(max-width: 1024px) 340px, 420px" />
+                  <span className="absolute top-[-4px] left-[18%] px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[12px] lg:text-[13px] font-semibold">구조 재설계</span>
+                  <span className="absolute top-[-4px] right-[18%] px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[12px] lg:text-[13px] font-semibold">세밀 분석</span>
+                  <span className="absolute top-[50%] left-[-36px] lg:left-[-44px] -translate-y-1/2 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[12px] lg:text-[13px] font-semibold">최적화</span>
+                  <span className="absolute top-[50%] right-[-36px] lg:right-[-44px] -translate-y-1/2 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[12px] lg:text-[13px] font-semibold">최적화</span>
+                  <span className="absolute bottom-[-4px] right-[18%] px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[12px] lg:text-[13px] font-semibold">정밀 판단</span>
+                  <span className="absolute bottom-[-4px] left-[18%] px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[12px] lg:text-[13px] font-semibold">고효율 실행</span>
+                </div>
               </div>
             </SlideInRight>
           </div>

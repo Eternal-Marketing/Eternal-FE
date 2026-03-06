@@ -184,16 +184,21 @@ export default function AboutSection() {
         <div className="relative mb-12 sm:mb-16 lg:mb-24 desktop:mb-[120px] py-4 sm:py-6 lg:py-8">
           <FadeIn delay={300}>
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center lg:-ml-8">
-              <div className="flex flex-col items-center flex-shrink-0" data-node-id="127:914">
-                <p className="font-sans text-[12px] sm:text-[14px] font-bold text-sub1 text-center mb-3 sm:mb-4" data-node-id="127:916">
-                  AI 마케팅 인텔리전스
-                </p>
-                <div className="w-[180px] h-[164px] lg:w-[260px] lg:h-[236px] relative" data-node-id="127:917">
-                  <Image alt="Laptop" fill className="object-contain" src="/images/laptop.svg" sizes="260px" />
+              <div className="flex flex-col items-center flex-shrink-0 relative" data-node-id="127:914">
+                <span className="absolute top-0 left-1/2 -translate-x-1/2 z-10 lg:hidden">
+                  <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight" data-node-id="127:916">
+                    AI 마케팅 인텔리전스
+                  </span>
+                </span>
+                <div className="w-[220px] h-[200px] lg:w-[320px] lg:h-[290px] relative mt-10 lg:mt-0" data-node-id="127:917">
+                  <Image alt="Data results" fill className="object-contain" src="/images/main-1.svg" sizes="320px" />
                 </div>
               </div>
 
-              <div className="text-center lg:text-left mt-6 sm:mt-8 lg:mt-0 lg:ml-6 whitespace-nowrap" data-node-id="58:95">
+              <div className="text-center lg:text-left mt-6 sm:mt-8 lg:mt-0 lg:ml-6 whitespace-nowrap flex flex-col items-center lg:items-start" data-node-id="58:95">
+                <span className="hidden lg:inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full mb-3 sm:mb-4 shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight" data-node-id="127:916">
+                  AI 마케팅 인텔리전스
+                </span>
                 <p className="leading-tight inline">
                   <span className="font-sans text-[26px] sm:text-[30px] lg:text-[40px] font-extrabold text-[#184bba]">
                     <CountUpNumber end={1200000} duration={2000} />건+
@@ -210,64 +215,75 @@ export default function AboutSection() {
           </FadeIn>
         </div>
 
-        <div className="relative mb-12 sm:mb-16 lg:mb-24 desktop:mb-[120px]">
-          <div className="flex flex-col lg:flex-col lg:items-center lg:justify-center gap-6 sm:gap-8 lg:gap-8">
-            <SlideIn direction="right" delay={400} className="flex-shrink-0">
-              <div className="flex flex-col items-center" data-node-id="158:25">
-                <p className="font-sans text-[12px] sm:text-[14px] font-bold text-sub1 text-center mb-3 sm:mb-4" data-node-id="127:912">
+        <div className="relative mb-12 sm:mb-16 lg:mb-24 desktop:mb-[120px] lg:pl-40 xl:pl-64">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center gap-6 sm:gap-8 lg:gap-4">
+            <FadeIn delay={600} className="order-2 lg:order-1">
+              <div className="hidden lg:flex items-center justify-center lg:justify-start" data-node-id="127:912-wrap">
+                <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full mb-3 sm:mb-4 shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight" data-node-id="127:912">
                   업종별 최상위 전문 마케터
-                </p>
-                <div className="w-[140px] h-[120px] sm:w-[160px] sm:h-[136px] lg:w-[280px] lg:h-[238px] relative">
-                  <Image alt="Graph" fill className="object-contain" src="/images/graph.svg" sizes="280px" />
+                </span>
+              </div>
+            </FadeIn>
+
+            <SlideIn direction="left" delay={400} className="flex-shrink-0 order-1 lg:order-2">
+              <div className="flex flex-col items-center relative" data-node-id="158:25">
+                <span className="absolute top-0 left-1/2 -translate-x-1/2 z-10 lg:hidden">
+                  <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight" data-node-id="127:912">
+                    업종별 최상위 전문 마케터
+                  </span>
+                </span>
+                <div className="w-[180px] h-[155px] sm:w-[200px] sm:h-[170px] lg:w-[340px] lg:h-[290px] relative mt-10 sm:mt-10 lg:mt-0">
+                  <Image alt="Recontract rate" fill className="object-contain" src="/images/main-2.svg" sizes="340px" />
+                </div>
+                <div className="text-center mt-4 sm:mt-5 lg:mt-6" data-node-id="58:96">
+                  <div className="mb-2 sm:mb-3 whitespace-nowrap">
+                    <p className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main leading-tight">
+                      프로젝트 연평균 매출 성장률{" "}
+                      <span className="font-sans text-[26px] sm:text-[30px] lg:text-[40px] font-extrabold text-[#184bba]">
+                        <CountUpNumber end={3} duration={1500} />배
+                      </span>
+                      <span className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main">
+                        {" "}이상
+                      </span>
+                    </p>
+                  </div>
+                  <div data-node-id="127:939" className="whitespace-nowrap">
+                    <p className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main leading-tight">
+                      12년간 재계약률{" "}
+                      <span className="font-sans text-[26px] sm:text-[30px] lg:text-[40px] font-extrabold text-[#184bba]">
+                        <CountUpNumber end={98} duration={2000} suffix="%" />
+                      </span>
+                      <span className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main">
+                        {" "}이상 유지중
+                      </span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </SlideIn>
-
-            <FadeIn delay={600}>
-              <div className="text-center" data-node-id="58:96">
-                <div className="mb-6 sm:mb-8 whitespace-nowrap">
-                  <p className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main leading-tight">
-                    프로젝트 연평균 매출 성장률{" "}
-                    <span className="font-sans text-[26px] sm:text-[30px] lg:text-[40px] font-extrabold text-[#184bba]">
-                      <CountUpNumber end={3} duration={1500} />배
-                    </span>
-                    <span className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main">
-                      {" "}이상
-                    </span>
-                  </p>
-                </div>
-
-                <div data-node-id="127:939" className="whitespace-nowrap">
-                  <p className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main leading-tight">
-                    12년간 재계약률{" "}
-                    <span className="font-sans text-[26px] sm:text-[30px] lg:text-[40px] font-extrabold text-[#184bba]">
-                      <CountUpNumber end={98} duration={2000} suffix="%" />
-                    </span>
-                    <span className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main">
-                      {" "}이상 유지중
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </FadeIn>
           </div>
         </div>
 
         <div className="relative pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20 desktop:pb-24">
           <div className="flex flex-col lg:flex-row lg:items-center gap-2 sm:gap-3 lg:gap-16 lg:ml-32 xl:ml-64">
             <SlideIn direction="left" delay={700} className="flex-shrink-0">
-              <div className="flex flex-col items-center" data-node-id="127:918">
-                <p className="font-sans text-[12px] sm:text-[14px] font-bold text-sub1 text-center mb-3 sm:mb-4 whitespace-nowrap shrink-0" data-node-id="127:936">
-                  업종별 전문 인력으로 전담 팀 구성
-                </p>
-                <div className="w-[240px] h-[210px] sm:w-[300px] sm:h-[260px] lg:w-[460px] lg:h-[400px] relative">
-                  <Image alt="Team Structure" fill className="object-contain" src="/images/wave1.svg" sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 460px" />
+              <div className="flex flex-col items-center relative" data-node-id="127:918">
+                <span className="absolute top-0 left-1/2 -translate-x-1/2 z-10 lg:hidden">
+                  <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight whitespace-nowrap shrink-0" data-node-id="127:936">
+                    업종별 전문 인력으로 전담 팀 구성
+                  </span>
+                </span>
+                <div className="w-[300px] h-[260px] sm:w-[360px] sm:h-[310px] lg:w-[540px] lg:h-[470px] relative mt-10 sm:mt-10 lg:mt-0">
+                  <Image alt="Team Structure" fill className="object-contain" src="/images/wave1.svg" sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 540px" />
                 </div>
               </div>
             </SlideIn>
 
             <SlideIn direction="right" delay={800} className="lg:-ml-8">
-              <div className="text-center lg:text-left" data-node-id="58:97">
+              <div className="text-center lg:text-left flex flex-col items-center lg:items-start" data-node-id="58:97">
+                <span className="hidden lg:inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full mb-3 sm:mb-4 shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight whitespace-nowrap shrink-0" data-node-id="127:936">
+                  업종별 전문 인력으로 전담 팀 구성
+                </span>
                 <p className="font-sans text-[14px] sm:text-[16px] lg:text-[20px] font-bold text-main leading-tight mb-2">
                   분야별{" "}
                   <span className="font-sans text-[26px] sm:text-[30px] lg:text-[40px] font-extrabold text-[#184bba]">

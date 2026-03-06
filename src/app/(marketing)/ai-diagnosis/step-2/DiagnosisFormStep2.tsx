@@ -148,7 +148,8 @@ export default function DiagnosisFormStep2() {
       {/* 담당자명* */}
       <div className="py-4 sm:py-5 border-b border-divider">
         <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">
-          담당자명<span className="text-[#ff3434]">*</span>
+          담당자명<span className="text-[#ff3434]">*</span>{' '}
+          <span className="font-normal text-[12px] sm:text-[13px] text-sub3">(기업의 경우 직책을 함께 기입해 주세요)</span>
         </label>
         <input
           type="text"
@@ -255,14 +256,23 @@ export default function DiagnosisFormStep2() {
           세부 전략과 실행 범위는 전문마케터와의 상담을 통해 함께 설계됩니다.
         </p>
 
-        <button
-          type="button"
-          onClick={handleSubmit}
-          disabled={!isFormValid || submitting}
-          className="mt-6 sm:mt-8 h-10 sm:h-[44px] min-w-[120px] w-[139px] max-w-full text-white text-[13px] sm:text-[14px] font-medium border-0 bg-[#2b2b2b] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-opacity rounded-sm"
+        <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+          <button
+            type="button"
+            onClick={() => router.push('/ai-diagnosis')}
+            className="h-10 sm:h-[44px] min-w-[120px] px-6 text-sub1 text-[13px] sm:text-[14px] font-medium border border-sub3 bg-transparent cursor-pointer hover:border-primary hover:text-primary transition-colors rounded-sm"
+          >
+            이전
+          </button>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={!isFormValid || submitting}
+          className="h-10 sm:h-[44px] min-w-[120px] w-[139px] max-w-full text-white text-[13px] sm:text-[14px] font-medium border-0 bg-[#2b2b2b] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed transition-opacity rounded-sm"
         >
-          {submitting ? '신청 중...' : '진단 신청하기'}
-        </button>
+            {submitting ? '신청 중...' : '진단 신청하기'}
+          </button>
+        </div>
         {submitSuccess && (
           <div className="mt-6 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px] text-center">
             상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다.
