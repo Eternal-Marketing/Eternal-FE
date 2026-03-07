@@ -920,6 +920,65 @@ body {
   animation: cta-tip-pulse 2.5s ease-in-out infinite;
 }
 
+/* 모바일 '탭해서 더 보기' 글래스 뱃지 */
+@keyframes tap-hint-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes tap-hint-glow {
+  0%, 100% { box-shadow: 0 0 8px 1px rgba(255,255,255,0.15), inset 0 0 6px rgba(255,255,255,0.05); }
+  50% { box-shadow: 0 0 14px 3px rgba(255,255,255,0.3), inset 0 0 10px rgba(255,255,255,0.1); }
+}
+.tap-hint-badge {
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.25);
+  animation: tap-hint-glow 2.5s ease-in-out infinite;
+}
+.tap-hint-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: tap-hint-shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* 케이스 스터디 슬라이드 전환 - 부드럽고 트렌디 (가로 슬라이드 + 페이드) */
+@keyframes slide-out-next {
+  from { transform: translateX(0) scale(1); opacity: 1; }
+  to { transform: translateX(-80px) scale(0.98); opacity: 0; }
+}
+@keyframes slide-out-prev {
+  from { transform: translateX(0) scale(1); opacity: 1; }
+  to { transform: translateX(80px) scale(0.98); opacity: 0; }
+}
+@keyframes slide-in-next {
+  from { transform: translateX(80px) scale(0.98); opacity: 0; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
+}
+@keyframes slide-in-prev {
+  from { transform: translateX(-80px) scale(0.98); opacity: 0; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
+}
+.slide-flip-out-next { animation: slide-out-next 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+.slide-flip-out-prev { animation: slide-out-prev 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+.slide-flip-in-next { animation: slide-in-next 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+.slide-flip-in-prev { animation: slide-in-prev 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+
+/* 모바일 스와이프 유도 */
+@keyframes swipe-hint {
+  0%, 100% { transform: translateX(0); opacity: 0.6; }
+  25% { transform: translateX(4px); opacity: 1; }
+  75% { transform: translateX(8px); opacity: 1; }
+}
+.animate-swipe-hint {
+  animation: swipe-hint 2.2s ease-in-out infinite;
+}
+
 /* TipTap / ProseMirror 에디터 */
 .ProseMirror {
   min-height: 200px;

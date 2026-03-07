@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
 import Image from "next/image";
 
 const circleIcon = "/images/elipse.svg";
@@ -7,16 +10,43 @@ const circleIcon = "/images/elipse.svg";
  * - Spline 3D 배경 + "마케팅의 기준을 다시 설계합니다" 타이틀, 서브 문구, 스크롤 화살표
  */
 export default function HeroSection() {
+  const mobileRef = useRef<HTMLVideoElement>(null);
+  const desktopRef = useRef<HTMLVideoElement>(null);
+  const [videoReady, setVideoReady] = useState(false);
+
+  useEffect(() => {
+    const checkReady = (el: HTMLVideoElement | null) => {
+      if (!el) return;
+      if (el.readyState >= 3) setVideoReady(true);
+      else el.addEventListener('canplay', () => setVideoReady(true), { once: true });
+    };
+    checkReady(mobileRef.current);
+    checkReady(desktopRef.current);
+  }, []);
+
   return (
-    <section className="relative w-full h-screen overflow-hidden z-20" data-node-id="24:6">
+    <section className="relative w-full h-screen overflow-hidden z-20 bg-[#0a0a0a]" data-node-id="24:6">
       <div className="absolute top-0 left-0 right-0 h-full w-full pointer-events-none z-10 overflow-hidden">
         <video
+          ref={mobileRef}
+          src="/images/mobile-3D.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className={`block sm:hidden w-full h-full object-cover object-center transition-opacity duration-700 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
+          aria-hidden
+        />
+        <video
+          ref={desktopRef}
           src="/images/spline-3D.mp4"
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover object-center"
+          preload="auto"
+          className={`hidden sm:block w-full h-full object-cover object-center transition-opacity duration-700 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
           aria-hidden
         />
       </div>

@@ -86,7 +86,7 @@ export default function DiagnosisFormStep1() {
         {/* 업체명 */}
         <div className="py-4 sm:py-5 border-b border-divider">
           <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">
-            업체명 <span className="font-normal text-[12px] sm:text-[13px] text-sub3">(기업의 경우 담당자 직책과 성함을 함께 기입해 주세요)</span>
+            업체명
           </label>
           <input
             type="text"

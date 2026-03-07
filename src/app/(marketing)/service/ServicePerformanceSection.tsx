@@ -43,11 +43,6 @@ export default function ServicePerformanceSection() {
           <span>Search Engine Optimization</span>
         </div>
 
-        {/* 모바일 전용: 클릭 안내 (lg 이상에서는 숨김) */}
-        <p className="mt-3 mb-0 text-center font-sans text-[12px] text-sub1 lg:hidden">
-          탭해서 더 보기
-        </p>
-
         {/* 2열 카드: 모바일 1열 세로, sm 이상 2열 가로 */}
         <div
           className={`mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 ${visible ? 'service-category-cards-visible' : ''}`}
@@ -69,13 +64,21 @@ export default function ServicePerformanceSection() {
                 sizes="(max-width: 640px) 50vw, 560px"
               />
               <div
-                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-[21.5px] lg:bottom-[21.5px] lg:left-[65px] lg:right-[65px] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'rwd' ? '!opacity-100' : ''}`}
+                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-0 lg:bottom-0 lg:left-[65px] lg:right-[65px] lg:-mt-[30px] lg:-mb-[30px] lg:min-h-[calc(100%+60px)] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'rwd' ? '!opacity-100' : ''}`}
                 aria-hidden
               >
                 <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                   브랜드DNA 기반 디자인과{'\n'}탑티어급 SEO 최적화 세팅
                 </p>
               </div>
+              {activeCard !== 'rwd' && (
+                <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full lg:hidden tap-hint-badge z-10">
+                  <span className="relative z-10 flex items-center gap-1">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 11l5-5 5 5"/><path d="M12 6v12"/></svg>
+                    TAP
+                  </span>
+                </span>
+              )}
             </div>
             <div className="mt-2 sm:mt-3 w-full max-w-[520px] text-left pl-0 sm:pl-[17px]">
               <p className="m-0 font-sans text-[14px] sm:text-[16px] font-medium text-black">Responsive Web Design</p>
@@ -99,13 +102,21 @@ export default function ServicePerformanceSection() {
                 sizes="(max-width: 640px) 50vw, 560px"
               />
               <div
-                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-[21.5px] lg:bottom-[21.5px] lg:left-[65px] lg:right-[65px] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'seo' ? '!opacity-100' : ''}`}
+                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-0 lg:bottom-0 lg:left-[65px] lg:right-[65px] lg:-mt-[30px] lg:-mb-[30px] lg:min-h-[calc(100%+60px)] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'seo' ? '!opacity-100' : ''}`}
                 aria-hidden
               >
                 <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                   대표 플랫폼 상위노출{'\n'}최고효율 운영
                 </p>
               </div>
+              {activeCard !== 'seo' && (
+                <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full lg:hidden tap-hint-badge z-10">
+                  <span className="relative z-10 flex items-center gap-1">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 11l5-5 5 5"/><path d="M12 6v12"/></svg>
+                    TAP
+                  </span>
+                </span>
+              )}
             </div>
             <div className="mt-2 sm:mt-3 w-full max-w-[520px] text-left pl-0 sm:pl-[17px]">
               <p className="m-0 font-sans text-[14px] sm:text-[16px] font-medium text-black">Search Engine Optimization (SEO)</p>

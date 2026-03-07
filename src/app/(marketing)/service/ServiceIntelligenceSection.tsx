@@ -74,8 +74,10 @@ export default function ServiceIntelligenceSection() {
       <div className="cta-banner-content relative z-10 w-full max-w-[1163px] mx-auto text-center text-white">
         <p className="m-0 font-sans text-[13px] sm:text-[15px] lg:text-[16px] font-light leading-loose space-y-1">
           <AnimLine delay={200} visible={visible}>
-            결과가 정해져 있는{' '}
-            <span className="font-semibold text-white/50 line-through decoration-[#e53935] decoration-2">패키지 마케팅</span>은 그만
+            <span className="text-[19px] sm:text-[22px] lg:text-[24px]">
+              결과가 정해져 있는{' '}
+              <span className="font-semibold text-white/50 line-through decoration-[#e53935] decoration-2">패키지 마케팅</span>은 그만
+            </span>
           </AnimLine>
           <AnimLine delay={400} visible={visible}>
             이터널은 변화하는{' '}

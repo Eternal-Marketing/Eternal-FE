@@ -72,7 +72,7 @@ export default function ServiceCaseStudySection() {
   const [current, setCurrent] = useState(0);
   currentRef.current = current;
   const [animating, setAnimating] = useState(false);
-  const [slideVisible, setSlideVisible] = useState(true);
+  const [nextIndex, setNextIndex] = useState<number | null>(null);
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
   const total = SLIDES.length;
 
@@ -96,14 +96,12 @@ export default function ServiceCaseStudySection() {
     if (animating || idx === current) return;
     setAnimating(true);
     setSlideDirection(direction);
-    setSlideVisible(false);
+    setNextIndex(idx);
     setTimeout(() => {
       setCurrent(idx);
-      requestAnimationFrame(() => {
-        setSlideVisible(true);
-        setTimeout(() => setAnimating(false), 450);
-      });
-    }, 350);
+      setNextIndex(null);
+      setAnimating(false);
+    }, 500);
   }, [animating, current]);
 
   const prev = () => goTo((current - 1 + total) % total, 'prev');
@@ -142,290 +140,119 @@ export default function ServiceCaseStudySection() {
   const slide = SLIDES[current];
   const layout = slide.layout || (slide.images.length === 1 ? 'single' : 'phones');
 
-  const slideOffset = slideDirection === 'next' ? 48 : -48;
-  const slideTransition: React.CSSProperties = {
-    opacity: slideVisible ? 1 : 0,
-    transform: slideVisible
-      ? 'translate(0, 0) scale(1)'
-      : `translate(${slideOffset}px, 8px) scale(0.97)`,
-    transition: 'opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  const isFlipping = animating && nextIndex !== null;
+  const flipFade = () => ({ opacity: 1, transform: 'translateY(0)' });
+  const flipTagStyle = { opacity: 1, transform: 'translateY(0) scale(1)', transition: 'none' as const };
+
+  const renderSlideCard = (s: Slide, isFlip: boolean) => {
+    const l = s.layout || (s.images.length === 1 ? 'single' : 'phones');
+    const f = isFlip ? flipFade : fade;
+    const v = isFlip || visible;
+    const tagStyle = (i: number) => isFlip ? flipTagStyle : { opacity: v ? 1 : 0, transform: v ? 'translateY(0) scale(1)' : 'translateY(6px) scale(0.96)', transition: `all 0.4s ease-out ${400 + i * 40}ms` };
+    const blobStyle = { background: 'radial-gradient(circle, rgba(109,148,255,0.10) 0%, rgba(109,148,255,0.03) 50%, transparent 70%)', opacity: v ? 1 : 0, transition: isFlip ? 'none' : 'opacity 1s ease-out 200ms' };
+    const imgBase = (delay: string) => ({ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(40px)', transition: isFlip ? 'none' : `opacity 0.75s ease-out ${delay}, transform 0.75s ease-out ${delay}` });
+    return (
+      <div key={s.title} className="flex flex-col lg:flex-row lg:items-start lg:gap-20 gap-12 sm:gap-10 w-full">
+        <div className="flex-shrink-0 lg:w-[300px] xl:w-[340px] flex flex-col justify-between lg:py-6 text-center lg:text-left items-center lg:items-start">
+          <div className="w-full">
+            <span className="inline-block mb-2 sm:mb-3 px-3 py-1 rounded-full bg-primary/8 text-primary font-sans text-[11px] sm:text-[12px] font-semibold tracking-[0.08em]" style={f(0)}>{s.category}</span>
+            <h2 className="m-0 font-sans text-[24px] sm:text-[32px] lg:text-[38px] font-bold text-main leading-[1.2]" style={f(100)}>{s.title}</h2>
+            <p className="m-0 mt-4 sm:mt-5 font-sans text-[13px] sm:text-[14px] font-light text-sub1 leading-[1.85] whitespace-pre-line" style={f(200)}>{s.description}</p>
+          </div>
+          <div className="hidden lg:flex flex-wrap gap-2 mt-8" style={f(350)}>
+            {s.tags.map((tag, i) => (
+              <span key={tag} className="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-sans text-[10px] font-semibold tracking-wide border border-primary/15 hover:bg-primary/15 transition-all duration-300 cursor-default" style={tagStyle(i)}>#{tag}</span>
+            ))}
+          </div>
+        </div>
+        <div className="flex-1 relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none" style={blobStyle} aria-hidden />
+          <div ref={!isFlipping ? swipeAreaRef : undefined} className="relative flex flex-row items-center sm:items-end justify-center gap-3 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] -mt-8 sm:mt-0 select-none" style={{ touchAction: 'pan-y' }} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+            <button onClick={prev} disabled={animating} className="hidden sm:flex absolute -left-24 top-[30%] -translate-y-1/2 items-center justify-center w-24 h-24 rounded-full text-primary active:scale-95 transition-all duration-200 z-10 disabled:pointer-events-none disabled:opacity-50" aria-label="이전">
+              <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+            </button>
+            {l === 'single' && (
+              <div className="relative w-full max-w-[600px] lg:max-w-[680px] aspect-[16/10] z-[1] self-center" style={imgBase('300ms')}>
+                <Image src={s.images[0]} alt={`${s.title} 예시`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 600px, 680px" />
+              </div>
+            )}
+            {l === 'phones' && (
+              <div className="flex flex-row items-end justify-center gap-2 sm:gap-4 z-[1]">
+                <div className="flex flex-col items-center">
+                  {s.imageLabels?.[0] && <span className="mb-1 sm:mb-2 mt-0 sm:mt-12 font-sans text-[11px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(8px)', transition: isFlip ? 'none' : 'opacity 0.5s ease-out 200ms, transform 0.5s ease-out 200ms' }}>{s.imageLabels[0]}</span>}
+                  <div className="relative w-[130px] sm:w-[250px] lg:w-[260px] xl:w-[280px] aspect-[271/574] shrink-0" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(8px) sm:translateY(32px)' : 'translateY(30px) sm:translateY(60px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms' }}>
+                    <Image src={s.images[0]} alt={`${s.title} 예시 1`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]" sizes="(max-width: 640px) 200px, (max-width: 1024px) 250px, 280px" />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center z-[2]">
+                  {s.imageLabels?.[1] && <span className="mb-1 sm:mb-2 mt-2 sm:mt-12 font-sans text-[11px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(8px)', transition: isFlip ? 'none' : 'opacity 0.5s ease-out 330ms, transform 0.5s ease-out 330ms' }}>{s.imageLabels[1]}</span>}
+                  <div className="relative w-[130px] sm:w-[250px] lg:w-[260px] xl:w-[280px] aspect-[271/574] shrink-0" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(30px) sm:translateY(60px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms' }}>
+                    <Image src={s.images[1]} alt={`${s.title} 예시 2`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]" sizes="(max-width: 640px) 200px, (max-width: 1024px) 250px, 280px" />
+                  </div>
+                </div>
+              </div>
+            )}
+            {l === 'cards' && (
+              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-8 sm:gap-10 self-center">
+                <div className="flex flex-col">
+                  <div className="relative w-[210px] sm:w-[270px] lg:w-[300px] xl:w-[340px] aspect-[870/660] z-[1] rounded-lg overflow-hidden" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(20px)' : 'translateY(50px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms' }}>
+                    <Image src={s.images[0]} alt={`${s.title} 예시 1`} fill quality={90} className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 210px, (max-width: 1024px) 270px, 340px" />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-3">
+                  {s.imageCaption && <p className="m-0 font-sans text-[11px] sm:text-[12px] lg:text-[13px] font-light text-sub2 leading-[1.7] whitespace-pre-line" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(10px)', transition: isFlip ? 'none' : 'opacity 0.65s ease-out 350ms, transform 0.65s ease-out 350ms' }}>{s.imageCaption}</p>}
+                  <div className="relative w-[210px] sm:w-[270px] lg:w-[300px] xl:w-[340px] aspect-square z-[2] rounded-lg overflow-hidden" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(50px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms' }}>
+                    <Image src={s.images[1]} alt={`${s.title} 예시 2`} fill quality={90} className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 210px, (max-width: 1024px) 270px, 340px" />
+                  </div>
+                </div>
+              </div>
+            )}
+            <button onClick={next} disabled={animating} className="hidden sm:flex absolute -right-24 top-[30%] -translate-y-1/2 items-center justify-center w-24 h-24 rounded-full text-primary active:scale-95 transition-all duration-200 z-10 disabled:pointer-events-none disabled:opacity-50" aria-label="다음">
+              <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+            </button>
+          </div>
+          {!isFlipping && (
+            <p className="sm:hidden absolute -right-4 sm:-right-2 top-[30%] -translate-y-1/2 flex items-center justify-center" style={fade(300)}>
+              <span className="animate-swipe-hint inline-flex items-center justify-center w-20 h-20 rounded-full text-primary">
+                <svg className="w-9 h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+              </span>
+            </p>
+          )}
+          {!isFlipping && (
+            <div className="flex lg:hidden flex-wrap justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8" style={fade(350)}>
+              {s.tags.map((tag, i) => (
+                <span key={tag} className="px-2 py-1 rounded-full bg-primary/10 text-primary font-sans text-[9px] sm:text-[10px] font-semibold tracking-wide border border-primary/15" style={tagStyle(i)}>#{tag}</span>
+              ))}
+            </div>
+          )}
+          {!isFlipping && (
+            <div className="mt-5 sm:mt-6 flex justify-center gap-1.5" style={fade(400)}>
+              {SLIDES.map((_, i) => (
+                <button key={i} onClick={() => goTo(i, i > current ? 'next' : 'prev')} disabled={animating} className={`rounded-full transition-all duration-300 ${i === current ? 'w-5 h-1.5 bg-sub2' : 'w-1.5 h-1.5 bg-sub3/50'}`} aria-label={`슬라이드 ${i + 1}`} />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
   };
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#f6f6f6] overflow-hidden">
-      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14 lg:py-[72px]">
-
-        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-20 gap-12 sm:gap-10" style={slideTransition}>
-
-          {/* ── 왼쪽: 텍스트 + 태그 ── */}
-          <div className="flex-shrink-0 lg:w-[300px] xl:w-[340px] flex flex-col justify-between lg:py-6">
-            <div>
-              <span
-                className="inline-block mb-2 sm:mb-3 px-3 py-1 rounded-full bg-primary/8 text-primary font-sans text-[11px] sm:text-[12px] font-semibold tracking-[0.08em]"
-                style={fade(0)}
-              >
-                {slide.category}
-              </span>
-              <h2
-                className="m-0 font-sans text-[24px] sm:text-[32px] lg:text-[38px] font-bold text-main leading-[1.2]"
-                style={fade(100)}
-              >
-                {slide.title}
-              </h2>
-              <p
-                className="m-0 mt-4 sm:mt-5 font-sans text-[13px] sm:text-[14px] font-light text-sub1 leading-[1.85] whitespace-pre-line"
-                style={fade(200)}
-              >
-                {slide.description}
-              </p>
+    <section ref={sectionRef} className="w-full min-h-[520px] sm:min-h-[600px] lg:min-h-[680px] bg-[#f6f6f6] -my-8 sm:my-0 py-8 sm:py-0">
+      <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14 lg:py-[72px] overflow-visible">
+        <div className="relative min-h-[560px] sm:min-h-[600px] overflow-visible">
+          {isFlipping && nextIndex !== null ? (
+            <div className="relative w-full min-h-[560px] sm:min-h-[600px] pointer-events-none overflow-visible">
+              <div className={`absolute inset-0 w-full ${slideDirection === 'next' ? 'slide-flip-in-next' : 'slide-flip-in-prev'}`}>
+                {renderSlideCard(SLIDES[nextIndex], true)}
+              </div>
+              <div className={`absolute inset-0 w-full z-10 ${slideDirection === 'next' ? 'slide-flip-out-next' : 'slide-flip-out-prev'}`}>
+                {renderSlideCard(SLIDES[current], true)}
+              </div>
             </div>
-
-            <div
-              className="hidden lg:flex flex-wrap gap-2 mt-8"
-              style={fade(350)}
-            >
-              {slide.tags.map((tag, i) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full bg-white text-sub2 font-sans text-[12px] font-medium ring-1 ring-black/[0.06] hover:ring-primary/30 hover:text-primary transition-all duration-250 cursor-default"
-                  style={{
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? 'translateY(0) scale(1)' : 'translateY(6px) scale(0.96)',
-                    transition: `all 0.4s ease-out ${400 + i * 40}ms`,
-                  }}
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* ── 오른쪽: 이미지 영역 ── */}
-          <div className="flex-1 relative">
-
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none"
-              style={{
-                background: 'radial-gradient(circle, rgba(109,148,255,0.10) 0%, rgba(109,148,255,0.03) 50%, transparent 70%)',
-                opacity: visible ? 1 : 0,
-                transition: 'opacity 1s ease-out 200ms',
-              }}
-              aria-hidden
-            />
-
-            <div
-              ref={swipeAreaRef}
-              className="relative flex flex-col sm:flex-row items-center sm:items-end justify-center gap-4 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] -mt-8 sm:mt-0 select-none"
-              style={{ touchAction: 'pan-y' }}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-            >
-
-              {/* 왼쪽 화살표 - 모바일에서 숨김 */}
-              <button
-                onClick={prev}
-                disabled={animating}
-                className="hidden sm:flex absolute -left-10 top-1/2 -translate-y-1/2 items-center justify-center text-[#555555] hover:text-[#222222] transition-colors duration-200 z-10 disabled:pointer-events-none"
-                aria-label="이전"
-              >
-                <svg className="w-7 h-12" viewBox="0 0 28 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="22 4 6 24 22 44" />
-                </svg>
-              </button>
-
-              {/* --- 레이아웃별 이미지 렌더링 --- */}
-
-              {layout === 'single' && (
-                <div
-                  className="relative w-full max-w-[600px] lg:max-w-[680px] aspect-[16/10] z-[1] self-center"
-                  style={{
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? 'translateY(0)' : 'translateY(40px)',
-                    transition: 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms',
-                  }}
-                >
-                  <Image
-                    src={slide.images[0]}
-                    alt={`${slide.title} 예시`}
-                    fill
-                    quality={90}
-                    className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 600px, 680px"
-                  />
-                </div>
-              )}
-
-              {layout === 'phones' && (
-                <>
-                  <div className="flex flex-col items-center z-[1]">
-                    {slide.imageLabels?.[0] && (
-                      <span
-                        className="mb-1 sm:mb-2 mt-0 sm:mt-12 font-sans text-[11px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2"
-                        style={{
-                          opacity: visible ? 1 : 0,
-                          transform: visible ? 'translateY(0)' : 'translateY(8px)',
-                          transition: 'opacity 0.5s ease-out 200ms, transform 0.5s ease-out 200ms',
-                        }}
-                      >
-                        {slide.imageLabels[0]}
-                      </span>
-                    )}
-                    <div
-                      className="relative w-[200px] sm:w-[250px] lg:w-[260px] xl:w-[280px] aspect-[271/574]"
-                      style={{
-                        opacity: visible ? 1 : 0,
-                        transform: visible ? 'translateY(8px) sm:translateY(32px)' : 'translateY(30px) sm:translateY(60px)',
-                        transition: 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms',
-                      }}
-                    >
-                      <Image
-                        src={slide.images[0]}
-                        alt={`${slide.title} 예시 1`}
-                        fill
-                        quality={90}
-                        className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
-                        sizes="(max-width: 640px) 200px, (max-width: 1024px) 250px, 280px"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center z-[2]">
-                    {slide.imageLabels?.[1] && (
-                      <span
-                        className="mb-1 sm:mb-2 mt-2 sm:mt-12 font-sans text-[11px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2"
-                        style={{
-                          opacity: visible ? 1 : 0,
-                          transform: visible ? 'translateY(0)' : 'translateY(8px)',
-                          transition: 'opacity 0.5s ease-out 330ms, transform 0.5s ease-out 330ms',
-                        }}
-                      >
-                        {slide.imageLabels[1]}
-                      </span>
-                    )}
-                    <div
-                      className="relative w-[200px] sm:w-[250px] lg:w-[260px] xl:w-[280px] aspect-[271/574]"
-                      style={{
-                        opacity: visible ? 1 : 0,
-                        transform: visible ? 'translateY(0)' : 'translateY(30px) sm:translateY(60px)',
-                        transition: 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms',
-                      }}
-                    >
-                      <Image
-                        src={slide.images[1]}
-                        alt={`${slide.title} 예시 2`}
-                        fill
-                        quality={90}
-                        className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
-                        sizes="(max-width: 640px) 200px, (max-width: 1024px) 250px, 280px"
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {layout === 'cards' && (
-                <div className="flex flex-col sm:flex-row items-center sm:items-end gap-8 sm:gap-10 self-center">
-                  {/* 카드 1 — 가로형 (아래쪽 배치) */}
-                  <div className="flex flex-col">
-                    <div
-                      className="relative w-[210px] sm:w-[270px] lg:w-[300px] xl:w-[340px] aspect-[870/660] z-[1] rounded-lg overflow-hidden"
-                      style={{
-                        opacity: visible ? 1 : 0,
-                        transform: visible ? 'translateY(20px)' : 'translateY(50px)',
-                        transition: 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms',
-                      }}
-                    >
-                      <Image
-                        src={slide.images[0]}
-                        alt={`${slide.title} 예시 1`}
-                        fill
-                        quality={90}
-                        className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]"
-                        sizes="(max-width: 640px) 210px, (max-width: 1024px) 270px, 340px"
-                      />
-                    </div>
-                  </div>
-
-                  {/* 카드 2 — 정사각 (위쪽 배치) + 캡션 */}
-                  <div className="flex flex-col gap-3">
-                    {slide.imageCaption && (
-                      <p
-                        className="m-0 font-sans text-[11px] sm:text-[12px] lg:text-[13px] font-light text-sub2 leading-[1.7] whitespace-pre-line"
-                        style={{
-                          opacity: visible ? 1 : 0,
-                          transform: visible ? 'translateY(0)' : 'translateY(10px)',
-                          transition: 'opacity 0.65s ease-out 350ms, transform 0.65s ease-out 350ms',
-                        }}
-                      >
-                        {slide.imageCaption}
-                      </p>
-                    )}
-                    <div
-                      className="relative w-[210px] sm:w-[270px] lg:w-[300px] xl:w-[340px] aspect-square z-[2] rounded-lg overflow-hidden"
-                      style={{
-                        opacity: visible ? 1 : 0,
-                        transform: visible ? 'translateY(0)' : 'translateY(50px)',
-                        transition: 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms',
-                      }}
-                    >
-                      <Image
-                        src={slide.images[1]}
-                        alt={`${slide.title} 예시 2`}
-                        fill
-                        quality={90}
-                        className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]"
-                        sizes="(max-width: 640px) 210px, (max-width: 1024px) 270px, 340px"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* 오른쪽 화살표 - 모바일에서 숨김 */}
-              <button
-                onClick={next}
-                disabled={animating}
-                className="hidden sm:flex absolute -right-10 top-1/2 -translate-y-1/2 items-center justify-center text-[#555555] hover:text-[#222222] transition-colors duration-200 z-10 disabled:pointer-events-none"
-                aria-label="다음"
-              >
-                <svg className="w-7 h-12" viewBox="0 0 28 48" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="6 4 22 24 6 44" />
-                </svg>
-              </button>
-            </div>
-
-            {/* 태그 - 모바일에서만 목업 아래 표시 */}
-            <div
-              className="flex lg:hidden flex-wrap justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8"
-              style={fade(350)}
-            >
-              {slide.tags.map((tag, i) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-0.5 rounded-full bg-white text-sub2 font-sans text-[10px] sm:text-[12px] font-medium ring-1 ring-black/[0.06]"
-                  style={{
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? 'translateY(0) scale(1)' : 'translateY(6px) scale(0.96)',
-                    transition: `all 0.4s ease-out ${400 + i * 40}ms`,
-                  }}
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-
-            {/* 페이지 인디케이터 */}
-            <div className="mt-5 sm:mt-6 flex justify-center gap-1.5" style={fade(400)}>
-              {SLIDES.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => goTo(i, i > current ? 'next' : 'prev')}
-                  disabled={animating}
-                  className={`rounded-full transition-all duration-300 ${i === current ? 'w-5 h-1.5 bg-sub2' : 'w-1.5 h-1.5 bg-sub3/50'}`}
-                  aria-label={`슬라이드 ${i + 1}`}
-                />
-              ))}
-            </div>
-          </div>
+          ) : (
+            renderSlideCard(slide, false)
+          )}
         </div>
       </div>
     </section>
