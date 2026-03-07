@@ -64,7 +64,7 @@ export default function ServicePerformanceSection() {
                 sizes="(max-width: 640px) 50vw, 560px"
               />
               <div
-                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-[21.5px] lg:bottom-[21.5px] lg:left-[65px] lg:right-[65px] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'rwd' ? '!opacity-100' : ''}`}
+                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-0 lg:bottom-0 lg:left-[65px] lg:right-[65px] lg:-mt-[30px] lg:-mb-[30px] lg:min-h-[calc(100%+60px)] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'rwd' ? '!opacity-100' : ''}`}
                 aria-hidden
               >
                 <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
@@ -102,7 +102,7 @@ export default function ServicePerformanceSection() {
                 sizes="(max-width: 640px) 50vw, 560px"
               />
               <div
-                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-[21.5px] lg:bottom-[21.5px] lg:left-[65px] lg:right-[65px] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'seo' ? '!opacity-100' : ''}`}
+                className={`absolute top-[21.5px] right-0 bottom-[21.5px] left-0 sm:top-[21.5px] sm:right-0 sm:bottom-[21.5px] sm:left-0 lg:top-0 lg:bottom-0 lg:left-[65px] lg:right-[65px] lg:-mt-[30px] lg:-mb-[30px] lg:min-h-[calc(100%+60px)] rounded-xl sm:rounded-2xl lg:rounded-[5px] flex items-center justify-center bg-black/50 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-300 px-4 py-5 ${activeCard === 'seo' ? '!opacity-100' : ''}`}
                 aria-hidden
               >
                 <p className="font-sans text-[14px] sm:text-[16px] font-bold leading-relaxed text-white text-center whitespace-pre-line tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">

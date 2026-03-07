@@ -60,7 +60,7 @@ function CountUpNumber({ end, duration = 2000, suffix = '' }: { end: number; dur
 }
 
 // 페이드인 애니메이션 컴포넌트
-function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -92,7 +92,7 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       ref={ref}
       className={`transition-all duration-1000 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+      } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
@@ -216,26 +216,20 @@ export default function AboutSection() {
         </div>
 
         <div className="relative mb-12 sm:mb-16 lg:mb-24 desktop:mb-[120px] lg:pl-40 xl:pl-64">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center gap-6 sm:gap-8 lg:gap-4">
-            <FadeIn delay={600} className="order-2 lg:order-1">
-              <div className="hidden lg:flex items-center justify-center lg:justify-start" data-node-id="127:912-wrap">
-                <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full mb-3 sm:mb-4 shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight" data-node-id="127:912">
-                  업종별 최상위 전문 마케터
-                </span>
-              </div>
-            </FadeIn>
-
-            <SlideIn direction="left" delay={400} className="flex-shrink-0 order-1 lg:order-2">
-              <div className="flex flex-col items-center relative" data-node-id="158:25">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center gap-6 sm:gap-8 lg:gap-10">
+            <FadeIn delay={600} className="order-2 lg:order-1 lg:flex-1">
+              <div className="flex flex-col items-center lg:items-start" data-node-id="158:25">
                 <span className="absolute top-0 left-1/2 -translate-x-1/2 z-10 lg:hidden">
                   <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight" data-node-id="127:912">
                     업종별 최상위 전문 마케터
                   </span>
                 </span>
-                <div className="w-[180px] h-[155px] sm:w-[200px] sm:h-[170px] lg:w-[340px] lg:h-[290px] relative mt-10 sm:mt-10 lg:mt-0">
-                  <Image alt="Recontract rate" fill className="object-contain" src="/images/main-2.svg" sizes="340px" />
+                <div className="hidden lg:flex items-center justify-start mb-3 lg:mb-4" data-node-id="127:912-wrap">
+                  <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight" data-node-id="127:912">
+                    업종별 최상위 전문 마케터
+                  </span>
                 </div>
-                <div className="text-center mt-4 sm:mt-5 lg:mt-6" data-node-id="58:96">
+                <div className="text-center lg:text-left mt-10 sm:mt-10 lg:mt-0" data-node-id="58:96">
                   <div className="mb-2 sm:mb-3 whitespace-nowrap">
                     <p className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main leading-tight">
                       프로젝트 연평균 매출 성장률{" "}
@@ -260,6 +254,12 @@ export default function AboutSection() {
                   </div>
                 </div>
               </div>
+            </FadeIn>
+
+            <SlideIn direction="left" delay={400} className="flex-shrink-0 order-1 lg:order-2">
+              <div className="w-[180px] h-[155px] sm:w-[200px] sm:h-[170px] lg:w-[340px] lg:h-[290px] relative">
+                <Image alt="Recontract rate" fill className="object-contain" src="/images/main-2.svg" sizes="340px" />
+              </div>
             </SlideIn>
           </div>
         </div>
@@ -274,7 +274,7 @@ export default function AboutSection() {
                   </span>
                 </span>
                 <div className="w-[300px] h-[260px] sm:w-[360px] sm:h-[310px] lg:w-[540px] lg:h-[470px] relative mt-10 sm:mt-10 lg:mt-0">
-                  <Image alt="Team Structure" fill className="object-contain" src="/images/wave1.svg" sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 540px" />
+                  <Image alt="Team Structure" fill className="object-contain" src="/images/reviewSection/mainl3-13.svg" sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 540px" />
                 </div>
               </div>
             </SlideIn>

@@ -1,6 +1,6 @@
 'use client';
 
-import { ChatBubbleLeftRightIcon, PlayIcon, ChartPieIcon, UserGroupIcon } from '@heroicons/react/24/solid';
+import { ChatBubbleLeftRightIcon, PlayIcon, ChartPieIcon, UserGroupIcon, SparklesIcon } from '@heroicons/react/24/solid';
 
 interface OurTeamChartProps {
   visible: boolean;
@@ -191,7 +191,7 @@ export default function OurTeamChart({ visible: v }: OurTeamChartProps) {
    * 각 단계 사이 여유 간격
    */
   return (
-    <div className="w-full max-w-[1040px] mx-auto">
+    <div className="w-full max-w-[1180px] mx-auto">
       {/* ═══════ 데스크탑 ═══════ */}
       <div className="hidden sm:block">
 
@@ -216,50 +216,62 @@ export default function OurTeamChart({ visible: v }: OurTeamChartProps) {
           <div style={{ height: LINE_W, background: LINE_COLOR, ...aLine(800, v, 'center') }} />
         </div>
 
-        {/* ④ 3갈래 드롭라인 쭉~ */}
-        <div className="grid grid-cols-3 gap-4 lg:gap-6 mx-[6%] lg:mx-[4%]">
-          {[1250, 1300, 1350].map((d, i) => (
+        {/* ④ 4갈래 드롭라인 쭉~ */}
+        <div className="grid grid-cols-4 gap-3 lg:gap-5 mx-[6%] lg:mx-[4%]">
+          {[1250, 1300, 1350, 1400].map((d, i) => (
             <div key={i} className="h-[48px] lg:h-[56px]">
               <div className="ml-[30px] lg:ml-[34px]" style={{ width: LINE_W, height: '100%', background: LINE_COLOR, ...aLine(d, v, 'top') }} />
             </div>
           ))}
         </div>
 
-        {/* ⑤ 좌측 부서 → 선 → 하위팀 순차 */}
-        {/* ⑥ 중앙 부서 → 선 → 하위팀 순차 */}
-        {/* ⑦ 우측 부서 → 선 → 하위팀 순차 */}
-        <div className="grid grid-cols-3 gap-4 lg:gap-6 mx-[6%] lg:mx-[4%]">
+        {/* ⑤~⑧ 각 본부/조직 순차 등장 */}
+        <div className="grid grid-cols-4 gap-3 lg:gap-5 mx-[6%] lg:mx-[4%]">
           <DeptColumn
             icon={<ChatBubbleLeftRightIcon />}
             label="마케팅 인텔리전스 전략 본부"
             deptDelay={1650}
             trunkDelay={2050}
             teams={[
-              { label: '데이터·AI 분석팀', delay: 2350 },
+              { label: '데이터 · AI 분석팀', delay: 2350 },
               { label: '채널 전략 설계팀', delay: 2650 },
+            ]}
+            v={v}
+          />
+          <DeptColumn
+            icon={<SparklesIcon />}
+            label="크리에이티브 전략 스튜디오"
+            deptDelay={2950}
+            trunkDelay={3350}
+            teams={[
+              { label: '광고 · 브랜드 전략 컨설팅팀', delay: 3650 },
+              { label: '웹 솔루션 개발팀', delay: 3950 },
+              { label: '브랜드 UX/UI 디자인팀', delay: 4250 },
+              { label: 'USP 콘텐츠 크리에이티브팀', delay: 4550 },
             ]}
             v={v}
           />
           <DeptColumn
             icon={<PlayIcon />}
             label="실행 전문 조직"
-            deptDelay={2950}
-            trunkDelay={3350}
+            deptDelay={4850}
+            trunkDelay={5250}
             teams={[
-              { label: '검색·콘텐츠 최적화팀', delay: 3650 },
-              { label: '스마트 플레이스·로컬 마케팅팀', delay: 3950 },
-              { label: '커뮤니티·바이럴 전략팀', delay: 4250 },
-              { label: '퍼포먼스·전환 최적화팀', delay: 4550 },
+              { label: '검색 · 콘텐츠 최적화팀', delay: 5550 },
+              { label: '스마트 플레이스 · 로컬 마케팅팀', delay: 5850 },
+              { label: '커뮤니티 바이럴 전략팀', delay: 6150 },
+              { label: '퍼포먼스 · 전환 최적화팀', delay: 6450 },
             ]}
             v={v}
           />
           <DeptColumn
             icon={<ChartPieIcon />}
-            label="운영·관리 조직"
-            deptDelay={4850}
-            trunkDelay={5250}
+            label="운영 · 관리 조직"
+            deptDelay={6750}
+            trunkDelay={7150}
             teams={[
-              { label: '클라이언트 운영·성과 관리팀', delay: 5550 },
+              { label: '클라이언트 운영 · 성과 관리팀', delay: 7450 },
+              { label: '고객 경험 관리팀', delay: 7750 },
             ]}
             v={v}
           />
@@ -292,13 +304,13 @@ export default function OurTeamChart({ visible: v }: OurTeamChartProps) {
           <div style={{ width: LINE_W, height: 24, background: LINE_COLOR, ...aLine(350, v, 'top') }} />
         </div>
 
-        {/* ③ 3개 본부: 트렁크에 가로 연결 → 부서카드(아이콘+라벨) → 하위팀 */}
+        {/* ③ 4개 본부: 트렁크에 가로 연결 → 부서카드(아이콘+라벨) → 하위팀 */}
         <div className="flex flex-col gap-4 pl-[35px] -mt-[1px]">
           <MobileDeptBranch
             icon={<ChatBubbleLeftRightIcon />}
             label="마케팅 인텔리전스 전략 본부"
             teams={[
-              { label: '데이터·AI 분석팀', delay: 1150 },
+              { label: '데이터 · AI 분석팀', delay: 1150 },
               { label: '채널 전략 설계팀', delay: 1450 },
             ]}
             deptDelay={750}
@@ -306,26 +318,40 @@ export default function OurTeamChart({ visible: v }: OurTeamChartProps) {
             v={v}
           />
           <MobileDeptBranch
-            icon={<PlayIcon />}
-            label="실행 전문 조직"
+            icon={<SparklesIcon />}
+            label="크리에이티브 전략 스튜디오"
             teams={[
-              { label: '검색·콘텐츠 최적화팀', delay: 2250 },
-              { label: '스마트 플레이스·로컬 마케팅팀', delay: 2550 },
-              { label: '커뮤니티·바이럴 전략팀', delay: 2850 },
-              { label: '퍼포먼스·전환 최적화팀', delay: 3150 },
+              { label: '광고 · 브랜드 전략 컨설팅팀', delay: 2250 },
+              { label: '웹 솔루션 개발팀', delay: 2550 },
+              { label: '브랜드 UX/UI 디자인팀', delay: 2850 },
+              { label: 'USP 콘텐츠 크리에이티브팀', delay: 3150 },
             ]}
             deptDelay={1850}
             trunkDelay={2050}
             v={v}
           />
           <MobileDeptBranch
-            icon={<ChartPieIcon />}
-            label="운영·관리 조직"
+            icon={<PlayIcon />}
+            label="실행 전문 조직"
             teams={[
-              { label: '클라이언트 운영·성과 관리팀', delay: 3850 },
+              { label: '검색 · 콘텐츠 최적화팀', delay: 3950 },
+              { label: '스마트 플레이스 · 로컬 마케팅팀', delay: 4250 },
+              { label: '커뮤니티 바이럴 전략팀', delay: 4550 },
+              { label: '퍼포먼스 · 전환 최적화팀', delay: 4850 },
             ]}
-            deptDelay={3450}
-            trunkDelay={3650}
+            deptDelay={3550}
+            trunkDelay={3750}
+            v={v}
+          />
+          <MobileDeptBranch
+            icon={<ChartPieIcon />}
+            label="운영 · 관리 조직"
+            teams={[
+              { label: '클라이언트 운영 · 성과 관리팀', delay: 5650 },
+              { label: '고객 경험 관리팀', delay: 5950 },
+            ]}
+            deptDelay={5250}
+            trunkDelay={5450}
             v={v}
             isLast
           />

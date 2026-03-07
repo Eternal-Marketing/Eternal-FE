@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import ReviewCard from './ReviewCard';
+import { reviewCards } from './reviewCards';
 
 /**
  * 리뷰·상장 섹션 (홈)
@@ -170,23 +172,6 @@ function SlideInRight({ children, delay = 0 }: { children: React.ReactNode; dela
 }
 
 export default function ReviewSection() {
-  const reviews = [
-    { image: '/images/reviewSection/review1.svg' },
-    { image: '/images/reviewSection/review2.svg' },
-    { image: '/images/reviewSection/review3.svg' },
-    { image: '/images/reviewSection/review4.svg' },
-    { image: '/images/reviewSection/review5.svg' },
-    { image: '/images/reviewSection/review6.svg' },
-    { image: '/images/reviewSection/review7.svg' },
-    { image: '/images/reviewSection/review8.svg' },
-  ];
-
-  const rewards = [
-    { image: '/images/reviewSection/reward1.svg' },
-    { image: '/images/reviewSection/reward2.svg' },
-    { image: '/images/reviewSection/reward4.svg' },
-  ];
-
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   const cardW = 'min-w-[340px] w-[340px] sm:min-w-[320px] sm:w-[320px] lg:min-w-[420px] lg:w-[420px]';
@@ -206,8 +191,8 @@ export default function ReviewSection() {
               <h2
                 className="font-sans text-[23px] sm:text-[24px] lg:text-[36px] font-bold leading-normal text-inverse text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
               >
-                판단은 이미 증명되어 있었고,<br />
-                AI는 그 판단을 정교하게 만들었습니다
+                판단은 이미 <span className="rounded-lg bg-primary/25 px-2 py-0.5 text-white">증명</span>되어 있었고,<br />
+                AI는 그 판단을 <span className="rounded-lg bg-primary/25 px-2 py-0.5 text-white">정교</span>하게 만들었습니다
               </h2>
             </div>
           </FadeIn>
@@ -217,21 +202,25 @@ export default function ReviewSection() {
         <ScaleIn delay={200}>
           <div className="pb-12 sm:pb-16 lg:pb-[200px]">
             <div className="w-screen" style={{ clipPath: 'inset(0 0 0 0)' }}>
-              <div className="review-scroll py-8">
+              <div className="review-scroll py-10 sm:py-12">
                 {[...Array(2)].map((_, repeatIndex) => (
                   <div key={repeatIndex} className="flex items-center flex-shrink-0">
-                    {reviews.map((review, index) => {
-                      const cardKey = `${repeatIndex}-${index}`;
+                    {reviewCards.map((review) => {
+                      const cardKey = `${repeatIndex}-${review.id}`;
                       const isActive = activeCard === cardKey;
                       return (
-                        <div
+                        <ReviewCard
                           key={cardKey}
-                          className={`flex items-center justify-center flex-shrink-0 mx-1.5 sm:mx-2 relative ${cardW} ${cardH} transition-all duration-300 ease-out [@media(hover:hover)]:hover:scale-[1.15] [@media(hover:hover)]:hover:-translate-y-4 [@media(hover:hover)]:hover:z-10 cursor-pointer`}
-                          style={isActive ? { transform: 'scale(1.15) translateY(-16px)', zIndex: 10 } : {}}
-                          onClick={() => setActiveCard(isActive ? null : cardKey)}
-                        >
-                          <Image src={review.image} alt={`Review ${index + 1}`} fill className="object-contain" sizes="360px" />
-                        </div>
+                          body={review.body}
+                          brand={review.brand}
+                          role={review.role}
+                          stars={review.stars}
+                          cardKey={cardKey}
+                          isActive={isActive}
+                          onToggle={(key) => setActiveCard(activeCard === key ? null : key)}
+                          widthClassName={cardW}
+                          heightClassName={cardH}
+                        />
                       );
                     })}
                   </div>
