@@ -108,7 +108,7 @@ function ExpandHighlight({ children, delay = 0 }: { children: React.ReactNode; d
   return (
     <span className="relative inline-block">
       <span
-        className="absolute inset-0 rounded-md bg-white/10"
+        className="absolute inset-0 rounded-lg bg-[linear-gradient(90deg,rgba(255,255,255,0.26),rgba(255,244,214,0.34),rgba(255,255,255,0.22))] shadow-[0_10px_26px_rgba(0,0,0,0.22)] ring-1 ring-white/28"
         style={{
           transformOrigin: 'left',
           transform: visible ? 'scaleX(1)' : 'scaleX(0)',
@@ -118,7 +118,13 @@ function ExpandHighlight({ children, delay = 0 }: { children: React.ReactNode; d
         }}
         aria-hidden
       />
-      <span className="relative z-10 text-white font-semibold px-2 py-0.5">{children}</span>
+      <span
+        className="pointer-events-none absolute inset-x-2 bottom-1 h-px rounded-full bg-[linear-gradient(90deg,rgba(255,255,255,0),rgba(255,236,184,0.9),rgba(255,255,255,0))] opacity-80"
+        aria-hidden
+      />
+      <span className="relative z-10 text-white font-extrabold px-2.5 py-0.5 tracking-[-0.02em] drop-shadow-[0_2px_6px_rgba(0,0,0,0.38)]">
+        {children}
+      </span>
     </span>
   );
 }
@@ -145,13 +151,24 @@ function ExpandBackground({ children }: { children: React.ReactNode }) {
     <ExpandBackgroundContext.Provider value={isVisible}>
       <div ref={ref} className="relative w-full overflow-hidden bg-white">
         <div
-          className="absolute inset-0 bg-primary"
+          className="absolute inset-0 bg-gradient-to-br from-[#1a3a6e] via-[#184BBA] to-[#2d2466]"
           style={{
             transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
             transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
             transformOrigin: 'center',
           }}
         />
+        {/* 그라데이션 · 블러 오버레이 */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] overflow-hidden"
+          aria-hidden
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-sky-400/[0.08] via-transparent to-indigo-400/[0.1]" />
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-indigo-400/15 blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-sky-400/12 blur-3xl" />
+          {/* 하이라이트와 톤을 묶어주는 웜 글로우 */}
+          <div className="absolute left-1/2 top-1/2 h-[240px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-200/10 blur-3xl" />
+        </div>
         <div
           className="relative z-10"
           style={{
@@ -313,30 +330,48 @@ export default function AboutPageClient() {
       </section>
 
       <ExpandBackground>
-        <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-24 sm:py-10 lg:py-[60px] text-center">
-          {/* 모바일 전용 */}
-          <div className="sm:hidden">
-            <p className="m-0 font-sans font-semibold leading-snug text-[24px]">
-              <ExpandHighlight delay={600}>이터널마케팅</ExpandHighlight>
-              <span className="text-white/80">은 이 비효율적인 구조에</span>
-            </p>
-            <p className="m-0 font-sans font-semibold leading-snug mt-2 text-[24px]">
-              <ExpandHighlight delay={1000}>질문</ExpandHighlight>
-              <span className="text-white/80">을 던지는 것에서 시작했습니다</span>
-            </p>
+        <div className="relative w-full max-w-[1163px] mx-auto px-4 sm:px-6 py-24 sm:py-10 lg:py-[60px] text-center">
+          {/* 상단 디바이더 */}
+          <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[92%] -translate-x-1/2 bg-[linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.28),rgba(255,255,255,0))]" aria-hidden />
+
+          {/* 문구 주변 장식 (카드 없이) */}
+          <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2" aria-hidden>
+            {/* 스포트라이트 */}
+            <div className="absolute left-1/2 top-1/2 h-[210px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0.07)_40%,rgba(255,255,255,0)_70%)] blur-xl" />
+            {/* 사선 라인 패턴 */}
+            <div className="absolute left-1/2 top-1/2 h-[170px] w-[860px] -translate-x-1/2 -translate-y-1/2 opacity-[0.26] [mask-image:radial-gradient(circle,black_40%,transparent_72%)] bg-[linear-gradient(135deg,rgba(255,255,255,0.26)_0,rgba(255,255,255,0.26)_1px,transparent_1px,transparent_14px)] [background-size:18px_18px]" />
+            {/* 얇은 라이트 스트릭 */}
+            <div className="absolute -top-6 right-[-80px] h-[140px] w-[260px] rotate-[16deg] rounded-full bg-[linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.14),rgba(255,255,255,0))] blur-xl" />
           </div>
-          {/* 데스크탑 전용 - 마케팅 인텔리전스 섹션과 동일한 형광 하이라이트 스윽 애니메이션 */}
-          <div className="hidden sm:block text-center">
-            <p className="m-0 font-sans font-semibold text-[28px] lg:text-[36px] leading-relaxed">
-              <ExpandHighlight delay={600}>이터널마케팅</ExpandHighlight>
-              <span className="text-white/70">은</span>
-            </p>
-            <p className="m-0 mt-2 font-sans font-semibold text-[24px] lg:text-[32px] leading-relaxed">
-              <span className="text-white/70">이 비효율적인 구조에 </span>
-              <ExpandHighlight delay={1000}>질문</ExpandHighlight>
-              <span className="text-white/70">을 던지는 것에서 시작했습니다</span>
-            </p>
+
+          <div className="relative mx-auto w-full max-w-[980px]">
+            {/* 모바일 전용 */}
+            <div className="sm:hidden">
+              <p className="m-0 font-sans font-semibold leading-snug text-[24px]">
+                <ExpandHighlight delay={600}>이터널마케팅</ExpandHighlight>
+                <span className="text-white/80">은 이 비효율적인 구조에</span>
+              </p>
+              <p className="m-0 font-sans font-semibold leading-snug mt-2 text-[24px]">
+                <ExpandHighlight delay={1000}>질문</ExpandHighlight>
+                <span className="text-white/80">을 던지는 것에서 시작했습니다</span>
+              </p>
+            </div>
+            {/* 데스크탑 전용 */}
+            <div className="hidden sm:block text-center">
+              <p className="m-0 font-sans font-semibold text-[28px] lg:text-[36px] leading-relaxed">
+                <ExpandHighlight delay={600}>이터널마케팅</ExpandHighlight>
+                <span className="text-white/70">은</span>
+              </p>
+              <p className="m-0 mt-2 font-sans font-semibold text-[24px] lg:text-[32px] leading-relaxed">
+                <span className="text-white/70">이 비효율적인 구조에 </span>
+                <ExpandHighlight delay={1000}>질문</ExpandHighlight>
+                <span className="text-white/70">을 던지는 것에서 시작했습니다</span>
+              </p>
+            </div>
           </div>
+
+          {/* 하단 디바이더 */}
+          <div className="pointer-events-none absolute left-1/2 bottom-0 h-px w-[92%] -translate-x-1/2 bg-[linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.22),rgba(255,255,255,0))]" aria-hidden />
         </div>
       </ExpandBackground>
 

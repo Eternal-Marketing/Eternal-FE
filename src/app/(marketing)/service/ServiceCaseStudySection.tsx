@@ -168,7 +168,7 @@ export default function ServiceCaseStudySection() {
         <div className="flex-1 relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none" style={blobStyle} aria-hidden />
           <div ref={!isFlipping ? swipeAreaRef : undefined} className="relative flex flex-row items-center sm:items-end justify-center gap-3 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] -mt-8 sm:mt-0 select-none" style={{ touchAction: 'pan-y' }} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-            <button onClick={prev} disabled={animating} className="hidden sm:flex absolute -left-24 top-[30%] -translate-y-1/2 items-center justify-center w-24 h-24 rounded-full text-primary active:scale-95 transition-all duration-200 z-10 disabled:pointer-events-none disabled:opacity-50" aria-label="이전">
+            <button onClick={prev} disabled={animating} className="hidden sm:flex absolute -left-24 top-1/2 -translate-y-1/2 items-center justify-center w-24 h-24 rounded-full text-primary active:scale-95 transition-all duration-200 z-10 disabled:pointer-events-none disabled:opacity-50" aria-label="이전">
               <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
             </button>
             {l === 'single' && (
@@ -207,7 +207,7 @@ export default function ServiceCaseStudySection() {
                 </div>
               </div>
             )}
-            <button onClick={next} disabled={animating} className="hidden sm:flex absolute -right-24 top-[30%] -translate-y-1/2 items-center justify-center w-24 h-24 rounded-full text-primary active:scale-95 transition-all duration-200 z-10 disabled:pointer-events-none disabled:opacity-50" aria-label="다음">
+            <button onClick={next} disabled={animating} className="hidden sm:flex absolute -right-24 top-1/2 -translate-y-1/2 items-center justify-center w-24 h-24 rounded-full text-primary active:scale-95 transition-all duration-200 z-10 disabled:pointer-events-none disabled:opacity-50" aria-label="다음">
               <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
             </button>
           </div>
