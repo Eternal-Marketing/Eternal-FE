@@ -13,7 +13,7 @@ const HERO_IMAGE_URLS = [
   '/images/service-page/service-background.svg',
 ] as const;
 
-/** 홈 히어로 Spline 3D 페이지 prefetch → 홈 진입 시 끊김 없이 재생 */
+
 const SPLINE_PREFETCH_URL = 'https://my.spline.design/motiontrails-7nu0l9wGTzn5nWxGtrBcWZHT/';
 
 export default function PreloadHeroImages() {
