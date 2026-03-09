@@ -261,7 +261,7 @@ export default function AboutPageClient() {
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
       <section className="relative w-full min-h-[726px] sm:min-h-[320px] lg:h-[420px] overflow-hidden">
         <div className="absolute inset-0 hidden sm:block">
-          <Image src="/images/about-page/firstimage.svg" alt="" fill className="object-cover" sizes="100vw" loading="eager" />
+          <Image src="/images/about-background-desktop.png" alt="" fill className="object-cover" sizes="100vw" loading="eager" />
         </div>
         <div className="absolute inset-0 sm:hidden">
           <Image src="/images/pngs/about-mobile-png.png" alt="" fill className="object-contain object-top" sizes="100vw" priority />
@@ -276,9 +276,9 @@ export default function AboutPageClient() {
             alt="Eternal Marketing Logo"
             width={80}
             height={46}
-            className="w-[70px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:hidden"
+            className="w-[70px] sm:w-[80px] h-auto drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] sm:mt-6"
           />
-          <div className="font-sans text-[18px] sm:text-[16px] lg:text-[18px] leading-relaxed text-white text-center sm:absolute sm:bottom-6 sm:left-0 sm:right-0 sm:px-4">
+          <div className="font-sans text-[18px] sm:text-[16px] lg:text-[18px] leading-relaxed text-white text-center sm:mt-8 sm:px-4">
             <p className="m-0 font-sans font-extralight">마케팅을 얼마나 진지하게 다루는지,</p>
             <p className="m-0 font-sans font-extralight">그리고 왜 결과가 다른지</p>
             <p className="m-0 font-sans font-extrabold text-[22px] sm:text-[20px] lg:text-[22px]">기준에서 드러납니다</p>
@@ -299,7 +299,7 @@ export default function AboutPageClient() {
           <div className="mt-8 sm:mt-10 lg:mt-[46px] flex flex-col lg:flex-row gap-10 lg:gap-12 items-center lg:items-start">
             <SlideInLeft delay={200}>
               <div className="w-full lg:w-[660px]">
-                <Image src="/images/about-page/ourstory.svg" alt="" width={680} height={400} className="w-full h-auto" sizes="(max-width: 1024px) 100vw, 680px" />
+                <Image src="/images/about-page/ourstory.svg" alt="" width={680} height={400} className="w-full h-auto" sizes="(max-width: 1024px) 100vw, 680px" loading="lazy" />
               </div>
             </SlideInLeft>
             <div className={`flex-1 w-full max-w-[520px] lg:pt-12 ${storyVisible ? 'about-story-animate' : ''}`}>
@@ -428,7 +428,7 @@ export default function AboutPageClient() {
               <div className="relative w-full max-w-[260px] sm:max-w-[360px] lg:max-w-[440px] mx-auto lg:mx-0 flex-shrink-0">
                 <div className="absolute inset-0 scale-[1.12] rounded-full bg-[radial-gradient(circle,rgba(24,75,186,0.14)_0%,rgba(24,75,186,0.06)_42%,transparent_72%)] blur-2xl pointer-events-none" aria-hidden />
                 <div className="relative">
-                  <Image src="/images/infinite.svg" alt="" width={440} height={320} className="w-full h-auto drop-shadow-[0_18px_40px_rgba(24,75,186,0.14)]" sizes="(max-width: 640px) 260px, (max-width: 1024px) 360px, 440px" />
+                  <Image src="/images/infinite.svg" alt="" width={440} height={320} className="w-full h-auto drop-shadow-[0_18px_40px_rgba(24,75,186,0.14)]" sizes="(max-width: 640px) 260px, (max-width: 1024px) 360px, 440px" loading="lazy" />
                   <span className="absolute top-0 left-[18%] -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">구조 재설계</span>
                   <span className="absolute top-0 right-[18%] -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">세밀 분석</span>
                   <span className="absolute top-1/2 left-[-8px] sm:left-[-18px] -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">최적화</span>
@@ -444,7 +444,7 @@ export default function AboutPageClient() {
 
       <section ref={intelligenceSectionRef} className="relative w-full min-h-[560px] sm:min-h-[620px] lg:h-[760px] overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/about-page/puzzle-background.svg" alt="" fill className="object-cover" sizes="100vw" />
+          <Image src="/images/about-page/about-puzzlebackground.png" alt="" fill className="object-cover" sizes="100vw" />
         </div>
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,6,15,0.18)_0%,rgba(3,6,15,0.36)_38%,rgba(3,6,15,0.76)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_38%,rgba(53,96,214,0.22),transparent_28%)]" />

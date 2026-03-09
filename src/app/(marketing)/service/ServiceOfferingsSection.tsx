@@ -8,13 +8,13 @@
 import { useRef, useEffect, useState } from 'react';
 
 const SERVICES = [
-  { name: '네이버 카페', icon: '/images/service-page/navercafe.svg' },
-  { name: '네이버 블로그', icon: '/images/service-page/naverblog.svg' },
-  { name: '네이버 플레이스', icon: '/images/service-page/naverplace.svg' },
-  { name: '인스타그램 관리', icon: '/images/service-page/instagram-management.svg' },
-  { name: 'SEO', icon: '/images/service-page/seo.svg' },
-  { name: '숏폼 콘텐츠', icon: '/images/service-page/shortform.svg' },
-  { name: '인앱 광고', icon: '/images/service-page/inappads.svg' },
+  { name: '네이버 카페', icon: '/images/service-page/naver-2.png' },
+  { name: '네이버 블로그', icon: '/images/service-page/naver-3.png' },
+  { name: '네이버 플레이스', icon: '/images/service-page/naver-1.png' },
+  { name: '인스타그램 관리', icon: '/images/service-page/sns3.png' },
+  { name: 'SEO', icon: '/images/service-page/performance-2.png' },
+  { name: '숏폼 콘텐츠', icon: '/images/service-page/sns2.png' },
+  { name: '인앱 광고', icon: '/images/service-page/sns-1.png' },
   { name: '홈페이지·브랜드·블로그', icon: '/images/service-page/homepagebrandblog.svg' },
   { name: '반응형 광고', icon: '/images/service-page/responsive.svg' },
   { name: '핫딜 마케팅', icon: '/images/service-page/hot-deal.svg' },

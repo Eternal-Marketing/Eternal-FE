@@ -24,7 +24,7 @@ export const FALLBACK_CATEGORIES = [
 export { CATEGORY_SLUGS };
 export type CategorySlug = (typeof CATEGORY_SLUGS)[number];
 
-const PLACEHOLDER_IMAGE = '/images/column/column-background.svg';
+const PLACEHOLDER_IMAGE = '/images/column-background2.png';
 const DEFAULT_LIMIT = 10;
 
 /* ─────────────────────────────────────────────
@@ -36,7 +36,7 @@ const ColumnHero = memo(function ColumnHero() {
       {/* 데스크탑 배경 */}
       <div className="absolute inset-0 hidden sm:block">
         <Image
-          src="/images/column/column-background.svg"
+          src="/images/column-background2.png"
           alt=""
           fill
           className="object-cover"

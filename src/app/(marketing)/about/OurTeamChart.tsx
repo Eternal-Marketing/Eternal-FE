@@ -279,7 +279,7 @@ export default function OurTeamChart({ visible: v }: OurTeamChartProps) {
       </div>
 
       {/* ═══════ 모바일 (이미지 구조: TEAM → 수직 트렁크 연속 → 가로 분기 → 3개 본부) ═══════ */}
-      <div className="sm:hidden px-4 relative">
+      <div className="sm:hidden px-4 pb-12 relative">
         {/* 연속 수직 트렁크 (TEAM 아래 ~ 맨 아래까지) */}
         <div
           className="absolute left-[51px] top-[72px] bottom-0 w-[2.5px]"

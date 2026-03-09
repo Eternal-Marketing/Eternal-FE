@@ -31,7 +31,7 @@ export default function AiDiagnosisStep2Page() {
       <section className="relative w-full min-h-[240px] sm:min-h-[280px] lg:h-[386px] overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/ai-diagnosis-page/background.svg"
+            src="/images/ai-diagnosis-page/ai-diagnosis-background.png"
             alt=""
             fill
             className="object-cover"

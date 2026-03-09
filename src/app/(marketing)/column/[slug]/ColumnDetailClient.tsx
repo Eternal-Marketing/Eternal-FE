@@ -8,7 +8,7 @@ import type { Column, ColumnCategoryCode } from '@/lib/api';
 import AdminColumnActions from '@/components/column/AdminColumnActions';
 import { getCategoryCode, getCategoryIndex } from '../categorySlug';
 
-const DEFAULT_THUMBNAIL = '/images/column/column-background.svg';
+const DEFAULT_THUMBNAIL = '/images/column-background2.png';
 
 export default function ColumnDetailClient({ slug }: { slug: string }) {
   const [column, setColumn] = useState<Column | null>(null);

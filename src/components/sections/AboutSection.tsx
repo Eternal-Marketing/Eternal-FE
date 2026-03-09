@@ -191,7 +191,7 @@ export default function AboutSection() {
                   </span>
                 </span>
                 <div className="w-[220px] h-[200px] lg:w-[320px] lg:h-[290px] relative mt-10 lg:mt-0" data-node-id="127:917">
-                  <Image alt="Data results" fill className="object-contain" src="/images/main-1.svg" sizes="320px" />
+                  <Image alt="Data results" fill className="object-contain" src="/images/main-1-laptop.png" sizes="320px" />
                 </div>
               </div>
 
@@ -259,7 +259,7 @@ export default function AboutSection() {
             </FadeIn>
             <SlideIn direction="left" delay={400} className="flex-shrink-0 order-1 lg:order-2 flex justify-center lg:justify-start">
               <div className="w-[180px] h-[155px] sm:w-[200px] sm:h-[170px] lg:w-[340px] lg:h-[290px] relative mx-auto lg:mx-0">
-                <Image alt="Recontract rate" fill className="object-contain" src="/images/main-2.svg" sizes="340px" />
+                <Image alt="Recontract rate" fill className="object-contain" src="/images/main-2-graph.png" sizes="340px" />
               </div>
             </SlideIn>
             </div>
@@ -277,7 +277,7 @@ export default function AboutSection() {
                   </span>
                 </span>
                 <div className="w-[300px] h-[260px] sm:w-[360px] sm:h-[310px] lg:w-[540px] lg:h-[470px] relative mt-1 sm:mt-10 lg:mt-0 mx-auto lg:mx-0">
-                  <Image alt="Team Structure" fill className="object-contain" src="/images/reviewSection/mainl3-13.svg" sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 540px" />
+                  <Image alt="Team Structure" fill className="object-contain" src="/images/main-3-puzzle.png" sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 540px" />
                 </div>
               </div>
             </SlideIn>

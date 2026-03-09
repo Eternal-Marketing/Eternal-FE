@@ -95,7 +95,7 @@ export default function ServicePerformanceSection() {
               onKeyDown={(e) => e.key === 'Enter' && setActiveCard((prev) => (prev === 'seo' ? null : 'seo'))}
             >
               <Image
-                src="/images/service-page/seo.svg"
+                src="/images/service-page/performance-2.png"
                 alt=""
                 fill
                 className="object-contain"

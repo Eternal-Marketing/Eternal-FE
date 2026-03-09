@@ -4,15 +4,20 @@ import { useEffect } from 'react';
 
 /**
  * About / Column / Service 페이지 히어로 이미지 preload
- * - 마케팅 레이아웃 마운트 시 head에 preload 링크 추가
- * - 해당 페이지 진입 시 이미 캐시되어 끊김 없이 표시
+ * - 데스크탑(sm: 640px+)에서만 데스크탑 이미지 프리로드
+ * - 모바일에서는 모바일 전용 이미지만 프리로드 (불필요한 대용량 다운로드 방지)
  */
-const HERO_IMAGE_URLS = [
-  '/images/about-page/firstimage.svg',
-  '/images/column/column-background.svg',
+const DESKTOP_IMAGE_URLS = [
+  '/images/about-background-desktop.png',
+  '/images/column-background2.png',
   '/images/service-page/service-background.svg',
-] as const;
+];
 
+const MOBILE_IMAGE_URLS = [
+  '/images/pngs/about-mobile-png.png',
+  '/images/pngs/column-mobile-png.png',
+  '/images/pngs/service-mobile-png.png',
+];
 
 const SPLINE_PREFETCH_URL = 'https://my.spline.design/motiontrails-7nu0l9wGTzn5nWxGtrBcWZHT/';
 
@@ -20,7 +25,10 @@ export default function PreloadHeroImages() {
   useEffect(() => {
     if (typeof document === 'undefined') return;
 
-    HERO_IMAGE_URLS.forEach((href) => {
+    const isDesktop = window.matchMedia('(min-width: 640px)').matches;
+    const urls = isDesktop ? DESKTOP_IMAGE_URLS : MOBILE_IMAGE_URLS;
+
+    urls.forEach((href) => {
       const existing = document.querySelector(`link[rel="preload"][href="${href}"]`);
       if (existing) return;
 
@@ -31,12 +39,15 @@ export default function PreloadHeroImages() {
       document.head.appendChild(link);
     });
 
-    const existingPrefetch = document.querySelector(`link[rel="prefetch"][href="${SPLINE_PREFETCH_URL}"]`);
-    if (!existingPrefetch) {
-      const prefetch = document.createElement('link');
-      prefetch.rel = 'prefetch';
-      prefetch.href = SPLINE_PREFETCH_URL;
-      document.head.appendChild(prefetch);
+    // Spline 3D 프리페치는 데스크탑에서만
+    if (isDesktop) {
+      const existingPrefetch = document.querySelector(`link[rel="prefetch"][href="${SPLINE_PREFETCH_URL}"]`);
+      if (!existingPrefetch) {
+        const prefetch = document.createElement('link');
+        prefetch.rel = 'prefetch';
+        prefetch.href = SPLINE_PREFETCH_URL;
+        document.head.appendChild(prefetch);
+      }
     }
   }, []);
 

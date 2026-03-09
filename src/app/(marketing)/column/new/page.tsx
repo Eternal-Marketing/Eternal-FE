@@ -123,7 +123,7 @@ function ColumnNewContent() {
         ...form,
         slug,
         status: 'PUBLISHED',
-        thumbnailUrl: thumbnailUrl || '/images/column/column-background.svg',
+        thumbnailUrl: thumbnailUrl || '/images/column-background2.png',
         categoryId: form.categoryId || undefined,
         categoryCode: form.categoryId ? undefined : form.categoryCode,
       });
