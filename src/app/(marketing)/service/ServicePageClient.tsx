@@ -62,6 +62,7 @@ export default function ServicePageClient() {
         <ServiceCTABanner />
 
         {/* 네이버 마케팅: 플레이스/카페/블로그/홈페이지형 블로그 4종 카드 */}
+        <div className="-mt-8 sm:mt-0">
         <ServiceCategoryCardsSection
         title="NAVER MARKETING"
         titleColorClassName="text-[#02c75c]"
@@ -93,6 +94,7 @@ export default function ServicePageClient() {
           },
         ]}
       />
+        </div>
 
       <ServicePerformanceSection />
 

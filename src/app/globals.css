@@ -938,12 +938,12 @@ body {
 }
 @media (max-width: 1023px) {
   .tap-hint-badge {
-    background: linear-gradient(135deg, rgba(140,140,140,0.9) 0%, rgba(120,120,120,0.9) 100%) !important;
-    border: 1px solid rgba(180,180,180,0.9) !important;
-    color: rgb(245,245,245) !important;
+    background: linear-gradient(135deg, rgba(165,165,165,0.9) 0%, rgba(145,145,145,0.9) 100%) !important;
+    border: 1px solid rgba(200,200,200,0.8) !important;
+    color: rgb(255,255,255) !important;
   }
   .tap-hint-badge svg {
-    stroke: rgb(245,245,245);
+    stroke: rgb(255,255,255);
   }
 }
 .tap-hint-badge::after {
