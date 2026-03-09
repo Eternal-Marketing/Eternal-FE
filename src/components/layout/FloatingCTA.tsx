@@ -1,348 +1,187 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import * as ReactDOM from 'react-dom';
+import { useState } from 'react';
+import type { ComponentType, SVGProps } from 'react';
+import {
+  ChatBubbleOvalLeftEllipsisIcon,
+  DocumentArrowDownIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/solid';
 
-const CONCERN_OPTIONS = [
-  '매출 증가',
-  '고객 유입',
-  '브랜드 인지도',
-  '효율 분석 / 마케팅 방향성 분석',
-];
+type CTAItem = {
+  href: string;
+  label: string;
+  ariaLabel: string;
+  bgClassName: string;
+  external: boolean;
+  Icon?: ComponentType<SVGProps<SVGSVGElement>>;
+  imageSrc?: string;
+};
 
-const MODAL_CLOSE_DURATION = 360;
-const PANEL_ANIM_DURATION = 360;
-
-type Step = 1 | 2;
+const CTA_ITEMS: CTAItem[] = [
+  {
+    href: 'https://open.kakao.com/me/eternalmarketing',
+    label: '실시간 상담',
+    ariaLabel: '카카오톡 실시간 상담',
+    bgClassName:
+      'border border-[#D6C85A]/45 bg-gradient-to-br from-[#F7F0A6] via-[#F0E47B] to-[#E4D45E] text-[#2E2A27]',
+    Icon: ChatBubbleOvalLeftEllipsisIcon,
+    external: true,
+  },
+  {
+    href: 'https://www.instagram.com/eternal__marketing?igsh=MWVhNHF2dXBiYmU0dw%3D%3D',
+    label: '인스타그램',
+    ariaLabel: '인스타그램',
+    bgClassName:
+      'border border-white/20 bg-gradient-to-br from-[#E2A2A6] via-[#C982B4] to-[#7B73C9] text-white',
+    imageSrc: '/cta-instagram.svg',
+    external: true,
+  },
+  {
+    href: '/company-profile.pdf',
+    label: '회사소개서',
+    ariaLabel: '회사소개서',
+    bgClassName:
+      'border border-white/20 bg-gradient-to-br from-[#9EB4F7] via-[#6C89E8] to-[#3F63C9] text-white',
+    Icon: DocumentArrowDownIcon,
+    external: false,
+  },
+] as const;
 
 /**
- * 플로팅 CTA (오른쪽 하단 고정)
- * - 클릭 시 간편 문의 모달(2단계 폼), X로 닫기, 진단 신청 시 /ai-diagnosis 이동
+ * 플로팅 CTA
+ * - 기본 원형 버튼 유지
+ * - 클릭 시 서브 CTA가 위로 펼쳐짐
  */
 export default function FloatingCTA() {
-  const [showModal, setShowModal] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [step, setStep] = useState<Step>(1);
-
-  useEffect(() => {
-    if (showModal && !isClosing) {
-      const t = requestAnimationFrame(() => setIsOpen(true));
-      return () => cancelAnimationFrame(t);
-    }
-    if (!showModal) setIsOpen(false);
-  }, [showModal, isClosing]);
-
-  const goStep2 = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setStep(2);
-  };
-
-  const goStep1 = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setStep(1);
-  };
-
-  const handleSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsClosing(true);
-    setTimeout(() => {
-      setShowModal(false);
-      setIsClosing(false);
-      setStep(1);
-      window.location.href = '/ai-diagnosis';
-    }, MODAL_CLOSE_DURATION);
-  };
-
-  const closeModal = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setShowModal(false);
-      setIsClosing(false);
-      setStep(1);
-    }, MODAL_CLOSE_DURATION);
-  };
-
-  const openModal = () => {
-    setStep(1);
-    setShowModal(true);
-  };
-
-  const showOverlay = showModal || isClosing;
-
-  const modalContent = showOverlay && (
-    <div className="fixed right-3 top-4 bottom-20 sm:right-4 sm:top-5 sm:bottom-24 lg:right-6 lg:top-6 lg:bottom-24 z-[99998] w-[calc(100vw-24px)] sm:w-[calc(100vw-32px)] sm:max-w-[420px] lg:w-[480px] lg:max-w-[480px] overflow-hidden">
-      <div
-        className={`h-full rounded-[28px] bg-gradient-to-b from-white/98 to-white/95 backdrop-blur-2xl overflow-hidden flex flex-col will-change-transform transition-transform duration-[360ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          isClosing
-            ? 'translate-y-full'
-            : isOpen
-              ? 'translate-y-0'
-              : 'translate-y-full'
-        }`}
-      >
-        <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-6 pt-4 sm:pt-6 pb-4 sm:pb-5">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-[56px] lg:h-[56px] rounded-xl sm:rounded-2xl bg-white shadow-[0_10px_24px_rgba(0,0,0,0.08)] flex items-center justify-center overflow-hidden shrink-0">
-            <Image src="/images/logo.svg" alt="" width={36} height={36} className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 object-contain" aria-hidden />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="m-0 font-sans text-[18px] sm:text-[20px] lg:text-[22px] font-bold text-main truncate">간편 문의하기</p>
-            {/* 운영시간 보기 문구 제거 */}
-          </div>
-          {step === 2 && (
-            <button
-              type="button"
-              onClick={goStep1}
-              className="h-[40px] px-3 rounded-full bg-black/5 hover:bg-black/10 transition-colors text-[13px] text-main"
-              aria-label="이전"
-            >
-              이전
-            </button>
-          )}
-        </div>
-
-        <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-4 sm:pb-6">
-
-          {/* Step 1 */}
-          {step === 1 && (
-            <form onSubmit={(e) => e.preventDefault()}>
-              <div className="space-y-5">
-                {/* 업체명 */}
-                <div>
-                  <label className="block font-sans text-[14px] font-semibold text-main">업체명</label>
-                  <input
-                    type="text"
-                    placeholder="내용 작성해 주세요."
-                    className="mt-2 w-full h-[46px] px-4 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 focus:border-primary"
-                  />
-                </div>
-
-              {/* 업종 */}
-              <div>
-                <label className="block font-sans text-[14px] font-semibold text-main">업종</label>
-                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
-                  {['음식점', '병원·의원', '뷰티·헬스', '쇼핑몰', '서비스업', '기타 (직접 입력)'].map(
-                    (label, idx) => (
-                      <label
-                        key={idx}
-                        className="flex items-center gap-2 text-[14px] text-main cursor-pointer"
-                      >
-                        <input
-                          type="radio"
-                          name="industry"
-                          className="w-4 h-4 accent-primary"
-                          defaultChecked={idx === 0}
-                        />
-                        <span>{label}</span>
-                      </label>
-                    )
-                  )}
-                </div>
-              </div>
-
-              {/* 현재 가장 고민되는 영역 (최대 2대 선택) */}
-              <div>
-                <label className="block font-sans text-[14px] font-semibold text-main">
-                  현재 가장 고민되는 영역 (최대 2대 선택)
-                </label>
-                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
-                  {CONCERN_OPTIONS.map((label, idx) => (
-                    <label
-                      key={idx}
-                      className="flex items-center gap-2 text-[14px] text-main cursor-pointer"
-                    >
-                      <input
-                        type="radio"
-                        name="concern"
-                        className="w-4 h-4 accent-primary"
-                        defaultChecked={idx === 0}
-                      />
-                      <span>{label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* 현재 마케팅 진행 상황 */}
-              <div>
-                <label className="block font-sans text-[14px] font-semibold text-main">현재 마케팅 진행 상황</label>
-                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
-                  {[
-                    '현재 별도의 마케팅을 진행하고 있지 않음',
-                    '내부에서 간단히 진행 중',
-                    '외주 또는 대행사를 이용 중',
-                    '과거에 진행했으나 중단한 상태',
-                  ].map((label, idx) => (
-                    <label
-                      key={idx}
-                      className="flex items-center gap-2 text-[14px] text-main cursor-pointer"
-                    >
-                      <input
-                        type="radio"
-                        name="status"
-                        className="w-4 h-4 accent-primary"
-                        defaultChecked={idx === 0}
-                      />
-                      <span>{label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* 관심있는 마케팅 채널 */}
-              <div>
-                <label className="block font-sans text-[14px] font-semibold text-main">
-                  관심있는 마케팅 채널 (복수 선택 가능)
-                </label>
-                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
-                  {[
-                    '네이버 블로그 (기자단 체험단)',
-                    '네이버 카페 / 커뮤니티',
-                    '네이버 스마트 플레이스',
-                    '인스타그램',
-                    '유튜브',
-                    '플랫폼별 숏폼 광고',
-                    '기타(자유 기재)',
-                  ].map((label, idx) => (
-                    <label
-                      key={idx}
-                      className="flex items-center gap-2 text-[14px] text-main cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        className="w-4 h-4 accent-primary"
-                        defaultChecked={idx === 0}
-                      />
-                      <span>{label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* 추가 공유 */}
-              <div>
-                <label className="block font-sans text-[14px] font-semibold text-main">
-                  추가로 공유하고 싶은 사항이 있다면 자유롭게 작성해주세요.
-                </label>
-                <textarea
-                  placeholder="(현재 상황, 궁금한 점, 기대하는 방향 등)"
-                  className="mt-2 w-full h-[96px] px-4 py-3 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 resize-none focus:border-primary"
-                />
-              </div>
-              </div>
-            </form>
-          )}
-
-          {/* Step 2 */}
-          {step === 2 && (
-            <form onSubmit={(e) => e.preventDefault()}>
-              <div className="space-y-5">
-                <div>
-                  <label className="block font-sans text-[14px] font-semibold text-main">
-                    지역<span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="예시 : 강남구 역삼동"
-                    className="mt-2 w-full h-[46px] px-4 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 focus:border-primary"
-                  />
-                </div>
-                <div>
-                  <label className="block font-sans text-[14px] font-semibold text-main">
-                    연락처<span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="01012341234(‘-’는 제외하고 작성해 주세요)"
-                    className="mt-2 w-full h-[46px] px-4 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 focus:border-primary"
-                  />
-                </div>
-                <div>
-                  <label className="block font-sans text-[14px] font-semibold text-main">이메일</label>
-                  <input
-                    type="email"
-                    placeholder="info@eternalmarketing.co.kr"
-                    className="mt-2 w-full h-[46px] px-4 rounded-xl border border-black/10 bg-white outline-none text-[15px] text-main placeholder:text-sub3 focus:border-primary"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-sans text-[14px] font-semibold text-main">현재 마케팅 진행 상황</label>
-                  <div className="mt-3 flex flex-wrap gap-x-5 gap-y-3">
-                    {['09:00~12:00', '12:00~15:00', '15:00~18:00', '18:00~00:00', '무관', '특정시간대(직접 입력)'].map(
-                      (label, idx) => (
-                        <label key={idx} className="flex items-center gap-2 text-[14px] text-main cursor-pointer">
-                          <input type="radio" name="time" className="w-4 h-4 accent-primary" defaultChecked={idx === 0} />
-                          <span>{label}</span>
-                        </label>
-                      )
-                    )}
-                  </div>
-                </div>
-              </div>
-            </form>
-          )}
-        </div>
-
-        <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-3 sm:pt-4 bg-white/95 backdrop-blur-xl">
-          {step === 1 ? (
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={goStep2}
-                className="h-11 sm:h-[48px] px-6 sm:px-10 rounded-xl sm:rounded-2xl bg-primary text-white text-[14px] sm:text-[16px] font-semibold shadow-[0_12px_28px_rgba(24,75,186,0.32)] hover:opacity-95 active:scale-[0.98] transition-[opacity,transform]"
-              >
-                다음
-              </button>
-            </div>
-          ) : (
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={handleSubmit}
-                className="h-11 sm:h-[48px] px-6 sm:px-10 rounded-xl sm:rounded-2xl bg-[#222] text-white text-[14px] sm:text-[16px] font-semibold shadow-[0_10px_24px_rgba(0,0,0,0.18)] hover:bg-[#111] active:scale-[0.98] transition-[background-color,transform]"
-              >
-                진단 신청하기
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+  const staggerDelay = 70;
+  const closeContainerDelay = (CTA_ITEMS.length - 1) * staggerDelay;
 
   return (
-    <>
-      {/* 모달: body로 포탈해 레이아웃/transform 영향 없이 항상 최상단 표시 */}
-      {showModal &&
-        typeof window !== 'undefined' &&
-        document.body &&
-        ReactDOM.createPortal(modalContent, document.body)}
-      {!showModal && (
-        <button
-          type="button"
-          onClick={openModal}
-          className="group fixed bottom-4 right-4 sm:bottom-5 sm:right-5 lg:bottom-6 lg:right-6 z-[100000] w-12 h-12 sm:w-14 sm:h-14 lg:w-[56px] lg:h-[56px] rounded-full flex items-center justify-center border-0 p-0 bg-white shadow-[0_12px_28px_rgba(0,0,0,0.24)] hover:-translate-y-1 transition-transform duration-200 active:scale-[0.96]"
-          style={{ position: 'fixed' }}
-          aria-label="간편 문의하기"
-        >
-          <Image src="/images/logo.svg" alt="AI 진단 받기" width={36} height={36} className="w-6 h-6 sm:w-7 sm:h-7 lg:w-9 lg:h-9 object-contain" />
-        </button>
-      )}
-      {showModal && (
-        <button
-          type="button"
-          onClick={closeModal}
-          className={`fixed bottom-4 right-4 sm:bottom-5 sm:right-5 lg:bottom-6 lg:right-6 z-[100000] w-12 h-12 sm:w-14 sm:h-14 lg:w-[56px] lg:h-[56px] rounded-full flex items-center justify-center bg-[#3d3d3d] shadow-[0_8px_18px_rgba(0,0,0,0.28)] hover:bg-[#4a4a4a] border-0 transition-[background-color,transform,opacity] duration-200 active:scale-[0.96] ${
-            isClosing ? 'opacity-80' : 'opacity-100'
+    <div className="fixed bottom-10 right-3 z-[100000] sm:bottom-12 sm:right-8 lg:bottom-16 lg:right-10">
+      <div className="flex flex-col items-center gap-3">
+        <div
+          className={`flex flex-col items-center gap-3 rounded-[32px] border border-white/20 bg-[linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.12))] p-3 shadow-[0_22px_50px_rgba(7,16,40,0.32)] backdrop-blur-xl transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            isOpen
+              ? 'pointer-events-auto translate-y-0 scale-100 opacity-100'
+              : 'pointer-events-none translate-y-2 scale-95 opacity-0'
           }`}
-          style={{ position: 'fixed' }}
-          aria-label="닫기"
+          style={{ transitionDelay: isOpen ? '0ms' : `${closeContainerDelay}ms` }}
         >
-          <Image src="/images/x%20.svg" alt="" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 brightness-0 invert object-contain" />
+          {CTA_ITEMS.map(({ href, label, ariaLabel, bgClassName, Icon, imageSrc, external }, index) => (
+            <a
+              key={label}
+              href={href}
+              aria-label={ariaLabel}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noreferrer' : undefined}
+              className={`group relative flex h-[82px] w-[82px] flex-col items-center justify-center rounded-[24px] shadow-[0_18px_34px_rgba(10,22,60,0.26)] ring-1 ring-white/20 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-x-1 hover:scale-[1.03] ${
+                isOpen ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-4 scale-90 opacity-0'
+              } ${bgClassName}`}
+              style={{
+                transitionDelay: isOpen
+                  ? `${index * staggerDelay}ms`
+                  : `${(CTA_ITEMS.length - 1 - index) * staggerDelay}ms`,
+              }}
+            >
+              <span className="pointer-events-none absolute inset-x-3 top-2 h-px rounded-full bg-white/40 opacity-80" />
+              {imageSrc ? (
+                <Image src={imageSrc} alt="" width={24} height={24} className="h-6 w-6 object-contain" aria-hidden />
+              ) : Icon ? (
+                <Icon className="h-6 w-6" aria-hidden />
+              ) : null}
+              <span className="font-sans text-[11px] font-semibold leading-tight tracking-[-0.03em] text-center">
+                {label}
+              </span>
+            </a>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          className={`group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/45 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.98),rgba(229,237,255,0.95)_55%,rgba(196,213,255,0.96))] p-0 shadow-[0_18px_40px_rgba(24,75,186,0.34)] ring-1 ring-[#184BBA]/10 transition-all duration-300 hover:-translate-y-1 active:scale-[0.96] sm:h-16 sm:w-16 lg:h-[68px] lg:w-[68px] ${
+            isOpen ? '' : 'animate-[cta-breathe_2.6s_ease-in-out_infinite]'
+          }`}
+          aria-label={isOpen ? 'CTA 닫기' : 'CTA 열기'}
+        >
+          <span
+            className={`pointer-events-none absolute inset-[-10px] rounded-full border border-[#6F94FF]/25 ${
+              isOpen ? 'opacity-0' : 'animate-[cta-glow_2.6s_ease-in-out_infinite]'
+            }`}
+          />
+          <span className="absolute inset-0 rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.55),rgba(255,255,255,0))]" />
+          <span className="pointer-events-none absolute inset-y-0 left-[-55%] w-[42%] -skew-x-12 bg-[linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.72),rgba(255,255,255,0))] opacity-80 animate-[cta-shine_2.8s_ease-in-out_infinite]" />
+          {isOpen ? (
+            <XMarkIcon
+              className="h-7 w-7 text-[#184BBA] transition-transform duration-300 sm:h-8 sm:w-8 lg:h-10 lg:w-10"
+              aria-hidden
+            />
+          ) : (
+            <Image
+              src="/images/logo.svg"
+              alt="바로가기 메뉴"
+              width={36}
+              height={36}
+              className={`h-7 w-7 object-contain transition-transform duration-300 sm:h-8 sm:w-8 lg:h-10 lg:w-10 ${
+                isOpen ? '' : 'animate-[cta-icon-float_2.6s_ease-in-out_infinite]'
+              }`}
+            />
+          )}
         </button>
-      )}
-    </>
+      </div>
+      <style jsx>{`
+        @keyframes cta-breathe {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.06);
+          }
+        }
+
+        @keyframes cta-glow {
+          0%,
+          100% {
+            transform: scale(0.96);
+            opacity: 0.18;
+          }
+          50% {
+            transform: scale(1.12);
+            opacity: 0.42;
+          }
+        }
+
+        @keyframes cta-icon-float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-2px);
+          }
+        }
+
+        @keyframes cta-shine {
+          0% {
+            transform: translateX(0) skewX(-12deg);
+            opacity: 0;
+          }
+          12% {
+            opacity: 0.9;
+          }
+          45% {
+            opacity: 0.55;
+          }
+          100% {
+            transform: translateX(320%) skewX(-12deg);
+            opacity: 0;
+          }
+        }
+      `}</style>
+    </div>
   );
 }

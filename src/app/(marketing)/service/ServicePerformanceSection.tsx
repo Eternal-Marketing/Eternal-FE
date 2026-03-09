@@ -72,7 +72,7 @@ export default function ServicePerformanceSection() {
                 </p>
               </div>
               {activeCard !== 'rwd' && (
-                <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full lg:hidden tap-hint-badge z-10">
+                <span className="absolute bottom-9 left-1/2 -translate-x-1/2 text-white text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full lg:hidden tap-hint-badge z-10">
                   <span className="relative z-10 flex items-center gap-1">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 11l5-5 5 5"/><path d="M12 6v12"/></svg>
                     TAP
@@ -95,7 +95,7 @@ export default function ServicePerformanceSection() {
               onKeyDown={(e) => e.key === 'Enter' && setActiveCard((prev) => (prev === 'seo' ? null : 'seo'))}
             >
               <Image
-                src="/images/service-page/seo.svg"
+                src="/images/service-page/performance-2.png"
                 alt=""
                 fill
                 className="object-contain"
@@ -110,7 +110,7 @@ export default function ServicePerformanceSection() {
                 </p>
               </div>
               {activeCard !== 'seo' && (
-                <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full lg:hidden tap-hint-badge z-10">
+                <span className="absolute bottom-9 left-1/2 -translate-x-1/2 text-white text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full lg:hidden tap-hint-badge z-10">
                   <span className="relative z-10 flex items-center gap-1">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 11l5-5 5 5"/><path d="M12 6v12"/></svg>
                     TAP

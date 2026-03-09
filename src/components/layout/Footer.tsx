@@ -87,7 +87,7 @@ export default function Footer() {
                   aria-label="네이버 블로그"
                   className="inline-flex items-center justify-center"
                 >
-                  <Image src="/images/footer/naver-blog.svg" alt="" width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
+                  <Image src="/images/service-page/naver-3.png" alt="" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 object-contain" />
                 </a>
               </div>
             </div>

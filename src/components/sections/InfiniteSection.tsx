@@ -217,6 +217,7 @@ export default function InfiniteSection() {
                 fill
                 className="object-contain"
                 sizes="(max-width: 1024px) 320px, 480px"
+                loading="lazy"
               />
               {/* 01 - 왼쪽 상단 */}
               <div className="absolute text-white font-bold text-[10px] sm:text-[12px]" style={{ top: '10%', left: '21%' }}>

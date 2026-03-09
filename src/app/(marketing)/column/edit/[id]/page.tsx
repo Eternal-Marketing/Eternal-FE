@@ -121,7 +121,7 @@ export default function ColumnEditPage() {
         slug: newSlug,
         content: form.content ?? column.content,
         excerpt: form.excerpt ?? column.excerpt,
-        thumbnailUrl: thumbnailUrl || '/images/column/column-background.svg',
+        thumbnailUrl: thumbnailUrl || '/images/column-background2.png',
         status: 'PUBLISHED',
         categoryId: form.categoryId ?? column.categoryId ?? undefined,
         categoryCode: (form.categoryId ?? column.categoryId) ? undefined : (form.categoryCode ?? 'VIRAL_MARKETING'),

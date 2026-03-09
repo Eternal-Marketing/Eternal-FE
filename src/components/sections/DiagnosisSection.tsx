@@ -196,7 +196,7 @@ export default function DiagnosisSection() {
           }}
         >
           <Image 
-            src="/images/diagnosisSection/diagnosisSection.svg" 
+            src="/images/diagnosis-background.png" 
             alt="Diagnosis Section Background"
             fill
             className="object-cover"

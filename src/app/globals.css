@@ -936,6 +936,16 @@ body {
   border: 1px solid rgba(255,255,255,0.25);
   animation: tap-hint-glow 2.5s ease-in-out infinite;
 }
+@media (max-width: 1023px) {
+  .tap-hint-badge {
+    background: linear-gradient(135deg, rgba(165,165,165,0.9) 0%, rgba(145,145,145,0.9) 100%) !important;
+    border: 1px solid rgba(200,200,200,0.8) !important;
+    color: rgb(255,255,255) !important;
+  }
+  .tap-hint-badge svg {
+    stroke: rgb(255,255,255);
+  }
+}
 .tap-hint-badge::after {
   content: '';
   position: absolute;

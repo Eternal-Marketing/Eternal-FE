@@ -191,7 +191,7 @@ export default function AboutSection() {
                   </span>
                 </span>
                 <div className="w-[220px] h-[200px] lg:w-[320px] lg:h-[290px] relative mt-10 lg:mt-0" data-node-id="127:917">
-                  <Image alt="Data results" fill className="object-contain" src="/images/main-1.svg" sizes="320px" />
+                  <Image alt="Data results" fill className="object-contain" src="/images/main-1-laptop.png" sizes="320px" />
                 </div>
               </div>
 
@@ -216,20 +216,22 @@ export default function AboutSection() {
         </div>
 
         <div className="relative mb-12 sm:mb-16 lg:mb-24 desktop:mb-[120px] lg:pl-40 xl:pl-64">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center gap-6 sm:gap-8 lg:gap-10">
-            <FadeIn delay={600} className="order-2 lg:order-1 lg:flex-1">
+          <div className="flex flex-col items-center lg:flex-row lg:items-center lg:justify-end gap-6 sm:gap-8">
+            <div className="flex flex-col items-center lg:flex-row lg:items-center gap-6 sm:gap-8 lg:gap-10 lg:mr-48 xl:mr-64">
+            {/* 모바일: 뱃지 → 이미지 위로 배치 */}
+            <div className="flex lg:hidden justify-center order-0" data-node-id="127:912-mobile">
+              <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight">
+                업종별 최상위 전문 마케터
+              </span>
+            </div>
+            <FadeIn delay={600} className="order-2 lg:order-1 lg:flex-1 w-full lg:w-auto">
               <div className="flex flex-col items-center lg:items-start" data-node-id="158:25">
-                <span className="absolute top-0 left-1/2 -translate-x-1/2 z-10 lg:hidden">
-                  <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight" data-node-id="127:912">
-                    업종별 최상위 전문 마케터
-                  </span>
-                </span>
                 <div className="hidden lg:flex items-center justify-start mb-3 lg:mb-4" data-node-id="127:912-wrap">
                   <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight" data-node-id="127:912">
                     업종별 최상위 전문 마케터
                   </span>
                 </div>
-                <div className="text-center lg:text-left mt-10 sm:mt-10 lg:mt-0" data-node-id="58:96">
+                <div className="text-center lg:text-left mt-0 lg:mt-0" data-node-id="58:96">
                   <div className="mb-2 sm:mb-3 whitespace-nowrap">
                     <p className="font-sans text-[13px] sm:text-[14px] lg:text-[18px] font-bold text-main leading-tight">
                       프로젝트 연평균 매출 성장률{" "}
@@ -255,36 +257,37 @@ export default function AboutSection() {
                 </div>
               </div>
             </FadeIn>
-
-            <SlideIn direction="left" delay={400} className="flex-shrink-0 order-1 lg:order-2">
-              <div className="w-[180px] h-[155px] sm:w-[200px] sm:h-[170px] lg:w-[340px] lg:h-[290px] relative">
-                <Image alt="Recontract rate" fill className="object-contain" src="/images/main-2.svg" sizes="340px" />
+            <SlideIn direction="left" delay={400} className="flex-shrink-0 order-1 lg:order-2 flex justify-center lg:justify-start">
+              <div className="w-[180px] h-[155px] sm:w-[200px] sm:h-[170px] lg:w-[340px] lg:h-[290px] relative mx-auto lg:mx-0">
+                <Image alt="Recontract rate" fill className="object-contain" src="/images/main-2-graph.png" sizes="340px" />
               </div>
             </SlideIn>
+            </div>
           </div>
         </div>
 
-        <div className="relative pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20 desktop:pb-24">
-          <div className="flex flex-col lg:flex-row lg:items-center gap-2 sm:gap-3 lg:gap-16 lg:ml-32 xl:ml-64">
-            <SlideIn direction="left" delay={700} className="flex-shrink-0">
+        <div className="relative pt-2 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20 desktop:pb-24">
+          <div className="flex flex-col items-center lg:flex-row lg:items-center gap-0 sm:gap-3 lg:gap-16 lg:ml-32 xl:ml-64">
+            <SlideIn direction="left" delay={700} className="flex-shrink-0 flex justify-center lg:justify-start w-full lg:w-auto">
               <div className="flex flex-col items-center relative" data-node-id="127:918">
+                {/* 모바일: 뱃지를 이미지 위에 배치 */}
                 <span className="absolute top-0 left-1/2 -translate-x-1/2 z-10 lg:hidden">
                   <span className="inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight whitespace-nowrap shrink-0" data-node-id="127:936">
                     업종별 전문 인력으로 전담 팀 구성
                   </span>
                 </span>
-                <div className="w-[300px] h-[260px] sm:w-[360px] sm:h-[310px] lg:w-[540px] lg:h-[470px] relative mt-10 sm:mt-10 lg:mt-0">
-                  <Image alt="Team Structure" fill className="object-contain" src="/images/reviewSection/mainl3-13.svg" sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 540px" />
+                <div className="w-[300px] h-[260px] sm:w-[360px] sm:h-[310px] lg:w-[540px] lg:h-[470px] relative mt-1 sm:mt-10 lg:mt-0 mx-auto lg:mx-0">
+                  <Image alt="Team Structure" fill className="object-contain" src="/images/main-3-puzzle.png" sizes="(max-width: 640px) 300px, (max-width: 1024px) 360px, 540px" />
                 </div>
               </div>
             </SlideIn>
 
             <SlideIn direction="right" delay={800} className="lg:-ml-8">
               <div className="text-center lg:text-left flex flex-col items-center lg:items-start" data-node-id="58:97">
-                <span className="hidden lg:inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full mb-3 sm:mb-4 shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight whitespace-nowrap shrink-0" data-node-id="127:936">
+                <span className="hidden lg:inline-flex items-center justify-center font-sans text-[11px] sm:text-[13px] font-semibold text-primary bg-[#EFF1FF] border border-primary/15 px-4 py-1.5 rounded-full mb-3 lg:mb-4 shadow-[0_1px_2px_rgba(24,75,186,0.08)] tracking-wide leading-tight whitespace-nowrap shrink-0" data-node-id="127:936">
                   업종별 전문 인력으로 전담 팀 구성
                 </span>
-                <p className="font-sans text-[14px] sm:text-[16px] lg:text-[20px] font-bold text-main leading-tight mb-2">
+                <p className="font-sans text-[14px] sm:text-[16px] lg:text-[20px] font-bold text-main leading-tight mb-0 lg:mb-2 sm:mb-2">
                   분야별{" "}
                   <span className="font-sans text-[26px] sm:text-[30px] lg:text-[40px] font-extrabold text-[#184bba]">
                     전문 인력

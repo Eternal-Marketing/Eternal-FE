@@ -97,7 +97,7 @@ export default function ServiceCTABanner() {
           </div>
         </div>
         <img
-          src="/images/service-page/handshake.svg"
+          src="/images/handshake.png"
           alt=""
           className="w-[180px] sm:w-[220px] lg:w-[260px] h-auto"
           style={{ opacity: visible ? 1 : 0, transform: visible ? 'scale(1)' : 'scale(0.85)', transition: 'all 0.7s ease-out', transitionDelay: '600ms' }}
