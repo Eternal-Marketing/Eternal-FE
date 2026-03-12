@@ -195,12 +195,23 @@ export default function DiagnosisSection() {
             transition: 'clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
-          <Image 
-            src="/images/diagnosis-background.png" 
-            alt="Diagnosis Section Background"
+          {/* 데스크탑 배경 - 원본 그대로 사용해 화질 유지 */}
+          <Image
+            src="/images/ai_diagnosis.png"
+            alt=""
             fill
-            className="object-cover"
+            className="object-cover hidden sm:block"
             sizes="100vw"
+            unoptimized
+          />
+          {/* 모바일 배경 - 원본 그대로 사용해 화질 유지 */}
+          <Image
+            src="/images/ai_diagnosis-mobile.png"
+            alt=""
+            fill
+            className="object-cover sm:hidden"
+            sizes="100vw"
+            unoptimized
           />
         </div>
       </div>

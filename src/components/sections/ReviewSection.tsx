@@ -175,12 +175,20 @@ export default function ReviewSection() {
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   const cardW = 'min-w-[340px] w-[340px] sm:min-w-[320px] sm:w-[320px] lg:min-w-[420px] lg:w-[420px]';
-  const cardH = 'h-[280px] sm:h-[250px] lg:h-[328px]';
+  const cardH = 'h-[300px] sm:h-[280px] lg:h-[360px]';
 
   return (
     <section id="review" className="relative overflow-x-hidden z-30 w-full min-h-[880px] sm:min-h-[1200px] lg:min-h-[1600px] xl:min-h-[1687px]">
       <div className="absolute inset-0 w-full h-full">
-        <Image src="/images/reviewSection/section.svg" alt="Review Section Background" fill className="object-cover" sizes="100vw" loading="lazy" />
+        <Image
+          src="/images/review-background.png"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+          loading="eager"
+          unoptimized
+        />
       </div>
 
       <div className="absolute inset-0 w-full h-full flex flex-col">
@@ -191,8 +199,8 @@ export default function ReviewSection() {
               <h2
                 className="font-sans text-[23px] sm:text-[24px] lg:text-[36px] font-bold leading-normal text-inverse text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
               >
-                판단은 이미 <span className="rounded-lg bg-primary/25 px-2 py-0.5 text-white">증명</span>되어 있었고,<br />
-                AI는 그 판단을 <span className="rounded-lg bg-primary/25 px-2 py-0.5 text-white">정교</span>하게 만들었습니다
+                판단은 이미 증명되어 있었고,<br />
+                AI는 그 판단을 정교하게 만들었습니다
               </h2>
             </div>
           </FadeIn>
@@ -217,7 +225,7 @@ export default function ReviewSection() {
                           stars={review.stars}
                           cardKey={cardKey}
                           isActive={isActive}
-                          onToggle={(key) => setActiveCard(activeCard === key ? null : key)}
+                          onToggle={(key) => setActiveCard((prev) => (prev === key ? null : key))}
                           widthClassName={cardW}
                           heightClassName={cardH}
                         />
