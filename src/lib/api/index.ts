@@ -6,6 +6,8 @@ export type { LoginRequest, LoginData, Admin } from './auth.api';
 export { getColumns, getColumnBySlug, getColumnById, createColumn, updateColumn, deleteColumn } from './columns.api';
 export { getCategories, getCategoryById, createCategory, updateCategory, deleteCategory } from './categories.api';
 export { getDailyDiagnosticCount } from './stats.api';
+export { getDailyDiagnosticMax, patchDailyDiagnosticMax } from './settings.api';
+export type { DailyDiagnosticMaxData } from './settings.api';
 export { uploadMedia } from './media.api';
 export { createSubscription, getSubscriptionCount, getSubscriptions, getSubscriptionById, deleteSubscription } from './subscriptions.api';
 export type { Media } from './media.api';

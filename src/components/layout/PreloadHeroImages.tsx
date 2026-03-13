@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 const DESKTOP_IMAGE_URLS = [
   '/images/about-background-desktop.png',
   '/images/column-background2.png',
-  '/images/service-page/service-background.svg',
+  '/images/service-background.png',
 ];
 
 const MOBILE_IMAGE_URLS = [

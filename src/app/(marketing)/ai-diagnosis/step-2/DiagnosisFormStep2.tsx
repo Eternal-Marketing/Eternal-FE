@@ -62,8 +62,7 @@ export default function DiagnosisFormStep2() {
   }, [touchedContact, contact]);
 
   const emailError = useMemo(() => {
-    if (!touchedEmail) return null;
-    if (!email.trim()) return '이메일을 입력해 주세요.';
+    if (!touchedEmail || !email.trim()) return null;
     if (!isValidEmail(email)) return '올바른 이메일 형식을 입력해 주세요.';
     return null;
   }, [touchedEmail, email]);
@@ -73,7 +72,8 @@ export default function DiagnosisFormStep2() {
     const hasRegion = region.trim().length > 0;
     const hasTime = timeSelected.some(Boolean);
     const hasOtherTime = timeSelected[5] ? contactTimeOther.trim().length > 0 : true;
-    return hasName && hasRegion && isValidContact(contact) && isValidEmail(email) && hasTime && hasOtherTime;
+    const emailOk = !email.trim() || isValidEmail(email);
+    return hasName && hasRegion && isValidContact(contact) && emailOk && hasTime && hasOtherTime;
   }, [name, region, contact, email, timeSelected, contactTimeOther]);
 
   const handleContactChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -202,7 +202,9 @@ export default function DiagnosisFormStep2() {
 
       {/* 이메일 */}
       <div className="py-4 sm:py-5 border-b border-divider">
-        <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">이메일</label>
+        <label className="block font-sans text-[16px] sm:text-[18px] font-medium text-main">
+          이메일 <span className="font-normal text-[11px] sm:text-[12px] text-sub3">(선택가능)</span>
+        </label>
         <input
           type="email"
           placeholder="info@eternalmarketing.co.kr"

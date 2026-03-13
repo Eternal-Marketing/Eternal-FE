@@ -39,13 +39,13 @@ const CTA_ITEMS: CTAItem[] = [
     external: true,
   },
   {
-    href: '/company-profile.pdf',
+    href: '/introcue_company-pdf/이터널마케팅_회사소개서.pdf',
     label: '회사소개서',
-    ariaLabel: '회사소개서',
+    ariaLabel: '회사소개서 PDF',
     bgClassName:
       'border border-white/20 bg-gradient-to-br from-[#9EB4F7] via-[#6C89E8] to-[#3F63C9] text-white',
     Icon: DocumentArrowDownIcon,
-    external: false,
+    external: true,
   },
 ] as const;
 
@@ -60,10 +60,10 @@ export default function FloatingCTA() {
   const closeContainerDelay = (CTA_ITEMS.length - 1) * staggerDelay;
 
   return (
-    <div className="fixed bottom-10 right-3 z-[100000] sm:bottom-12 sm:right-8 lg:bottom-16 lg:right-10">
-      <div className="flex flex-col items-center gap-3">
+    <div className="fixed bottom-8 right-2 z-[100000] sm:bottom-12 sm:right-8 lg:bottom-16 lg:right-10">
+      <div className="flex flex-col items-center gap-2.5 sm:gap-3">
         <div
-          className={`flex flex-col items-center gap-3 rounded-[32px] border border-white/20 bg-[linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.12))] p-3 shadow-[0_22px_50px_rgba(7,16,40,0.32)] backdrop-blur-xl transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          className={`flex flex-col items-center gap-2.5 rounded-2xl border border-white/20 bg-[linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.12))] p-2.5 shadow-[0_22px_50px_rgba(7,16,40,0.32)] backdrop-blur-xl transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:gap-3 sm:rounded-[32px] sm:p-3 ${
             isOpen
               ? 'pointer-events-auto translate-y-0 scale-100 opacity-100'
               : 'pointer-events-none translate-y-2 scale-95 opacity-0'
@@ -77,7 +77,7 @@ export default function FloatingCTA() {
               aria-label={ariaLabel}
               target={external ? '_blank' : undefined}
               rel={external ? 'noreferrer' : undefined}
-              className={`group relative flex h-[82px] w-[82px] flex-col items-center justify-center rounded-[24px] shadow-[0_18px_34px_rgba(10,22,60,0.26)] ring-1 ring-white/20 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-x-1 hover:scale-[1.03] ${
+              className={`group relative flex h-[72px] w-[72px] flex-col items-center justify-center rounded-xl shadow-[0_18px_34px_rgba(10,22,60,0.26)] ring-1 ring-white/20 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-x-1 hover:scale-[1.03] sm:h-[82px] sm:w-[82px] sm:rounded-[24px] ${
                 isOpen ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-4 scale-90 opacity-0'
               } ${bgClassName}`}
               style={{
@@ -86,13 +86,13 @@ export default function FloatingCTA() {
                   : `${(CTA_ITEMS.length - 1 - index) * staggerDelay}ms`,
               }}
             >
-              <span className="pointer-events-none absolute inset-x-3 top-2 h-px rounded-full bg-white/40 opacity-80" />
+              <span className="pointer-events-none absolute inset-x-2.5 top-2 h-px rounded-full bg-white/40 opacity-80 sm:inset-x-3 sm:top-2" />
               {imageSrc ? (
                 <Image src={imageSrc} alt="" width={24} height={24} className="h-6 w-6 object-contain" aria-hidden />
               ) : Icon ? (
                 <Icon className="h-6 w-6" aria-hidden />
               ) : null}
-              <span className="font-sans text-[11px] font-semibold leading-tight tracking-[-0.03em] text-center">
+              <span className="font-sans text-[10px] font-semibold leading-tight tracking-[-0.03em] text-center sm:text-[11px]">
                 {label}
               </span>
             </a>
@@ -102,7 +102,7 @@ export default function FloatingCTA() {
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className={`group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border border-white/45 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.98),rgba(229,237,255,0.95)_55%,rgba(196,213,255,0.96))] p-0 shadow-[0_18px_40px_rgba(24,75,186,0.34)] ring-1 ring-[#184BBA]/10 transition-all duration-300 hover:-translate-y-1 active:scale-[0.96] sm:h-16 sm:w-16 lg:h-[68px] lg:w-[68px] ${
+          className={`group relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/45 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.98),rgba(229,237,255,0.95)_55%,rgba(196,213,255,0.96))] p-0 shadow-[0_18px_40px_rgba(24,75,186,0.34)] ring-1 ring-[#184BBA]/10 transition-all duration-300 hover:-translate-y-1 active:scale-[0.96] sm:h-16 sm:w-16 lg:h-[68px] lg:w-[68px] ${
             isOpen ? '' : 'animate-[cta-breathe_2.6s_ease-in-out_infinite]'
           }`}
           aria-label={isOpen ? 'CTA 닫기' : 'CTA 열기'}
@@ -116,7 +116,7 @@ export default function FloatingCTA() {
           <span className="pointer-events-none absolute inset-y-0 left-[-55%] w-[42%] -skew-x-12 bg-[linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.72),rgba(255,255,255,0))] opacity-80 animate-[cta-shine_2.8s_ease-in-out_infinite]" />
           {isOpen ? (
             <XMarkIcon
-              className="h-7 w-7 text-[#184BBA] transition-transform duration-300 sm:h-8 sm:w-8 lg:h-10 lg:w-10"
+              className="h-6 w-6 text-[#184BBA] transition-transform duration-300 sm:h-8 sm:w-8 lg:h-10 lg:w-10"
               aria-hidden
             />
           ) : (
@@ -125,7 +125,7 @@ export default function FloatingCTA() {
               alt="바로가기 메뉴"
               width={36}
               height={36}
-              className={`h-7 w-7 object-contain transition-transform duration-300 sm:h-8 sm:w-8 lg:h-10 lg:w-10 ${
+              className={`h-6 w-6 object-contain transition-transform duration-300 sm:h-8 sm:w-8 lg:h-10 lg:w-10 ${
                 isOpen ? '' : 'animate-[cta-icon-float_2.6s_ease-in-out_infinite]'
               }`}
             />

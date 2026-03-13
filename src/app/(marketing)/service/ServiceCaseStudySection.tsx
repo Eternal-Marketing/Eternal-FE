@@ -167,8 +167,8 @@ export default function ServiceCaseStudySection() {
         </div>
         <div className="flex-1 relative overflow-visible">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none" style={blobStyle} aria-hidden />
-          <button type="button" onClick={prev} disabled={animating} className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-6 items-center justify-center w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-white/90 shadow-lg text-primary hover:bg-white active:scale-95 transition-all duration-200 z-20 disabled:pointer-events-none disabled:opacity-50 border border-primary/10" aria-label="이전 슬라이드">
-            <svg className="w-6 h-6 lg:w-8 lg:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+          <button type="button" onClick={prev} disabled={animating} className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-6 items-center justify-center p-2 text-primary hover:opacity-80 active:scale-95 transition-all duration-200 z-20 disabled:pointer-events-none disabled:opacity-50" aria-label="이전 슬라이드">
+            <svg className="w-10 h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
           </button>
           <div ref={!isFlipping ? swipeAreaRef : undefined} className="relative flex flex-row items-center sm:items-end justify-center gap-3 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] -mt-8 sm:mt-0 select-none" style={{ touchAction: 'pan-y' }} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
             {l === 'single' && (
@@ -208,8 +208,8 @@ export default function ServiceCaseStudySection() {
               </div>
             )}
           </div>
-          <button type="button" onClick={next} disabled={animating} className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-6 items-center justify-center w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-white/90 shadow-lg text-primary hover:bg-white active:scale-95 transition-all duration-200 z-20 disabled:pointer-events-none disabled:opacity-50 border border-primary/10" aria-label="다음 슬라이드">
-            <svg className="w-6 h-6 lg:w-8 lg:h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+          <button type="button" onClick={next} disabled={animating} className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-6 items-center justify-center p-2 text-primary hover:opacity-80 active:scale-95 transition-all duration-200 z-20 disabled:pointer-events-none disabled:opacity-50" aria-label="다음 슬라이드">
+            <svg className="w-10 h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
           </button>
           {!isFlipping && (
             <p className="sm:hidden absolute -right-4 sm:-right-2 top-[30%] -translate-y-1/2 flex items-center justify-center" style={fade(300)}>

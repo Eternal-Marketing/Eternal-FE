@@ -17,7 +17,7 @@ export default function ServicePageClient() {
         {/* 데스크탑 배경 */}
         <div className="absolute inset-0 hidden sm:block">
           <Image
-            src="/images/service-page/service-background.svg"
+            src="/images/service-background.png"
             alt=""
             fill
             className="object-cover"
