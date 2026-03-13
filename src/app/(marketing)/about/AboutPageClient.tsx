@@ -427,14 +427,14 @@ export default function AboutPageClient() {
             <SlideInRight delay={350}>
               <div className="relative w-full max-w-[260px] sm:max-w-[360px] lg:max-w-[440px] mx-auto lg:mx-0 flex-shrink-0">
                 <div className="absolute inset-0 scale-[1.12] rounded-full bg-[radial-gradient(circle,rgba(24,75,186,0.14)_0%,rgba(24,75,186,0.06)_42%,transparent_72%)] blur-2xl pointer-events-none" aria-hidden />
-                <div className="relative">
+                <div className="relative p-4">
                   <Image src="/images/infinite.svg" alt="" width={440} height={320} className="w-full h-auto drop-shadow-[0_18px_40px_rgba(24,75,186,0.14)]" sizes="(max-width: 640px) 260px, (max-width: 1024px) 360px, 440px" loading="lazy" />
-                  <span className="absolute top-0 left-[18%] -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">구조 재설계</span>
-                  <span className="absolute top-0 right-[18%] -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">세밀 분석</span>
-                  <span className="absolute top-1/2 left-[-8px] sm:left-[-18px] -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">최적화</span>
-                  <span className="absolute top-1/2 right-[-8px] sm:right-[-18px] -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">최적화</span>
-                  <span className="absolute bottom-0 right-[18%] translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">정밀 판단</span>
-                  <span className="absolute bottom-0 left-[18%] translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">고효율 실행</span>
+                  <span className="absolute top-0 left-[18%] -translate-y-[calc(50%+0.5rem)] px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">구조 재설계</span>
+                  <span className="absolute top-0 right-[18%] -translate-y-[calc(50%+0.5rem)] px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">세밀 분석</span>
+                  <span className="absolute top-1/2 -left-6 sm:-left-8 -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">최적화</span>
+                  <span className="absolute top-1/2 -right-6 sm:-right-8 -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">최적화</span>
+                  <span className="absolute bottom-0 right-[18%] translate-y-[calc(50%+0.5rem)] px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">정밀 판단</span>
+                  <span className="absolute bottom-0 left-[18%] translate-y-[calc(50%+0.5rem)] px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">고효율 실행</span>
                 </div>
               </div>
             </SlideInRight>

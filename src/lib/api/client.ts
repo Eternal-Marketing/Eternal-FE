@@ -8,10 +8,11 @@ type RequestOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   body?: unknown;
   headers?: Record<string, string>;
+  cache?: RequestCache;
 };
 
 export async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
-  const { method = 'GET', body, headers = {} } = options;
+  const { method = 'GET', body, headers = {}, cache } = options;
 
   const url = apiConfig.baseURL
     ? `${apiConfig.baseURL.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}`
@@ -27,6 +28,7 @@ export async function request<T>(path: string, options: RequestOptions = {}): Pr
       body: body ? JSON.stringify(body) : undefined,
       signal: controller.signal,
       credentials: 'include',
+      ...(cache ? { cache } : {}),
     });
 
     clearTimeout(timeoutId);
