@@ -180,11 +180,22 @@ export default function ReviewSection() {
   return (
     <section id="review" className="relative overflow-x-hidden z-30 w-full min-h-[880px] sm:min-h-[1200px] lg:min-h-[1600px] xl:min-h-[1687px]">
       <div className="absolute inset-0 w-full h-full">
+        {/* 모바일 배경 */}
+        <Image
+          src="/images/review-background-mobile.png"
+          alt=""
+          fill
+          className="object-cover block lg:hidden"
+          sizes="100vw"
+          loading="eager"
+          unoptimized
+        />
+        {/* 데스크톱 배경 */}
         <Image
           src="/images/review-background.png"
           alt=""
           fill
-          className="object-cover"
+          className="object-cover hidden lg:block"
           sizes="100vw"
           loading="eager"
           unoptimized
