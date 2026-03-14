@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 /**
  * 운영 원칙 섹션
@@ -53,6 +54,7 @@ const cards = [
 
 export default function ServicePrinciplesSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
@@ -107,18 +109,11 @@ export default function ServicePrinciplesSection() {
                   }}
                 >
                   <Image
-                    src={card.srcMobile}
+                    src={isMobile ? card.srcMobile : card.src}
                     alt=""
                     width={228}
                     height={240}
-                    className="sm:hidden w-[110px] h-auto mx-auto relative z-10"
-                  />
-                  <Image
-                    src={card.src}
-                    alt=""
-                    width={228}
-                    height={240}
-                    className="hidden sm:block w-[150px] h-auto mx-auto relative z-10"
+                    className={isMobile ? "w-[110px] h-auto mx-auto relative z-10" : "w-[150px] h-auto mx-auto relative z-10"}
                   />
                 </div>
 

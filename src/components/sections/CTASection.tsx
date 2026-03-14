@@ -7,6 +7,7 @@ import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getDailyDiagnosticCount } from '@/lib/api';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -101,18 +102,21 @@ interface CTASectionProps {
 
 export default function CTASection({ imageSrc = "/images/about-page/last-background.svg" }: CTASectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   const [bgExpanded, setBgExpanded] = useState(false);
   const [dailyCount, setDailyCount] = useState(0);
 
   useEffect(() => {
-    getDailyDiagnosticCount()
-      .then(setDailyCount)
-      .catch(() => {});
-  }, []);
-
-  useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setBgExpanded(true); },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setBgExpanded(true);
+          getDailyDiagnosticCount()
+            .then(setDailyCount)
+            .catch(() => {});
+          observer.disconnect();
+        }
+      },
       { threshold: 0.2 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -123,7 +127,8 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
     <div ref={sectionRef} className="relative overflow-hidden w-full">
 
       {/* 모바일: DiagnosisSection과 동일한 구성 */}
-      <div className="sm:hidden relative w-full" style={{ minHeight: '100vh' }}>
+      {isMobile && (
+      <div className="relative w-full" style={{ minHeight: '100vh' }}>
         {/* 배경 */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <div
@@ -139,6 +144,7 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
               fill
               className="object-cover"
               sizes="100vw"
+              loading="lazy"
             />
           </div>
         </div>
@@ -173,6 +179,7 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
                     width={140}
                     height={60}
                     className="w-[120px] h-auto animate-bubble-bounce"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -195,9 +202,11 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
           </div>
         </div>
       </div>
+      )}
 
       {/* 데스크탑: 기존 가로형 레이아웃 */}
-      <div className="hidden sm:block relative w-full min-h-[160px] overflow-hidden bg-[#0a0a1a]">
+      {!isMobile && (
+      <div className="relative w-full min-h-[160px] overflow-hidden bg-[#0a0a1a]">
         <div
           className="absolute inset-0"
           style={{
@@ -240,6 +249,7 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
           </div>
         </div>
       </div>
+      )}
 
     </div>
   );

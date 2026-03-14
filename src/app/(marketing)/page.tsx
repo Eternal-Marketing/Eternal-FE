@@ -1,14 +1,28 @@
 /**
  * 홈 페이지
  * - 히어로 → 회사소개 → 플랫폼 → 리뷰/상장 → 프로세스(무한대) → AI 진단 CTA
+ * - 하단 섹션은 dynamic import로 코드스플릿해 모바일 초기 로딩 경량화
  */
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import PlatformsSection from "@/components/sections/PlatformsSection";
-import ReviewSection from "@/components/sections/ReviewSection";
-import InfiniteSection from "@/components/sections/InfiniteSection";
-import DiagnosisSection from "@/components/sections/DiagnosisSection";
+
+const ReviewSection = dynamic(
+  () => import("@/components/sections/ReviewSection"),
+  { ssr: true }
+);
+
+const InfiniteSection = dynamic(
+  () => import("@/components/sections/InfiniteSection"),
+  { ssr: true }
+);
+
+const DiagnosisSection = dynamic(
+  () => import("@/components/sections/DiagnosisSection"),
+  { ssr: true }
+);
 
 export const metadata: Metadata = {
   title: "맘카페·블로그·바이럴 마케팅 전문",

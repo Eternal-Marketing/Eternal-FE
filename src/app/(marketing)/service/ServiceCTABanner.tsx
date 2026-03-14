@@ -6,6 +6,7 @@
  */
 
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 
 function AnimLine({ children, delay = 0, visible }: { children: React.ReactNode; delay?: number; visible: boolean }) {
   return (
@@ -96,12 +97,20 @@ export default function ServiceCTABanner() {
             </p>
           </div>
         </div>
-        <img
-          src="/images/handshake.png"
-          alt=""
-          className="w-[180px] sm:w-[220px] lg:w-[260px] h-auto"
+        <div
+          className="relative w-[180px] sm:w-[220px] lg:w-[260px] flex-shrink-0"
           style={{ opacity: visible ? 1 : 0, transform: visible ? 'scale(1)' : 'scale(0.85)', transition: 'all 0.7s ease-out', transitionDelay: '600ms' }}
-        />
+        >
+          <Image
+            src="/images/pngs/about-handshake-1.png"
+            alt=""
+            width={260}
+            height={260}
+            className="w-full h-auto object-contain"
+            sizes="(max-width: 640px) 180px, (max-width: 1024px) 220px, 260px"
+            loading="lazy"
+          />
+        </div>
       </div>
     </section>
   );

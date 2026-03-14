@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import ServiceIntroSection from './ServiceIntroSection';
 import ServiceCTABanner from './ServiceCTABanner';
 import ServiceCategoryCardsSection from './ServiceCategoryCardsSection';
@@ -11,32 +12,34 @@ import ServiceCaseStudySection from './ServiceCaseStudySection';
 import DiagnosisSection from '@/components/sections/DiagnosisSection';
 
 export default function ServicePageClient() {
+  const isMobile = useIsMobile();
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
       <section className="relative w-full min-h-[726px] sm:min-h-[320px] lg:h-[420px] overflow-hidden">
-        {/* 데스크탑 배경 */}
-        <div className="absolute inset-0 hidden sm:block">
-          <Image
-            src="/images/service-background.png"
-            alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
-            loading="eager"
-          />
+        <div className="absolute inset-0">
+          {isMobile ? (
+            <Image
+              src="/images/pngs/service-mobile-png.png"
+              alt=""
+              fill
+              className="object-contain object-top"
+              sizes="100vw"
+              priority
+            />
+          ) : (
+            <>
+              <Image
+                src="/images/service-background.png"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="100vw"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-black/40" />
+            </>
+          )}
         </div>
-        {/* 모바일 배경 */}
-        <div className="absolute inset-0 sm:hidden">
-          <Image
-            src="/images/pngs/service-mobile-png.png"
-            alt=""
-            fill
-            className="object-contain object-top"
-            sizes="100vw"
-            priority
-          />
-        </div>
-        <div className="absolute inset-0 bg-black/40 hidden sm:block" />
         <div className="relative z-10 h-full min-h-[726px] sm:min-h-[320px] flex flex-col items-center text-center px-4 pt-16 sm:pt-16 pb-[200px] sm:pb-16 lg:pt-14 lg:pb-20 gap-6 sm:gap-0 justify-center sm:justify-start">
           <h1 className="m-0 mt-0 sm:mt-12 lg:mt-12 font-sans text-[32px] sm:text-[32px] lg:text-[40px] font-bold leading-normal text-center">
             <span className="text-[#6d94ff] block sm:inline">ETERNAL MARKETING</span>

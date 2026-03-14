@@ -6,6 +6,7 @@
  */
 
 import { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 
 function AnimLine({ children, delay = 0, visible }: { children: React.ReactNode; delay?: number; visible: boolean }) {
   return (
@@ -104,11 +105,15 @@ export default function ServiceIntroSection() {
         </div>
 
         {/* 오른쪽: 체크 아이콘 */}
-        <div className="flex-shrink-0 service-intro-icon">
-          <img
-            src="/images/service-page/checked.svg"
+        <div className="flex-shrink-0 service-intro-icon relative w-[160px] sm:w-[220px] lg:w-[280px]">
+          <Image
+            src="/images/pngs/about-checked-1.png"
             alt=""
-            className="w-[160px] sm:w-[220px] lg:w-[280px] h-auto"
+            width={280}
+            height={280}
+            className="w-full h-auto object-contain"
+            sizes="(max-width: 640px) 160px, (max-width: 1024px) 220px, 280px"
+            loading="lazy"
           />
         </div>
       </div>
