@@ -44,9 +44,6 @@ export default function ReviewCard({
         <span className="absolute left-11 top-7 text-[54px] leading-none font-serif text-primary/10" aria-hidden>
           "
         </span>
-        <span className="absolute top-4 right-5 rounded-full border border-primary/12 bg-white/70 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-primary shadow-[0_10px_24px_rgba(24,75,186,0.12)] backdrop-blur-md" aria-hidden>
-          Review
-        </span>
 
         <span className="relative flex h-full flex-col rounded-[30px] border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(242,246,255,0.9)_100%)] px-4 py-3 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.98),0_12px_30px_rgba(24,75,186,0.08)] sm:px-6 sm:py-5 lg:px-6 lg:py-5">
           <span className="flex items-center justify-between gap-2 flex-shrink-0">
