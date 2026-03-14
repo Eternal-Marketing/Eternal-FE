@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { getDailyDiagnosticCount } from '@/lib/api';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 /**
  * AI 진단 CTA 섹션 (홈)
@@ -153,20 +154,19 @@ function ScaleIn({ children, delay = 0, className = '', style }: { children: Rea
 
 export default function DiagnosisSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const [bgExpanded, setBgExpanded] = useState(false);
   const [dailyCount, setDailyCount] = useState(0);
-
-  useEffect(() => {
-    getDailyDiagnosticCount()
-      .then(setDailyCount)
-      .catch(() => { /* 실패 시 0 유지 */ });
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setBgExpanded(true);
+          getDailyDiagnosticCount()
+            .then(setDailyCount)
+            .catch(() => { /* 실패 시 0 유지 */ });
+          observer.disconnect();
         }
       },
       { threshold: 0.2 }
@@ -195,24 +195,26 @@ export default function DiagnosisSection() {
             transition: 'clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
-          {/* 데스크탑 배경 - 원본 그대로 사용해 화질 유지 */}
-          <Image
-            src="/images/ai_diagnosis.png"
-            alt=""
-            fill
-            className="object-cover hidden sm:block"
-            sizes="100vw"
-            unoptimized
-          />
-          {/* 모바일 배경 */}
-          <Image
-            src="/images/reviewSection/diagnosis-mobile.png"
-            alt=""
-            fill
-            className="object-cover sm:hidden"
-            sizes="100vw"
-            unoptimized
-          />
+          {/* 모바일: 배경 1개만 로드해 속도 개선 */}
+          {isMobile ? (
+            <Image
+              src="/images/reviewSection/diagnosis-mobile.png"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="100vw"
+              loading="lazy"
+            />
+          ) : (
+            <Image
+              src="/images/ai_diagnosis.png"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="100vw"
+              loading="lazy"
+            />
+          )}
         </div>
       </div>
 

@@ -21,7 +21,7 @@ const SLIDES: Slide[] = [
     category: '패션 브랜드 D2C 쇼핑몰',
     title: '숏폼 마케팅',
     description: '알고리즘 변화를 지속적으로 반영해 트렌드를 선제적으로 반영하고,\n고객의 기억에 각인되는 숏폼 콘텐츠로 기획·운영합니다',
-    images: ['/images/service-page/service-1.png', '/images/service-page/service-2.png'],
+    images: ['/images/service-page/service-1-1.png', '/images/service-page/service-1-2.png'],
     tags: ['유투브숏츠', '인스타릴스', '틱톡인피드', '플랫폼별맞춤기획', '알고리즘분석', '노출값극대화', 'AI정답키워드세팅'],
     layout: 'phones',
   },
@@ -29,7 +29,7 @@ const SLIDES: Slide[] = [
     category: '의료 서비스 전문 기관',
     title: '네이버 카페 커뮤니티 마케팅',
     description: '광고성 글이 아닌 자연스러운 리뷰 구조로\n지역상권 중심적으로 신뢰를 쌓고 실제 방문 전환을 강화하며,\n브랜드 특화 전용 자연노출형 및 신뢰 축적형 리뷰 컨텐츠를 기획 후 운영합니다',
-    images: ['/images/service-page/service-3.png', '/images/service-page/service-4.png'],
+    images: ['/images/service-page/service-2-1.png', '/images/service-page/service-2-2.png'],
     tags: ['네이버카페', '맘카페마케팅', '지역상권', '자연노출형리뷰', '신뢰축적형컨텐츠', '방문전환강화', '커뮤니티바이럴'],
     layout: 'phones',
   },
@@ -60,17 +60,10 @@ const SLIDES: Slide[] = [
   },
 ];
 
-const SWIPE_THRESHOLD = 40;
-
 export default function ServiceCaseStudySection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const swipeAreaRef = useRef<HTMLDivElement>(null);
-  const touchStartX = useRef<number>(0);
-  const touchStartY = useRef<number>(0);
-  const currentRef = useRef(0);
   const [visible, setVisible] = useState(false);
   const [current, setCurrent] = useState(0);
-  currentRef.current = current;
   const [animating, setAnimating] = useState(false);
   const [nextIndex, setNextIndex] = useState<number | null>(null);
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
@@ -106,30 +99,6 @@ export default function ServiceCaseStudySection() {
 
   const prev = () => goTo((current - 1 + total) % total, 'prev');
   const next = () => goTo((current + 1) % total, 'next');
-
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-  }, []);
-
-  useEffect(() => {
-    const el = swipeAreaRef.current;
-    if (!el) return;
-    const onTouchMove = (e: TouchEvent) => {
-      const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
-      const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
-      if (dx > dy && dx > 15) e.preventDefault();
-    };
-    el.addEventListener('touchmove', onTouchMove, { passive: false });
-    return () => el.removeEventListener('touchmove', onTouchMove);
-  }, []);
-
-  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
-    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
-    const curr = currentRef.current;
-    if (deltaX > SWIPE_THRESHOLD) goTo((curr - 1 + total) % total, 'prev');
-    else if (deltaX < -SWIPE_THRESHOLD) goTo((curr + 1) % total, 'next');
-  }, [total, goTo]);
 
   const fade = (delay: number) => ({
     opacity: visible ? 1 : 0,
@@ -167,10 +136,18 @@ export default function ServiceCaseStudySection() {
         </div>
         <div className="flex-1 relative overflow-visible">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none" style={blobStyle} aria-hidden />
-          <button type="button" onClick={prev} disabled={animating} className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-6 items-center justify-center p-2 text-primary hover:opacity-80 active:scale-95 transition-all duration-200 z-20 disabled:pointer-events-none disabled:opacity-50" aria-label="이전 슬라이드">
-            <svg className="w-10 h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
-          </button>
-          <div ref={!isFlipping ? swipeAreaRef : undefined} className="relative flex flex-row items-center sm:items-end justify-center gap-3 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] -mt-8 sm:mt-0 select-none" style={{ touchAction: 'pan-y' }} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+          {/* 이미지 영역: 화살표가 이 영역 세로 중앙에 고정 */}
+          <div className="relative min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] -mt-8 sm:mt-0">
+            {/* 왼쪽 화살표: 이전 슬라이드 */}
+            <button type="button" onClick={prev} disabled={animating} className="flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 lg:-translate-x-6 items-center justify-center p-2 min-w-[44px] min-h-[44px] text-primary hover:opacity-80 active:scale-95 transition-all duration-200 z-30 cursor-pointer disabled:pointer-events-none disabled:opacity-50" aria-label="이전 슬라이드">
+              <span className="inline-block case-study-swipe-hint-left pointer-events-none">
+                <svg className="w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+              </span>
+            </button>
+            {/* 모바일: 양쪽 클릭 영역 - 왼쪽=이전, 오른쪽=다음 */}
+            <button type="button" onClick={prev} disabled={animating} className="sm:hidden absolute left-0 top-0 bottom-0 w-1/3 z-10 cursor-pointer disabled:pointer-events-none" aria-label="이전 슬라이드(왼쪽)" />
+            <button type="button" onClick={next} disabled={animating} className="sm:hidden absolute right-0 top-0 bottom-0 w-1/3 z-10 cursor-pointer disabled:pointer-events-none" aria-label="다음 슬라이드(오른쪽)" />
+            <div className="relative flex flex-row items-center sm:items-end justify-center gap-3 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] select-none">
             {l === 'single' && (
               <div className="relative w-full max-w-[600px] lg:max-w-[680px] aspect-[16/10] z-[1] self-center" style={imgBase('300ms')}>
                 <Image src={s.images[0]} alt={`${s.title} 예시`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 600px, 680px" />
@@ -207,17 +184,14 @@ export default function ServiceCaseStudySection() {
                 </div>
               </div>
             )}
-          </div>
-          <button type="button" onClick={next} disabled={animating} className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-6 items-center justify-center p-2 text-primary hover:opacity-80 active:scale-95 transition-all duration-200 z-20 disabled:pointer-events-none disabled:opacity-50" aria-label="다음 슬라이드">
-            <svg className="w-10 h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
-          </button>
-          {!isFlipping && (
-            <p className="sm:hidden absolute -right-4 sm:-right-2 top-[30%] -translate-y-1/2 flex items-center justify-center" style={fade(300)}>
-              <span className="animate-swipe-hint inline-flex items-center justify-center w-20 h-20 rounded-full text-primary">
-                <svg className="w-9 h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+            </div>
+            {/* 오른쪽 화살표: 다음 슬라이드 */}
+            <button type="button" onClick={next} disabled={animating} className="flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 lg:translate-x-6 items-center justify-center p-2 min-w-[44px] min-h-[44px] text-primary hover:opacity-80 active:scale-95 transition-all duration-200 z-30 cursor-pointer disabled:pointer-events-none disabled:opacity-50" aria-label="다음 슬라이드">
+              <span className="inline-block case-study-swipe-hint-right pointer-events-none">
+                <svg className="w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
               </span>
-            </p>
-          )}
+            </button>
+          </div>
           {!isFlipping && (
             <div className="flex lg:hidden flex-wrap justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8" style={fade(350)}>
               {s.tags.map((tag, i) => (

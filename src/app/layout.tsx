@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     images: ["/images/big-logo.svg"],
   },
   icons: {
-    icon: "/images/logo.svg",
+    icon: "/images/service-page/google-logo.svg",
   },
   keywords: [
     "이터널마케팅",
@@ -96,14 +96,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        {/* Spline 3D 첫 진입 시 끊김 방지: 연결 미리 수립 */}
-        <link rel="preconnect" href="https://my.spline.design" />
-        <link rel="dns-prefetch" href="https://my.spline.design" />
-
-        <Script id="jsonld-org" type="application/ld+json" strategy="beforeInteractive">
+        <Script id="jsonld-org" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify(jsonLdOrganization)}
         </Script>
-        <Script id="jsonld-website" type="application/ld+json" strategy="beforeInteractive">
+        <Script id="jsonld-website" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify(jsonLdWebsite)}
         </Script>
 

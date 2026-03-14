@@ -577,28 +577,22 @@ body {
   animation: case-study-scroll-in 0.6s ease-out forwards;
 }
 
-/* 케이스 스터디: 상시 스와이프 힌트 (화살표·카드 영역) */
-@keyframes swipe-hint {
+/* 케이스 스터디: 상시 클릭 유도 애니메이션 (화살표 - 좌우 동일) */
+@keyframes arrow-hint-pulse {
   0%, 100% {
-    transform: translateX(0);
+    transform: scale(0.95);
+    opacity: 0.6;
+    filter: drop-shadow(0 0 2px rgba(24, 75, 186, 0.3));
   }
   50% {
-    transform: translateX(4px);
+    transform: scale(1.2);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(24, 75, 186, 0.6)) drop-shadow(0 0 24px rgba(24, 75, 186, 0.35));
   }
 }
-@keyframes swipe-hint-left {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-4px);
-  }
-}
-.case-study-swipe-hint-right {
-  animation: swipe-hint 2.5s ease-in-out infinite;
-}
+.case-study-swipe-hint-right,
 .case-study-swipe-hint-left {
-  animation: swipe-hint-left 2.5s ease-in-out infinite;
+  animation: arrow-hint-pulse 1.5s ease-in-out infinite;
 }
 
 /* 순차 페이드인 (숫자용) */

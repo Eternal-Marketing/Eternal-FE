@@ -12,6 +12,7 @@ import { getColumns } from '@/lib/api';
 import type { Column } from '@/lib/api';
 import { hasTokens } from '@/lib/auth/token';
 import { useCategories } from '@/hooks/useCategories';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { CATEGORY_SLUGS, getCategoryCode, getCategoryIndex } from './categorySlug';
 
 export const FALLBACK_CATEGORIES = [
@@ -31,29 +32,29 @@ const DEFAULT_LIMIT = 10;
    히어로 섹션 - memo로 감싸 절대 리렌더링 안 됨
 ───────────────────────────────────────────── */
 const ColumnHero = memo(function ColumnHero() {
+  const isMobile = useIsMobile();
   return (
     <section className="relative w-full min-h-[726px] sm:min-h-[320px] lg:h-[420px] overflow-hidden" data-node-id="804:486">
-      {/* 데스크탑 배경 */}
-      <div className="absolute inset-0 hidden sm:block">
-        <Image
-          src="/images/column-background2.png"
-          alt=""
-          fill
-          className="object-cover"
-          sizes="100vw"
-          loading="eager"
-        />
-      </div>
-      {/* 모바일 배경 */}
-      <div className="absolute inset-0 sm:hidden">
-        <Image
-          src="/images/pngs/column-mobile-png.png"
-          alt=""
-          fill
-          className="object-contain object-top"
-          sizes="100vw"
-          priority
-        />
+      <div className="absolute inset-0">
+        {isMobile ? (
+          <Image
+            src="/images/pngs/column-mobile-png.png"
+            alt=""
+            fill
+            className="object-contain object-top"
+            sizes="100vw"
+            priority
+          />
+        ) : (
+          <Image
+            src="/images/column-background2.png"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            loading="eager"
+          />
+        )}
       </div>
       <div className="relative z-10 h-full min-h-[726px] sm:min-h-[320px] flex flex-col items-center text-center px-4 pt-0 sm:pt-16 pb-[200px] sm:pb-16 lg:pt-14 lg:pb-20 gap-6 sm:gap-0 justify-center sm:justify-start">
         <h1

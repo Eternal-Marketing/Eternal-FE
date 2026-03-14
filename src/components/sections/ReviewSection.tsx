@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import ReviewCard from './ReviewCard';
 import { reviewCards } from './reviewCards';
+import { useIsBelowLg } from '@/hooks/useIsMobile';
 
 /**
  * 리뷰·상장 섹션 (홈)
@@ -173,6 +174,7 @@ function SlideInRight({ children, delay = 0 }: { children: React.ReactNode; dela
 
 export default function ReviewSection() {
   const [activeCard, setActiveCard] = useState<string | null>(null);
+  const isBelowLg = useIsBelowLg();
 
   const cardW = 'min-w-[340px] w-[340px] sm:min-w-[320px] sm:w-[320px] lg:min-w-[420px] lg:w-[420px]';
   const cardH = 'h-[300px] sm:h-[280px] lg:h-[360px]';
@@ -180,26 +182,25 @@ export default function ReviewSection() {
   return (
     <section id="review" className="relative overflow-x-hidden z-30 w-full min-h-[880px] sm:min-h-[1200px] lg:min-h-[1600px] xl:min-h-[1687px]">
       <div className="absolute inset-0 w-full h-full">
-        {/* 모바일 배경 */}
-        <Image
-          src="/images/review-background-mobile.png"
-          alt=""
-          fill
-          className="object-cover block lg:hidden"
-          sizes="100vw"
-          loading="eager"
-          unoptimized
-        />
-        {/* 데스크톱 배경 */}
-        <Image
-          src="/images/review-background.png"
-          alt=""
-          fill
-          className="object-cover hidden lg:block"
-          sizes="100vw"
-          loading="eager"
-          unoptimized
-        />
+        {isBelowLg ? (
+          <Image
+            src="/images/review-background-mobile.png"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            loading="lazy"
+          />
+        ) : (
+          <Image
+            src="/images/review-background.png"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            loading="lazy"
+          />
+        )}
       </div>
 
       <div className="absolute inset-0 w-full h-full flex flex-col">

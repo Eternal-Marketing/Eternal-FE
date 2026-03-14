@@ -4,6 +4,7 @@ import { createContext, useContext, useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import DiagnosisSection from '@/components/sections/DiagnosisSection';
 import OurTeamChart from './OurTeamChart';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -192,6 +193,7 @@ export default function AboutPageClient() {
   const [whyEternalVisible, setWhyEternalVisible] = useState(false);
   const [intelligenceVisible, setIntelligenceVisible] = useState(false);
   const [teamVisible, setTeamVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const el = storySectionRef.current;
@@ -260,11 +262,12 @@ export default function AboutPageClient() {
   return (
     <main className="min-h-screen bg-bg text-main break-keep whitespace-normal">
       <section className="relative w-full min-h-[726px] sm:min-h-[320px] lg:h-[420px] overflow-hidden">
-        <div className="absolute inset-0 hidden sm:block">
-          <Image src="/images/about-background-desktop.png" alt="" fill className="object-cover" sizes="100vw" loading="eager" />
-        </div>
-        <div className="absolute inset-0 sm:hidden">
-          <Image src="/images/pngs/about-mobile-png.png" alt="" fill className="object-contain object-top" sizes="100vw" priority />
+        <div className="absolute inset-0">
+          {isMobile ? (
+            <Image src="/images/pngs/about-mobile-png.png" alt="" fill className="object-contain object-top" sizes="100vw" priority />
+          ) : (
+            <Image src="/images/about-background-desktop.png" alt="" fill className="object-cover" sizes="100vw" loading="eager" />
+          )}
         </div>
         <div className="relative z-10 h-full min-h-[726px] sm:min-h-[320px] flex flex-col items-center text-center px-4 pt-0 sm:pt-16 pb-[200px] sm:pb-16 lg:pt-14 lg:pb-20 gap-6 sm:gap-0 justify-center sm:justify-start">
           <h1 className="m-0 mt-0 sm:mt-12 lg:mt-12 font-sans text-[32px] sm:text-[32px] lg:text-[40px] font-bold leading-normal text-center">
@@ -299,7 +302,7 @@ export default function AboutPageClient() {
           <div className="mt-8 sm:mt-10 lg:mt-[46px] flex flex-col lg:flex-row gap-10 lg:gap-12 items-center lg:items-start">
             <SlideInLeft delay={200}>
               <div className="w-full lg:w-[660px]">
-                <Image src="/images/about-page/ourstory.svg" alt="" width={680} height={400} className="w-full h-auto" sizes="(max-width: 1024px) 100vw, 680px" loading="lazy" />
+                <Image src="/images/about-page/about-svg.png" alt="" width={680} height={400} className="w-full h-auto" sizes="(max-width: 1024px) 100vw, 680px" loading="lazy" />
               </div>
             </SlideInLeft>
             <div className={`flex-1 w-full max-w-[520px] lg:pt-12 ${storyVisible ? 'about-story-animate' : ''}`}>
@@ -428,7 +431,7 @@ export default function AboutPageClient() {
               <div className="relative w-full max-w-[260px] sm:max-w-[360px] lg:max-w-[440px] mx-auto lg:mx-0 flex-shrink-0">
                 <div className="absolute inset-0 scale-[1.12] rounded-full bg-[radial-gradient(circle,rgba(24,75,186,0.14)_0%,rgba(24,75,186,0.06)_42%,transparent_72%)] blur-2xl pointer-events-none" aria-hidden />
                 <div className="relative p-4">
-                  <Image src="/images/infinite.svg" alt="" width={440} height={320} className="w-full h-auto drop-shadow-[0_18px_40px_rgba(24,75,186,0.14)]" sizes="(max-width: 640px) 260px, (max-width: 1024px) 360px, 440px" loading="lazy" />
+                  <Image src="/images/about-page/about-infinite.png" alt="" width={440} height={320} className="w-full h-auto drop-shadow-[0_18px_40px_rgba(24,75,186,0.14)]" sizes="(max-width: 640px) 260px, (max-width: 1024px) 360px, 440px" loading="lazy" />
                   <span className="absolute top-0 left-[18%] -translate-y-[calc(50%+0.5rem)] px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">구조 재설계</span>
                   <span className="absolute top-0 right-[18%] -translate-y-[calc(50%+0.5rem)] px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">세밀 분석</span>
                   <span className="absolute top-1/2 -left-6 sm:-left-8 -translate-y-1/2 px-3 py-1 rounded-full bg-white/88 backdrop-blur-sm shadow-[0_8px_20px_rgba(17,17,17,0.06)] text-primary text-[11px] sm:text-[12px] font-semibold">최적화</span>
