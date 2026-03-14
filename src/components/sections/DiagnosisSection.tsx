@@ -204,9 +204,9 @@ export default function DiagnosisSection() {
             sizes="100vw"
             unoptimized
           />
-          {/* 모바일 배경 - 원본 그대로 사용해 화질 유지 */}
+          {/* 모바일 배경 */}
           <Image
-            src="/images/ai_diagnosis-mobile.png"
+            src="/images/reviewSection/diagnosis-mobile.png"
             alt=""
             fill
             className="object-cover sm:hidden"
