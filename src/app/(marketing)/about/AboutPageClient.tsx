@@ -133,8 +133,12 @@ function ExpandHighlight({ children, delay = 0 }: { children: React.ReactNode; d
 function ExpandBackground({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
+  /* 모바일: 배경 즉시 표시(애니메이션 생략). 데스크톱: 뷰포트 진입 시 scale 애니메이션 */
+  const showBackground = isVisible || isMobile;
 
   useEffect(() => {
+    if (isMobile) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -146,16 +150,16 @@ function ExpandBackground({ children }: { children: React.ReactNode }) {
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
-    <ExpandBackgroundContext.Provider value={isVisible}>
+    <ExpandBackgroundContext.Provider value={showBackground}>
       <div ref={ref} className="relative w-full overflow-hidden bg-white">
         <div
           className="absolute inset-0 bg-gradient-to-br from-[#1a3a6e] via-[#184BBA] to-[#2d2466]"
           style={{
-            transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
-            transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+            transform: showBackground ? 'scaleX(1)' : 'scaleX(0)',
+            transition: isMobile ? 'none' : 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
             transformOrigin: 'center',
           }}
         />
@@ -173,8 +177,8 @@ function ExpandBackground({ children }: { children: React.ReactNode }) {
         <div
           className="relative z-10"
           style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 0.5s ease-out 0.4s',
+            opacity: showBackground ? 1 : 0,
+            transition: isMobile ? 'none' : 'opacity 0.5s ease-out 0.4s',
           }}
         >
           {children}
@@ -264,7 +268,7 @@ export default function AboutPageClient() {
       <section className="relative w-full min-h-[726px] sm:min-h-[320px] lg:h-[420px] overflow-hidden">
         <div className="absolute inset-0">
           {isMobile ? (
-            <Image src="/images/pngs/about-mobile-png.png" alt="" fill className="object-contain object-top" sizes="100vw" priority />
+            <Image src="/images/pngs/about-mobile-png.png" alt="" fill className="object-contain object-top" sizes="(max-width: 639px) 100vw, 640px" priority />
           ) : (
             <Image src="/images/about-background-desktop.png" alt="" fill className="object-cover" sizes="100vw" loading="eager" />
           )}

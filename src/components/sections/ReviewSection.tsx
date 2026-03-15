@@ -184,7 +184,7 @@ export default function ReviewSection() {
       <div className="absolute inset-0 w-full h-full">
         {isBelowLg ? (
           <Image
-            src="/images/review-background-mobile.png"
+            src="/images/reviewSection/review-back-mobile.webp"
             alt=""
             fill
             className="object-cover"

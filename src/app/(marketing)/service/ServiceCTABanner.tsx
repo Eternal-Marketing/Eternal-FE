@@ -2,11 +2,12 @@
 /**
  * CTA 배너
  * - 좌·우 절반씩 파란 배경이 중앙으로 퍼지는 CSS 애니메이션 (뷰포트 진입 시)
- * - 문구 + 악수 이미지
+ * - 모바일: 배경 즉시 표시 (observer 미동작 시 로드 안 됨 방지)
  */
 
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 function AnimLine({ children, delay = 0, visible }: { children: React.ReactNode; delay?: number; visible: boolean }) {
   return (
@@ -46,8 +47,11 @@ function Highlight({ children, delay = 0, visible, color = '#b6ff4e', textColor 
 export default function ServiceCTABanner() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+  const isMobile = useIsMobile();
+  const showVisible = visible || isMobile;
 
   useEffect(() => {
+    if (isMobile) return;
     const el = sectionRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -61,12 +65,12 @@ export default function ServiceCTABanner() {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section
       ref={sectionRef}
-      className={`relative overflow-hidden py-14 sm:py-18 lg:py-24 px-4 sm:px-6 bg-white ${visible ? 'cta-banner-spread is-visible' : 'cta-banner-spread'}`}
+      className={`relative overflow-hidden py-14 sm:py-18 lg:py-24 px-4 sm:px-6 bg-white ${showVisible ? 'cta-banner-spread is-visible' : 'cta-banner-spread'}`}
     >
       {/* 좌·우 절반 배경 (cta-banner-spread 애니메이션으로 중앙까지 퍼짐) */}
       <div className="cta-banner-spread-left absolute inset-y-0 left-0 w-1/2 bg-[#07276c]" aria-hidden />
@@ -76,20 +80,20 @@ export default function ServiceCTABanner() {
         <div className="text-center lg:text-left">
           <div className="font-sans leading-relaxed text-white">
             <p className="m-0 text-[16px] sm:text-[20px] lg:text-[22px] font-light leading-loose space-y-1">
-              <AnimLine delay={200} visible={visible}>
+              <AnimLine delay={200} visible={showVisible}>
                 <span className="text-white/60">복잡한 마케팅</span>은 맡겨주세요
               </AnimLine>
             </p>
             <p className="m-0 mt-3 text-[22px] sm:text-[30px] lg:text-[36px] font-extrabold leading-tight tracking-tight space-y-1">
-              <AnimLine delay={400} visible={visible}>
-                <Highlight delay={600} visible={visible} color="rgba(255,255,255,0.15)" textColor="text-white">기획부터 실행, 관리까지</Highlight>
+              <AnimLine delay={400} visible={showVisible}>
+                <Highlight delay={600} visible={showVisible} color="rgba(255,255,255,0.15)" textColor="text-white">기획부터 실행, 관리까지</Highlight>
               </AnimLine>
-              <AnimLine delay={600} visible={visible}>
+              <AnimLine delay={600} visible={showVisible}>
                 이터널이{' '}
                 <span className="relative inline-block">
                   <span
                     className="absolute inset-0 rounded-md bg-white/20 transition-transform duration-700 origin-left"
-                    style={{ transform: visible ? 'scaleX(1)' : 'scaleX(0)', transitionDelay: '900ms' }}
+                    style={{ transform: showVisible ? 'scaleX(1)' : 'scaleX(0)', transitionDelay: '900ms' }}
                   />
                   <span className="relative z-10 px-2">정답입니다</span>
                 </span>
@@ -99,7 +103,7 @@ export default function ServiceCTABanner() {
         </div>
         <div
           className="relative w-[180px] sm:w-[220px] lg:w-[260px] flex-shrink-0"
-          style={{ opacity: visible ? 1 : 0, transform: visible ? 'scale(1)' : 'scale(0.85)', transition: 'all 0.7s ease-out', transitionDelay: '600ms' }}
+          style={{ opacity: showVisible ? 1 : 0, transform: showVisible ? 'scale(1)' : 'scale(0.85)', transition: 'all 0.7s ease-out', transitionDelay: '600ms' }}
         >
           <Image
             src="/images/pngs/about-handshake-1.png"

@@ -2,10 +2,11 @@
 /**
  * 인텔리전스 배너
  * - 좌·우 절반 회색 배경이 중앙으로 퍼지는 애니메이션 (뷰포트 진입 시)
- * - 텍스트 줄별 페이드업 + 형광 하이라이트 스윽 칠해지는 애니메이션
+ * - 모바일: 배경 즉시 표시 (observer 미동작 시 로드 안 됨 방지)
  */
 
 import { useRef, useEffect, useState } from 'react';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 function AnimLine({ children, delay = 0, visible }: { children: React.ReactNode; delay?: number; visible: boolean }) {
   return (
@@ -45,8 +46,11 @@ function Highlight({ children, delay = 0, visible }: { children: React.ReactNode
 export default function ServiceIntelligenceSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+  const isMobile = useIsMobile();
+  const showVisible = visible || isMobile;
 
   useEffect(() => {
+    if (isMobile) return;
     const el = sectionRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -60,12 +64,12 @@ export default function ServiceIntelligenceSection() {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section
       ref={sectionRef}
-      className={`relative overflow-hidden py-12 sm:py-16 lg:py-[90px] px-4 sm:px-6 bg-white ${visible ? 'cta-banner-spread is-visible' : 'cta-banner-spread'}`}
+      className={`relative overflow-hidden py-12 sm:py-16 lg:py-[90px] px-4 sm:px-6 bg-white ${showVisible ? 'cta-banner-spread is-visible' : 'cta-banner-spread'}`}
     >
       {/* 좌·우 스프레드 배경 */}
       <div className="cta-banner-spread-left absolute inset-y-0 left-0 w-1/2 bg-[#191919]" aria-hidden />
@@ -73,24 +77,24 @@ export default function ServiceIntelligenceSection() {
 
       <div className="cta-banner-content relative z-10 w-full max-w-[1163px] mx-auto text-center text-white">
         <p className="m-0 font-sans text-[13px] sm:text-[15px] lg:text-[16px] font-light leading-loose space-y-1">
-          <AnimLine delay={200} visible={visible}>
+          <AnimLine delay={200} visible={showVisible}>
             <span className="text-[19px] sm:text-[22px] lg:text-[24px]">
               결과가 정해져 있는{' '}
               <span className="font-semibold text-white/50 line-through decoration-[#e53935] decoration-2">패키지 마케팅</span>은 그만
             </span>
           </AnimLine>
-          <AnimLine delay={400} visible={visible}>
+          <AnimLine delay={400} visible={showVisible}>
             이터널은 변화하는{' '}
-            <Highlight delay={600} visible={visible}>알고리즘과 사업 조건</Highlight>에 맞춰
+            <Highlight delay={600} visible={showVisible}>알고리즘과 사업 조건</Highlight>에 맞춰
           </AnimLine>
-          <AnimLine delay={600} visible={visible}>
-            업체별 <Highlight delay={800} visible={visible}>전용 전략</Highlight>을 설계합니다
+          <AnimLine delay={600} visible={showVisible}>
+            업체별 <Highlight delay={800} visible={showVisible}>전용 전략</Highlight>을 설계합니다
           </AnimLine>
-          <AnimLine delay={800} visible={visible}>
+          <AnimLine delay={800} visible={showVisible}>
             패키지가 아닌,{' '}
             <span
               className="font-semibold transition-colors duration-700"
-              style={{ color: visible ? '#b6ff4e' : 'transparent', transitionDelay: '1000ms' }}
+              style={{ color: showVisible ? '#b6ff4e' : 'transparent', transitionDelay: '1000ms' }}
             >
               AI 인텔리전스 기반 솔루션
             </span>으로
@@ -100,8 +104,8 @@ export default function ServiceIntelligenceSection() {
         <div
           className="m-0 mt-6 sm:mt-8 font-sans text-[20px] sm:text-[24px] lg:text-[28px] font-bold transition-all duration-700 ease-out"
           style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(20px)',
+            opacity: showVisible ? 1 : 0,
+            transform: showVisible ? 'translateY(0)' : 'translateY(20px)',
             transitionDelay: '1100ms',
           }}
         >
@@ -110,7 +114,7 @@ export default function ServiceIntelligenceSection() {
               className="absolute inset-0 rounded"
               style={{
                 background: '#b6ff4e',
-                transform: visible ? 'scaleX(1)' : 'scaleX(0)',
+                transform: showVisible ? 'scaleX(1)' : 'scaleX(0)',
                 transformOrigin: 'left',
                 transition: 'transform 0.6s cubic-bezier(0.4,0,0.2,1)',
                 transitionDelay: '1300ms',

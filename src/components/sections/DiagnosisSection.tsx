@@ -198,11 +198,11 @@ export default function DiagnosisSection() {
           {/* 모바일: 배경 1개만 로드해 속도 개선 */}
           {isMobile ? (
             <Image
-              src="/images/reviewSection/diagnosis-mobile.png"
+              src="/diagnosis-back-mobile.png"
               alt=""
               fill
               className="object-cover"
-              sizes="100vw"
+              sizes="(max-width: 639px) 100vw, 1px"
               loading="lazy"
             />
           ) : (
@@ -278,7 +278,7 @@ export default function DiagnosisSection() {
               </div>
             </ScaleIn>
 
-            <div className="text-center absolute bottom-56 sm:bottom-60 lg:bottom-[120px] left-1/2 -translate-x-1/2 w-full px-4">
+            <div className="text-center absolute bottom-40 sm:bottom-60 lg:bottom-[120px] left-1/2 -translate-x-1/2 w-full px-4">
               <FadeIn delay={400} style={{ display: 'inline-block' }}>
                 <div className="font-sans text-[16px] sm:text-[20px] lg:text-[24px] font-semibold leading-normal text-inverse text-center flex flex-wrap items-center justify-center gap-2 sm:gap-3">
                   <span className="relative flex h-3 w-3 sm:h-4 sm:w-4 lg:h-3 lg:w-3">

@@ -42,7 +42,7 @@ const ColumnHero = memo(function ColumnHero() {
             alt=""
             fill
             className="object-contain object-top"
-            sizes="100vw"
+            sizes="(max-width: 639px) 100vw, 640px"
             priority
           />
         ) : (

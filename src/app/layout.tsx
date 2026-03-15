@@ -71,6 +71,14 @@ export const metadata: Metadata = {
   ],
 };
 
+/** 모바일: 뷰포트·세이프영역 통일 → iPhone/갤럭시 표시 차이 완화 */
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: {
