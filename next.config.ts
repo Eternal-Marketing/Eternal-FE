@@ -4,8 +4,10 @@ const nextConfig: NextConfig = {
   output: "standalone",
   images: {
     qualities: [75, 90, 95, 100],
-    formats: ['image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    // avif를 먼저 두면 지원 브라우저(Chrome/Android)에서 WebP보다 40~50% 작은 파일을 받음
+    // iOS Safari 16+도 avif 지원 → 모바일 이미지 로드 체감 개선
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [390, 640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },

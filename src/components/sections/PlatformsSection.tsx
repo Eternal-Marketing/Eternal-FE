@@ -105,7 +105,7 @@ export default function PlatformsSection() {
               수많은 실전 결과를 통해 검증된
             </h2>
             <p className="font-sans text-[30px] sm:text-[28px] lg:text-[44px] font-semibold leading-tight text-main text-center">
-              <span className="inline-block bg-gradient-to-r from-[#1a4fd6] to-[#3273ff] text-white px-3 py-0.5 sm:px-4 sm:py-1 rounded-lg sm:rounded-xl shadow-md shadow-[#1a4fd6]/15">
+              <span className="inline-block text-white px-3 py-0.5 sm:px-4 sm:py-1 rounded-lg sm:rounded-xl bg-[#1a4fd6] sm:bg-gradient-to-r sm:from-[#1a4fd6] sm:to-[#3273ff] shadow-[0_2px_8px_rgba(26,79,214,0.25)] sm:shadow-md sm:shadow-[#1a4fd6]/15 will-change-auto">
                 마케팅
               </span>{" "}
               의 핵심 영역

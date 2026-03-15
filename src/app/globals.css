@@ -1,6 +1,6 @@
 @config "../../tailwind.config.ts";
 
-/* Freesentation – 각 weight별 폰트 파일 정의 */
+/* Freesentation – 전체 뷰포트 공통 */
 @font-face {
   font-family: "Freesentation";
   src: url("/fonts/Freesentation-5Medium.woff2") format("woff2");
@@ -63,6 +63,19 @@
 
 body {
   font-family: var(--font-sans);
+  /* iPhone 노치·홈 인디케이터 / 갤럭시 영역 회피 (viewport-fit: cover와 쌍) */
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  /* 모바일 터치 하이라이트 통일 */
+  -webkit-tap-highlight-color: rgba(24, 75, 186, 0.12);
+}
+
+/* 모바일 풀스크린 높이: iOS 주소창 노출/숨김 시 100vh 흔들림 방지 */
+@supports (min-height: 100dvh) {
+  .min-h-screen-mobile {
+    min-height: 100dvh;
+  }
 }
 
 /* AI 진단 폼 구분선/입력 테두리와 동일한 옅은 회색 */

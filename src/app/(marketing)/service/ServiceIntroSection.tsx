@@ -3,10 +3,12 @@
  * 서비스 인트로 섹션
  * - "정답만 선택하시면 됩니다" 문구 + 체크 아이콘
  * - 뷰포트 진입 시 라인별·아이콘 애니메이션 (IntersectionObserver)
+ * - 모바일: 콘텐츠 즉시 표시 (observer 미동작 시 안 보임 방지)
  */
 
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 function AnimLine({ children, delay = 0, visible }: { children: React.ReactNode; delay?: number; visible: boolean }) {
   return (
@@ -46,8 +48,11 @@ function Highlight({ children, delay = 0, visible }: { children: React.ReactNode
 export default function ServiceIntroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+  const isMobile = useIsMobile();
+  const showVisible = visible || isMobile;
 
   useEffect(() => {
+    if (isMobile) return;
     const el = sectionRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -61,44 +66,44 @@ export default function ServiceIntroSection() {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section
       ref={sectionRef}
       className="bg-white min-h-0 py-16 sm:py-20 lg:min-h-[700px] lg:py-[120px] px-4 sm:px-6 flex items-center"
     >
-      <div className={`max-w-[1163px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 sm:gap-12 lg:gap-24 ${visible ? 'service-intro-animate' : ''}`}>
+      <div className={`max-w-[1163px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 sm:gap-12 lg:gap-24 ${showVisible ? 'service-intro-animate' : ''}`}>
         {/* 왼쪽: 타이틀 + 본문 */}
         <div className="flex-1 w-full">
           {/* 상단 레이블 */}
           <span
             className="inline-block mb-4 px-3 py-1 rounded-full bg-primary/10 text-primary font-sans text-[11px] sm:text-[12px] font-semibold tracking-widest transition-all duration-500"
-            style={{ opacity: visible ? 1 : 0, transform: visible ? 'translateY(0)' : 'translateY(-10px)', transitionDelay: '100ms' }}
+            style={{ opacity: showVisible ? 1 : 0, transform: showVisible ? 'translateY(0)' : 'translateY(-10px)', transitionDelay: '100ms' }}
           >
             ETERNAL INTELLIGENCE
           </span>
 
           <h2 className="font-sans text-[26px] sm:text-[36px] font-bold leading-tight text-main mb-4 sm:mb-6 space-y-2">
-            <AnimLine delay={200} visible={visible}>
+            <AnimLine delay={200} visible={showVisible}>
               무분별한 마케팅은 그만,
             </AnimLine>
-            <AnimLine delay={400} visible={visible}>
+            <AnimLine delay={400} visible={showVisible}>
               <span className="text-primary">정답</span>만 선택하시면 됩니다
             </AnimLine>
           </h2>
 
           <div className="font-sans text-[16px] sm:text-[17px] font-light leading-relaxed text-sub1 space-y-2">
-            <AnimLine delay={600} visible={visible}>
+            <AnimLine delay={600} visible={showVisible}>
               유입 경로가 많다고 매출이 함께 늘어나는 것은 아닙니다.
             </AnimLine>
-            <AnimLine delay={800} visible={visible}>
+            <AnimLine delay={800} visible={showVisible}>
               선택이 늘어날수록 <span className="font-semibold text-main">비용은 새고</span>, 성과는 명확해지지 않습니다.
             </AnimLine>
-            <AnimLine delay={1000} visible={visible}>
+            <AnimLine delay={1000} visible={showVisible}>
               <span className="font-semibold text-main">효율적인 마케팅은 많이 하는 일이 아니라</span>
             </AnimLine>
-            <AnimLine delay={1200} visible={visible}>
+            <AnimLine delay={1200} visible={showVisible}>
               <span className="font-bold text-[18px] sm:text-[20px] text-primary">정답을 고르는 일입니다.</span>
             </AnimLine>
           </div>

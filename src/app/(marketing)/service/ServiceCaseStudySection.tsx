@@ -106,14 +106,16 @@ export default function ServiceCaseStudySection() {
     transition: `opacity 0.65s ease-out ${delay}ms, transform 0.65s ease-out ${delay}ms`,
   });
 
-  const slide = SLIDES[current];
+  // 전환 후에도 메인 카드를 재마운트하지 않도록 → 이미지 깜빡임 방지
+  const displayIndex = nextIndex ?? current;
+  const slide = SLIDES[displayIndex];
   const layout = slide.layout || (slide.images.length === 1 ? 'single' : 'phones');
 
   const isFlipping = animating && nextIndex !== null;
   const flipFade = () => ({ opacity: 1, transform: 'translateY(0)' });
   const flipTagStyle = { opacity: 1, transform: 'translateY(0) scale(1)', transition: 'none' as const };
 
-  const renderSlideCard = (s: Slide, isFlip: boolean) => {
+  const renderSlideCard = (s: Slide, isFlip: boolean, activeDotIndex: number = current) => {
     const l = s.layout || (s.images.length === 1 ? 'single' : 'phones');
     const f = isFlip ? flipFade : fade;
     const v = isFlip || visible;
@@ -138,16 +140,8 @@ export default function ServiceCaseStudySection() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none" style={blobStyle} aria-hidden />
           {/* 이미지 영역: 화살표가 이 영역 세로 중앙에 고정 */}
           <div className="relative min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] -mt-8 sm:mt-0">
-            {/* 왼쪽 화살표: 이전 슬라이드 */}
-            <button type="button" onClick={prev} disabled={animating} className="flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 lg:-translate-x-6 items-center justify-center p-2 min-w-[44px] min-h-[44px] text-primary hover:opacity-80 active:scale-95 transition-all duration-200 z-30 cursor-pointer disabled:pointer-events-none disabled:opacity-50" aria-label="이전 슬라이드">
-              <span className="inline-block case-study-swipe-hint-left pointer-events-none">
-                <svg className="w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
-              </span>
-            </button>
-            {/* 모바일: 양쪽 클릭 영역 - 왼쪽=이전, 오른쪽=다음 */}
-            <button type="button" onClick={prev} disabled={animating} className="sm:hidden absolute left-0 top-0 bottom-0 w-1/3 z-10 cursor-pointer disabled:pointer-events-none" aria-label="이전 슬라이드(왼쪽)" />
-            <button type="button" onClick={next} disabled={animating} className="sm:hidden absolute right-0 top-0 bottom-0 w-1/3 z-10 cursor-pointer disabled:pointer-events-none" aria-label="다음 슬라이드(오른쪽)" />
-            <div className="relative flex flex-row items-center sm:items-end justify-center gap-3 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] select-none">
+            {/* 이미지 컨텐츠는 터치를 받지 않게 해서, 어떤 슬라이드에서도 화살표/클릭영역을 가리지 않도록 함 */}
+            <div className="relative flex flex-row items-center sm:items-end justify-center gap-3 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] select-none pointer-events-none">
             {l === 'single' && (
               <div className="relative w-full max-w-[600px] lg:max-w-[680px] aspect-[16/10] z-[1] self-center" style={imgBase('300ms')}>
                 <Image src={s.images[0]} alt={`${s.title} 예시`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 600px, 680px" />
@@ -185,12 +179,6 @@ export default function ServiceCaseStudySection() {
               </div>
             )}
             </div>
-            {/* 오른쪽 화살표: 다음 슬라이드 */}
-            <button type="button" onClick={next} disabled={animating} className="flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 lg:translate-x-6 items-center justify-center p-2 min-w-[44px] min-h-[44px] text-primary hover:opacity-80 active:scale-95 transition-all duration-200 z-30 cursor-pointer disabled:pointer-events-none disabled:opacity-50" aria-label="다음 슬라이드">
-              <span className="inline-block case-study-swipe-hint-right pointer-events-none">
-                <svg className="w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
-              </span>
-            </button>
           </div>
           {!isFlipping && (
             <div className="flex lg:hidden flex-wrap justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8" style={fade(350)}>
@@ -202,7 +190,7 @@ export default function ServiceCaseStudySection() {
           {!isFlipping && (
             <div className="mt-5 sm:mt-6 flex justify-center gap-1.5" style={fade(400)}>
               {SLIDES.map((_, i) => (
-                <button key={i} onClick={() => goTo(i, i > current ? 'next' : 'prev')} disabled={animating} className={`rounded-full transition-all duration-300 ${i === current ? 'w-5 h-1.5 bg-sub2' : 'w-1.5 h-1.5 bg-sub3/50'}`} aria-label={`슬라이드 ${i + 1}`} />
+                <button key={i} onClick={() => goTo(i, i > current ? 'next' : 'prev')} disabled={animating} className={`rounded-full transition-all duration-300 ${i === activeDotIndex ? 'w-5 h-1.5 bg-sub2' : 'w-1.5 h-1.5 bg-sub3/50'}`} aria-label={`슬라이드 ${i + 1}`} />
               ))}
             </div>
           )}
@@ -215,18 +203,44 @@ export default function ServiceCaseStudySection() {
     <section ref={sectionRef} className="w-full min-h-[520px] sm:min-h-[600px] lg:min-h-[680px] bg-[#f6f6f6] -my-8 sm:my-0 py-8 sm:py-0 overflow-visible">
       <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14 lg:py-[72px] overflow-visible">
         <div className="relative min-h-[560px] sm:min-h-[600px] overflow-visible">
-          {isFlipping && nextIndex !== null ? (
-            <div className="relative w-full min-h-[560px] sm:min-h-[600px] pointer-events-none overflow-visible">
-              <div className={`absolute inset-0 w-full ${slideDirection === 'next' ? 'slide-flip-in-next' : 'slide-flip-in-prev'}`}>
-                {renderSlideCard(SLIDES[nextIndex], true)}
-              </div>
-              <div className={`absolute inset-0 w-full z-10 ${slideDirection === 'next' ? 'slide-flip-out-next' : 'slide-flip-out-prev'}`}>
-                {renderSlideCard(SLIDES[current], true)}
-              </div>
+          {/* 메인 카드는 항상 한 개만 유지. 전환 중엔 새 슬라이드를 미리 표시하고 나가는 슬라이드만 오버레이로 제거 → 전환 후 이미지 재마운트 없어 깜빡임 방지 */}
+          <div className={`relative w-full min-h-[560px] sm:min-h-[600px] overflow-visible ${isFlipping ? 'pointer-events-none' : ''}`}>
+            <div className={`w-full ${isFlipping ? (slideDirection === 'next' ? 'slide-flip-in-next' : 'slide-flip-in-prev') : ''}`}>
+              {renderSlideCard(slide, isFlipping, displayIndex)}
             </div>
-          ) : (
-            renderSlideCard(slide, false)
+          </div>
+          {isFlipping && nextIndex !== null && (
+            <div className={`absolute inset-0 w-full z-10 pointer-events-none ${slideDirection === 'next' ? 'slide-flip-out-next' : 'slide-flip-out-prev'}`}>
+              {renderSlideCard(SLIDES[current], true, current)}
+            </div>
           )}
+          {/* 화살표·클릭 영역: 카드 밖에서 단일 레이어로 항상 최상단. 모바일: 기존. 데스크톱: 이미지 영역 양끝(좌 380px·우 0) */}
+          <div className="absolute inset-0 z-[100]" aria-hidden>
+            <button type="button" onClick={prev} disabled={animating} className="sm:hidden absolute left-0 top-0 bottom-0 w-1/3 cursor-pointer disabled:pointer-events-none" aria-label="이전 슬라이드(왼쪽)" />
+            <button type="button" onClick={next} disabled={animating} className="sm:hidden absolute right-0 top-0 bottom-0 w-1/3 cursor-pointer disabled:pointer-events-none" aria-label="다음 슬라이드(오른쪽)" />
+            <button
+              type="button"
+              onClick={prev}
+              disabled={animating}
+              className="flex absolute left-0 lg:left-[380px] xl:left-[420px] top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 lg:-translate-x-full items-center justify-center p-2 min-w-[44px] min-h-[44px] text-primary hover:opacity-80 active:scale-95 transition-all duration-200 cursor-pointer disabled:pointer-events-none disabled:opacity-50 touch-manipulation"
+              aria-label="이전 슬라이드"
+            >
+              <span className="inline-block case-study-swipe-hint-left pointer-events-none">
+                <svg className="w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              disabled={animating}
+              className="flex absolute right-0 top-1/2 -translate-y-1/2 items-center justify-center p-2 min-w-[44px] min-h-[44px] text-primary hover:opacity-80 active:scale-95 transition-all duration-200 cursor-pointer disabled:pointer-events-none disabled:opacity-50 touch-manipulation translate-x-2 sm:translate-x-4 lg:translate-x-8 xl:translate-x-10"
+              aria-label="다음 슬라이드"
+            >
+              <span className="inline-block case-study-swipe-hint-right pointer-events-none">
+                <svg className="w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </section>

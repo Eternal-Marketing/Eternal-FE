@@ -105,8 +105,14 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
   const isMobile = useIsMobile();
   const [bgExpanded, setBgExpanded] = useState(false);
   const [dailyCount, setDailyCount] = useState(0);
+  /* 모바일: 배경·콘텐츠 즉시 표시 (observer 미동작 시 로드 안 됨 방지) */
+  const showBgExpanded = bgExpanded || isMobile;
 
   useEffect(() => {
+    if (isMobile) {
+      getDailyDiagnosticCount().then(setDailyCount).catch(() => {});
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -121,7 +127,7 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
     <div ref={sectionRef} className="relative overflow-hidden w-full">
@@ -134,7 +140,7 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
           <div
             className="absolute inset-0 w-full h-full"
             style={{
-              clipPath: bgExpanded ? 'inset(0 0% 0 0%)' : 'inset(0 50% 0 50%)',
+              clipPath: showBgExpanded ? 'inset(0 0% 0 0%)' : 'inset(0 50% 0 50%)',
               transition: 'clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
             }}
           >
@@ -152,7 +158,7 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
         <div
           className="absolute inset-0 w-full h-full flex flex-col"
           style={{
-            opacity: bgExpanded ? 1 : 0,
+            opacity: showBgExpanded ? 1 : 0,
             transition: 'opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.6s',
           }}
         >
@@ -210,7 +216,7 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
         <div
           className="absolute inset-0"
           style={{
-            transform: bgExpanded ? 'scaleX(1)' : 'scaleX(0)',
+            transform: showBgExpanded ? 'scaleX(1)' : 'scaleX(0)',
             transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)',
             transformOrigin: 'center',
           }}
@@ -220,7 +226,7 @@ export default function CTASection({ imageSrc = "/images/about-page/last-backgro
         <div
           className="relative z-10 h-full"
           style={{
-            opacity: bgExpanded ? 1 : 0,
+            opacity: showBgExpanded ? 1 : 0,
             transition: 'opacity 0.6s ease-out 0.5s',
           }}
         >

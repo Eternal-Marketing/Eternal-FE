@@ -1,15 +1,18 @@
 'use client';
 
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import ServiceIntroSection from './ServiceIntroSection';
 import ServiceCTABanner from './ServiceCTABanner';
-import ServiceCategoryCardsSection from './ServiceCategoryCardsSection';
-import ServicePerformanceSection from './ServicePerformanceSection';
-import ServicePrinciplesSection from './ServicePrinciplesSection';
-import ServiceIntelligenceSection from './ServiceIntelligenceSection';
-import ServiceCaseStudySection from './ServiceCaseStudySection';
-import DiagnosisSection from '@/components/sections/DiagnosisSection';
+
+// 스크롤 후 보이는 하단 섹션 — dynamic import로 초기 번들에서 분리 (모바일 초기 로딩 경량화)
+const ServiceCategoryCardsSection = dynamic(() => import('./ServiceCategoryCardsSection'), { ssr: true });
+const ServicePerformanceSection = dynamic(() => import('./ServicePerformanceSection'), { ssr: true });
+const ServicePrinciplesSection = dynamic(() => import('./ServicePrinciplesSection'), { ssr: true });
+const ServiceIntelligenceSection = dynamic(() => import('./ServiceIntelligenceSection'), { ssr: true });
+const ServiceCaseStudySection = dynamic(() => import('./ServiceCaseStudySection'), { ssr: true });
+const DiagnosisSection = dynamic(() => import('@/components/sections/DiagnosisSection'), { ssr: true });
 
 export default function ServicePageClient() {
   const isMobile = useIsMobile();
@@ -23,7 +26,7 @@ export default function ServicePageClient() {
               alt=""
               fill
               className="object-contain object-top"
-              sizes="100vw"
+              sizes="(max-width: 639px) 100vw, 640px"
               priority
             />
           ) : (
