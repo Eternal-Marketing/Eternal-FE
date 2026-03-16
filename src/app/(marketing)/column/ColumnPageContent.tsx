@@ -216,6 +216,14 @@ export default function ColumnPageContent({ activeCategorySlug }: { activeCatego
             <div className="flex flex-col items-center justify-center py-12 sm:py-16 text-sub2 font-sans text-[14px]">
               칼럼을 불러오는 중입니다.
             </div>
+          ) : columns.length === 0 ? (
+            <div
+              className="flex flex-col items-center justify-center py-16 sm:py-24 rounded-xl bg-white/60 border border-[#eee] text-center animate-fade-in-up"
+              style={{ animationDelay: '0.7s', animationFillMode: 'both', animationDuration: '0.5s' }}
+            >
+              <p className="m-0 font-sans text-[18px] sm:text-[20px] font-semibold text-main">칼럼이 존재하지 않습니다.</p>
+              <p className="m-0 mt-2 font-sans text-[14px] text-sub1">해당 카테고리에 등록된 칼럼이 없습니다.</p>
+            </div>
           ) : (
             <>
               {featured && (
