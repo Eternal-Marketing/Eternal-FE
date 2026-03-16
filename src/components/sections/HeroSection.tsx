@@ -51,7 +51,7 @@ export default function HeroSection() {
         {isMobile ? (
           <video
             ref={mobileVideoRef}
-            src={mobileVideoInView ? "/images/mobile-3D.mp4" : undefined}
+            src={mobileVideoInView ? "/images/3d_hero-mobile.mp4" : undefined}
             preload={mobileVideoInView ? "metadata" : "none"}
             className={videoClass}
             {...baseVideoProps}
@@ -95,7 +95,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="absolute bottom-12 sm:bottom-16 lg:bottom-[80px] left-1/2 -translate-x-1/2 w-6 h-4 sm:w-8 sm:h-[18px] lg:w-[32px] lg:h-[18px] animate-bounce-down">
+        <div className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 w-6 h-4 sm:w-8 sm:h-[18px] animate-bounce-down lg:hidden">
           <Image
             src="/images/arrow-down.svg"
             alt="Scroll down"

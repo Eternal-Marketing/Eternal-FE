@@ -7,6 +7,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { getColumnById, updateColumn, ApiClientError, uploadMedia } from '@/lib/api';
 import type { Column, UpdateColumnPayload, ColumnCategoryCode } from '@/lib/api';
 import { hasTokens } from '@/lib/auth/token';
+import { CATEGORY_SLUGS, CATEGORY_CODES } from '../../categorySlug';
 import CategorySelect from '@/components/shared/CategorySelect';
 import ColumnEditor from '@/components/column/ColumnEditor';
 
@@ -127,7 +128,11 @@ export default function ColumnEditPage() {
         categoryCode: (form.categoryId ?? column.categoryId) ? undefined : (form.categoryCode ?? 'VIRAL_MARKETING'),
       });
       setSuccess(true);
-      setTimeout(() => router.push(`/column/id/${updated.id}`), 1500);
+      // 해당 카테고리 목록으로 이동 (상세 이동 시 slug/id 이슈 방지)
+      const code = form.categoryCode ?? (updated as unknown as { categoryCode?: ColumnCategoryCode }).categoryCode ?? 'VIRAL_MARKETING';
+      const idx = CATEGORY_CODES.indexOf(code);
+      const categorySlug = CATEGORY_SLUGS[Math.min(idx >= 0 ? idx : 0, CATEGORY_SLUGS.length - 1)];
+      setTimeout(() => router.push(`/column/category/${categorySlug}`), 1500);
     } catch (err) {
       const raw = err instanceof ApiClientError ? err.message : '칼럼 수정에 실패했습니다.';
       const msg = /slug already exists/i.test(raw)
@@ -257,7 +262,7 @@ export default function ColumnEditPage() {
             </Link>
             {success && (
               <div className="w-full mt-4 p-4 rounded-lg bg-primary/10 border border-primary/30 text-primary font-sans text-[14px]">
-                칼럼이 수정되었습니다. 상세 페이지로 이동합니다.
+                칼럼이 수정되었습니다. 해당 카테고리 목록으로 이동합니다.
               </div>
             )}
           </div>

@@ -18,7 +18,11 @@ interface ColumnEditorProps {
 export default function ColumnEditor({ value, onChange, placeholder = '칼럼 본문 내용...', minHeight = '360px' }: ColumnEditorProps) {
   const editor = useEditor({
     extensions: [
-      StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
+      // StarterKit v3에 link가 포함되어 있어 중복 방지를 위해 비활성화 후 별도 Link 사용
+      StarterKit.configure({
+        heading: { levels: [1, 2, 3] },
+        link: false,
+      }),
       Link.configure({ openOnClick: false, HTMLAttributes: { target: '_blank', rel: 'noopener noreferrer' } }),
       ImageWithDeleteExtension,
       Placeholder.configure({ placeholder }),

@@ -211,8 +211,8 @@ export default function ReviewSection() {
               <h2
                 className="font-sans text-[23px] sm:text-[24px] lg:text-[36px] font-bold leading-normal text-inverse text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
               >
-                판단은 이미 증명되어 있었고,<br />
-                AI는 그 판단을 정교하게 만들었습니다
+                판단은 이미 <span className="underline decoration-2 underline-offset-2" style={{ textDecorationColor: 'var(--color-primary)' }}>증명</span>되어 있었고,<br />
+                AI는 그 판단을 <span className="underline decoration-2 underline-offset-2" style={{ textDecorationColor: 'var(--color-primary)' }}>정교</span>하게 만들었습니다
               </h2>
             </div>
           </FadeIn>

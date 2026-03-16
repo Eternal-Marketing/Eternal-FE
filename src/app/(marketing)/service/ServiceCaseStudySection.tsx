@@ -45,7 +45,7 @@ const SLIDES: Slide[] = [
     category: 'H헤어 디자인 전문 살롱',
     title: '인스타그램 매니지먼트',
     description: '인스타그램 계정을 사업 목적에 맞게 정밀 세팅하여\n피드·하이라이트·소개글까지 전문적으로 구성하고\n브랜드 인식 개선과 매출 전환을 강화합니다',
-    images: ['/images/service-page/service-6.png', '/images/service-page/service-7.png'],
+    images: ['/images/service-page/service-6.png', '/images/service-blur1.png'],
     tags: ['인스타그램', '계정최적화', '피드디자인', '하이라이트구성', '브랜드이미지', '매출전환', '소개글세팅'],
     layout: 'phones',
     imageLabels: ['before', 'after'],
@@ -123,7 +123,7 @@ export default function ServiceCaseStudySection() {
     const blobStyle = { background: 'radial-gradient(circle, rgba(109,148,255,0.10) 0%, rgba(109,148,255,0.03) 50%, transparent 70%)', opacity: v ? 1 : 0, transition: isFlip ? 'none' : 'opacity 1s ease-out 200ms' };
     const imgBase = (delay: string) => ({ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(40px)', transition: isFlip ? 'none' : `opacity 0.75s ease-out ${delay}, transform 0.75s ease-out ${delay}` });
     return (
-      <div key={s.title} className="flex flex-col lg:flex-row lg:items-start lg:gap-20 gap-12 sm:gap-10 w-full">
+      <div key={s.title} className="flex flex-col lg:flex-row lg:items-start lg:gap-12 gap-8 sm:gap-8 w-full">
         <div className="flex-shrink-0 lg:w-[300px] xl:w-[340px] flex flex-col justify-between lg:py-6 text-center lg:text-left items-center lg:items-start">
           <div className="w-full">
             <span className="inline-block mb-2 sm:mb-3 px-3 py-1 rounded-full bg-primary/8 text-primary font-sans text-[11px] sm:text-[12px] font-semibold tracking-[0.08em]" style={f(0)}>{s.category}</span>
@@ -137,43 +137,43 @@ export default function ServiceCaseStudySection() {
           </div>
         </div>
         <div className="flex-1 relative overflow-visible">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full pointer-events-none" style={blobStyle} aria-hidden />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] sm:w-[340px] sm:h-[340px] lg:w-[400px] lg:h-[400px] rounded-full pointer-events-none" style={blobStyle} aria-hidden />
           {/* 이미지 영역: 화살표가 이 영역 세로 중앙에 고정 */}
-          <div className="relative min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] -mt-8 sm:mt-0">
+          <div className="relative min-h-[240px] sm:min-h-[380px] lg:min-h-[440px] -mt-6 sm:mt-0">
             {/* 이미지 컨텐츠는 터치를 받지 않게 해서, 어떤 슬라이드에서도 화살표/클릭영역을 가리지 않도록 함 */}
-            <div className="relative flex flex-row items-center sm:items-end justify-center gap-3 sm:gap-5 lg:gap-6 min-h-[280px] sm:min-h-[460px] lg:min-h-[520px] select-none pointer-events-none">
+            <div className="relative flex flex-row items-center sm:items-end justify-center gap-2 sm:gap-3 lg:gap-4 min-h-[240px] sm:min-h-[380px] lg:min-h-[440px] select-none pointer-events-none">
             {l === 'single' && (
-              <div className="relative w-full max-w-[600px] lg:max-w-[680px] aspect-[16/10] z-[1] self-center" style={imgBase('300ms')}>
-                <Image src={s.images[0]} alt={`${s.title} 예시`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 600px, 680px" />
+              <div className="relative w-full max-w-[300px] sm:max-w-[340px] lg:max-w-[380px] aspect-[16/10] z-[1] self-center" style={imgBase('300ms')}>
+                <Image src={s.images[0]} alt={`${s.title} 예시`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 300px, (max-width: 1024px) 340px, 380px" />
               </div>
             )}
             {l === 'phones' && (
-              <div className="flex flex-row items-end justify-center gap-2 sm:gap-4 z-[1]">
+              <div className="flex flex-row items-end justify-center gap-1.5 sm:gap-3 z-[1]">
                 <div className="flex flex-col items-center">
-                  {s.imageLabels?.[0] && <span className="mb-1 sm:mb-2 mt-0 sm:mt-12 font-sans text-[11px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(8px)', transition: isFlip ? 'none' : 'opacity 0.5s ease-out 200ms, transform 0.5s ease-out 200ms' }}>{s.imageLabels[0]}</span>}
-                  <div className="relative w-[130px] sm:w-[250px] lg:w-[260px] xl:w-[280px] aspect-[271/574] shrink-0" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(8px) sm:translateY(32px)' : 'translateY(30px) sm:translateY(60px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms' }}>
-                    <Image src={s.images[0]} alt={`${s.title} 예시 1`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]" sizes="(max-width: 640px) 200px, (max-width: 1024px) 250px, 280px" />
+                  {s.imageLabels?.[0] && <span className="mb-1 sm:mb-1.5 mt-0 sm:mt-8 font-sans text-[11px] sm:text-[14px] lg:text-[15px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(8px)', transition: isFlip ? 'none' : 'opacity 0.5s ease-out 200ms, transform 0.5s ease-out 200ms' }}>{s.imageLabels[0]}</span>}
+                  <div className="relative w-[110px] sm:w-[200px] lg:w-[220px] xl:w-[240px] aspect-[271/574] shrink-0" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(8px) sm:translateY(24px)' : 'translateY(30px) sm:translateY(60px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms' }}>
+                    <Image src={s.images[0]} alt={`${s.title} 예시 1`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]" sizes="(max-width: 640px) 140px, (max-width: 1024px) 200px, 240px" />
                   </div>
                 </div>
                 <div className="flex flex-col items-center z-[2]">
-                  {s.imageLabels?.[1] && <span className="mb-1 sm:mb-2 mt-2 sm:mt-12 font-sans text-[11px] sm:text-[15px] lg:text-[17px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(8px)', transition: isFlip ? 'none' : 'opacity 0.5s ease-out 330ms, transform 0.5s ease-out 330ms' }}>{s.imageLabels[1]}</span>}
-                  <div className="relative w-[130px] sm:w-[250px] lg:w-[260px] xl:w-[280px] aspect-[271/574] shrink-0" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(30px) sm:translateY(60px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms' }}>
-                    <Image src={s.images[1]} alt={`${s.title} 예시 2`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]" sizes="(max-width: 640px) 200px, (max-width: 1024px) 250px, 280px" />
+                  {s.imageLabels?.[1] && <span className="mb-1 sm:mb-1.5 mt-1.5 sm:mt-8 font-sans text-[11px] sm:text-[14px] lg:text-[15px] font-light tracking-[0.12em] sm:tracking-[0.18em] text-sub2" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(8px)', transition: isFlip ? 'none' : 'opacity 0.5s ease-out 330ms, transform 0.5s ease-out 330ms' }}>{s.imageLabels[1]}</span>}
+                  <div className="relative w-[110px] sm:w-[200px] lg:w-[220px] xl:w-[240px] aspect-[271/574] shrink-0" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(30px) sm:translateY(60px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms' }}>
+                    <Image src={s.images[1]} alt={`${s.title} 예시 2`} fill quality={90} className="object-contain drop-shadow-[0_8px_30px_rgba(0,0,0,0.12)]" sizes="(max-width: 640px) 140px, (max-width: 1024px) 200px, 240px" />
                   </div>
                 </div>
               </div>
             )}
             {l === 'cards' && (
-              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-8 sm:gap-10 self-center">
+              <div className="flex flex-col sm:flex-row items-center sm:items-end gap-5 sm:gap-6 self-center">
                 <div className="flex flex-col">
-                  <div className="relative w-[210px] sm:w-[270px] lg:w-[300px] xl:w-[340px] aspect-[870/660] z-[1] rounded-lg overflow-hidden" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(20px)' : 'translateY(50px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms' }}>
-                    <Image src={s.images[0]} alt={`${s.title} 예시 1`} fill quality={90} className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 210px, (max-width: 1024px) 270px, 340px" />
+                  <div className="relative w-[180px] sm:w-[220px] lg:w-[250px] xl:w-[270px] aspect-[870/660] z-[1] rounded-lg overflow-hidden" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(20px)' : 'translateY(50px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 300ms, transform 0.75s ease-out 300ms' }}>
+                    <Image src={s.images[0]} alt={`${s.title} 예시 1`} fill quality={90} className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 180px, (max-width: 1024px) 220px, 270px" />
                   </div>
                 </div>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-2">
                   {s.imageCaption && <p className="m-0 font-sans text-[11px] sm:text-[12px] lg:text-[13px] font-light text-sub2 leading-[1.7] whitespace-pre-line" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(10px)', transition: isFlip ? 'none' : 'opacity 0.65s ease-out 350ms, transform 0.65s ease-out 350ms' }}>{s.imageCaption}</p>}
-                  <div className="relative w-[210px] sm:w-[270px] lg:w-[300px] xl:w-[340px] aspect-square z-[2] rounded-lg overflow-hidden" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(50px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms' }}>
-                    <Image src={s.images[1]} alt={`${s.title} 예시 2`} fill quality={90} className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 210px, (max-width: 1024px) 270px, 340px" />
+                  <div className="relative w-[180px] sm:w-[220px] lg:w-[250px] xl:w-[270px] aspect-square z-[2] rounded-lg overflow-hidden" style={{ opacity: v ? 1 : 0, transform: v ? 'translateY(0)' : 'translateY(50px)', transition: isFlip ? 'none' : 'opacity 0.75s ease-out 430ms, transform 0.75s ease-out 430ms' }}>
+                    <Image src={s.images[1]} alt={`${s.title} 예시 2`} fill quality={90} className="object-cover drop-shadow-[0_8px_30px_rgba(0,0,0,0.10)]" sizes="(max-width: 640px) 180px, (max-width: 1024px) 220px, 270px" />
                   </div>
                 </div>
               </div>
@@ -202,7 +202,8 @@ export default function ServiceCaseStudySection() {
   return (
     <section ref={sectionRef} className="w-full min-h-[520px] sm:min-h-[600px] lg:min-h-[680px] bg-[#f6f6f6] -my-8 sm:my-0 py-8 sm:py-0 overflow-visible">
       <div className="w-full max-w-[1163px] mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-14 lg:py-[72px] overflow-visible">
-        <div className="relative min-h-[560px] sm:min-h-[600px] overflow-visible">
+        {/* 모바일·데스크톱 모두 고정 높이로 슬라이드 바꿔도 화살표 위치 동일 */}
+        <div className="relative h-[560px] sm:h-[600px] lg:h-[640px] overflow-visible">
           {/* 메인 카드는 항상 한 개만 유지. 전환 중엔 새 슬라이드를 미리 표시하고 나가는 슬라이드만 오버레이로 제거 → 전환 후 이미지 재마운트 없어 깜빡임 방지 */}
           <div className={`relative w-full min-h-[560px] sm:min-h-[600px] overflow-visible ${isFlipping ? 'pointer-events-none' : ''}`}>
             <div className={`w-full ${isFlipping ? (slideDirection === 'next' ? 'slide-flip-in-next' : 'slide-flip-in-prev') : ''}`}>
@@ -214,15 +215,13 @@ export default function ServiceCaseStudySection() {
               {renderSlideCard(SLIDES[current], true, current)}
             </div>
           )}
-          {/* 화살표·클릭 영역: 카드 밖에서 단일 레이어로 항상 최상단. 모바일: 기존. 데스크톱: 이미지 영역 양끝(좌 380px·우 0) */}
+          {/* 화살표·클릭 영역 */}
           <div className="absolute inset-0 z-[100]" aria-hidden>
-            <button type="button" onClick={prev} disabled={animating} className="sm:hidden absolute left-0 top-0 bottom-0 w-1/3 cursor-pointer disabled:pointer-events-none" aria-label="이전 슬라이드(왼쪽)" />
-            <button type="button" onClick={next} disabled={animating} className="sm:hidden absolute right-0 top-0 bottom-0 w-1/3 cursor-pointer disabled:pointer-events-none" aria-label="다음 슬라이드(오른쪽)" />
             <button
               type="button"
               onClick={prev}
               disabled={animating}
-              className="flex absolute left-0 lg:left-[380px] xl:left-[420px] top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 lg:-translate-x-full items-center justify-center p-2 min-w-[44px] min-h-[44px] text-primary hover:opacity-80 active:scale-95 transition-all duration-200 cursor-pointer disabled:pointer-events-none disabled:opacity-50 touch-manipulation"
+              className="flex absolute left-0 lg:left-[380px] xl:left-[420px] top-0 bottom-0 lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 -translate-x-2 sm:-translate-x-4 lg:-translate-x-full w-1/3 sm:w-auto sm:min-w-[44px] min-h-[44px] lg:min-w-[44px] items-center justify-start sm:justify-center pl-4 sm:pl-0 p-2 text-primary hover:opacity-80 lg:text-primary/40 lg:hover:text-primary lg:hover:opacity-100 active:scale-95 transition-all duration-200 cursor-pointer disabled:pointer-events-none disabled:opacity-50 touch-manipulation"
               aria-label="이전 슬라이드"
             >
               <span className="inline-block case-study-swipe-hint-left pointer-events-none">
@@ -233,7 +232,7 @@ export default function ServiceCaseStudySection() {
               type="button"
               onClick={next}
               disabled={animating}
-              className="flex absolute right-0 top-1/2 -translate-y-1/2 items-center justify-center p-2 min-w-[44px] min-h-[44px] text-primary hover:opacity-80 active:scale-95 transition-all duration-200 cursor-pointer disabled:pointer-events-none disabled:opacity-50 touch-manipulation translate-x-2 sm:translate-x-4 lg:translate-x-8 xl:translate-x-10"
+              className="flex absolute right-0 top-0 bottom-0 lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 items-center justify-end sm:justify-center pr-4 sm:pr-0 p-2 w-1/3 sm:w-auto sm:min-w-[44px] min-h-[44px] lg:min-w-[44px] text-primary hover:opacity-80 lg:text-primary/40 lg:hover:text-primary lg:hover:opacity-100 active:scale-95 transition-all duration-200 cursor-pointer disabled:pointer-events-none disabled:opacity-50 touch-manipulation translate-x-0 sm:translate-x-4 lg:translate-x-8 xl:translate-x-10"
               aria-label="다음 슬라이드"
             >
               <span className="inline-block case-study-swipe-hint-right pointer-events-none">
