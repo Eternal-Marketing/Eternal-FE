@@ -1,8 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ComponentType, SVGProps } from 'react';
+
+const COMPANY_PDF_HREF = '/introcue_company-pdf/이터널마케팅_회사소개서.pdf';
 import {
   ChatBubbleOvalLeftEllipsisIcon,
   DocumentArrowDownIcon,
@@ -39,7 +41,7 @@ const CTA_ITEMS: CTAItem[] = [
     external: true,
   },
   {
-    href: '/introcue_company-pdf/이터널마케팅_회사소개서.pdf',
+    href: COMPANY_PDF_HREF,
     label: '회사소개서',
     ariaLabel: '회사소개서 PDF',
     bgClassName:
@@ -57,6 +59,28 @@ const CTA_ITEMS: CTAItem[] = [
 export default function FloatingCTA() {
   const [isOpen, setIsOpen] = useState(false);
   const staggerDelay = 70;
+
+  // 회사소개서 PDF: 페이지 로드 직후 prefetch, 2초 뒤 preload 추가로 우선순위 올려 클릭 시 빠르게 열리도록
+  useEffect(() => {
+    const prefetchLink = document.createElement('link');
+    prefetchLink.rel = 'prefetch';
+    prefetchLink.href = COMPANY_PDF_HREF;
+    prefetchLink.as = 'document';
+    document.head.appendChild(prefetchLink);
+
+    const t = setTimeout(() => {
+      const preloadLink = document.createElement('link');
+      preloadLink.rel = 'preload';
+      preloadLink.href = COMPANY_PDF_HREF;
+      preloadLink.as = 'document';
+      document.head.appendChild(preloadLink);
+    }, 2000);
+
+    return () => {
+      clearTimeout(t);
+      if (prefetchLink.parentNode) prefetchLink.parentNode.removeChild(prefetchLink);
+    };
+  }, []);
   const closeContainerDelay = (CTA_ITEMS.length - 1) * staggerDelay;
 
   return (

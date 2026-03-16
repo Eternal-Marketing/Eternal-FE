@@ -67,8 +67,9 @@ body {
   padding-left: env(safe-area-inset-left, 0);
   padding-right: env(safe-area-inset-right, 0);
   padding-bottom: env(safe-area-inset-bottom, 0);
-  /* 모바일 터치 하이라이트 통일 */
-  -webkit-tap-highlight-color: rgba(24, 75, 186, 0.12);
+  /* 모바일 터치 시 영역 하이라이트 비표시 */
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
 }
 
 /* 모바일 풀스크린 높이: iOS 주소창 노출/숨김 시 100vh 흔들림 방지 */
@@ -539,7 +540,7 @@ body {
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: none;
   }
 }
 
@@ -606,6 +607,15 @@ body {
 .case-study-swipe-hint-right,
 .case-study-swipe-hint-left {
   animation: arrow-hint-pulse 1.5s ease-in-out infinite;
+}
+/* 데스크톱에서는 화살표 상시 애니메이션 제거 */
+@media (min-width: 1024px) {
+  .case-study-swipe-hint-right,
+  .case-study-swipe-hint-left {
+    animation: none;
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* 순차 페이드인 (숫자용) */

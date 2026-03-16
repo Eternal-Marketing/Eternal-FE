@@ -23,12 +23,23 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
     setNotFound(false);
     setImgError(false);
 
+    // slug가 없거나 'undefined' 문자열이면 조회하지 않음 (api/columns/slug/undefined 404 방지)
+    if (!slug || slug === 'undefined') {
+      setNotFound(true);
+      setColumn(null);
+      setLoading(false);
+      return () => { cancelled = true; };
+    }
+
+    // UUID 형식이거나 숫자 id(예: /column/id/123)인 경우 id로 조회, 그 외에는 slug로 조회
     const looksLikeUuid =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(slug);
+    const looksLikeNumericId = /^\d+$/.test(slug);
 
-    const fetcher = looksLikeUuid
-      ? getColumnById(slug, true, false)
-      : getColumnBySlug(slug, true);
+    const fetcher =
+      looksLikeUuid || looksLikeNumericId
+        ? getColumnById(slug, true, false)
+        : getColumnBySlug(slug, true);
 
     fetcher
       .then((data) => {
@@ -223,7 +234,7 @@ export default function ColumnDetailClient({ slug }: { slug: string }) {
               {relatedColumns.map((c) => (
                 <Link
                   key={c.id}
-                  href={`/column/${c.slug}`}
+                  href={`/column/id/${c.id}`}
                   className="flex gap-4 py-5 first:pt-0 last:pb-0 no-underline text-main hover:opacity-90 transition-opacity"
                 >
                   <div className="flex-1 min-w-0">
