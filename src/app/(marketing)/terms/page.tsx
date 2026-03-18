@@ -8,6 +8,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "이용약관",
   description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
+  alternates: { canonical: "/terms" },
   openGraph: {
     title: "이터널마케팅 | 이용약관",
     description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
