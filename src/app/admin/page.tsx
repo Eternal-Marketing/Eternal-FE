@@ -9,7 +9,7 @@ import { setTokens, setAdminInfo } from '@/lib/auth/token';
 
 /**
  * 관리자 로그인 페이지
- * - 이메일/비밀번호로 로그인, JWT 토큰 발급
+ * - 아이디/비밀번호로 로그인, JWT 토큰 발급
  */
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -25,7 +25,7 @@ export default function AdminLoginPage() {
 
     try {
       if (!email.trim() || !password.trim()) {
-        setError('이메일과 비밀번호를 입력해 주세요.');
+        setError('아이디와 비밀번호를 입력해 주세요.');
         return;
       }
 
@@ -103,18 +103,18 @@ export default function AdminLoginPage() {
         <div className="relative">
           <div className="relative rounded-2xl bg-[#25252a] border border-white/[0.08] p-8 sm:p-10 shadow-xl">
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* 이메일 */}
+              {/* 아이디 */}
               <div className="group/input">
-                <label htmlFor="admin-email" className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-2.5">
-                  이메일
+                <label htmlFor="admin-id" className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-2.5">
+                  아이디
                 </label>
                 <input
-                  id="admin-email"
+                  id="admin-id"
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@example.com"
-                  autoComplete="email"
+                  placeholder="아이디를 입력하세요"
+                  autoComplete="username"
                   className="w-full h-12 px-4 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-white/25 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 focus:bg-white/[0.06] transition-all duration-300"
                   disabled={isLoading}
                 />
