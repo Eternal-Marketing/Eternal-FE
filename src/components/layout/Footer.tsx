@@ -24,8 +24,8 @@ export default function Footer() {
             position: 'relative'
           }}
         >
-          {/* 로고 영역 */}
-          <div className="flex items-center gap-[10px] flex-shrink-0 self-start">
+          {/* 로고 영역: 메인(/) 링크로 대표 URL 강화 */}
+          <Link href="/" className="flex items-center gap-[10px] flex-shrink-0 self-start no-underline text-inherit" aria-label="이터널마케팅 메인으로">
             <img
               src="/images/logo.svg"
               alt="ETERNAL MARKETING"
@@ -39,7 +39,7 @@ export default function Footer() {
                 MARKETING
               </p>
             </div>
-          </div>
+          </Link>
 
           {/* 회사 정보 영역 (데스크탑: 오른쪽, 모바일: 아래) */}
           <div className="text-left lg:text-left mb-5 lg:ml-[200px]">

@@ -12,9 +12,9 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://eternalmarketing.co
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 const naverSiteVerification = process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION;
 
-const defaultTitle = "이터널마케팅 | 맘카페·블로그·바이럴 마케팅 전문";
+const defaultTitle = "이터널마케팅 | 맘카페·블로그·플레이스·SNS 마케팅 대행사";
 const defaultDescription =
-  "맘카페·블로그·커뮤니티·인스타그램을 활용한 실전 바이럴 홍보 마케팅. 마케팅 컨설팅부터 콘텐츠/커뮤니티 운영까지, 이터널마케팅이 데이터 기반으로 설계합니다.";
+  "맘카페 광고·홍보, 블로그 상위노출·관리 대행, 네이버 플레이스 상위노출, 인스타그램 마케팅·계정 관리, 커뮤니티 바이럴. 서울·경기·인천·부산 마케팅 업체, 온라인 마케팅·광고 대행사 추천. AI 마케팅·퍼포먼스 마케팅 전문.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -52,22 +52,49 @@ export const metadata: Metadata = {
     images: ["/images/big-logo.svg"],
   },
   icons: {
-    icon: "/images/service-page/google-logo.svg",
+    icon: "/images/logo.svg",
   },
   keywords: [
     "이터널마케팅",
     "맘카페 마케팅",
     "맘카페 홍보",
     "맘카페 광고",
+    "맘카페 바이럴",
     "커뮤니티 마케팅",
+    "커뮤니티 바이럴",
     "카페 침투 마케팅",
+    "블로그 마케팅",
+    "블로그 상위노출",
+    "블로그 광고",
+    "블로그 홍보",
+    "블로그 체험단",
+    "블로그 기자단",
+    "브랜드 블로그 관리",
     "블로그 관리 대행",
-    "브랜드 블로그",
-    "바이럴 마케팅 대행",
-    "온라인 마케팅 대행",
-    "마케팅 외주",
-    "인스타그램 광고",
     "AI 마케팅",
+    "네이버 플레이스 광고",
+    "네이버 플레이스 상위노출",
+    "스마트 플레이스 광고",
+    "플레이스 마케팅",
+    "인스타그램 마케팅",
+    "인스타그램 광고",
+    "인스타그램 홍보",
+    "인스타그램 계정 관리",
+    "인플루언서 마케팅",
+    "릴스 마케팅",
+    "바이럴 마케팅 업체",
+    "마케팅 대행사 추천",
+    "온라인 마케팅 업체",
+    "광고 대행사 추천",
+    "블로그 마케팅 업체",
+    "맘카페 광고 업체",
+    "SNS 마케팅 업체",
+    "퍼포먼스 마케팅 업체",
+    "디지털 마케팅 회사",
+    "인천 마케팅 업체",
+    "부산 마케팅 업체",
+    "경기 마케팅 업체",
+    "서울 마케팅 업체",
   ],
 };
 
@@ -99,6 +126,39 @@ export default function RootLayout({
     "@type": "WebSite",
     name: "이터널마케팅",
     url: canonicalUrl,
+    description: defaultDescription,
+    inLanguage: "ko-KR",
+    publisher: { "@id": `${canonicalUrl}/#organization` },
+    sameAs: [
+      "https://blog.naver.com/eternal_marketing",
+      "https://www.instagram.com/eternal__marketing",
+      "https://open.kakao.com/me/eternalmarketing",
+    ],
+  };
+
+  const jsonLdLocalBusiness = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${canonicalUrl}/#localbusiness`,
+    name: "이터널마케팅",
+    description:
+      "맘카페 광고·홍보, 블로그 상위노출·관리 대행, 네이버 플레이스 상위노출, 인스타그램 마케팅·계정 관리, 커뮤니티 바이럴. 서울·경기·인천·부산 마케팅 업체, 온라인 마케팅·광고 대행사.",
+    url: canonicalUrl,
+    logo: `${canonicalUrl}/images/logo.svg`,
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "경기",
+      addressLocality: "부천시",
+      streetAddress: "원미구 소향로13번길 14-22, 8층 802-라54호 (상동, 금호프라자)",
+      addressCountry: "KR",
+    },
+    areaServed: [
+      { "@type": "City", name: "서울특별시" },
+      { "@type": "State", name: "경기도" },
+      { "@type": "City", name: "인천광역시" },
+      { "@type": "City", name: "부산광역시" },
+    ],
+    sameAs: jsonLdWebsite.sameAs,
   };
 
   return (
@@ -109,6 +169,9 @@ export default function RootLayout({
         </Script>
         <Script id="jsonld-website" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify(jsonLdWebsite)}
+        </Script>
+        <Script id="jsonld-localbusiness" type="application/ld+json" strategy="afterInteractive">
+          {JSON.stringify(jsonLdLocalBusiness)}
         </Script>
 
         {gaId ? (
