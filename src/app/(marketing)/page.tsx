@@ -24,21 +24,23 @@ const DiagnosisSection = dynamic(
   { ssr: true }
 );
 
+const homeTitle = "맘카페·블로그·플레이스·SNS 마케팅 대행사 | 이터널마케팅";
+const homeDescription =
+  "맘카페 광고·홍보, 블로그 상위노출·관리 대행, 네이버 플레이스 상위노출, 인스타그램 마케팅·계정 관리, 커뮤니티 바이럴. 서울·경기·인천·부산 마케팅 업체, 온라인 마케팅·광고 대행사 추천. AI 마케팅·퍼포먼스 마케팅 전문.";
+
 export const metadata: Metadata = {
-  title: "맘카페·블로그·바이럴 마케팅 전문",
-  description:
-    "맘카페·블로그·커뮤니티·인스타그램을 활용한 실전 바이럴 홍보 마케팅. 마케팅 컨설팅부터 콘텐츠/커뮤니티 운영까지, 이터널마케팅이 데이터 기반으로 설계합니다.",
+  title: homeTitle,
+  description: homeDescription,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "이터널마케팅 | 맘카페·블로그·바이럴 마케팅 전문",
-    description:
-      "맘카페·블로그·커뮤니티·인스타그램을 활용한 실전 바이럴 홍보 마케팅. 마케팅 컨설팅부터 콘텐츠/커뮤니티 운영까지, 이터널마케팅이 데이터 기반으로 설계합니다.",
+    title: homeTitle,
+    description: homeDescription,
     url: "/",
     images: ["/images/big-logo.svg"],
   },
   twitter: {
-    title: "이터널마케팅 | 맘카페·블로그·바이럴 마케팅 전문",
-    description:
-      "맘카페·블로그·커뮤니티·인스타그램을 활용한 실전 바이럴 홍보 마케팅. 마케팅 컨설팅부터 콘텐츠/커뮤니티 운영까지, 이터널마케팅이 데이터 기반으로 설계합니다.",
+    title: homeTitle,
+    description: homeDescription,
     images: ["/images/big-logo.svg"],
   },
 };
