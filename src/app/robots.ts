@@ -10,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: isProduction ? '/' : undefined,
-        disallow: isProduction ? ['/admin', '/admin/*'] : '/',
+        disallow: isProduction ? ['/admin', '/admin/*', '/images/'] : '/',
       },
     ],
     sitemap: `${siteUrl.replace(/\/$/, '')}/sitemap.xml`,
