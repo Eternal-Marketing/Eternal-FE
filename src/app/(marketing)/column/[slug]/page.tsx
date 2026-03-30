@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteOgImage } from "@/lib/siteOgImage";
 import ColumnDetailClient from "./ColumnDetailClient";
 
 /**
@@ -18,8 +19,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description =
     "맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 전략과 사례를 칼럼으로 정리했습니다.";
 
-  const imageUrl = "/images/big-logo.svg";
-
   return {
     title,
     description,
@@ -28,12 +27,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       url: `/column/${slug}`,
       type: "article",
-      images: [{ url: imageUrl }],
+      images: [siteOgImage],
     },
     twitter: {
       title: `이터널마케팅 | ${title}`,
       description,
-      images: [imageUrl],
+      images: [siteOgImage.url],
     },
   };
 }

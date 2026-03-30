@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { siteOgImage } from '@/lib/siteOgImage';
 import ColumnPageContent from '../../ColumnPageContent';
 import { CATEGORY_NAMES, getCategoryIndex } from '../../categorySlug';
 
@@ -19,12 +20,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `이터널마케팅 | ${categoryName} 칼럼`,
       description: `${categoryName} 관련 전략과 사례를 모았습니다. 맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 인사이트를 확인해 보세요.`,
       url: `/column/category/${categorySlug}`,
-      images: ['/images/big-logo.svg'],
+      images: [siteOgImage],
     },
     twitter: {
       title: `이터널마케팅 | ${categoryName} 칼럼`,
       description: `${categoryName} 관련 전략과 사례를 모았습니다. 맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 인사이트를 확인해 보세요.`,
-      images: ['/images/big-logo.svg'],
+      images: [siteOgImage.url],
     },
   };
 }

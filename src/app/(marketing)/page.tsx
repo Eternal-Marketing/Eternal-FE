@@ -4,6 +4,7 @@
  * - 하단 섹션은 dynamic import로 코드스플릿해 모바일 초기 로딩 경량화
  */
 import type { Metadata } from "next";
+import { siteOgImage } from "@/lib/siteOgImage";
 import dynamic from "next/dynamic";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
@@ -36,12 +37,12 @@ export const metadata: Metadata = {
     title: homeTitle,
     description: homeDescription,
     url: "/",
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage],
   },
   twitter: {
     title: homeTitle,
     description: homeDescription,
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage.url],
   },
 };
 

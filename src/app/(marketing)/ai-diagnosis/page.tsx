@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteOgImage } from "@/lib/siteOgImage";
 import Image from "next/image";
 import DiagnosisFormStep1 from "./DiagnosisFormStep1";
 
@@ -16,13 +17,13 @@ export const metadata: Metadata = {
     description:
       "무료 AI 마케팅 진단. 업종·채널에 맞는 실행 방향을 제안합니다. 맘카페·블로그·플레이스·인스타그램 등 맞춤 인사이트.",
     url: "/ai-diagnosis",
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage],
   },
   twitter: {
     title: "이터널마케팅 | AI 진단받기",
     description:
       "무료 AI 마케팅 진단. 업종·채널에 맞는 실행 방향을 제안합니다. 맘카페·블로그·플레이스·인스타그램 등 맞춤 인사이트.",
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage.url],
   },
 };
 

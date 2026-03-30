@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { siteOgImage } from '@/lib/siteOgImage';
 import ColumnPageContent from './ColumnPageContent';
 
 /**
@@ -16,12 +17,12 @@ export const metadata: Metadata = {
     title: '이터널마케팅 | 마케팅 칼럼',
     description: columnDescription,
     url: '/column',
-    images: ['/images/big-logo.svg'],
+    images: [siteOgImage],
   },
   twitter: {
     title: '이터널마케팅 | 마케팅 칼럼',
     description: columnDescription,
-    images: ['/images/big-logo.svg'],
+    images: [siteOgImage.url],
   },
 };
 

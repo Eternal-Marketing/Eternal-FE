@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import HealthLogger from "@/components/layout/HealthLogger";
+import { siteOgImage } from "@/lib/siteOgImage";
 import "./globals.css";
 
 /**
@@ -35,24 +36,18 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "이터널마케팅",
     type: "website",
-    images: [
-      {
-        url: "/images/big-logo.svg",
-        width: 174,
-        height: 100,
-        alt: "이터널마케팅",
-      },
-    ],
+    images: [siteOgImage],
     locale: "ko_KR",
   },
   twitter: {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage.url],
   },
   icons: {
-    icon: "/images/logo.svg",
+    icon: "/images/og/favi.png",
+    apple: "/images/og/favi.png",
   },
   keywords: [
     "이터널마케팅",

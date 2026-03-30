@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteOgImage } from "@/lib/siteOgImage";
 import Link from "next/link";
 
 /**
@@ -13,12 +14,12 @@ export const metadata: Metadata = {
     title: "이터널마케팅 | 이용약관",
     description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
     url: "/terms",
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage],
   },
   twitter: {
     title: "이터널마케팅 | 이용약관",
     description: "이터널마케팅 서비스 이용 약관과 이용자의 권리·의무, 책임사항을 안내합니다.",
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage.url],
   },
 };
 
