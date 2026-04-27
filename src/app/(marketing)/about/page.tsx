@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { siteOgImage } from '@/lib/siteOgImage';
 import AboutPageClient from './AboutPageClient';
 
 const aboutDescription =
@@ -7,17 +8,18 @@ const aboutDescription =
 export const metadata: Metadata = {
   title: '회사 소개',
   description: aboutDescription,
+  robots: { index: false, follow: true },
   alternates: { canonical: "/about" },
   openGraph: {
     title: '이터널마케팅 | 회사 소개',
     description: aboutDescription,
     url: '/about',
-    images: ['/images/service-page/background-logo.svg'],
+    images: [siteOgImage],
   },
   twitter: {
     title: '이터널마케팅 | 회사 소개',
     description: aboutDescription,
-    images: ['/images/service-page/background-logo.svg'],
+    images: [siteOgImage.url],
   },
 };
 

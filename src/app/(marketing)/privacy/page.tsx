@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteOgImage } from "@/lib/siteOgImage";
 import Link from "next/link";
 
 /**
@@ -9,19 +10,20 @@ export const metadata: Metadata = {
   title: "개인정보처리방침",
   description:
     "이터널마케팅 서비스 이용과 관련한 개인정보 수집 항목, 이용 목적, 보유 기간 및 처리 기준을 안내합니다.",
+  robots: { index: false, follow: true },
   alternates: { canonical: "/privacy" },
   openGraph: {
     title: "이터널마케팅 | 개인정보처리방침",
     description:
       "이터널마케팅 서비스 이용과 관련한 개인정보 수집 항목, 이용 목적, 보유 기간 및 처리 기준을 안내합니다.",
     url: "/privacy",
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage],
   },
   twitter: {
     title: "이터널마케팅 | 개인정보처리방침",
     description:
       "이터널마케팅 서비스 이용과 관련한 개인정보 수집 항목, 이용 목적, 보유 기간 및 처리 기준을 안내합니다.",
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage.url],
   },
 };
 

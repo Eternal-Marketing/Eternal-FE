@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { siteOgImage } from '@/lib/siteOgImage';
 import ServicePageClient from './ServicePageClient';
 
 const serviceTitle = '맘카페·블로그·플레이스 마케팅 대행 서비스';
@@ -13,12 +14,12 @@ export const metadata: Metadata = {
     title: `${serviceTitle} | 이터널마케팅`,
     description: serviceDescription,
     url: '/service',
-    images: ['/images/big-logo.svg'],
+    images: [siteOgImage],
   },
   twitter: {
     title: `${serviceTitle} | 이터널마케팅`,
     description: serviceDescription,
-    images: ['/images/big-logo.svg'],
+    images: [siteOgImage.url],
   },
 };
 

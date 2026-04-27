@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteOgImage } from "@/lib/siteOgImage";
 import Image from "next/image";
 import DiagnosisFormStep2 from "./DiagnosisFormStep2";
 
@@ -10,18 +11,20 @@ export const metadata: Metadata = {
   title: "AI 진단받기 (2단계)",
   description:
     "AI 진단 신청을 위한 기본 정보를 입력합니다. 입력하신 정보로 상담 및 진단 결과 안내를 진행합니다.",
+  robots: { index: false, follow: false },
+  alternates: { canonical: "/ai-diagnosis/step-2" },
   openGraph: {
     title: "이터널마케팅 | AI 진단받기 (2단계)",
     description:
       "AI 진단 신청을 위한 기본 정보를 입력합니다. 입력하신 정보로 상담 및 진단 결과 안내를 진행합니다.",
     url: "/ai-diagnosis/step-2",
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage],
   },
   twitter: {
     title: "이터널마케팅 | AI 진단받기 (2단계)",
     description:
       "AI 진단 신청을 위한 기본 정보를 입력합니다. 입력하신 정보로 상담 및 진단 결과 안내를 진행합니다.",
-    images: ["/images/big-logo.svg"],
+    images: [siteOgImage.url],
   },
 };
 
