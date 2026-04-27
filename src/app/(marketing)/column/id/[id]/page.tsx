@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { getColumnById } from '@/lib/api';
+import { columnSeoMetadata } from '@/lib/seo';
 import { siteOgImage } from '@/lib/siteOgImage';
 import ColumnDetailClient from '../../[slug]/ColumnDetailClient';
 
@@ -9,6 +11,14 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
+  const column = await getColumnById(id, false, false);
+  if (column?.slug) {
+    return {
+      ...columnSeoMetadata(column, `/column/${column.slug}`),
+      robots: { index: false, follow: true },
+    };
+  }
+
   const title = '마케팅 칼럼';
   const description =
     '맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 전략과 사례를 칼럼으로 정리했습니다.';
@@ -16,6 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
+    robots: { index: false, follow: true },
     openGraph: {
       title: `이터널마케팅 | ${title}`,
       description,

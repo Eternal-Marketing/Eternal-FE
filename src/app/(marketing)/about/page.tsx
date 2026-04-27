@@ -8,6 +8,7 @@ const aboutDescription =
 export const metadata: Metadata = {
   title: '회사 소개',
   description: aboutDescription,
+  robots: { index: false, follow: true },
   alternates: { canonical: "/about" },
   openGraph: {
     title: '이터널마케팅 | 회사 소개',

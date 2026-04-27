@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: isProduction ? '/' : undefined,
+        allow: isProduction ? ['/', '/images/og/'] : undefined,
         disallow: isProduction ? ['/admin', '/admin/*', '/images/'] : '/',
       },
     ],

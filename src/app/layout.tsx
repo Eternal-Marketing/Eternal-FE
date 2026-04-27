@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import HealthLogger from "@/components/layout/HealthLogger";
 import { siteOgImage } from "@/lib/siteOgImage";
+import { defaultDescription, defaultTitle, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
 /**
@@ -9,13 +10,8 @@ import "./globals.css";
  * - 전역 메타데이터(제목, 설명, OG, 트위터, 파비콘)
  * - body 기본 폰트·배경
  */
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://eternalmarketing.co.kr";
 const googleSiteVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 const naverSiteVerification = process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION;
-
-const defaultTitle = "이터널마케팅 | 맘카페·블로그·플레이스·SNS 마케팅 대행사";
-const defaultDescription =
-  "맘카페 광고·홍보, 블로그 상위노출·관리 대행, 네이버 플레이스 상위노출, 인스타그램 마케팅·계정 관리, 커뮤니티 바이럴. 서울·경기·인천·부산 마케팅 업체, 온라인 마케팅·광고 대행사 추천. AI 마케팅·퍼포먼스 마케팅 전문.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -24,6 +20,10 @@ export const metadata: Metadata = {
     template: "%s | 이터널마케팅",
   },
   description: defaultDescription,
+  applicationName: "이터널마케팅",
+  authors: [{ name: "이터널마케팅", url: siteUrl }],
+  publisher: "이터널마케팅",
+  alternates: { canonical: "/" },
   ...(googleSiteVerification || naverSiteVerification
     ? {
         verification: googleSiteVerification ? { google: googleSiteVerification } : undefined,
@@ -46,8 +46,12 @@ export const metadata: Metadata = {
     images: [siteOgImage.url],
   },
   icons: {
-    icon: "/images/og/favi.png",
-    apple: "/images/og/favi.png",
+    icon: [
+      { url: "/images/og/favi.png", type: "image/png" },
+      { url: "/images/og/icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/images/og/favi.png",
+    apple: [{ url: "/images/og/icon.png", sizes: "512x512", type: "image/png" }],
   },
   keywords: [
     "이터널마케팅",
@@ -111,6 +115,7 @@ export default function RootLayout({
   const jsonLdOrganization = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${canonicalUrl}/#organization`,
     name: "이터널마케팅",
     url: canonicalUrl,
     logo: `${canonicalUrl}/images/logo.svg`,
@@ -159,15 +164,21 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        <Script id="jsonld-org" type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify(jsonLdOrganization)}
-        </Script>
-        <Script id="jsonld-website" type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify(jsonLdWebsite)}
-        </Script>
-        <Script id="jsonld-localbusiness" type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify(jsonLdLocalBusiness)}
-        </Script>
+        <script
+          id="jsonld-org"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrganization) }}
+        />
+        <script
+          id="jsonld-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
+        />
+        <script
+          id="jsonld-localbusiness"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdLocalBusiness) }}
+        />
 
         {gaId ? (
           <>

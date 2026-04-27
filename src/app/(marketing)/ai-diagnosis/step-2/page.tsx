@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   title: "AI 진단받기 (2단계)",
   description:
     "AI 진단 신청을 위한 기본 정보를 입력합니다. 입력하신 정보로 상담 및 진단 결과 안내를 진행합니다.",
+  robots: { index: false, follow: false },
+  alternates: { canonical: "/ai-diagnosis/step-2" },
   openGraph: {
     title: "이터널마케팅 | AI 진단받기 (2단계)",
     description:

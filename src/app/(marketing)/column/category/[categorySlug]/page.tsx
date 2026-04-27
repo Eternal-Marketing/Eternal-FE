@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${categoryName} 칼럼`,
     description: `${categoryName} 관련 전략과 사례를 모았습니다. 맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 인사이트를 확인해 보세요.`,
+    alternates: { canonical: `/column/category/${categorySlug}` },
     openGraph: {
       title: `이터널마케팅 | ${categoryName} 칼럼`,
       description: `${categoryName} 관련 전략과 사례를 모았습니다. 맘카페·블로그·커뮤니티·바이럴·SNS 마케팅 인사이트를 확인해 보세요.`,

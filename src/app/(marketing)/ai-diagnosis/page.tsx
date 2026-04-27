@@ -7,22 +7,22 @@ import DiagnosisFormStep1 from "./DiagnosisFormStep1";
  * AI 진단 1단계 페이지 (/ai-diagnosis)
  * - 히어로 + "고객님에 대해 알려주세요" 폼(업체명, 업종, 고민 영역 등)
  */
+const diagnosisDescription =
+  "AI 진단을 통해 원하시는 마케팅 고민을 신청하고, 업종과 채널에 맞는 실행 방향을 무료로 진단받아보세요.";
+
 export const metadata: Metadata = {
   title: "AI 진단받기",
-  description:
-    "무료 AI 마케팅 진단. 업종·채널에 맞는 실행 방향을 제안합니다. 맘카페·블로그·플레이스·인스타그램 등 맞춤 인사이트.",
+  description: diagnosisDescription,
   alternates: { canonical: "/ai-diagnosis" },
   openGraph: {
     title: "이터널마케팅 | AI 진단받기",
-    description:
-      "무료 AI 마케팅 진단. 업종·채널에 맞는 실행 방향을 제안합니다. 맘카페·블로그·플레이스·인스타그램 등 맞춤 인사이트.",
+    description: diagnosisDescription,
     url: "/ai-diagnosis",
     images: [siteOgImage],
   },
   twitter: {
     title: "이터널마케팅 | AI 진단받기",
-    description:
-      "무료 AI 마케팅 진단. 업종·채널에 맞는 실행 방향을 제안합니다. 맘카페·블로그·플레이스·인스타그램 등 맞춤 인사이트.",
+    description: diagnosisDescription,
     images: [siteOgImage.url],
   },
 };
