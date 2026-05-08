@@ -1012,6 +1012,12 @@ body {
   outline: none;
   font-size: 15px;
 }
+/* 붙여넣은 텍스트의 줄바꿈/탭 들여쓰기 유지 */
+.column-editor-body .ProseMirror p,
+.column-editor-body .ProseMirror li {
+  white-space: pre-wrap;
+  tab-size: 4;
+}
 .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
@@ -1076,21 +1082,77 @@ body {
 }
 
 /* 칼럼 상세 본문 (TipTap HTML 렌더링) */
-.column-body h1 { font-size: 1.5em; font-weight: 700; margin: 1.25em 0 0.5em; }
-.column-body h2 { font-size: 1.25em; font-weight: 600; margin: 1.1em 0 0.5em; }
-.column-body h3 { font-size: 1.1em; font-weight: 600; margin: 1em 0 0.4em; }
-.column-body p { margin: 0.6em 0; }
-.column-body ul, .column-body ol { margin: 0.6em 0; padding-left: 1.5em; }
+.column-body {
+  font-size: 17px;
+  line-height: 1.9;
+  letter-spacing: -0.01em;
+}
+.column-body h1 {
+  font-size: 1.62em;
+  font-weight: 700;
+  margin: 1.4em 0 0.55em;
+  line-height: 1.4;
+}
+.column-body h2 {
+  font-size: 1.35em;
+  font-weight: 700;
+  margin: 1.3em 0 0.5em;
+  line-height: 1.45;
+}
+.column-body h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin: 1.15em 0 0.45em;
+  line-height: 1.45;
+}
+.column-body p { margin: 0.8em 0; }
+.column-body p,
+.column-body li {
+  white-space: pre-wrap;
+  tab-size: 4;
+}
+.column-body ul,
+.column-body ol {
+  margin: 0.6em 0;
+  padding-left: 1.8em;
+  list-style-position: outside;
+}
+.column-body ul { list-style-type: disc; }
+.column-body ol { list-style-type: decimal; }
+.column-body li {
+  display: list-item;
+  margin: 0.32em 0;
+}
+/* 중첩 목록 들여쓰기/구분 */
+.column-body ul ul,
+.column-body ol ul,
+.column-body ul ol,
+.column-body ol ol {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  padding-left: 1.4em;
+}
+.column-body ul ul { list-style-type: circle; }
+.column-body ul ul ul { list-style-type: square; }
+.column-body ol ol { list-style-type: lower-alpha; }
 .column-body blockquote {
-  margin: 0.8em 0;
-  padding-left: 1em;
+  margin: 1em 0;
+  padding: 0.75em 1em;
   border-left: 3px solid var(--color-primary);
   color: var(--color-sub1);
+  background: rgba(24, 75, 186, 0.06);
+  border-radius: 0 8px 8px 0;
 }
-.column-body a { color: var(--color-primary); text-decoration: underline; }
+.column-body a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+.column-body strong { font-weight: 700; }
+.column-body hr {
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  margin: 1.2em 0;
+}
 .column-body img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  margin: 0.8em 0;
+  border-radius: 10px;
+  margin: 1em 0;
 }
