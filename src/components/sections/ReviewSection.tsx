@@ -273,8 +273,8 @@ export default function ReviewSection() {
               </div>
             </ScaleIn>
             <SlideInRight delay={600}>
-              <div className="flex-shrink-0 animate-float-3 w-[112px] h-[168px] sm:w-[190px] sm:h-[285px] lg:w-[252px] lg:h-[378px] overflow-hidden relative flex items-center justify-center">
-                <Image src="/images/reviewSection/reward3.png" alt="Reward 3" fill className="object-cover object-center" sizes="252px" />
+              <div className="flex-shrink-0 animate-float-3 w-[104px] h-[156px] sm:w-[180px] sm:h-[270px] lg:w-[236px] lg:h-[354px] overflow-hidden relative flex items-center justify-center">
+                <Image src="/images/reviewSection/reward3.png" alt="Reward 3" fill className="object-cover object-center" sizes="236px" />
               </div>
             </SlideInRight>
           </div>
