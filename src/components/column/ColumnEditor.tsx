@@ -6,7 +6,59 @@ import Link from '@tiptap/extension-link';
 import { ImageWithDeleteExtension } from './ImageWithDeleteExtension';
 import Placeholder from '@tiptap/extension-placeholder';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { DOMParser, type Slice } from '@tiptap/pm/model';
+import type { EditorView } from '@tiptap/pm/view';
 import { uploadMedia } from '@/lib/api';
+
+function escapeHtmlForPaste(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/** text/plain의 줄 단위를 그대로 문단으로 변환(빈 줄 포함) */
+function plainTextToColumnPasteHtml(text: string): string {
+  const normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  return normalized
+    .split('\n')
+    .map((line) => {
+      const escaped = escapeHtmlForPaste(line);
+      return escaped === '' ? '<p><br></p>' : `<p>${escaped}</p>`;
+    })
+    .join('');
+}
+
+/**
+ * HTML 붙여넣기는 출처마다 달라서, 줄 수 대비 `<p>/<br>/<div>`가 많아 보여도
+ * 실제 빈 줄(단락 구분)이 사라지는 경우가 많습니다. 그래서 Word·표·이미지
+ * 붙여넣기만 예외로 두고, 줄바꿈이 있는 일반 텍스트는 text/plain 기준으로
+ * 다시 조립합니다.
+ */
+function shouldRebuildPasteFromPlainText(plain: string, html: string): boolean {
+  if (!/[\r\n]/.test(plain)) return false;
+
+  const h = html.trim();
+  if (!h) return true;
+
+  if (/<\w[^>]*mso-|urn:schemas-microsoft-com:office/i.test(h)) return false;
+  if (/<table[\s>]/i.test(h)) return false;
+  if (/<img[\s>]/i.test(h)) return false;
+
+  return true;
+}
+
+function insertParsedPasteSlice(view: EditorView, slice: Slice) {
+  const singleNode =
+    slice.openStart === 0 && slice.openEnd === 0 && slice.content.childCount === 1
+      ? slice.content.firstChild
+      : null;
+  const tr = singleNode
+    ? view.state.tr.replaceSelectionWith(singleNode, false)
+    : view.state.tr.replaceSelection(slice);
+  view.dispatch(tr.scrollIntoView().setMeta('paste', true).setMeta('uiEvent', 'paste'));
+}
 
 interface ColumnEditorProps {
   value: string;
@@ -31,6 +83,25 @@ export default function ColumnEditor({ value, onChange, placeholder = '칼럼 �
     immediatelyRender: false,
     editorProps: {
       attributes: { class: 'column-editor-prose' },
+      handleDOMEvents: {
+        paste(view, event) {
+          const cd = event.clipboardData;
+          if (!cd) return false;
+          const plain = cd.getData('text/plain');
+          if (!plain || !/[\r\n]/.test(plain)) return false;
+          const html = cd.getData('text/html') ?? '';
+          if (!shouldRebuildPasteFromPlainText(plain, html)) return false;
+
+          const wrap = document.createElement('div');
+          wrap.innerHTML = plainTextToColumnPasteHtml(plain);
+          const parsedSlice = DOMParser.fromSchema(view.state.schema).parseSlice(wrap, {
+            preserveWhitespace: true,
+          });
+          insertParsedPasteSlice(view, parsedSlice);
+          event.preventDefault();
+          return true;
+        },
+      },
     },
   });
 
